@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="108dp"
+    android:layout_height="216dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="8dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/banner_bg"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/item_img"
+            android:layout_width="108dp"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:transitionName="mediaCover"
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:id="@+id/itemCompactScoreBG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/item_number"
+            android:backgroundTint="#BFFFFFFF"
+            android:backgroundTintMode="multiply"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp">
+
+            <TextView
+                android:id="@+id/itemCompactScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingTop="2dp"
+                android:textColor="@color/bg_white"
+                android:textSize="13dp"
+                tools:ignore="TextContrastCheck"
+                tools:text="0.0" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+
+                android:id="@+id/imageView2"
+                android:layout_width="15dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"
+                android:scaleType="centerCrop"
+                android:transitionName="mediaCover"
+                app:srcCompat="@drawable/ic_round_star_24"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/title_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/inter_bold"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="-4dp"
+        android:maxLines="2"
+        android:textFontWeight="400"
+        android:textColor="@color/light_grey"
+        android:textSize="14dp"
+        android:transitionName="mediaTitle"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        tools:text="@string/get_recommendations" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

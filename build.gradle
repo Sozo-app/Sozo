@@ -1,0 +1,18 @@
+buildscript {
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-serialization:1.9.0-RC"
+        classpath "com.android.tools:r8:8.1.56"
+        classpath 'com.google.guava:guava:30.1.1-jre'  // <-- THIS IS REQUIRED UNTIL R8 3.2.4-dev
+    }
+}
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.2.2' apply false
+    id 'com.android.library' version '7.2.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id 'com.android.test' version '7.2.2' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

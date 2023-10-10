@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="violet_400">#91A6FF</color>
+    <color name="violet_700">#3358FF</color>
+    <color name="watching">#639c67</color>
+    <color name="planToWatch">#b764bc</color>
+    <color name="completed">#5c6cc3</color>
+    <color name="onHold">#ffc928</color>
+    <color name="dropped">#ef5450</color>
+
+    <color name="violet_400_50">#8091A6FF</color>
+    <color name="bg_black">#000000</color>
+    <color name="bg_white">#EEEEEE</color>
+    <color name="white">@color/bg_white</color>
+    <color name="bg">#000000</color>
+    <color name="fg">#A8EEEEEE</color>
+    <color name="bg_filter_dialog">#2B2B2B</color>
+    <color name="bg_search">#3C3F41</color>
+    <color name="bg_opp">@color/bg_black</color>
+    <color name="BackwardColorHeavy">#B0000000</color>
+    <color name="backward_color">#DD000000</color>
+    <color name="library_back_color">#FB181818</color>
+    <color name="library_back_color_dd">#DD181818</color>
+    <color name="library_back_color_88">#88181818</color>
+    <color name="nav_bg">@color/dark_500</color>
+    <color name="nav_bg_inv">#00FFFFFF</color>
+    <color name="nav_tab">#7C7C7C</color>
+    <color name="nav_tab_disabled">#7C7C7C</color>
+    <color name="status">#9EB8B8B8</color>
+    <color name="button_icon">#D5FFFFFF</color>
+    <color name="nav_status">#80FFFFFF</color>
+    <color name="fav">#E63956</color>
+    <color name="colorPrimary">#1a4a61</color>
+    <color name="colorPrimaryDark">#002237</color>
+    <color name="colorAccent">#2196F3</color>
+
+    <color name="color_white">#ffffff</color>
+    <color name="background_Image_tint">#77002237</color>
+
+    <color name="color_gray_green">#375730</color>
+    <color name="background_green_image_tint">#613C5730</color>
+    <color name="color_transparent">#00FFFFFF</color>
+
+    <color name="dark_200">#4A4A4A</color>
+    <color name="dark_500">#1F1F1F</color>
+    <color name="dark">#181A20</color>
+    <color name="banner_bg">#232323</color>
+    <color name="dark_700">#202020</color>
+    <color name="basic_color">#FF2828</color>
+    <color name="basic_color_400">#EF6B6B</color>
+    <color name="basic_color_500">#E63956</color>
+    <color name="background">#010101</color>
+    <color name="dark_grey">#181818</color>
+    <color name="medium_grey">#1F1F1F</color>
+    <color name="light">#FEFEFE</color>
+    <color name="light_grey">#8E8E8E</color>
+    <color name="blue">#68A6CD</color>
+    <color name="stroke_color">#EFEFEF</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+</resources>

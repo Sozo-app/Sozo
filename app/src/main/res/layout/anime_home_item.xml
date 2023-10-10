@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardBackgroundColor="@color/nav_bg"
+        android:layout_marginHorizontal="14dp"
+        app:cardCornerRadius="12dp"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/anime_image"
+                android:layout_width="match_parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                android:scaleType="centerCrop"
+                android:transitionName="mediaCover"
+                android:layout_height="match_parent"
+                tools:ignore="ContentDescription,ImageContrastCheck"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <LinearLayout
+                android:id="@+id/itemCompactScoreBG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_score"
+                android:backgroundTintMode="multiply"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="6dp">
+
+                <TextView
+                    android:id="@+id/itemCompactScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="11dp"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/bg_white"
+                    android:textSize="20sp"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="1" />
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#BF000000"
+                android:layout_marginBottom="7dp"
+                android:backgroundTintMode="multiply"
+                android:background="@drawable/linear_time_bg"
+                android:paddingHorizontal="9dp"
+                android:paddingVertical="3dp">
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="23:36"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_photo"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewCircle"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+
+        tools:srcCompat="@tools:sample/backgrounds/scenic"/>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_photo"
+        app:layout_constraintStart_toEndOf="@+id/profile_photo"
+        app:layout_constraintTop_toTopOf="@+id/profile_photo">
+
+        <TextView
+            android:id="@+id/title_item"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:transitionName="mediaTitle"
+            android:lineSpacingExtra="-4dp"
+            android:maxLines="1"
+            android:fontFamily="@font/poppins_bold"
+            android:text="1065   Someone`s Dream"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/description_item"
+            android:layout_width="252dp"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/poppins"
+            android:text="Demon Slayer Swordsman Village Arc • 4.9 lakh views • 2 days ago"
+            android:textColor="#9A9A9A"
+            android:textSize="12dp" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/baseline_more_vert_24"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:tint="@color/white" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

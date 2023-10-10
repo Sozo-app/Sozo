@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:foreground="?selectableItemBackground"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="#B0171717"
+
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginVertical="1dp"
+            app:cardBackgroundColor="@color/banner_bg"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/item_img"
+                android:layout_width="108dp"
+                android:layout_height="170dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/anime_img"
+                android:transitionName="mediaCover"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <LinearLayout
+                android:id="@+id/itemCompactScoreBG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/item_number"
+                android:backgroundTint="#BFFFFFFF"
+                android:backgroundTintMode="multiply"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="6dp">
+
+                <TextView
+                    android:id="@+id/itemCompactScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:paddingTop="2dp"
+                    android:textColor="@color/bg_white"
+                    android:textSize="13dp"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="0.0" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+
+                    android:id="@+id/imageView2"
+                    android:layout_width="15dp"
+                    android:layout_height="14dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:scaleType="centerCrop"
+                    android:transitionName="mediaCover"
+                    app:srcCompat="@drawable/ic_round_star_24"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genreList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@id/episodeTotal"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_genre_for_search" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="221dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+
+            android:fontFamily="@font/inter_bold"
+            android:gravity="start"
+            android:maxLines="1"
+
+            android:text="Bleach Thousand-Year Blood War - The Spe..."
+
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/episodeTotal"
+            app:layout_constraintStart_toStartOf="@+id/episodeTotal"
+            app:layout_constraintTop_toTopOf="@+id/cardView2" />
+
+        <LinearLayout
+            android:id="@+id/episodeTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/genreList"
+            app:layout_constraintStart_toStartOf="@+id/genreList"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <TextView
+                android:id="@+id/itemCompactTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                tools:ignore="SpUsage,TextContrastCheck"
+                tools:text="/??" />
+
+            <TextView
+                android:id="@+id/itemTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.66"
+                android:text="@string/eps"
+                android:textSize="14dp"
+                tools:ignore="SpUsage" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/playButtonForBanner"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Play"
+            android:textColor="@color/bg_black"
+            android:textSize="20sp"
+
+            app:backgroundTint="@color/white"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/play_banner"
+            app:iconSize="25dp"
+            app:iconTint="@color/bg_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/genreList"
+            app:layout_constraintTop_toBottomOf="@id/genreList" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

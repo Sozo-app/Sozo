@@ -1,0 +1,14 @@
+<resources>
+
+    <style name="Widget.Theme.AnimeApp.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+    </style>
+
+    <style name="Widget.Theme.AnimeApp.ButtonBar.Fullscreen" parent="">
+    </style>
+
+    <style name="Widget.AnimeApp.AppWidget.Container" parent="android:Widget">
+    </style>
+
+    <style name="Widget.AnimeApp.AppWidget.InnerView" parent="android:Widget">
+    </style>
+</resources>

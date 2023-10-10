@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_graph"
+    app:startDestination="@id/splashScreen">
+
+
+    <fragment
+        android:id="@+id/animeScreen"
+        android:name="com.animestudios.animeapp.ui.screen.anime.AnimeScreen"
+        android:label="animeScreen"
+        tools:layout="@layout/anime_screen" />
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.animestudios.animeapp.ui.screen.home.HomeScreen"
+        android:label="home_screen"
+        tools:layout="@layout/home_screen" />
+    <fragment
+        android:id="@+id/mainScreen"
+        android:name="com.animestudios.animeapp.ui.screen.main.MainScreen"
+        android:label="main_screen"
+        tools:layout="@layout/main_screen">
+        <action
+
+            android:id="@+id/action_mainScreen_to_searchScreen"
+            app:destination="@id/searchScreen"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right_out" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/searchScreen"
+        android:name="com.animestudios.animeapp.ui.screen.search.SearchScreen"
+        android:label="search_screen"
+        tools:layout="@layout/search_screen" />
+    <fragment
+        android:id="@+id/detailScreen"
+        android:name="com.animestudios.animeapp.ui.screen.detail.DetailScreen"
+        android:label="DetailScreen" >
+        <action
+            android:id="@+id/action_detailScreen_to_mainScreen"
+            app:destination="@id/mainScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.animestudios.animeapp.ui.screen.splash.SplashScreen"
+        android:label="SplashScreen"
+        tools:layout="@layout/splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
+        <action
+            android:id="@+id/action_splashScreen_to_mainScreen"
+            app:destination="@id/mainScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.animestudios.animeapp.ui.screen.login.LoginScreen"
+        android:label="LoginScreen"
+        tools:layout="@layout/login_screen" />
+</navigation>

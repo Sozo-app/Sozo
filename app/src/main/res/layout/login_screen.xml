@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark">
+
+    <ImageView
+        android:id="@+id/onBoardingImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rotation="4"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:srcCompat="@drawable/onboarding_bg" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+
+        android:layout_height="480dp"
+        android:src="@drawable/onboarding_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.github.sablasvegas.shadout.Shadout
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="100dp"
+        app:Dy="5dp"
+        app:cornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintStart_toStartOf="@+id/description"
+        app:shadowColor="#1AE21221"
+        app:shadowRadius="10dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/login"
+            android:textColor="@color/button_icon"
+            app:backgroundTint="#F70004"
+            app:cornerRadius="100dp"
+            app:icon="@drawable/anilistlogo"
+            app:iconGravity="textStart"
+            app:iconTint="@color/button_icon" />
+    </com.github.sablasvegas.shadout.Shadout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="@string/welcome"
+        android:textColor="@color/white"
+
+        android:textFontWeight="700"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/oboarding_desc"
+        android:textColor="@color/white"
+        android:textFontWeight="400"
+        android:textSize="16sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="191dp"
+        android:layout_height="67dp"
+        android:alpha="0.5"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/shadow"
+        app:layout_constraintStart_toStartOf="@+id/shadow"
+        app:layout_constraintTop_toBottomOf="@+id/shadow">
+
+
+        <ImageView
+            android:id="@+id/loginGithub"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_github"
+            app:tint="#CCCBCB"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="4dp"
+            android:layout_height="48dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_github"
+            android:visibility="invisible"
+            app:tint="#CCCBCB"
+            tools:ignore="ContentDescription" />
+
+
+        <ImageView
+            android:id="@+id/loginTelegram"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_telegram"
+            app:tint="#CCCBCB"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="@dimen/marginNormal"
+    android:foreground="?selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchRootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/searchImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintEnd_toStartOf="@id/searchImageGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/searchRankBadge"
+            layout="@layout/layout_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginClose"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/searchImageGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@fraction/listImageRatio" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/searchTitle"
+            style="@style/FontRegularClickable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/searchImageGuideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/searchMediaExtraInfoLayout"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginClose"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="@id/searchTitle"
+            app:layout_constraintTop_toBottomOf="@id/searchTitle">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/searchMediaYearText"
+                style="@style/FontSmall"
+                tools:text="gg"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/searchMediaInfoDividerIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/marginClose"
+                app:srcCompat="@drawable/ic_filled_circle_small"
+                app:tint="@color/basic_color" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/searchMediaFormatText"
+                style="@style/FontSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/searchMediaLengthDividerIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/marginClose"
+                app:srcCompat="@drawable/ic_filled_circle_small"
+                app:tint="@color/basic_color" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/searchMediaLengthText"
+                style="@style/FontSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/searchStatsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginSmall"
+            app:layout_constraintStart_toStartOf="@id/searchMediaExtraInfoLayout"
+            app:layout_constraintTop_toBottomOf="@id/searchMediaExtraInfoLayout">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/searchScoreText"
+                style="@style/FontRegularBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/marginClose"
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_star_filled"
+                app:drawableTint="#FFCA28" />
+
+            <View
+                android:id="@+id/searchStatsDivider"
+                android:layout_width="@dimen/marginNormal"
+                android:layout_height="0dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchMediaGenre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/searchTitle"
+            app:layout_constraintTop_toBottomOf="@+id/searchStatsLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

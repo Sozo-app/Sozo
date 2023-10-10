@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OutlineTextView">
+        <attr name="outlineColor" format="color" />
+        <attr name="outlineWidth" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="Xpandable">
+        <attr name="isExpanded" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="FeedItem">
+        <attr name="android:orientation" />
+    </declare-styleable>
+
+    <declare-styleable name="DoubleTapPlayerView">
+        <attr name="dtpv_controller" format="reference" />
+    </declare-styleable>
+    <attr name="themeAppNameFont" format="reference"/>
+    <attr name="themeTitleFont" format="reference"/>
+    <attr name="themeRegularFont" format="reference"/>
+    <attr name="themeRegularBoldFont" format="reference"/>
+    <attr name="themeRegularClickableFont" format="reference"/>
+    <attr name="themeRegularClickableBoldFont" format="reference"/>
+    <attr name="themeRegularNegativeFont" format="reference"/>
+    <attr name="themeSmallFont" format="reference"/>
+    <attr name="themeSmallClickableFont" format="reference"/>
+    <attr name="themeSmallNegativeFont" format="reference"/>
+    <attr name="themeBigFont" format="reference"/>
+    <attr name="themeBigBoldFont" format="reference"/>
+
+    <attr name="themePrimaryButton" format="reference"/>
+    <attr name="themePrimaryBorderButton" format="reference"/>
+    <attr name="themeNegativeBorderButton" format="reference"/>
+    <fraction name="listImageRatio">0.25</fraction>
+    <fraction name="listImageBigRatio">0.35</fraction>
+    <fraction name="listImageMediumRatio">0.20</fraction>
+    <fraction name="listImageSmallRatio">0.15</fraction>
+
+</resources>

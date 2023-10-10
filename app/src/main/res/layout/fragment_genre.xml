@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/genreContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadingEdge="vertical"
+    android:orientation="vertical"
+    android:requiresFadingEdge="vertical"
+    android:scrollbars="vertical">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mediaInfoGenresRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="vertical"
+        android:overScrollMode="never"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="10dp"
+        android:requiresFadingEdge="vertical"
+        android:paddingBottom="20dp"
+        tools:itemCount="49"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/genres_item"
+        tools:orientation="vertical"
+        tools:spanCount="2" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/mediaInfoGenresProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_margin="32dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
+</LinearLayout>

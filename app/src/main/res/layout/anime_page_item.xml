@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:clipToPadding="false"
+    android:fadingEdge="vertical"
+    android:orientation="vertical"
+    android:requiresFadingEdge="vertical"
+    android:scrollbars="vertical"
+    tools:context=".ui.screen.anime.AnimeScreen">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/page_container"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="420dp" />
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/anime_toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="end"
+                android:layout_marginEnd="29dp">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/search"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    app:srcCompat="@drawable/ic_search"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="SOZO"
+                android:textSize="28dp" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/recentReleased"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_bold"
+
+            android:text="Recently Updated"
+            android:textFontWeight="600"
+            android:textSize="24dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/page_container"
+            tools:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:text="View All"
+            android:textColor="@color/basic_color"
+            android:textSize="14dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/recentReleased"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recentReleased" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/animePageRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="10dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:orientation="horizontal"
+            android:requiresFadingEdge="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/recentReleased"
+            app:layout_constraintTop_toBottomOf="@+id/recentReleased"
+            tools:itemCount="5"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/anime_hd_item" />
+
+        <TextView
+            android:id="@+id/forYouTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:clipToPadding="false"
+            android:fontFamily="@font/inter_bold"
+            android:text="Trending"
+
+            android:textFontWeight="600"
+            android:textSize="24dp"
+
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/animePageRecyclerView"
+            app:layout_constraintTop_toBottomOf="@id/animePageRecyclerView"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/onlOnYouRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:requiresFadingEdge="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/animePageRecyclerView"
+            app:layout_constraintTop_toBottomOf="@id/forYouTxt"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/anime_hd_item" />
+
+        <ProgressBar
+            android:id="@+id/animeUpdatedProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/animePageRecyclerView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

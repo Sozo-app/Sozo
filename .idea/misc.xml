@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable-v24/ic_back.xml" value="0.213" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable-xxxhdpi/banner_bg.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable-xxxhdpi/ic_back.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable-xxxhdpi/ic_baseline_add_24.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable-xxxhdpi/ic_baseline_error_outline_24.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/background_gradient_three.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/background_gradient_two.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/banner_bg.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/bg_navigation.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/bottom_bg.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/bottom_nav.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/bottom_nav_background.xml" value="0.173" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/bottom_selector.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/browse.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/browse_active.xml" value="0.1605" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/category_selected_bg.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/chip_selected_color.xml" value="0.1835" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/explore.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/explore_filter.xml" value="0.1835" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/gradient_back.xml" value="0.246" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/gradient_shadow.xml" value="0.246" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/home.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/home_active.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_ask.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_back.xml" value="0.213" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_data.xml" value="0.213" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_devices.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_faq.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_filled_circle.xml" value="0.1" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_filled_circle_small.xml" value="0.1" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_filter.xml" value="0.1835" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_github.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_heart_outline.xml" value="0.2005" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_round_arrow_back_ios_new_24.xml" value="0.213" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_round_grid_view_24.xml" value="0.1835" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_round_search_24.xml" value="0.1785" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_round_settings_24.xml" value="0.1725" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_star_filled.xml" value="0.1" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_telegram.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/item_bg.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/item_navbar_bg.xml" value="0.1725" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/item_number.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/item_number_hd.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/item_score.xml" value="0.249" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/linear_gradient_bg.xml" value="0.198" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/linear_gradient_black_horizontal.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/linear_gradient_nav.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/linear_time_bg.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/list.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/logo_anim.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/nav_bar_bg.xml" value="0.1725" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/onboarding_gradient.xml" value="0.1815" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/play.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/radius_anime_home_number.xml" value="0.1725" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/round_corner.xml" value="0.1245" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/rounded_btn.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/rounded_btn_dark.xml" value="0.175" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/shape_corner_16dp.xml" value="0.1725" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/tab_selected.xml" value="0.1925" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout-night/bottom_sheet_custom.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout-night/bottom_sheet_search_filter.xml" value="0.27685185185185185" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout-night/filter_single_click_screen_for_sort.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/activity_fullscreen.xml" value="0.3078125" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/activity_home.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/activity_main.xml" value="0.23984526112185686" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/all_anime_item.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_hd_item.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_home__place_holder_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_home_item.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_item.xml" value="0.4528302049755674" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_item_place_holder.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_notitle_item.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_page_item.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/anime_screen.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/banner_item.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/banner_two.xml" value="0.32083333333333336" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/bookmarks_load_state.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/borwse_screen.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/bottom_sheet_custom.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/bottom_sheet_search_filter.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/browse_screen_end.xml" value="0.32083333333333336" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/category_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/detail_screen.xml" value="0.1901886860897383" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/filter_single_click_screen.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/filter_single_click_screen_for_genre.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/filter_single_click_screen_for_sort.xml" value="0.26944444444444443" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/fragment_all_anime.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/fragment_genre.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/fragment_list.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/fragment_profile_screen.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/genres_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/home_banner_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/home_screen.xml" value="0.2711715664765248" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/hr_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/introduction_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_chip.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_dropdown.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_genre_for_search.xml" value="0.4528302049755674" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_media_page.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_progress.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_search_header.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/item_single_click.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/layout_badge.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/layout_history_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/layout_not_logged_in.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/list_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/list_screen_item.xml" value="0.3169230769230769" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/login_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/main_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/movies_screen.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/new_item.xml" value="0.4528302049755674" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/place_holder_anime_item.xml" value="0.32083333333333336" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/place_holder_homebar.xml" value="0.32083333333333336" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/placeholder_genre.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/profile_menu_layout.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/screen_tab_library.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/screen_tab_library_end.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/search_big_item.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/search_new_item.xml" value="0.2719836400817996" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/search_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/shimmer_anime_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/splash_screen.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/subscribtions_screen.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/year_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/menu-v26/bottom_navbar_menu.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/menu/bottom_navbar_menu.xml" value="0.19924529018924966" />
+        <entry key="..\:/AnimeApp/app/src/main/res/menu/home_toolbar.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/menu/manga_menu_detail.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/xml/activity_header_sence.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/xml/activity_telegram_header_scene.xml" value="0.321875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.4528302049755674" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

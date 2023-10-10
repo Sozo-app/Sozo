@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:context=".ui.screen.main.MainScreen">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/mainProgressBar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:elevation="20dp"
+
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navbar_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/navbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            android:background="@drawable/linear_gradient_bg"
+            android:elevation="10dp"
+
+            android:padding="0dp"
+            android:translationZ="12dp"
+            android:visibility="gone"
+            app:elevation="10dp"
+            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+            app:itemBackground="@drawable/item_bg"
+            app:itemIconSize="20dp"
+
+            app:itemIconTint="@drawable/item_navbar_bg"
+            app:itemRippleColor="@color/status"
+            app:itemTextAppearanceActive="@style/MyBottomNavigationView.TextAppearance"
+            app:itemTextAppearanceInactive="@style/MyBottomNavigationView.TextAppearance"
+            app:itemTextColor="@drawable/item_navbar_bg"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navbar_menu"
+            tools:visibility="visible" />
+    </FrameLayout>
+
+    <!--            app:abb_animationDuration="300"-->
+    <!--            app:abb_animationInterpolator="@anim/over_shoot"-->
+    <!--            app:abb_badgeBackgroundColor="#F44336"-->
+    <!--            app:abb_indicatorColor="?attr/colorSecondary"-->
+    <!--    app:abb_indicatorAppearance="invisible"-->
+    <!--            app:abb_indicatorLocation="bottom"-->
+    <!--            app:abb_indicatorMargin="28dp"-->
+    <!--            app:abb_selectedIndex="0"-->
+    <!--            app:abb_selectedTabType="text"-->
+    <!--            app:abb_tabColor="@color/nav_tab"-->
+    <!--            app:abb_tabColorDisabled="@color/nav_tab_disabled"-->
+    <!--            app:abb_tabColorSelected="@color/white"-->
+    <!--            app:abb_tabs="@menu/bottom_navbar_menu"-->
+    <!--            app:abb_textAppearance="@style/NavBarText"-->
+</androidx.constraintlayout.widget.ConstraintLayout>
