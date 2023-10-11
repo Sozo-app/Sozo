@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission
+        android:name="android.permission.BATTERY_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -36,6 +41,18 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/search_app_widget_info" />
         </receiver>
+        <service
+            android:name=".services.BatteryCheckService"
+            android:enabled="true"
+            android:exported="false"
+            tools:ignore="WrongManifestParent" />
+        <receiver
+            android:name=".services.receiver.BatteryReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+        </receiver>
 
         <profileable
             android:shell="true"
@@ -55,6 +72,7 @@
 
                 <data
                     android:host="animeapp"
+                    android:pathPrefix="/login"
                     android:scheme="senzo" />
             </intent-filter>
         </activity>
@@ -100,6 +118,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -114,7 +133,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>

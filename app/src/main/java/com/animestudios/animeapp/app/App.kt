@@ -3,13 +3,21 @@ package com.animestudios.animeapp.app
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.animestudios.animeapp.initializeNetwork
+import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.services.BatteryCheckService
+import com.animestudios.animeapp.settings.UISettings
 
 @SuppressLint("StaticFieldLeak")
 class App : MultiDexApplication() {
+
+
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)
@@ -25,7 +33,6 @@ class App : MultiDexApplication() {
         super.onCreate()
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
         initializeNetwork(baseContext)
-
 
     }
 
@@ -45,6 +52,8 @@ class App : MultiDexApplication() {
         override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}
         override fun onActivityDestroyed(p0: Activity) {}
     }
+
+
 
     companion object {
         private var instance: App? = null

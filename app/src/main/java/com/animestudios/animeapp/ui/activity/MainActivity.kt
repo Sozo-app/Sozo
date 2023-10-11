@@ -1,22 +1,22 @@
 package com.animestudios.animeapp.ui.activity
 
-import android.os.Build
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnAttach
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.animestudios.animeapp.R
-import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.ActivityMainBinding
 import com.animestudios.animeapp.initActivity
 import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.services.BatteryCheckService
+import com.animestudios.animeapp.services.receiver.BatteryReceiver
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,9 +33,14 @@ class MainActivity : AppCompatActivity() {
         binding.root.isMotionEventSplittingEnabled = false
         binding.root.doOnAttach {
             initActivity(this)
-            uiSettings = readData("ui_settings") ?: uiSettings
 
         }
+        val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+        val receiver = BatteryReceiver()
+        registerReceiver(receiver, filter)
+        uiSettings = readData("ui_settings") ?: uiSettings
+
+
 //        lifecycleScope.launchWhenStarted {
 //
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -69,5 +74,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    override fun onDestroy() {
+        val stopServiceIntent = Intent(this, BatteryCheckService::class.java)
+        stopService(stopServiceIntent) // Service ni to'xtatish
+        super.onDestroy()
+
+
     }
 }

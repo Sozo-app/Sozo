@@ -1,78 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    android:id="@+id/telegramMotion"
-    app:layoutDescription="@xml/activity_telegram_header_scene">
+    android:background="#444"
+    app:layoutDescription="@xml/activity_main_scene"
+    tools:ignore="contentDescription"
+    >
 
-    <ImageView
-        android:id="@+id/headerBackground"
-        android:layout_width="0dp"
-        android:layout_height="240dp"
-        android:background="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardProfile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:cardElevation="0dp"
-        app:cardForegroundColor="?colorPrimary"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_image_container"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constrainedWidth="true"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="56dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="340dp" />
-
-    <TextView
-        android:id="@+id/nameField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="Rodrigo Dominguez"
-        android:textColor="@android:color/white"
-        android:textSize="28sp" />
-
-    <TextView
-        android:id="@+id/statusField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="En linea"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/nameField"
-        app:layout_constraintTop_toBottomOf="@id/nameField" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
-        android:padding="4dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/top_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/anime_img"
+        app:layout_constraintTop_toTopOf="@id/top_image_container"
+        app:layout_constraintBottom_toBottomOf="@id/top_image_container"
+        app:layout_constraintStart_toStartOf="@id/top_image_container"
+        app:layout_constraintEnd_toEndOf="@id/top_image_container"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabButton"
+    <ImageView
+        android:id="@+id/image_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:src="@drawable/add"
-        app:layout_constraintBottom_toBottomOf="@id/cardProfile"
+        android:layout_marginEnd="16dp"
+        android:alpha="0"
+        app:srcCompat="@drawable/ic_arrow"
+        app:layout_constraintEnd_toStartOf="@id/image_clear"
+        app:layout_constraintTop_toTopOf="@id/top_image_container"
+        app:layout_constraintBottom_toBottomOf="@id/top_image_container"
+        />
+
+    <ImageView
+        android:id="@+id/image_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:alpha="0"
+        app:srcCompat="@drawable/ic_filled_circle"
+        app:layout_constraintEnd_toEndOf="@id/top_image_container"
+        app:layout_constraintBottom_toBottomOf="@id/top_image_container"
+        app:layout_constraintTop_toTopOf="@id/top_image_container"
+        />
+
+    <FrameLayout
+        android:id="@+id/recyclerview_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardProfile" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_image_container"
+        />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_front"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_image_container" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/manga_menu_detail"
+        />
 </androidx.constraintlayout.motion.widget.MotionLayout>
