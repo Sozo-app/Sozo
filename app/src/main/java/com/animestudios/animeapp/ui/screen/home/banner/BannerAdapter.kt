@@ -55,13 +55,15 @@ class BannerAdapter(
         val media = mediaList?.get(position)
         if (media != null) {
             println(media.toString())
-            b.itemCompactBanner.setTransitionGenerator(
-                RandomTransitionGenerator(
-                    (10000 + 15000 * (uiSettings.animationSpeed)).toLong(),
-                    AccelerateDecelerateInterpolator()
+            if (uiSettings.layoutAnimations)
+                b.itemCompactBanner.setTransitionGenerator(
+                    RandomTransitionGenerator(
+                        (10000 + 15000 * (uiSettings.animationSpeed)).toLong(),
+                        AccelerateDecelerateInterpolator()
+                    )
                 )
-            )
-            val banner =  b.itemCompactBanner
+            val banner =
+                if (uiSettings.layoutAnimations) b.itemCompactBanner else b.itemCompactBannerNoKen
             val context = b.itemCompactBanner.context
             if (!(context as Activity).isDestroyed)
                 Glide.with(context as Context)

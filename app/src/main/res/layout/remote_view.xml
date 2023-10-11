@@ -1,28 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cookie"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="@color/bg_white"
-    tools:ignore="UseCompoundDrawables">
+    app:cardBackgroundColor="@color/bg"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/remoteTextTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/inter_bold"
-        android:text="Power Saving Mode Enabled"
-        android:textColor="@color/basic_color"
-        android:textSize="18sp" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+>
 
     <ImageView
-        android:id="@+id/remoteButtonClose"
-        android:layout_width="24dp"
+        android:id="@+id/iv_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/logo"
 
-        android:layout_height="24dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/low_battery" />
 
-</LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:maxLines="1"
+        android:text="Power Sawing Mode.."
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="@+id/iv_icon"
+        app:layout_constraintVertical_bias="0.473" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+
+        android:fontFamily="@font/poppins_family"
+        android:paddingEnd="4dp"
+        android:text="Device Charge was 5%. Sozo App has been put into power saving mode"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_action"
+        app:layout_constraintStart_toStartOf="@+id/iv_icon"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
+
+
+    <TextView
+        android:id="@+id/btn_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/inter_bold"
+        android:foreground="?selectableItemBackground"
+        android:text="Cancel"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_message" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

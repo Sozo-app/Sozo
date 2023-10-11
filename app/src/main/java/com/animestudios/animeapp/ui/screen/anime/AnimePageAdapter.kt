@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LayoutAnimationController
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
@@ -60,15 +59,15 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
         adapter.submitLit(list.toMutableList())
         binding.animePageRecyclerView.setHasFixedSize(true)
         binding.animePageRecyclerView.adapter = adapter
-        binding.animePageRecyclerView.layoutAnimation =
-            LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
-        binding.animePageRecyclerView.layoutManager = LinearLayoutManager(
-            binding.animePageRecyclerView.context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
         binding.recentReleased.visibility = View.VISIBLE
-        binding.recentReleased.slideStart(700, 0)
+
+        if (uiSettings!!.layoutAnimations) {
+            binding.animePageRecyclerView.layoutAnimation =
+                LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
+            binding.recentReleased.slideStart(700, 0)
+        }
+
+
 
     }
 
@@ -92,10 +91,13 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
         binding.viewPager2.setPageTransformer(MediaPageTransformer())
         binding.viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         binding.viewPager2.offscreenPageLimit = 3
-        binding.viewPager2.layoutAnimation =
-            LayoutAnimationController(setSlideIn(uiSettings), 0.50f)
         binding.animeToolbarContainer.visible()
-        binding.animeToolbarContainer.slideUp(700, 0)
+        if (uiSettings!!.layoutAnimations) {
+            binding.viewPager2.layoutAnimation =
+                LayoutAnimationController(setSlideIn(uiSettings), 0.50f)
+            binding.animeToolbarContainer.slideUp(700, 0)
+        }
+
     }
 
     fun updateTrending(list: MutableList<Media>) {
@@ -108,15 +110,14 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             binding.forYouTxt.visible()
             onlOnYouRecyclerView.adapter = animeTitleWithScoreAdapter
             binding.onlOnYouRecyclerView.setHasFixedSize(true)
-            binding.onlOnYouRecyclerView.layoutAnimation =
-                LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
-            binding.forYouTxt.slideStart(700, 0)
+            if (uiSettings!!.layoutAnimations) {
+                binding.onlOnYouRecyclerView.layoutAnimation =
+                    LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
+                binding.forYouTxt.slideStart(700, 0)
+            }
         }
     }
 
-    fun updateHeight() {
-        trendingViewPager!!.updateLayoutParams { height += statusBarHeight }
-    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

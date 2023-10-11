@@ -124,10 +124,10 @@ dependencies {
     implementation 'com.alexvasilkov:gesture-views:2.8.3'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.github.brahmkshatriya:NiceHttp:1.1.0'
-    implementation 'com.fragula2:fragula-core:2.9'
     implementation 'com.github.SabriGhazali:Shadout-Android:1.0.2'
     implementation 'androidx.browser:browser:1.5.0'
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'org.aviran.cookiebar2:cookiebar2:1.1.5'
 
 
 //    Exoplayer

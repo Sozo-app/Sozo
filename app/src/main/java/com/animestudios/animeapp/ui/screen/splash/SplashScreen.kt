@@ -12,10 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.R
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.SplashScreenBinding
-import com.animestudios.animeapp.setSlideIn
+import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.setSlideUp
 import com.animestudios.animeapp.settings.UISettings
-import com.animestudios.animeapp.tools.slideUp
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,6 +24,7 @@ class SplashScreen : Fragment() {
     private val model: MainViewModelImp by viewModels()
     private var _binding: SplashScreenBinding? = null
     private val binding get() = _binding!!
+    private var uiSettings = UISettings()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,15 +37,16 @@ class SplashScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val uiSettings = readData<UISettings>("ui_settings") ?: uiSettings
 
+        if (uiSettings!!.layoutAnimations) {
+            binding.splashImage.startAnimation(setSlideUp(UISettings()))
+        }
         lifecycleScope.launch(Dispatchers.IO) {
             model.getGenresAndTags(requireActivity())
         }
         lifecycleScope.launch {
-            binding.splashImage.slideUp(1000, 0)
             delay(2000)
-            binding.splashImage.startAnimation(setSlideUp(UISettings()))
-
             if (Anilist.token == null) {
                 findNavController().navigate(
                     R.id.loginScreen,

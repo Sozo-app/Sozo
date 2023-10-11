@@ -42,9 +42,9 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
             android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -115,11 +115,11 @@
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:requiresFadingEdge="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/recentReleased"
             app:layout_constraintTop_toBottomOf="@+id/recentReleased"
             tools:itemCount="5"
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/anime_hd_item" />
 
         <TextView
@@ -133,8 +133,8 @@
 
             android:textFontWeight="600"
             android:textSize="24dp"
-
             android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="@+id/animePageRecyclerView"
             app:layout_constraintTop_toBottomOf="@id/animePageRecyclerView"
             tools:visibility="visible" />

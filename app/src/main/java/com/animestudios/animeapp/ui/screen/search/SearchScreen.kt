@@ -26,7 +26,6 @@ import com.animestudios.animeapp.statusBarHeight
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchAdapter
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchItemAdapter
 import com.animestudios.animeapp.viewmodel.imp.SearchViewModelImp
-import com.fragula2.utils.findSwipeController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -3,10 +3,8 @@ package com.animestudios.animeapp
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
+import android.content.Context.BATTERY_SERVICE
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.ConnectivityManager
@@ -30,9 +28,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.app.App
-import com.animestudios.animeapp.model.AnimeModel
-import com.animestudios.animeapp.model.CategoryModel
-import com.animestudios.animeapp.model.HomeModel
+import com.animestudios.animeapp.app.App.Companion.context
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.ui.activity.MainActivity
 import com.animestudios.animeapp.ui.screen.search.dialog.tab.model.FilterTabModel
@@ -403,7 +399,9 @@ fun openLinkInBrowser(link: String?) {
 fun initActivity(a: Activity) {
     val window = a.window
     WindowCompat.setDecorFitsSystemWindows(window, false)
+
     val uiSettings = readData<UISettings>("ui_settings", toast = false)
+
         ?: UISettings().apply {
             saveData("ui_settings", this)
         }

@@ -18,7 +18,6 @@ import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.toFirstUpperCase
 import com.animestudios.animeapp.ui.screen.search.SearchScreen
 import com.animestudios.animeapp.ui.screen.search.dialog.SearchFilterBottomDialog
-import com.fragula2.utils.findSwipeController
 
 
 class SearchAdapter(private val activity: SearchScreen) :

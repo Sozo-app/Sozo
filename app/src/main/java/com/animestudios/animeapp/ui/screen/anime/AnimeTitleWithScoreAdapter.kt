@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.*
@@ -33,8 +31,10 @@ AnimeTitleWithScoreAdapter(
 
         fun onBind(datA: Media) {
             binding.apply {
-                setAnimation(activity.requireActivity(), binding.root, uiSettings)
-                binding.titleItem.animation=setSlideIn(uiSettings)
+                if (uiSettings.layoutAnimations) {
+                    setAnimation(activity.requireActivity(), binding.root, uiSettings)
+                    binding.titleItem.animation = setSlideIn(uiSettings)
+                }
                 itemImg.loadImage(datA.cover ?: datA.banner)
                 binding.itemCompactScore.text = ((if (datA.userScore == 0) (datA.meanScore
                     ?: 0) else datA.userScore) / 10.0).toString()

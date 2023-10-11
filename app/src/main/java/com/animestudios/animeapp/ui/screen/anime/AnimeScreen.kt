@@ -1,8 +1,6 @@
 package com.animestudios.animeapp.ui.screen.anime
 
 import android.annotation.SuppressLint
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,14 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.animestudios.animeapp.*
-import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.AnimeScreenBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 import com.animestudios.animeapp.viewmodel.imp.AniListViewModelImp
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.max

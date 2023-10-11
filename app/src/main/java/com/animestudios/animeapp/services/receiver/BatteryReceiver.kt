@@ -1,5 +1,6 @@
 package com.animestudios.animeapp.services.receiver
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
@@ -7,7 +8,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.BatteryManager
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.animestudios.animeapp.R
+import com.animestudios.animeapp.currContext
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.settings.UISettings
@@ -23,21 +26,26 @@ class BatteryReceiver : BroadcastReceiver() {
                 BatteryManager.EXTRA_STATUS,
                 -1
             ) == BatteryManager.BATTERY_STATUS_CHARGING
-            if (level <= 15 && !isCharging && lastBatteryLevel == 0) {
+            if (level <= 15 && !isCharging) {
                 showNotification(context, level)
                 val uiSettings = readData<UISettings>("ui_settings")
-                saveData("ui_settings",uiSettings!!.copy(layoutAnimations = false))
+                saveData("ui_settings", uiSettings!!.copy(layoutAnimations = false))
                 lastBatteryLevel += 1
+                saveData("last", lastBatteryLevel)
                 isLowBattery = true
-            } else if ((level > 15 || isCharging) && isLowBattery) {
+            } else if ((level > 15 || isCharging) ) {
                 cancelNotification(context)
+                val uiSettings = readData<UISettings>("ui_settings")
+                saveData("ui_settings", uiSettings!!.copy(layoutAnimations = true))
                 isLowBattery = false
                 lastBatteryLevel -= 1
+                saveData("last", lastBatteryLevel)
             }
             println("LAST BATTERY : " + lastBatteryLevel)
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables", "NewApi")
     private fun showNotification(context: Context, level: Int) {
         val channelId = "battery_channel"
         val notificationManager =
@@ -46,17 +54,22 @@ class BatteryReceiver : BroadcastReceiver() {
             val channel = NotificationChannel(
                 channelId,
                 "sozo",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager.createNotificationChannel(channel)
         }
 
+
         val notification = NotificationCompat.Builder(context, channelId)
             .setContentTitle("Sozo App")
-            .setContentText("Power saving mode is enabled.")
+            .setLargeIcon(
+                currContext()!!.resources.getDrawable(R.drawable.low_battery).toBitmap()
+            )
+            .setContentText("Device Charge was $level%. Sozo App has been put into power saving mode")
             .setSmallIcon(R.drawable.logo)
-
         notificationManager.notify(1, notification.build())
+
+
     }
 
     private fun cancelNotification(context: Context) {

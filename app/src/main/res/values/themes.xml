@@ -43,11 +43,11 @@
         </item>
         <item name="snackbarTextViewStyle">@string/MySnackBarText</item>
         <item name="popupMenuStyle">@style/MyPopup</item>
-        <item name="fgl_scrim_color">#000000</item>
-        <item name="fgl_scrim_amount">0.15</item>
-        <item name="fgl_parallax_factor">1.3</item>
-        <item name="fgl_anim_duration">500</item>
-        <item name="fgl_elevation">3dp</item>
+<!--        <item name="fgl_scrim_color">#000000</item>-->
+<!--        <item name="fgl_scrim_amount">0.15</item>-->
+<!--        <item name="fgl_parallax_factor">1.3</item>-->
+<!--        <item name="fgl_anim_duration">500</item>-->
+<!--        <item name="fgl_elevation">3dp</item>-->
 
     </style>
 

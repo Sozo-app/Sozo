@@ -30,7 +30,6 @@ class BatteryCheckService : Service() {
         val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         registerReceiver(batteryReceiver, filter)
 
-
             startForeground(1, createNotification())
 
         return START_STICKY

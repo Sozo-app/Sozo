@@ -33,7 +33,6 @@ class App : MultiDexApplication() {
         super.onCreate()
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
         initializeNetwork(baseContext)
-
     }
 
     inner class FTActivityLifecycleCallbacks : ActivityLifecycleCallbacks {
@@ -42,11 +41,9 @@ class App : MultiDexApplication() {
         override fun onActivityStarted(p0: Activity) {
             currentActivity = p0
         }
-
         override fun onActivityResumed(p0: Activity) {
             currentActivity = p0
         }
-
         override fun onActivityPaused(p0: Activity) {}
         override fun onActivityStopped(p0: Activity) {}
         override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}
