@@ -55,6 +55,7 @@ class BatteryReceiver : BroadcastReceiver() {
                 channelId,
                 "sozo",
                 NotificationManager.IMPORTANCE_HIGH
+
             )
             notificationManager.createNotificationChannel(channel)
         }
