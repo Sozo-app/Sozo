@@ -9,7 +9,6 @@ import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.saveData
-import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.viewmodel.AniListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -42,6 +41,11 @@ class AniListViewModelImp() : AniListViewModel, ViewModel() {
     var loaded = false
     var notSet = true
 
+
+    init {
+        loadAnimeSection(1)
+
+    }
 
     override fun getHomeAnimeListByGenre(genre: MutableList<String>) {
         getHomeAnimeList.postValue(Resource.Loading)
@@ -79,7 +83,6 @@ class AniListViewModelImp() : AniListViewModel, ViewModel() {
         }
 
     }
-
 
 
     override fun loadAnimeSection(i: Int) {

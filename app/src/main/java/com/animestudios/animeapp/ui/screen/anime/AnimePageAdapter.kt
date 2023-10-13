@@ -9,7 +9,6 @@ import android.view.animation.LayoutAnimationController
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.animestudios.animeapp.*
@@ -30,8 +29,6 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             fragmentAdapter as AnimeScreen
         )
     }
-    private val uiSettings =
-        readData<UISettings>("ui_settings") ?: UISettings()
     var height = statusBarHeight
     val ready = MutableLiveData(false)
     lateinit var binding: AnimePageItemBinding
@@ -55,6 +52,8 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
 
 
     fun updateRecently(list: List<Media>) {
+        val uiSettings =
+            readData<UISettings>("ui_settings") ?: UISettings()
 
         adapter.submitLit(list.toMutableList())
         binding.animePageRecyclerView.setHasFixedSize(true)
@@ -68,10 +67,11 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
         }
 
 
-
     }
 
     fun updateTrendingBanner(adapterBannerAdapter: BannerAdapter) {
+        val uiSettings =
+            readData<UISettings>("ui_settings") ?: UISettings()
         binding.viewPager2.adapter = adapterBannerAdapter
 
         trendHandler = Handler(Looper.getMainLooper())
@@ -92,7 +92,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
         binding.viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         binding.viewPager2.offscreenPageLimit = 3
         binding.animeToolbarContainer.visible()
-        if (uiSettings!!.layoutAnimations) {
+        if (uiSettings.layoutAnimations) {
             binding.viewPager2.layoutAnimation =
                 LayoutAnimationController(setSlideIn(uiSettings), 0.50f)
             binding.animeToolbarContainer.slideUp(700, 0)
@@ -101,6 +101,8 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
     }
 
     fun updateTrending(list: MutableList<Media>) {
+        val uiSettings =
+            readData<UISettings>("ui_settings") ?: UISettings()
         println("Tushdiiiiii ${list.size}")
         val animeTitleWithScoreAdapter =
             AnimeTitleWithScoreAdapter(fragmentAdapter)

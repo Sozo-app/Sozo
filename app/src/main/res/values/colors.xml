@@ -17,7 +17,7 @@
     <color name="bg_filter_dialog">#2B2B2B</color>
     <color name="bg_search">#3C3F41</color>
     <color name="bg_opp">@color/bg_black</color>
-    <color name="BackwardColorHeavy">#B0000000</color>
+    <color name="BackwardColorHeavy">#94000000</color>
     <color name="backward_color">#DD000000</color>
     <color name="library_back_color">#FB181818</color>
     <color name="library_back_color_dd">#DD181818</color>

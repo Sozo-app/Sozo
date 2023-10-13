@@ -3,8 +3,10 @@ package com.animestudios.animeapp
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
-import android.content.*
-import android.content.Context.BATTERY_SERVICE
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.ConnectivityManager
@@ -28,7 +30,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.app.App
-import com.animestudios.animeapp.app.App.Companion.context
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.ui.activity.MainActivity
 import com.animestudios.animeapp.ui.screen.search.dialog.tab.model.FilterTabModel
@@ -52,7 +53,7 @@ var statusBarHeight = 0
 var navBarHeight = 0
 val Int.dp: Float get() = (this / Resources.getSystem().displayMetrics.density)
 val Int.dpIndicator: Float get() = (this * (Resources.getSystem().displayMetrics.densityDpi / 160f))
-var selectedPosition =-1
+var selectedPosition = -1
 
 val Float.px: Int get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 const val EMPTY_VALUE_STRING = "~"
@@ -143,11 +144,16 @@ fun loadFilterTab(
     list.add(FilterTabModel(newList, "Format", defaultItemYears))
 
 
-    list.add(FilterTabModel(currContext()!!.resources.getStringArray(R.array.sort_by).toMutableList(), "Sort", defaultItemSort))
+    list.add(
+        FilterTabModel(
+            currContext()!!.resources.getStringArray(R.array.sort_by).toMutableList(),
+            "Sort",
+            defaultItemSort
+        )
+    )
 
     return list
 }
-
 
 
 class ZoomOutPageTransformer(private val uiSettings: UISettings) :
@@ -350,11 +356,11 @@ fun ImageView.loadImage(file: FileUrl?, size: Int = 0) {
     if (file?.url?.isNotEmpty() == true) {
         tryWith {
             val glideUrl = GlideUrl(file.url) { file.headers }
-            Glide.with(this.context).load(glideUrl).transition(DrawableTransitionOptions.withCrossFade()).override(size).into(this)
+            Glide.with(this.context).load(glideUrl)
+                .transition(DrawableTransitionOptions.withCrossFade()).override(size).into(this)
         }
     }
 }
-
 
 
 var loaded: Boolean = false
@@ -385,7 +391,6 @@ val Int.pxToDp: Int
 
 val Int.dpToPx: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
-
 
 
 fun openLinkInBrowser(link: String?) {
@@ -491,6 +496,7 @@ class CustomViewPagerScroll : ViewPager {
     }
 
 }
+
 var loadMedia: Int? = null
 
 fun startMainActivity(activity: Activity, bundle: Bundle? = null) {
@@ -562,7 +568,7 @@ fun setAnimation(
     context: Context,
     viewToAnimate: View,
     uiSettings: UISettings,
-    duration: Long = 100,
+    duration: Long = 150,
     list: FloatArray = floatArrayOf(0.0f, 1.0f, 0.0f, 1.0f),
     pivot: Pair<Float, Float> = 0.5f to 0.5f
 ) {
@@ -572,9 +578,9 @@ fun setAnimation(
             list[1],
             list[2],
             list[3],
-            Animation.ZORDER_NORMAL,
+            Animation.RELATIVE_TO_SELF,
             pivot.first,
-            Animation.ZORDER_NORMAL,
+            Animation.RELATIVE_TO_SELF,
             pivot.second
         )
         anim.duration = (duration * uiSettings.animationSpeed).toLong()
@@ -582,6 +588,7 @@ fun setAnimation(
         viewToAnimate.startAnimation(anim)
     }
 }
+
 fun setSlideIn(uiSettings: UISettings) = AnimationSet(false).apply {
     if (uiSettings.layoutAnimations) {
         var animation: Animation = AlphaAnimation(0.0f, 1.0f)

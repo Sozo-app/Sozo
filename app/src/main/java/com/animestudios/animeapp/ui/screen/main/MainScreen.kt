@@ -27,45 +27,18 @@ class MainScreen : Fragment() {
     private val model by viewModels<MainViewModelImp>()
     private var uiSettings = UISettings()
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = com.animestudios.animeapp.databinding.MainScreenBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-        return _binding?.root
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val navbar = binding.navbar
-        val mainViewPager = binding.viewPager
-        binding.mainProgressBar.visible()
-        bottomBar = navbar
-        mainViewPager.gone()
-        navbar.gone()
-        mainViewPager.isUserInputEnabled = false
-        uiSettings = readData("ui_settings") ?: uiSettings
-        model.getGenres(requireActivity())
-        model . genres . observe (
-                viewLifecycleOwner
-                ) {
+        model.genres.observe(
+            this
+        ) {
             if (it != null) {
                 if (it) {
-                    navbar.visibility = View.VISIBLE
-                    mainViewPager.isUserInputEnabled = false
+                    val mainViewPager = binding.viewPager
+                    val navbar = binding.navbar
+                    binding.navbar.visibility = View.VISIBLE
+                    binding.viewPager.isUserInputEnabled = false
                     binding.viewPager.adapter = BottomNavigationAdapter(requireActivity())
                     model.loadProfile() {
 
@@ -123,6 +96,35 @@ class MainScreen : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = com.animestudios.animeapp.databinding.MainScreenBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        return _binding?.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val navbar = binding.navbar
+        val mainViewPager = binding.viewPager
+        binding.mainProgressBar.visible()
+        bottomBar = navbar
+        mainViewPager.gone()
+        navbar.gone()
+        mainViewPager.isUserInputEnabled = false
+        uiSettings = readData("ui_settings") ?: uiSettings
+        model.getGenres(requireActivity())
+
     }
 
     override fun onPause() {
