@@ -18,8 +18,6 @@ AnimeTitleWithScoreAdapter(
 ) : RecyclerView.Adapter<AnimeTitleWithScoreAdapter.AnimeNoTitleVh>() {
     private val list: MutableList<Media> = ArrayList()
 
-    private val uiSettings =
-        readData<UISettings>("ui_settings") ?: UISettings()
 
     inner class AnimeNoTitleVh(val binding: AnimeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -30,6 +28,8 @@ AnimeTitleWithScoreAdapter(
         }
 
         fun onBind(datA: Media) {
+            val uiSettings =
+                readData<UISettings>("ui_settings") ?: UISettings()
             binding.apply {
                 if (uiSettings.layoutAnimations) {
                     setAnimation(activity.requireActivity(), binding.root, uiSettings)

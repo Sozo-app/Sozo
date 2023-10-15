@@ -40,7 +40,7 @@ class BatteryReceiver : BroadcastReceiver() {
             Sneaker.with(currActivity()!!)
                 .setTitle("Battery Low !!")
                 .setMessage("Power Saving Mode Enabled !")
-                .sneakError()
+                .sneakWarning()
         } else if (level >= 15) {
             isNotificationShown = false
         }

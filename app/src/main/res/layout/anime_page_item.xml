@@ -30,7 +30,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="420dp" />
+                android:layout_height="430dp" />
 
 
         </FrameLayout>
@@ -39,7 +39,7 @@
             android:id="@+id/anime_toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="26dp"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
                 android:layout_marginStart="26dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="SOZO"
-                android:textSize="28dp" />
+                android:textSize="26dp" />
 
         </FrameLayout>
 

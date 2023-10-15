@@ -127,6 +127,7 @@ dependencies {
     implementation 'com.github.SabriGhazali:Shadout-Android:1.0.2'
     implementation 'androidx.browser:browser:1.5.0'
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'com.github.iammert:ScalingLayout:1.2.1'
     implementation 'com.irozon.sneaker:sneaker:2.0.0'
 
 

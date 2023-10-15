@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_main_scene">
+
+    <!--  cover  -->
+    <ImageView
+        android:id="@+id/movieCoverImg"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@drawable/headbg"        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--  Fake Toolbar  -->
+    <View
+        android:id="@+id/movieFakeToolbar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="#EFF0ED"
+        android:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+
+    <!--  Scroll  -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/movieScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#EFF0ED"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieCoverImg">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--      Info      -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/movieInfoLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/movieRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="6.4"
+                    android:textColor="#222831"
+                    android:textSize="12sp"
+                    app:drawableTint="#222831"
+                    app:drawableTopCompat="@drawable/ic_round_star_24"
+                    app:flow_horizontalBias="0.5"
+                    app:layout_constraintEnd_toStartOf="@id/movieDuration"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/movieDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="127 minutes"
+                    android:textColor="#222831"
+                    android:textSize="12sp"
+                    app:drawableTint="#222831"
+                    app:drawableTopCompat="@drawable/add"
+                    app:flow_horizontalBias="0.5"
+                    app:layout_constraintEnd_toStartOf="@id/movieStatus"
+                    app:layout_constraintStart_toEndOf="@id/movieRate"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/movieStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="Released"
+                    android:textColor="#222831"
+                    android:textSize="12sp"
+                    app:drawableTint="#222831"
+                    app:drawableTopCompat="@drawable/ic_arrow"
+                    app:flow_horizontalBias="0.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/movieDuration"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--      Desc      -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:lineSpacingExtra="5dp"
+                android:text="@string/app_name"
+                android:textColor="#222831"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movieInfoLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--  poster  -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/moviePosterImg"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="20dp"
+        android:elevation="1dp"
+        android:src="@drawable/anime_img"
+        app:layout_constraintBottom_toBottomOf="@id/movieCoverImg"
+        app:layout_constraintDimensionRatio="h,1:1.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+    <!--  Name  -->
+    <TextView
+        android:id="@+id/movieNameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/app_name"
+        android:textColor="#FF3700B3"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/moviePosterImg"
+        app:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+    <!--  genre  -->
+    <TextView
+        android:id="@+id/movieGenreTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="Action"
+        android:textColor="#606060"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/moviePosterImg"
+        app:layout_constraintTop_toBottomOf="@id/movieNameTxt" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
