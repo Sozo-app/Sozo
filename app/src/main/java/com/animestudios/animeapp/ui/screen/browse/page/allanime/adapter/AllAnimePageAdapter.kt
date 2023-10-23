@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.animestudios.animeapp.anime.Anime
 import com.animestudios.animeapp.databinding.AnimeHdItemBinding
-import com.animestudios.animeapp.databinding.AnimeItemBinding
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.loadImage
 import com.animestudios.animeapp.media.Media

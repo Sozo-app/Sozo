@@ -14,6 +14,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 object Anilist {
+    val BASE_URL ="https://graphql.anilist.co/"
     val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)

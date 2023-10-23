@@ -24,11 +24,11 @@ class BatteryReceiver : BroadcastReceiver() {
             ) == BatteryManager.BATTERY_STATUS_CHARGING
             if (level <= 15 && !isCharging) {
                 showNotification(level)
-                val uiSettings = readData<UISettings>("ui_settings")
-                saveData("ui_settings", uiSettings!!.copy(layoutAnimations = false))
+                val uiSettings = readData<UISettings>("ui_settings")?:UISettings()
+                saveData("ui_settings", uiSettings.copy(layoutAnimations = false))
             } else if ((level > 15 || isCharging)) {
-                val uiSettings = readData<UISettings>("ui_settings")
-                saveData("ui_settings", uiSettings!!.copy(layoutAnimations = true))
+                val uiSettings = readData<UISettings>("ui_settings")?:UISettings()
+                saveData("ui_settings", uiSettings.copy(layoutAnimations = true))
             }
         }
     }
@@ -47,9 +47,5 @@ class BatteryReceiver : BroadcastReceiver() {
 
     }
 
-    private fun cancelNotification(context: Context) {
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.cancel(1) // 1 - Notification ID
-    }
+
 }

@@ -44,6 +44,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
@@ -294,7 +295,6 @@ fun <T> tryWith(post: Boolean = false, snackbar: Boolean = true, call: () -> T):
     return try {
         call.invoke()
     } catch (e: Throwable) {
-//        logError(e, post, snackbar)
         null
     }
 }
@@ -322,9 +322,7 @@ class CardTransformer(private val context: Context) : ViewPager2.PageTransformer
         val dpHeight = displayMetrics.heightPixels / displayMetrics.density
 
         page.translationX = -pageTranslationX * position  /*dpHeight/(100)*/
-        // Next line scales the item's height. You can remove it if you don't want this effect
         page.scaleY = 1 - (0.12f * kotlin.math.abs(position))
-        // If you want a fading effect uncomment the next line:
         page.alpha = 0.5f + (1 - kotlin.math.abs(position))
     }
 
@@ -549,19 +547,12 @@ fun setGenreItemAnimation(activity: Activity?, view: View) {
     set.start()
 
 }
-//fun Context.circularProgressDrawable(): Drawable {
-//    return CircularProgressDrawable(this).apply {
-//        strokeWidth = 7f
-//        centerRadius = 60f
-//        setColorSchemeColors(
-//            androidx.core.content.ContextCompat.getColor(
-//                this@circularProgressDrawable,
-//                R.color.text_color
-//            )
-//        )
-//        start()
-//    }
-//}
+
+fun displayInDayDateTimeFormat(seconds: Int): String {
+    val dateFormat = SimpleDateFormat("E, dd MMM yyyy, hh:mm a", Locale.getDefault())
+    val date = Date(seconds * 1000L)
+    return dateFormat.format(date)
+}
 
 
 fun setAnimation(
@@ -788,6 +779,30 @@ class MyCountDownTimer(startTime: Long, interval: Long, private val func: () -> 
     CountDownTimer(startTime, interval) {
     override fun onFinish() = func()
     override fun onTick(timer: Long) {}
+}
+
+enum class MediaStatusAnimity {
+    COMPLETED,
+    WATCHING,
+    DROPPED,
+    PAUSED,
+    PLANNING,
+    REPEATING,
+    NOTHING;
+
+    companion object {
+        fun stringToMediaListStatus(passedString: String?): MediaStatusAnimity {
+            return when (passedString?.uppercase(Locale.getDefault())) {
+                "COMPLETED" -> COMPLETED
+                "CURRENT" -> WATCHING
+                "DROPPED" -> DROPPED
+                "PAUSED" -> PAUSED
+                "PLANNING" -> PLANNING
+                "REPEATING" -> REPEATING
+                else -> NOTHING
+            }
+        }
+    }
 }
 
 

@@ -6,7 +6,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.ui.screen.anime.AnimeScreen
 import com.animestudios.animeapp.ui.screen.browse.BrowseScreen
-import com.animestudios.animeapp.ui.screen.home.HomeScreen
 import com.animestudios.animeapp.ui.screen.list.ListScreen
 import com.animestudios.animeapp.ui.screen.profile.ProfileScreen
 

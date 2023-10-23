@@ -1,11 +1,7 @@
 package com.animestudios.animeapp.media
 
-import com.animestudios.animeapp.anilist.response.FuzzyDate
-import com.animestudios.animeapp.anilist.response.MediaEdge
-import com.animestudios.animeapp.anilist.response.MediaList
-import com.animestudios.animeapp.anilist.response.MediaType
 import ani.saikou.media.Selected
-import com.animestudios.animeapp.anime.Anime
+import com.animestudios.animeapp.anilist.response.*
 import java.io.Serializable
 import com.animestudios.animeapp.anilist.response.Media as ApiMedia
 

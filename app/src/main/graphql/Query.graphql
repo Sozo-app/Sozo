@@ -1,0 +1,193 @@
+query Notifications($page: Int) {
+    page: Page(page: $page, perPage: 20) {
+        notifications(resetNotificationCount: false) {
+            ... on FollowingNotification {
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+            ... on AiringNotification {
+                id
+                episode
+                contexts
+                media {
+                    ...HomeMedia
+                }
+                type
+            }
+            ... on ActivityLikeNotification {
+                activity {
+                    ... on ListActivity {
+                        id
+                        type
+                        createdAt
+                        status
+                        progress
+                        media {
+                            ...HomeMedia
+                        }
+                    }
+                    ... on MessageActivity {
+                        id
+                        type
+                        createdAt
+                        message
+                        recipient {
+                            id
+                            name
+                            avatar {
+                                large
+                                medium
+                            }
+                        }
+                    }
+                    ... on TextActivity {
+                        id
+                        type
+                        createdAt
+                        text
+                    }
+                }
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+            ... on ActivityMessageNotification {
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+            ... on ActivityMentionNotification {
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+            ... on ActivityReplyNotification {
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+            ... on ThreadCommentMentionNotification {
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+            ... on ThreadCommentReplyNotification {
+                context
+                createdAt
+                id
+                type
+                user {
+                    id
+                    name
+                    avatar {
+                        large
+                        medium
+                    }
+                }
+                userId
+            }
+        }
+    }
+}
+
+fragment HomeMedia on Media {
+    id
+    idMal
+    title {
+        romaji
+        userPreferred
+    }
+    type
+    isFavourite
+
+    status(version: 2)
+    format
+    description(asHtml: false)
+    coverImage {
+        extraLarge
+        large
+        medium
+    }
+    streamingEpisodes {
+        title
+        thumbnail
+    }
+    nextAiringEpisode {
+        airingAt
+        episode
+    }
+    bannerImage
+    genres
+    averageScore
+    favourites
+    startDate {
+        year
+        month
+        day
+    }
+    mediaListEntry {
+        id
+        status
+    }
+}

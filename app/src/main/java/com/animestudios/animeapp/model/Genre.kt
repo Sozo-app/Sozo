@@ -1,8 +1,13 @@
 package com.animestudios.animeapp.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Genre(
     val name: String = ""
-)
+) : Parcelable
+
 
 fun Genre.getHexColor(): String {
     return when (name) {

@@ -3,7 +3,7 @@ package com.animestudios.animeapp.viewmodel.imp
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.animestudios.animeapp.Resource
+import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults

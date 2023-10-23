@@ -1,7 +1,7 @@
 package com.animestudios.animeapp.anilist.api.imp
 
 import android.app.Activity
-import ani.saikou.anilist.api.Page
+import com.animestudios.animeapp.anilist.response.Page
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.AniListQueries
 import com.animestudios.animeapp.anilist.api.common.Anilist

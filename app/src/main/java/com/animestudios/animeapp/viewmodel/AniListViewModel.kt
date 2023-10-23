@@ -1,7 +1,7 @@
 package com.animestudios.animeapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.animestudios.animeapp.Resource
+import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.media.Media

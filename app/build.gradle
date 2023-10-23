@@ -2,13 +2,21 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id "com.apollographql.apollo3" version("3.7.0")
+    id 'kotlin-parcelize'
+    id 'com.google.dagger.hilt.android'
     id 'kotlinx-serialization'
+
 }
 
 android {
     namespace 'com.animestudios.animeapp'
     compileSdk 33
-
+    apollo {
+        packageName.set("com.animestudios.animeapp")
+        generateKotlinModels.set(true)
+        excludes.add("**/schema.json.graphql")
+    }
     defaultConfig {
         applicationId "com.animestudios.animeapp"
         minSdk 24
@@ -129,6 +137,7 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation 'com.github.iammert:ScalingLayout:1.2.1'
     implementation 'com.irozon.sneaker:sneaker:2.0.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 
 //    Exoplayer
@@ -141,5 +150,26 @@ dependencies {
     implementation "androidx.media3:media3-session:$exo_version"
     implementation 'com.github.dueeeke:dk-tablayout:1.0.2'
     implementation "com.github.skydoves:powermenu:2.2.4"
+
+    def apolloVersion = '3.7.0'
+    implementation "com.apollographql.apollo3:apollo-runtime:$apolloVersion"
+
+    // paging 3
+    def paginationVersion = "3.1.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paginationVersion"
+
+    /**
+     * DI Dagger Hilt
+     * */
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+
+    //Work Manager
+    def work_version = "2.8.1"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation 'androidx.hilt:hilt-work:1.0.0'
+    implementation "androidx.startup:startup-runtime:1.1.1"
+
 
 }

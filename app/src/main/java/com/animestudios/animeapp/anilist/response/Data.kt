@@ -35,7 +35,7 @@
             @Serializable
             data class Data(
                 @SerialName("Page")
-                val page : ani.saikou.anilist.api.Page?
+                val page : com.animestudios.animeapp.anilist.response.Page?
             )
         }
     //    data class AiringSchedule(

@@ -8,35 +8,18 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LayoutAnimationController
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.animestudios.animeapp.MediaPageTransformer
-import com.animestudios.animeapp.R
-import com.animestudios.animeapp.Refresh
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.ListScreenBinding
-import com.animestudios.animeapp.gone
-import com.animestudios.animeapp.loadImage
-import com.animestudios.animeapp.loaded
 import com.animestudios.animeapp.media.Media
-import com.animestudios.animeapp.readData
-import com.animestudios.animeapp.selectedPosition
-import com.animestudios.animeapp.setSlideIn
-import com.animestudios.animeapp.setSlideUp
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.ui.screen.anime.AnimeTitleWithScoreAdapter
-import com.animestudios.animeapp.ui.screen.list.adapter.ListViewPagerAdapter
 import com.animestudios.animeapp.viewmodel.imp.ListViewModelImp
-import com.animestudios.animeapp.visible
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.powermenu.CircularEffect
 import com.skydoves.powermenu.MenuAnimation
 import com.skydoves.powermenu.PowerMenu
@@ -46,7 +29,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ListScreen() : Fragment() {
+class ListScreen : Fragment() {
     private var _binding: ListScreenBinding? = null
     private val binding get() = _binding!!
     private val scope = lifecycleScope
@@ -68,7 +51,6 @@ class ListScreen() : Fragment() {
             binding.listProgressBar.visibility = View.GONE
             binding.sort.visible()
             binding.listRefresh.visible()
-//            binding.container.visible()
             binding.homeUserName.text = Anilist.username
             binding.homeUserEpisodesWatched.text = Anilist.episodesWatched.toString()
             binding.profilePhoto.loadImage(Anilist.avatar.toString())
@@ -81,12 +63,12 @@ class ListScreen() : Fragment() {
             binding.listTypeName.animation = setSlideIn(uiSettings)
             binding.listTypeSize.animation = setSlideIn(uiSettings)
             binding.sort.animation = setSlideUp(uiSettings)
-            binding.listTabLayout.animation= setSlideUp(uiSettings)
-            binding.horizontalSpace.animation= setSlideUp(uiSettings)
+            binding.listTabLayout.animation = setSlideUp(uiSettings)
+            binding.horizontalSpace.animation = setSlideUp(uiSettings)
 
             val powerList = ArrayList<PowerMenuItem>()
-            keys.onEach {
-                powerList.add(PowerMenuItem(it))
+            keys.onEach {its->
+                powerList.add(PowerMenuItem(its))
             }
             initClicks(powerList, keys, values)
             update(values.toList().getOrNull(selectedPositionF)!!)
@@ -117,9 +99,13 @@ class ListScreen() : Fragment() {
     }
 
 
-    private fun initClicks(powerList:ArrayList<PowerMenuItem>,keys:List<String>,values:List<ArrayList<Media>>){
+    private fun initClicks(
+        powerList: ArrayList<PowerMenuItem>,
+        keys: List<String>,
+        values: List<ArrayList<Media>>
+    ) {
         binding.imageView3.setOnClickListener {
-            val powerMenu = PowerMenu.Builder(requireContext()!!).addItemList(
+            val powerMenu = PowerMenu.Builder(requireContext()).addItemList(
                 mutableListOf(
                     PowerMenuItem(requireContext().getString(R.string.sort_by_score)),
                     PowerMenuItem(requireContext().getString(R.string.sort_by_title)),
@@ -128,7 +114,7 @@ class ListScreen() : Fragment() {
                 )
             ).setAnimation(MenuAnimation.SHOW_UP_CENTER).setIsClipping(true)
                 .setAutoDismiss(true).setMenuRadius(16f).setMenuShadow(16f)
-                .setTextColor(ContextCompat.getColor(requireContext()!!, R.color.light_grey))
+                .setTextColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
                 .setTextGravity(Gravity.CENTER)
                 .setCircularEffect(CircularEffect.INNER) // Shows circular revealed effects for the content view of the popup menu.
                 .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
@@ -137,9 +123,7 @@ class ListScreen() : Fragment() {
                 .setSelectedMenuColorResource(R.color.basic_color_500)
                 .setMenuColor(requireActivity().getColor(R.color.banner_bg)).build()
             powerMenu.selectedPosition = selectedPosition
-             // showing the popup menu as left-bottom aligns to the anchor.
-
-                powerMenu.showAsAnchorLeftBottom(binding.imageView3)
+            powerMenu.showAsAnchorLeftBottom(binding.imageView3)
 
 
             powerMenu.setOnMenuItemClickListener { position, item ->
@@ -166,11 +150,11 @@ class ListScreen() : Fragment() {
 
         }
         binding.sort.setOnClickListener {
-            val powerMenu = PowerMenu.Builder(requireContext()!!).addItemList(
+            val powerMenu = PowerMenu.Builder(requireContext()).addItemList(
                 powerList
             ).setAnimation(MenuAnimation.SHOWUP_BOTTOM_RIGHT).setIsClipping(true)
                 .setAutoDismiss(true).setMenuRadius(16f).setMenuShadow(16f)
-                .setTextColor(ContextCompat.getColor(requireContext()!!, R.color.light_grey))
+                .setTextColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
                 .setTextGravity(Gravity.CENTER)
                 .setCircularEffect(CircularEffect.INNER) // Shows circular revealed effects for the content view of the popup menu.
                 .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
@@ -181,14 +165,14 @@ class ListScreen() : Fragment() {
 
             powerMenu.showAsAnchorLeftBottom(
                 binding.sort,
-                binding.sort.getMeasuredWidth() / 2 - powerMenu.getContentViewWidth(),
-                -binding.sort.getMeasuredHeight() / 2 - powerMenu.getContentViewHeight()
+                binding.sort.measuredWidth / 2 - powerMenu.contentViewWidth,
+                -binding.sort.measuredHeight / 2 - powerMenu.contentViewHeight
             )
 
 
 
 
-            powerMenu.setOnMenuItemClickListener { position, item ->
+            powerMenu.setOnMenuItemClickListener { position, _ ->
                 selectedPositionF = position
                 powerMenu.selectedPosition = position
                 binding.listProgressBar.visible()
@@ -210,14 +194,5 @@ class ListScreen() : Fragment() {
         readData<UISettings>("ui_settings") ?: UISettings()
 
 
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
 

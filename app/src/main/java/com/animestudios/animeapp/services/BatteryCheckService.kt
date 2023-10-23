@@ -7,15 +7,13 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.BatteryManager
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
+import com.animestudios.animeapp.R
 import com.animestudios.animeapp.services.receiver.BatteryReceiver
 
 class BatteryCheckService : Service() {
     private lateinit var batteryReceiver: BatteryReceiver
-    private var isLowBattery = false
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -49,13 +47,11 @@ class BatteryCheckService : Service() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val notification = NotificationCompat.Builder(this, channelId)
+        return NotificationCompat.Builder(this, channelId)
             .setContentTitle("Low Battery Warning")
             .setContentText("Battery level is below 15%.")
-            .setSmallIcon(android.R.drawable.ic_dialog_alert)
+            .setSmallIcon(R.drawable.ic_baseline_error_outline_24)
             .build()
-
-        return notification
     }
 
     override fun onDestroy() {
