@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.multidex.MultiDex
 import androidx.work.*
+import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.initializeNetwork
 import com.animestudios.animeapp.worker.NotificationWorker
 import com.animestudios.animeapp.worker.NotificationWorkerFactory
@@ -27,28 +28,33 @@ class App : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
+        Anilist.getSavedToken(this)
+
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
         initializeNetwork(baseContext)
         createNotificationChannel()
         setupNotificationWorker()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun setupNotificationWorker() {
         val workInfos = WorkManager.getInstance(this).getWorkInfosByTag(TAG_PERIODIC_WORK_REQUEST)
         val hasExistingWorkRequest = workInfos.get().isNotEmpty()
             println("CREATE")
-            val work = createPeriodicWorkerRequest(
-                Frequency(
-                    repeatInterval = 4,
-                    repeatIntervalTimeUnit = TimeUnit.MINUTES
-                )
-            )
+//          if (!hasExistingWorkRequest){
+              val work = createPeriodicWorkerRequest(
+                  Frequency(
+                      repeatInterval = 1,
+                      repeatIntervalTimeUnit = TimeUnit.MINUTES
+                  )
+              )
 
-            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-                TAG_PERIODIC_WORK_REQUEST,
-                ExistingPeriodicWorkPolicy.KEEP,
-                work
-            )
+              WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                  TAG_PERIODIC_WORK_REQUEST,
+                  ExistingPeriodicWorkPolicy.KEEP,
+                  work
+              )
+//          }
     }
 
     private fun createPeriodicWorkerRequest(

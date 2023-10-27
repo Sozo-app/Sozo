@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.worker
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.pm.PackageManager
@@ -20,28 +21,27 @@ import com.animestudios.animeapp.model.PagingDataItem
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.ui.activity.MainActivity
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltWorker
-class NotificationWorker @AssistedInject constructor(
-    @Assisted context: Context,
-    @Assisted workerParameters: WorkerParameters,
-) : CoroutineWorker(context, workerParameters) {
+class NotificationWorker @Inject constructor(
+    appContext: Context,
+    workerParams: WorkerParameters,
+    private var aniListGraphQlClient: AniListClient
+) : CoroutineWorker(appContext, workerParams) {
     @Inject
-    lateinit var aniListGraphQlClient: AniListClient
 
 
+    @SuppressLint("SuspiciousIndentation")
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         return@withContext try {
             val latestNotification = fetchLatestNotification()
-
             if (latestNotification != null && !isNotificationIdStored(latestNotification.id)) {
                 Log.e(TAG, "Notifications received: $latestNotification")
-                showNotification(latestNotification)
+                showNotification(latestNotification!!)
                 storeNotificationId(latestNotification.id)
             }
             Result.success()

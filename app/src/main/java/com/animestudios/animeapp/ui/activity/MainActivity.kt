@@ -13,6 +13,7 @@ import com.animestudios.animeapp.initActivity
 import com.animestudios.animeapp.services.BatteryCheckService
 import com.animestudios.animeapp.services.receiver.BatteryReceiver
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
+import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

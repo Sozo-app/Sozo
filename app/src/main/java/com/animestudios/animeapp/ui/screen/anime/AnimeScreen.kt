@@ -19,12 +19,12 @@ import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.statusBarHeight
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 import com.animestudios.animeapp.viewmodel.imp.AniListViewModelImp
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.max
 import kotlin.math.min
-
 
 class AnimeScreen : Fragment() {
     private var _binding: AnimeScreenBinding? = null
@@ -122,7 +122,6 @@ class AnimeScreen : Fragment() {
 
             }
 
-
         }
     }
 
@@ -134,13 +133,13 @@ class AnimeScreen : Fragment() {
             binding.animeRefresh.setProgressViewEndTarget(false, height + 120)
             binding.animeRefresh.setOnRefreshListener {
                 lifecycleScope.launch {
-                    model.loadAnimeSection(1)
-                    Refresh.activity[this.hashCode()]!!.postValue(true)
-
+                    Refresh.activity[1]!!.postValue(true)
                 }
             }
 
-            val live = Refresh.activity.getOrPut(this.hashCode()) { MutableLiveData(false) }
+            val live = Refresh.activity.getOrPut(
+               1
+            ) { MutableLiveData(false) }
             live.observe(viewLifecycleOwner) {
                 if (it) {
                     viewLifecycleOwner.lifecycleScope.launch {
@@ -176,7 +175,8 @@ class AnimeScreen : Fragment() {
 
 
     override fun onResume() {
-        if (!model.loaded)
+        if (!model.loaded) Refresh.activity[1]!!.postValue(true)
+
         super.onResume()
     }
 }
