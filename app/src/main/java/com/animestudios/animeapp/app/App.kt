@@ -9,11 +9,11 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.multidex.MultiDex
 import androidx.work.*
 import com.animestudios.animeapp.initializeNetwork
 import com.animestudios.animeapp.worker.NotificationWorker
+import com.animestudios.animeapp.worker.NotificationWorkerFactory
 import dagger.hilt.android.HiltAndroidApp
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @SuppressLint("StaticFieldLeak")
 class App : Application(), Configuration.Provider {
     @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+    lateinit var workerFactory: NotificationWorkerFactory
 
 
     override fun onCreate() {
@@ -34,15 +34,12 @@ class App : Application(), Configuration.Provider {
     }
 
     private fun setupNotificationWorker() {
-        // Check if there is an existing periodic work request with the specified tag
         val workInfos = WorkManager.getInstance(this).getWorkInfosByTag(TAG_PERIODIC_WORK_REQUEST)
         val hasExistingWorkRequest = workInfos.get().isNotEmpty()
-
-        // Schedule a new periodic work request only if there is no existing one
-        if (!hasExistingWorkRequest) {
+            println("CREATE")
             val work = createPeriodicWorkerRequest(
                 Frequency(
-                    repeatInterval = 10,
+                    repeatInterval = 4,
                     repeatIntervalTimeUnit = TimeUnit.MINUTES
                 )
             )
@@ -52,7 +49,6 @@ class App : Application(), Configuration.Provider {
                 ExistingPeriodicWorkPolicy.KEEP,
                 work
             )
-        }
     }
 
     private fun createPeriodicWorkerRequest(
@@ -73,8 +69,9 @@ class App : Application(), Configuration.Provider {
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .setRequiresBatteryNotLow(false)
         .build()
+
     private fun createNotificationChannel() {
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "SozoNotifications"
             val descriptionText = "Sozo notifications for anime airing"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -134,7 +131,7 @@ class App : Application(), Configuration.Provider {
         }
     }
 
-    override fun getWorkManagerConfiguration()= Configuration.Builder()
+    override fun getWorkManagerConfiguration() = Configuration.Builder()
         .setWorkerFactory(workerFactory)
         .setMinimumLoggingLevel(Log.DEBUG)
         .build()

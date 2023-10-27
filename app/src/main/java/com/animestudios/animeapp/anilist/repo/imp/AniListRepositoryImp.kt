@@ -35,8 +35,7 @@ class AniListRepositoryImp() : AniListRepository {
         if (response != null) {
             ((response.page)).also { currentPage = it }
             emit(Result.success(response))
-            println(response.toString())
-        }
+            }
 
     }.flowOn(Dispatchers.IO)
 

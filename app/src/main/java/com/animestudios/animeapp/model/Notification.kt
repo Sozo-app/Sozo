@@ -10,9 +10,9 @@ data class Notification(
      */
     val episode: Int? = null,
     /**
-     * The Notification context text
+     * The notification context text
      */
-    val contexts: List<String?>? = null,
+    val contexts: List<String?>? = emptyList(),
     /**
      * The user associated with the notification
      */
@@ -20,8 +20,8 @@ data class Notification(
     /**
      * The associated media of the airing schedule
      */
-    val media: AniListMedia=AniListMedia(),
-){
+    val media: AniListMedia = AniListMedia()
+) {
     fun getFormattedNotification(): String {
         return if (user != null) {
             "${user.name}${contexts?.first().orEmpty()}"

@@ -54,7 +54,6 @@ class BannerAdapter(
         val b = (holder as MediaPageSmallViewHolder).binding
         val media = mediaList?.get(position)
         if (media != null) {
-            println(media.toString())
             if (uiSettings.layoutAnimations)
                 b.itemCompactBanner.setTransitionGenerator(
                     RandomTransitionGenerator(

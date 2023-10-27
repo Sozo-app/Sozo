@@ -15,14 +15,14 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.animestudios.animeapp.R
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
+import com.animestudios.animeapp.mapper.convert
 import com.animestudios.animeapp.model.PagingDataItem
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.ui.activity.MainActivity
-import com.animestudios.animeapp.mapper.convert
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -30,15 +30,15 @@ import javax.inject.Inject
 class NotificationWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParameters: WorkerParameters,
-    private val ioDispatchers: CoroutineDispatcher,
-    private val aniListGraphQlClient: AniListClient,
 ) : CoroutineWorker(context, workerParameters) {
-    override suspend fun doWork(): Result = withContext(ioDispatchers) {
-        return@withContext try {
+    @Inject
+    lateinit var aniListGraphQlClient: AniListClient
 
+
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
+        return@withContext try {
             val latestNotification = fetchLatestNotification()
 
-            println("Tushdi !!!")
             if (latestNotification != null && !isNotificationIdStored(latestNotification.id)) {
                 Log.e(TAG, "Notifications received: $latestNotification")
                 showNotification(latestNotification)
@@ -46,9 +46,9 @@ class NotificationWorker @AssistedInject constructor(
             }
             Result.success()
         } catch (e: Exception) {
+            println("Hatolik Bo`ldi : ${e.message}")
             Result.failure()
         }
-
     }
 
     private fun isNotificationIdStored(id: Int?): Boolean =
@@ -101,7 +101,7 @@ class NotificationWorker @AssistedInject constructor(
 
     private suspend fun fetchLatestNotification(): com.animestudios.animeapp.model.Notification? {
         val response = aniListGraphQlClient.getNotifications(1).data?.convert()
-
+        println("Is workkingggg ")
         return response?.flatMap {
             when (it) {
                 is PagingDataItem.NotificationItem -> listOf(it.notification)
@@ -111,9 +111,9 @@ class NotificationWorker @AssistedInject constructor(
     }
 
     companion object {
-        private const val TAG = "NotificationWorker"
+        private const val TAG = "GGGG"
         private const val CHANNEL_ID = "SOZO_NOTIFICATIONS_CHANNEL_ID"
-        private const val NOTIFICATION_ID = 0x1
+        private const val NOTIFICATION_ID = 0x3
     }
 
 }

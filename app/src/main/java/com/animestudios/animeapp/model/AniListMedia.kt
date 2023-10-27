@@ -9,6 +9,7 @@ import com.animestudios.animeapp.displayInDayDateTimeFormat
 import com.animestudios.animeapp.type.*
 import kotlinx.parcelize.Parcelize
 
+
 @Parcelize
 data class AniListMedia(
     val idAniList: Int = 0,

@@ -106,7 +106,6 @@ class AniListViewModelImp() : AniListViewModel, ViewModel() {
                     }
 
                     secondData.onSuccess {
-                        saveData("dabbaList", it!!)
                         recentlyUpdatedList.postValue(it)
 
                     }
