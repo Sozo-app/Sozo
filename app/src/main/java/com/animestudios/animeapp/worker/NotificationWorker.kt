@@ -1,7 +1,6 @@
 package com.animestudios.animeapp.worker
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.pm.PackageManager
@@ -21,27 +20,27 @@ import com.animestudios.animeapp.model.PagingDataItem
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.ui.activity.MainActivity
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltWorker
-class NotificationWorker @Inject constructor(
-    appContext: Context,
-    workerParams: WorkerParameters,
-    private var aniListGraphQlClient: AniListClient
-) : CoroutineWorker(appContext, workerParams) {
-    @Inject
+class NotificationWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted workerParameters: WorkerParameters,
+ private   val   aniListGraphQlClient: AniListClient,
+    ) : CoroutineWorker(context, workerParameters) {
 
 
-    @SuppressLint("SuspiciousIndentation")
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         return@withContext try {
             val latestNotification = fetchLatestNotification()
+
             if (latestNotification != null && !isNotificationIdStored(latestNotification.id)) {
                 Log.e(TAG, "Notifications received: $latestNotification")
-                showNotification(latestNotification!!)
+                showNotification(latestNotification)
                 storeNotificationId(latestNotification.id)
             }
             Result.success()
@@ -111,9 +110,9 @@ class NotificationWorker @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "GGGG"
-        private const val CHANNEL_ID = "SOZO_NOTIFICATIONS_CHANNEL_ID"
-        private const val NOTIFICATION_ID = 0x3
+        private const val TAG = "NotificationWorker"
+        private const val CHANNEL_ID = "ANIMITY_NOTIFICATIONS_CHANNEL_ID"
+        private const val NOTIFICATION_ID = 0x1
     }
 
 }

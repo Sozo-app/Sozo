@@ -1,29 +1,23 @@
 package com.animestudios.animeapp.viewmodel.imp
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.animestudios.animeapp.anilist.apollo.client.AniListClient
 import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
-import com.animestudios.animeapp.mapper.convert
 import com.animestudios.animeapp.media.Media
-import com.animestudios.animeapp.model.PagingDataItem
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.viewmodel.AniListViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class AniListViewModelImp   : AniListViewModel, ViewModel() {
+class AniListViewModelImp() : AniListViewModel, ViewModel() {
     private val repository = AniListRepositoryImp()
     override val recentlyUpdatedList: MutableLiveData<MutableList<Media>> =
         MutableLiveData()
@@ -91,7 +85,6 @@ class AniListViewModelImp   : AniListViewModel, ViewModel() {
     }
 
 
-    @SuppressLint("SuspiciousIndentation")
     override fun loadAnimeSection(i: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getPopularBanner(i)
@@ -124,13 +117,8 @@ class AniListViewModelImp   : AniListViewModel, ViewModel() {
                     recentlyTrendList.postValue(it)
                 }
             }.launchIn(viewModelScope)
-
-//         val  data =   fetchLatestNotification()
-//            println(data!!.contexts!!.toList().toString())
-//        }
+        }
     }
-    }
-
 
     override fun loadFullDataByMedia(media: Media) {
         loadBannerFullData.postValue(Resource.Loading)

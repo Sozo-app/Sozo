@@ -2,7 +2,6 @@ package com.animestudios.animeapp.di
 
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
-import com.animestudios.animeapp.anilist.interceptor.HeaderInterceptor
 import com.animestudios.animeapp.tools.Apollo
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
@@ -22,11 +21,13 @@ object NetworkModule {
     @Provides
     @Singleton
     @Apollo
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(HeaderInterceptor())
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        })
+    fun provideOkHttpClient(
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(
+            HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        )
         .connectTimeout(20, TimeUnit.SECONDS)
         .readTimeout(20, TimeUnit.SECONDS)
         .writeTimeout(20, TimeUnit.SECONDS)
