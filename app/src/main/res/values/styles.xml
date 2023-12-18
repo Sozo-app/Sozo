@@ -11,4 +11,6 @@
 
     <style name="Widget.AnimeApp.AppWidget.InnerView" parent="android:Widget">
     </style>
+
+
 </resources>

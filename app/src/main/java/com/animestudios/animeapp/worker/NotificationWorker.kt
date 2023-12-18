@@ -1,38 +1,38 @@
 package com.animestudios.animeapp.worker
 
 import android.Manifest
-import android.app.PendingIntent
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
+import androidx.core.content.edit
 import androidx.hilt.work.HiltWorker
-import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.animestudios.animeapp.R
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
+import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.mapper.convert
+import com.animestudios.animeapp.model.Notification
 import com.animestudios.animeapp.model.PagingDataItem
-import com.animestudios.animeapp.readData
-import com.animestudios.animeapp.saveData
-import com.animestudios.animeapp.ui.activity.MainActivity
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @HiltWorker
 class NotificationWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParameters: WorkerParameters,
- private   val   aniListGraphQlClient: AniListClient,
-    ) : CoroutineWorker(context, workerParameters) {
-
+    private val aniListGraphQlClient: AniListClient,
+    private val preferences: SharedPreferences
+) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         return@withContext try {
@@ -45,62 +45,13 @@ class NotificationWorker @AssistedInject constructor(
             }
             Result.success()
         } catch (e: Exception) {
-            println("Hatolik Bo`ldi : ${e.message}")
             Result.failure()
         }
     }
 
-    private fun isNotificationIdStored(id: Int?): Boolean =
-        readData<Boolean>(id.toString()) ?: false
-
-    private fun storeNotificationId(id: Int?) = saveData(id.toString(), true)
-    private fun buildPendingIntent(notification: com.animestudios.animeapp.model.Notification): PendingIntent {
-        val args = bundleOf(
-            "animeDetails" to notification.media,
-            if (notification.episode != null) {
-                "desiredPosition" to notification.episode
-            } else {
-                "desiredPosition" to -1
-            }
-        )
-
-        return NavDeepLinkBuilder(applicationContext)
-            .setComponentName(MainActivity::class.java)
-            .setGraph(R.navigation.app_graph)
-            .setDestination(R.id.mainScreen)
-            .setArguments(args)
-            .createPendingIntent()
-    }
-
-
-    private fun showNotification(notification: com.animestudios.animeapp.model.Notification) {
-        val pendingIntent = buildPendingIntent(notification)
-
-        val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-            .setSmallIcon(R.drawable.logo)
-            .setContentTitle("New Notification")
-            .setContentText(notification.getFormattedNotification())
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        sendNotification(builder)
-    }
-
-    private fun sendNotification(builder: NotificationCompat.Builder) {
-        NotificationManagerCompat.from(applicationContext).apply {
-            if (ContextCompat.checkSelfPermission(
-                    applicationContext,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                notify(NOTIFICATION_ID, builder.build())
-            }
-        }
-    }
-
-    private suspend fun fetchLatestNotification(): com.animestudios.animeapp.model.Notification? {
+    private suspend fun fetchLatestNotification(): Notification? {
         val response = aniListGraphQlClient.getNotifications(1).data?.convert()
-        println("Is workkingggg ")
+
         return response?.flatMap {
             when (it) {
                 is PagingDataItem.NotificationItem -> listOf(it.notification)
@@ -109,10 +60,49 @@ class NotificationWorker @AssistedInject constructor(
         }?.maxByOrNull { it.id ?: -1 }
     }
 
-    companion object {
-        private const val TAG = "NotificationWorker"
-        private const val CHANNEL_ID = "ANIMITY_NOTIFICATIONS_CHANNEL_ID"
-        private const val NOTIFICATION_ID = 0x1
+    private fun showNotification(notification: Notification) {
+        createNotificationChannel()
+        val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+            .setSmallIcon(R.drawable.logo)
+            .setContentTitle(applicationContext.getString(R.string.app_name))
+            .setContentText(notification.getFormattedNotification())
+            .setAutoCancel(true)
+
+        sendNotification(builder)
     }
 
+
+    private fun sendNotification(builder: NotificationCompat.Builder) {
+
+        NotificationManagerCompat.from(applicationContext).apply {
+            Log.e(TAG, "sendNotification: ${builder.toString()}")
+            notify(NOTIFICATION_ID, builder.build())
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "SozoNotifications"
+            val descriptionText = "Sozonotifications for anime airing"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel =
+                NotificationChannel(App.SOZO_NOTIFICATIONS_CHANNEL_ID, name, importance).apply {
+                    description = descriptionText
+                }
+            val notificationManager: NotificationManager =
+                applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun isNotificationIdStored(id: Int?): Boolean =
+        preferences.getBoolean(id.toString(), false)
+
+    private fun storeNotificationId(id: Int?) = preferences.edit { putBoolean(id.toString(), true) }
+
+    companion object {
+        private const val TAG = "NotificationWorker"
+        private const val CHANNEL_ID = "SOZO_NOTIFICATIONS_CHANNEL_ID"
+        private const val NOTIFICATION_ID = 0x1
+    }
 }

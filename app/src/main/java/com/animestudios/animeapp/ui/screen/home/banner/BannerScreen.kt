@@ -21,7 +21,6 @@ class BannerScreen : Fragment
     () {
     private var _binding: BannerItemBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AniListViewModelImp by activityViewModels()
     private val uiSettings =
         readData<UISettings>("ui_settings") ?: UISettings()
 

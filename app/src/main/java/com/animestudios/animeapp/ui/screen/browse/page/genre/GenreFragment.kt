@@ -14,11 +14,12 @@ import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.ui.screen.browse.page.genre.adapter.GenreAdapter
 import com.animestudios.animeapp.viewmodel.imp.GenresViewModelImp
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class GenreFragment : Fragment() {
     private var _binding: FragmentGenreBinding? = null
     private val binding get() = _binding!!
@@ -68,5 +69,13 @@ class GenreFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val screenWidth = resources.displayMetrics.run { widthPixels / density }
+        binding.mediaInfoGenresRecyclerView.layoutManager =
+            GridLayoutManager(requireContext(), (screenWidth / 156f).toInt())
+
     }
 }

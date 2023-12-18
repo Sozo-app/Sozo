@@ -12,7 +12,7 @@ import com.animestudios.animeapp.ui.screen.profile.ProfileScreen
 class BottomNavigationAdapter(fragmentManager: FragmentActivity) :
     FragmentStateAdapter(fragmentManager) {
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 5
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
@@ -20,6 +20,7 @@ class BottomNavigationAdapter(fragmentManager: FragmentActivity) :
             1 -> BrowseScreen()
             2 -> if (Anilist.token != null) ListScreen() else ListScreen()
             3 -> ProfileScreen()
+            4 -> ProfileScreen()
             else -> {
                 ListScreen()
             }

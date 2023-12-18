@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.ui.screen.browse.page.allanime
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,18 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.databinding.FragmentAllAnimeBinding
 import com.animestudios.animeapp.others.ProgressAdapter
+import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.ui.screen.browse.page.allanime.adapter.AllAnimePageAdapter
 import com.animestudios.animeapp.viewmodel.imp.AllAnimeViewModelImp
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
-
+@AndroidEntryPoint
 class AllAnimeFragment : Fragment() {
 
     private var _binding: FragmentAllAnimeBinding? = null
@@ -27,7 +30,6 @@ class AllAnimeFragment : Fragment() {
     private val model by viewModels<AllAnimeViewModelImp>()
     private lateinit var allAnimePageAdapter: AllAnimePageAdapter
     private lateinit var concatAdapter: ConcatAdapter
-    private var style = 0
     lateinit var result: SearchResults
     private lateinit var progressAdapter: ProgressAdapter
     private var screenWidth: Float = 0f
@@ -46,7 +48,6 @@ class AllAnimeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         screenWidth = resources.displayMetrics.run { widthPixels / density }
         initUIWithLocalData()
         result = model.searchResults
@@ -55,21 +56,11 @@ class AllAnimeFragment : Fragment() {
             AllAnimePageAdapter(model.searchResults.results, true, requireActivity())
         concatAdapter = ConcatAdapter(allAnimePageAdapter, progressAdapter)
         binding.allAnimeRv.adapter = concatAdapter
-//        val gridSize = (screenWidth / 124f).toInt()
-//        val gridLayoutManager = GridLayoutManager(requireContext(), gridSize)
-//        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-//            override fun getSpanSize(position: Int): Int {
-//                return when (position) {
-//                    0                           -> gridSize
-//                    concatAdapter.itemCount - 1 -> gridSize
-//                    else                        -> when (style) {
-//                        0    -> 1
-//                        else -> gridSize
-//                    }
-//                }
-//            }
-//        }
-//        binding.allAnimeRv.layoutManager=gridLayoutManager
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.allAnimeRv.layoutManager =
+            GridLayoutManager(requireContext(), (screenWidth / 124f).toInt())
+
         initPagination()
         observerLoadData()
     }
@@ -192,10 +183,11 @@ class AllAnimeFragment : Fragment() {
     }
 
 
+
+
     override fun onResume() {
         super.onResume()
         result.page = 0
     }
-
 
 }

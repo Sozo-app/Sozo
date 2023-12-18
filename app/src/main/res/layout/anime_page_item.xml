@@ -54,6 +54,7 @@
                 android:layout_marginEnd="29dp">
 
 
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/search"
                     android:layout_width="42dp"
@@ -68,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="SOZO"
                 android:textSize="26dp" />
@@ -80,7 +81,7 @@
             android:id="@+id/recentReleased"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/inter_bold"
 
@@ -110,14 +111,14 @@
             android:id="@+id/animePageRecyclerView"
             android:layout_width="0dp"
             android:layout_height="220dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:requiresFadingEdge="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/recentReleased"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recentReleased"
             tools:itemCount="5"
             tools:listitem="@layout/anime_hd_item" />
@@ -132,10 +133,10 @@
             android:text="Trending"
 
             android:textFontWeight="600"
-            android:textSize="24dp"
+            android:textSize="22sp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="@+id/animePageRecyclerView"
+            app:layout_constraintStart_toStartOf="@+id/recentReleased"
             app:layout_constraintTop_toBottomOf="@id/animePageRecyclerView"
             tools:visibility="visible" />
 
@@ -143,7 +144,7 @@
             android:id="@+id/onlOnYouRecyclerView"
             android:layout_width="0dp"
             android:layout_height="220dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -151,7 +152,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/animePageRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/forYouTxt"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/anime_hd_item" />

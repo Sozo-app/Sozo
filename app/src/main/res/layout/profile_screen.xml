@@ -96,7 +96,6 @@
                     android:textColor="#222831"
                     android:textSize="12sp"
                     app:drawableTint="#222831"
-                    app:drawableTopCompat="@drawable/ic_arrow"
                     app:flow_horizontalBias="0.5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/movieDuration"

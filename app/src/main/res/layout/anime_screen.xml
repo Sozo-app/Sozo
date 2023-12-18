@@ -15,6 +15,7 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/animeRefresh"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
@@ -37,14 +38,17 @@
                 android:paddingBottom="16dp"
                 android:requiresFadingEdge="vertical"
                 tools:itemCount="1"
-                tools:listitem="@layout/anime_page_item" />
+                tools:listitem="@layout/anime_page_item" >
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <com.airbnb.lottie.LottieAnimationView
+    <ProgressBar
         android:id="@+id/animeTrendingProgressBar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_colorFilter="@color/basic_color"
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"

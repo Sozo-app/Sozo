@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.di
 
 import com.animestudios.animeapp.anilist.api.common.Anilist
+import com.animestudios.animeapp.anilist.api.intercepter.HeaderInterceptor
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
 import com.animestudios.animeapp.tools.Apollo
 import com.apollographql.apollo3.ApolloClient
@@ -28,6 +29,7 @@ object NetworkModule {
                 level = HttpLoggingInterceptor.Level.BODY
             }
         )
+        .addInterceptor(HeaderInterceptor())
         .connectTimeout(20, TimeUnit.SECONDS)
         .readTimeout(20, TimeUnit.SECONDS)
         .writeTimeout(20, TimeUnit.SECONDS)

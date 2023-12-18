@@ -15,16 +15,17 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
 
 
-        <com.flaviofaria.kenburnsview.KenBurnsView
-            android:id="@+id/itemCompactBanner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/itemCompactBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,10 +44,11 @@
             android:layout_marginBottom="4dp"
             android:translationZ="8dp"
             app:cardCornerRadius="16dp"
+            android:layout_marginStart="4dp"
             app:cardElevation="4dp"
             app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout4"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout4">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemCompactImage"
@@ -123,7 +125,6 @@
                             android:id="@+id/addToListBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="3dp"
                             android:focusable="true"
                             android:fontFamily="@font/inter_bold"
                             android:text="Add to List"
@@ -134,6 +135,7 @@
                             app:iconSize="25dp"
                             app:iconTint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/playButtonForBanner"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:rippleColor="#51FFFFFF" />
@@ -143,7 +145,6 @@
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="58dp"
-                            android:layout_marginEnd="5dp"
                             android:fontFamily="@font/inter_bold"
                             android:text="Play"
                             android:textColor="@color/bg_black"
@@ -155,18 +156,17 @@
                             app:iconSize="25dp"
                             app:iconTint="@color/bg_black"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/infoBtn"
-                            app:layout_constraintStart_toEndOf="@+id/addToListBtn"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/addToListBtn" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/infoBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="3dp"
                             android:focusable="true"
                             android:fontFamily="@font/inter_bold"
-                            android:text="Add List"
+                            android:text="More Info"
                             android:textColor="@color/white"
                             app:backgroundTint="@android:color/transparent"
                             app:icon="@drawable/ic_baseline_error_outline_24"
@@ -175,6 +175,7 @@
                             app:iconTint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/playButtonForBanner"
                             app:layout_constraintTop_toTopOf="parent"
                             app:rippleColor="#51FFFFFF" />
 

@@ -97,7 +97,6 @@ class AniListViewModelImp() : AniListViewModel, ViewModel() {
                     }
 
                 }.launchIn(viewModelScope)
-            delay(100)
             repository.recentlyUpdated()
                 .onEach { secondData ->
 
@@ -110,7 +109,6 @@ class AniListViewModelImp() : AniListViewModel, ViewModel() {
 
                     }
                 }.launchIn(viewModelScope)
-            delay(100)
 
             repository.forYouAnimeList().onEach {
                 it.onSuccess {

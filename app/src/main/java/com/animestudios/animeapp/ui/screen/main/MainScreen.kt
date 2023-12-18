@@ -19,8 +19,10 @@ import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainScreen : Fragment() {
     private var _binding: MainScreenBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +32,7 @@ class MainScreen : Fragment() {
     @SuppressLint("ResourceAsColor", "NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        model.getUnreadNotificationsCount()
         model.genres.observe(
             this
         ) {
@@ -39,33 +42,16 @@ class MainScreen : Fragment() {
                     val navbar = binding.navbar
                     binding.navbar.visibility = View.VISIBLE
                     binding.viewPager.isUserInputEnabled = false
+                    binding.viewPager.setPageTransformer(ZoomOutPageTransformer(uiSettings))
                     binding.viewPager.adapter = BottomNavigationAdapter(requireActivity())
-                    model.loadProfile() {
-
-                        val item = bottomBar.menu.getItem(3)
-                        item.iconTintList = null
-                        item.iconTintMode = PorterDuff.Mode.DST
-                        Glide.with(requireView())
-                            .load(Anilist.avatar)
-                            .circleCrop()
-                            .into(object : CustomTarget<Drawable>() {
-                                override fun onResourceReady(
-                                    resource: Drawable,
-                                    transition: Transition<in Drawable>?
-                                ) {
-                                    println(resource.current)
-                                    item.setIcon(resource)
-                                }
-
-                                override fun onLoadCleared(placeholder: Drawable?) {
-                                    item.setIcon(placeholder)
-                                }
-                            })
-                        binding.mainProgressBar.gone()
-                        mainViewPager.visible()
-                    }
-
                     navbar.visible()
+                    model.unReadNotificationCountLiveData.observe(viewLifecycleOwner) {
+                        if (it == 0)
+                            binding.navbar.removeBadge(R.id.notification)
+                        else
+                            binding.navbar.getOrCreateBadge(R.id.notification).number = it
+
+                    }
                     navbar.setOnItemSelectedListener {
                         when (it.itemId) {
                             R.id.home -> {
@@ -93,6 +79,31 @@ class MainScreen : Fragment() {
                         }
                         true
                     }
+                    model.loadProfile() {
+
+                        val item = bottomBar.menu.getItem(4)
+                        item.iconTintList = null
+                        item.iconTintMode = PorterDuff.Mode.DST
+                        Glide.with(requireView())
+                            .load(Anilist.avatar)
+                            .circleCrop()
+                            .into(object : CustomTarget<Drawable>() {
+                                override fun onResourceReady(
+                                    resource: Drawable,
+                                    transition: Transition<in Drawable>?
+                                ) {
+                                    println(resource.current)
+                                    item.setIcon(resource)
+                                }
+
+                                override fun onLoadCleared(placeholder: Drawable?) {
+                                    item.setIcon(placeholder)
+                                }
+                            })
+                        binding.mainProgressBar.gone()
+                        mainViewPager.visible()
+                    }
+
                 }
             }
         }

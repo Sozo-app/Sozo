@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.worker
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.work.ListenableWorker
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
@@ -11,6 +12,7 @@ import javax.inject.Inject
 class NotificationWorkerFactory @Inject constructor(
     @ApplicationContext private val appContext: Context,
     private val aniListClient: AniListClient,
+    private val sharedPreferences: SharedPreferences
 ) : WorkerFactory() {
 
     override fun createWorker(
@@ -20,7 +22,7 @@ class NotificationWorkerFactory @Inject constructor(
     ): ListenableWorker? {
         return when (workerClassName) {
             NotificationWorker::class.java.name -> {
-                NotificationWorker(appContext, workerParameters,aniListClient)
+                NotificationWorker(appContext, workerParameters, aniListClient, sharedPreferences)
             }
 
             else -> null

@@ -5,7 +5,7 @@ import com.animestudios.animeapp.anilist.response.*
 import java.io.Serializable
 import com.animestudios.animeapp.anilist.response.Media as ApiMedia
 
-data class Media(
+data class  Media(
     val anime: Anime? = null,
     val manga: String? = null,
     val id: Int,

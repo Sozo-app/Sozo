@@ -44,9 +44,10 @@ class BrowseScreen : Fragment() {
             toolbarBrowse.slideStart(700, 0)
             browseType.slideStart(700, 0)
             viewPager.slideStart(700, 0)
-//            binding.genreContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> { topMargin += statusBarHeight;bottomMargin += navBarHeight }
             adapter = TabAdapter(localLoadTabTxt(), requireActivity())
-            viewPager.adapter = adapter
+            binding.viewPager.adapter = adapter
+
+//            binding.genreContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> { topMargin += statusBarHeight;bottomMargin += navBarHeight }
 
             TabLayoutMediator(browseType, viewPager) { _, _ ->
             }.attach()

@@ -14,17 +14,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="horizontal"
         android:padding="8dp">
 
         <EditText
             android:id="@+id/searchBarText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="290dp"
+            android:layout_width="wrap_content"
             android:paddingVertical="12dp"
+            android:layout_weight="1"
             android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_margin="14dp"
             android:background="@drawable/search_bg"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="20dp"
@@ -39,11 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+
+            android:layout_weight="0.11"
             android:src="@drawable/ic_filter"
             android:background="@drawable/filter_bg"
 
             app:tint="@color/basic_color"
-            android:padding="8dp"
+            android:layout_margin="8dp"
             tools:ignore="ContentDescription,TextContrastCheck" />
 
 

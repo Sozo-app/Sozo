@@ -29,32 +29,32 @@ class App : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         Anilist.getSavedToken(this)
-
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
         initializeNetwork(baseContext)
-        createNotificationChannel()
-        setupNotificationWorker()
+        if (Anilist.token != null) {
+            setupNotificationWorker()
+        }
     }
 
     @SuppressLint("SuspiciousIndentation")
     private fun setupNotificationWorker() {
         val workInfos = WorkManager.getInstance(this).getWorkInfosByTag(TAG_PERIODIC_WORK_REQUEST)
         val hasExistingWorkRequest = workInfos.get().isNotEmpty()
-            println("CREATE")
-//          if (!hasExistingWorkRequest){
-              val work = createPeriodicWorkerRequest(
-                  Frequency(
-                      repeatInterval = 1,
-                      repeatIntervalTimeUnit = TimeUnit.MINUTES
-                  )
-              )
+        println("CREATE")
+        if (!hasExistingWorkRequest) {
+            val work = createPeriodicWorkerRequest(
+                Frequency(
+                    repeatInterval = 5,
+                    repeatIntervalTimeUnit = TimeUnit.MINUTES
+                )
+            )
 
-              WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-                  TAG_PERIODIC_WORK_REQUEST,
-                  ExistingPeriodicWorkPolicy.KEEP,
-                  work
-              )
-//          }
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                TAG_PERIODIC_WORK_REQUEST,
+                ExistingPeriodicWorkPolicy.KEEP,
+                work
+            )
+        }
     }
 
     private fun createPeriodicWorkerRequest(
@@ -76,21 +76,6 @@ class App : Application(), Configuration.Provider {
         .setRequiresBatteryNotLow(false)
         .build()
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "SozoNotifications"
-            val descriptionText = "Sozo notifications for anime airing"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel =
-                NotificationChannel(SOZO_NOTIFICATIONS_CHANNEL_ID, name, importance).apply {
-                    description = descriptionText
-                }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
 
 
     init {

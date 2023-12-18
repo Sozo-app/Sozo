@@ -6,16 +6,18 @@
 
         android:icon="@drawable/home"
         android:title="@string/home"
-        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
         app:iconTint="@drawable/item_navbar_bg" />
 
     <item
         android:id="@+id/brows"
-        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
-
         android:icon="@drawable/browse"
         android:title="@string/browse"
 
+        app:iconTint="@drawable/item_navbar_bg" />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_notification"
+        android:title="@string/notifications"
         app:iconTint="@drawable/item_navbar_bg" />
 
     <item

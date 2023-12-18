@@ -89,7 +89,6 @@
         <item name="android:navigationBarColor">@color/status</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
-        <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/shape_corner_16dp</item>
     </style>
 

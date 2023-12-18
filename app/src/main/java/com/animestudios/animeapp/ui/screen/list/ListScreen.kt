@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.ListScreenBinding
@@ -47,6 +50,8 @@ class ListScreen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         model.lists.observe(this) {
             binding.listProgressBar.visibility = View.GONE
             binding.sort.visible()
@@ -80,7 +85,6 @@ class ListScreen : Fragment() {
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        screenWidth = resources.displayMetrics.run { widthPixels / density }
         scope.launch(Dispatchers.IO) {
             model.loadLists(
                 true, Anilist.userid!!
@@ -91,8 +95,12 @@ class ListScreen : Fragment() {
 
 
     private fun update(list: ArrayList<Media>) {
-        val adapter = AnimeTitleWithScoreAdapter(this)
+        screenWidth = resources.displayMetrics.run { widthPixels / density }
+        val adapter = AnimeTitleWithScoreAdapter(this.requireActivity(),true)
         adapter.submitLit(list)
+        adapter.setItemClickListener {
+            findNavController().navigate(R.id.detailScreen)
+        }
         binding.listViewPager.layoutManager =
             GridLayoutManager(requireContext(), (screenWidth / 124f).toInt())
         binding.listViewPager.adapter = adapter
@@ -188,7 +196,17 @@ class ListScreen : Fragment() {
 
             }
         }
+        binding.listViewPager.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0)
+                    binding.sort.hide()
+                else
+                    binding.sort.show()
+
+            }
+        })
     }
+
 
     private val uiSettings =
         readData<UISettings>("ui_settings") ?: UISettings()

@@ -16,10 +16,12 @@ import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.setSlideUp
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashScreen : Fragment() {
     private val model: MainViewModelImp by viewModels()
     private var _binding: SplashScreenBinding? = null

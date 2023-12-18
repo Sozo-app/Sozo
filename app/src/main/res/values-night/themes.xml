@@ -4,9 +4,9 @@
         <item name="colorPrimary">@color/basic_color</item>
         <item name="colorOnPrimary">@color/bg_black</item>
         <item name="android:textColor">@color/bg_white</item>
-        <item name="colorSecondary">@color/violet_400</item>
+        <item name="colorSecondary">@color/white</item>
         <item name="colorAccent">@color/basic_color</item>
-        <item name="colorSecondaryVariant">@color/violet_400</item>
+        <item name="colorSecondaryVariant">@color/white</item>
     </style>
     <style name="ThemeOverlay.AnimeApp.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_900</item>

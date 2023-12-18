@@ -46,6 +46,7 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.math.min
 
@@ -128,6 +129,16 @@ fun localLoadTabTxt(): ArrayList<String> {
     list.add("Genres")
     return list
 }
+
+fun loadDetailTabs(): ArrayList<String> {
+    val list = ArrayList<String>()
+    list.add("Episodes")
+    list.add("Cast")
+    list.add("Relations")
+    list.add("Details")
+    return list
+}
+
 
 fun loadFilterTab(
     defaultItemGenre: ArrayList<String>,
@@ -362,7 +373,17 @@ fun ImageView.loadImage(file: FileUrl?, size: Int = 0) {
 
 
 var loaded: Boolean = false
-var loadedBrowse: Boolean = false
+
+
+fun loadIcons():ArrayList<Int>{
+    val list = ArrayList<Int>()
+    list.add(com.animestudios.animeapp.R.drawable.ic_bookmark)
+    list.add(R.drawable.ic_heart)
+    list.add(R.drawable.ic_share)
+    list.add(R.drawable.ic_close)
+    list.add(R.drawable.ic_network)
+    return list
+}
 
 fun View.preventTwoClick() {
     this.isEnabled = false

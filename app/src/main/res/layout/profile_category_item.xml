@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="55dp"
     android:layout_marginHorizontal="25dp"
-    android:layout_marginBottom="24dp"
+    android:layout_marginBottom="12dp"
     app:cardBackgroundColor="@color/dark_700"
     app:cardCornerRadius="10dp">
 
@@ -18,8 +18,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_settings" />
+            android:layout_marginStart="14dp"/>
 
         <TextView
             android:layout_width="wrap_content"

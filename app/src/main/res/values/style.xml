@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="ShapeAppearanceOverlayExtended" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">41dp</item>
+    </style>
     <style name="NavBarText">
         <item name="android:textAllCaps">true</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:padding">2sp</item>
     </style>
+    <style name="Outlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="startIconTint">@color/basic_color</item>
+        <item name="boxStrokeColor">@color/basic_color</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="endIconTint">@color/basic_color</item>
+    </style>
+
+    <style name="BottomSheet_Button" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
 
     <style name="Suffix">
         <item name="android:height">54dp</item>

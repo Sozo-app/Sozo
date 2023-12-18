@@ -1,11 +1,13 @@
 package com.animestudios.animeapp.anilist.api.imp
 
 import android.app.Activity
+import android.util.Log
 import com.animestudios.animeapp.anilist.response.Page
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.AniListQueries
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.api.common.Anilist.executeQuery
+import com.animestudios.animeapp.anilist.api.common.Anilist.userid
 import com.animestudios.animeapp.anilist.response.FuzzyDate
 import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.anilist.response.Query
@@ -535,6 +537,7 @@ Page(page:$page,perPage:50) {
         userId: Int,
         sortOrder: String?
     ): MutableMap<String, ArrayList<Media>> {
+        Log.e("TAG", "getMediaLists: ${userid}", )
 
         val anime = true
         val response =
@@ -549,7 +552,6 @@ Page(page:$page,perPage:50) {
             val name = i.name.toString().trim('"')
             unsorted[name] = arrayListOf()
             i.entries?.forEach {
-                println("Keldiiii  " + it)
                 val a = Media(it)
                 unsorted[name]?.add(a)
                 if (!allIds.contains(a.id)) {
@@ -560,7 +562,6 @@ Page(page:$page,perPage:50) {
         }
 
         val options = response?.data?.mediaListCollection?.user?.mediaListOptions
-        println("options " + options)
         val mediaList = if (anime) options?.animeList else options?.mangaList
         mediaList?.sectionOrder?.forEach {
             if (unsorted.containsKey(it)) sorted[it] = unsorted[it]!!

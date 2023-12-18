@@ -6,20 +6,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
+import com.animestudios.animeapp.anilist.repo.imp.NotificationRepositoryImp
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModelImp : ViewModel(), MainViewModel {
-    val queriesImp = AniListQueriesImp()
+@HiltViewModel
+class MainViewModelImp @Inject constructor(private var notificationRepository: NotificationRepositoryImp) :
+    ViewModel(), MainViewModel {
+    private val queriesImp = AniListQueriesImp()
     override val genres: MutableLiveData<Boolean?> = MutableLiveData(null)
+    override val unReadNotificationCountLiveData: MutableLiveData<Int> = MutableLiveData()
 
     override fun getGenresAndTags(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO) {
             Anilist.getSavedToken(activity)
-
         }
+    }
+
+    override fun getUnreadNotificationsCount() {
+        notificationRepository.getNotificationUnReadCount().onEach {
+            it.onSuccess{
+                unReadNotificationCountLiveData.postValue(it)
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun loadProfile(runnable: Runnable) {

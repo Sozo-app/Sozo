@@ -3,21 +3,26 @@ package com.animestudios.animeapp.ui.screen.anime
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.AnimeItemBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.ui.widgets.MediaListSmallDialog
 
 class
 AnimeTitleWithScoreAdapter(
-    private val activity: Fragment,
+    private val activity: FragmentActivity,
     private val matchParent: Boolean = false,
 ) : RecyclerView.Adapter<AnimeTitleWithScoreAdapter.AnimeNoTitleVh>() {
     private val list: MutableList<Media> = ArrayList()
 
+    lateinit var clickListener: ((Media) -> Unit)
+
+    fun setItemClickListener(listener: ((Media) -> Unit)) {
+        clickListener = listener
+    }
 
     inner class AnimeNoTitleVh(val binding: AnimeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,7 +37,7 @@ AnimeTitleWithScoreAdapter(
                 readData<UISettings>("ui_settings") ?: UISettings()
             binding.apply {
                 if (uiSettings.layoutAnimations) {
-                    setAnimation(activity.requireActivity(), binding.root, uiSettings)
+                    setAnimation(activity, binding.root, uiSettings)
                     binding.titleItem.animation = setSlideIn(uiSettings)
                 }
                 itemImg.loadImage(datA.cover ?: datA.banner)
@@ -44,17 +49,18 @@ AnimeTitleWithScoreAdapter(
     }
 
     fun clicked(position: Int) {
-        activity.findNavController().navigate(R.id.detailScreen)
+        clickListener.invoke(list[position])
     }
 
     fun longClicked(position: Int): Boolean {
-//        if ((mediaList?.size ?: 0) > position && position != -1) {
-//            val media = mediaList?.get(position) ?: return false
-//            if (activity.supportFragmentManager.findFragmentByTag("list") == null) {
-//                MediaListDialogSmallFragment.newInstance(media).show(activity.supportFragmentManager, "list")
-//                return true
-//            }
-//        }
+        if (list.size > position && position != -1) {
+            val media = list.get(position)
+            if (activity.supportFragmentManager.findFragmentByTag("list") == null) {
+                MediaListSmallDialog.newInstance(media)
+                    .show(activity.supportFragmentManager, "list")
+                return true
+            }
+        }
         return false
     }
 

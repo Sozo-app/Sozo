@@ -26,7 +26,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
     private lateinit var trendRun: Runnable
     private val adapter: AnimeTitleWithScoreAdapter by lazy {
         AnimeTitleWithScoreAdapter(
-            fragmentAdapter as AnimeScreen
+            fragmentAdapter.requireActivity()
         )
     }
     var height = statusBarHeight
@@ -42,7 +42,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             trendingViewPager = binding.viewPager2
 
             binding.search.setOnClickListener {
-                fragmentAdapter.findNavController().navigate(R.id.action_mainScreen_to_searchScreen)
+                fragmentAdapter.findNavController().navigate(com.animestudios.animeapp.R.id.action_mainScreen_to_searchScreen)
             }
 
             if (ready.value == false)
@@ -56,6 +56,9 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             readData<UISettings>("ui_settings") ?: UISettings()
 
         adapter.submitLit(list.toMutableList())
+        adapter.setItemClickListener {
+            fragmentAdapter.findNavController().navigate(R.id.detailScreen)
+        }
         binding.animePageRecyclerView.setHasFixedSize(true)
         binding.animePageRecyclerView.adapter = adapter
         binding.recentReleased.visibility = View.VISIBLE
@@ -105,8 +108,11 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             readData<UISettings>("ui_settings") ?: UISettings()
         println("Tushdiiiiii ${list.size}")
         val animeTitleWithScoreAdapter =
-            AnimeTitleWithScoreAdapter(fragmentAdapter)
+            AnimeTitleWithScoreAdapter(fragmentAdapter.requireActivity())
         animeTitleWithScoreAdapter.submitLit(list)
+        animeTitleWithScoreAdapter.setItemClickListener {
+            fragmentAdapter.findNavController().navigate(R.id.detailScreen)
+        }
         binding.apply {
 
             binding.forYouTxt.visible()

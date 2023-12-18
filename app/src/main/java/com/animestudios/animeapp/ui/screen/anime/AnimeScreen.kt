@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
@@ -15,22 +15,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.animestudios.animeapp.Refresh
 import com.animestudios.animeapp.databinding.AnimeScreenBinding
 import com.animestudios.animeapp.gone
+import com.animestudios.animeapp.loaded
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.statusBarHeight
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 import com.animestudios.animeapp.viewmodel.imp.AniListViewModelImp
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.math.max
 import kotlin.math.min
 
 class AnimeScreen : Fragment() {
     private var _binding: AnimeScreenBinding? = null
     private val binding get() = _binding!!
-    private val model by activityViewModels<AniListViewModelImp>()
-    private val animePageAdapter = AnimePageAdapter(this@AnimeScreen)
+    private val model by viewModels<AniListViewModelImp>()
     var height = statusBarHeight
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,44 +45,6 @@ class AnimeScreen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        animePageAdapter.ready.observe(this) { i ->
-            binding.mainScrollView.isNestedScrollingEnabled = false
-            val adapter = ConcatAdapter(animePageAdapter)
-            binding.animePageRecyclerView.adapter = adapter
-            val layout = LinearLayoutManager(requireContext())
-            binding.animePageRecyclerView.layoutManager = layout
-            if (i) {
-                if (animePageAdapter.trendingViewPager != null) {
-                    model.loadPopular.observe(this) {
-                        binding.animeRefresh.isRefreshing = false
-
-                        binding.mainScrollView.isNestedScrollingEnabled = true
-                        if (it != null) {
-                            binding.animeTrendingProgressBar.gone()
-                            val newList = filterList(it.results)
-                            animePageAdapter.updateTrendingBanner(
-                                BannerAdapter(
-                                    3,
-                                    newList,
-                                    requireActivity(),
-                                    viewPager = animePageAdapter.trendingViewPager,
-                                )
-                            )
-                        }
-                    }
-                }
-                model.recentlyTrendList.observe(this) {
-                    if (it != null) {
-                        animePageAdapter.updateTrending(it)
-                    }
-                }
-                model.recentlyUpdatedList.observe(this) {
-                    if (it != null) {
-                        animePageAdapter.updateRecently(it)
-                    }
-                }
-            }
-        }
 
     }
 
@@ -111,6 +71,46 @@ class AnimeScreen : Fragment() {
             initRv(height)
             initView()
         }
+
+        val animePageAdapter = AnimePageAdapter(this@AnimeScreen)
+        val adapter = ConcatAdapter(animePageAdapter)
+        binding.animePageRecyclerView.adapter = adapter
+        val layout = LinearLayoutManager(requireContext())
+        binding.animePageRecyclerView.layoutManager = layout
+        animePageAdapter.ready.observe(viewLifecycleOwner) { i ->
+            binding.mainScrollView.isNestedScrollingEnabled = false
+            if (i) {
+                if (animePageAdapter.trendingViewPager != null) {
+                    model.loadPopular.observe(viewLifecycleOwner) {
+                        binding.animeRefresh.isRefreshing = false
+
+                        binding.mainScrollView.isNestedScrollingEnabled = true
+                        if (it != null) {
+                            binding.animeTrendingProgressBar.gone()
+                            val newList = filterList(it.results)
+                            animePageAdapter.updateTrendingBanner(
+                                BannerAdapter(
+                                    3,
+                                    newList,
+                                    requireActivity(),
+                                    viewPager = animePageAdapter.trendingViewPager,
+                                )
+                            )
+                        }
+                    }
+                }
+                model.recentlyTrendList.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        animePageAdapter.updateTrending(it)
+                    }
+                }
+                model.recentlyUpdatedList.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        animePageAdapter.updateRecently(it)
+                    }
+                }
+            }
+        }
     }
 
 
@@ -125,7 +125,6 @@ class AnimeScreen : Fragment() {
         }
     }
 
-
     @SuppressLint("NewApi")
     private fun initRv(height: Int) {
         binding.apply {
@@ -138,15 +137,13 @@ class AnimeScreen : Fragment() {
             }
 
             val live = Refresh.activity.getOrPut(
-               1
+                1
             ) { MutableLiveData(false) }
             live.observe(viewLifecycleOwner) {
                 if (it) {
                     viewLifecycleOwner.lifecycleScope.launch {
-                        withContext(Dispatchers.IO) {
-                            model.loaded = true
-                            model.loadAnimeSection(1)
-                        }
+                        loaded = true
+                        model.loadAnimeSection(1)
                         live.postValue(false)
                         _binding?.animeRefresh?.isRefreshing = false
                     }
@@ -175,7 +172,7 @@ class AnimeScreen : Fragment() {
 
 
     override fun onResume() {
-        if (!model.loaded) Refresh.activity[1]!!.postValue(true)
+        if (!loaded) Refresh.activity[1]!!.postValue(true)
 
         super.onResume()
     }
