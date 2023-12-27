@@ -66,4 +66,25 @@ class SplashScreen : Fragment() {
 
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenResumed {
+            delay(600)
+            if (Anilist.token == null) {
+                findNavController().navigate(
+                    R.id.loginScreen,
+                    null,
+                    NavOptions.Builder().setPopUpTo(R.id.splashScreen, true).build()
+                )
+            }
+            if (Anilist.token != null) {
+                findNavController().navigate(
+                    R.id.mainScreen,
+                    null,
+                    NavOptions.Builder().setPopUpTo(R.id.splashScreen, true).build()
+                )
+            }
+        }
+    }
 }

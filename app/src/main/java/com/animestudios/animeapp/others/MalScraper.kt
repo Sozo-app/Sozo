@@ -1,6 +1,6 @@
 package com.animestudios.animeapp.others
 
-import com.animestudios.animeapp.client
+import com.animestudios.animeapp.tools.client
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.snackString
 import kotlinx.coroutines.TimeoutCancellationException

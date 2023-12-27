@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.media.Media
-import com.animestudios.animeapp.tryWithSuspend
+import com.animestudios.animeapp.tools.tryWithSuspend
 import com.animestudios.animeapp.viewmodel.ListViewModel
 
 class ListViewModelImp : ListViewModel, ViewModel() {

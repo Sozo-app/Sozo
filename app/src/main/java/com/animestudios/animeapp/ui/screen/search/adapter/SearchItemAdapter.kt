@@ -1,9 +1,10 @@
 package com.animestudios.animeapp.ui.screen.search.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,9 @@ import com.animestudios.animeapp.model.Genre
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.setAnimation
 import com.animestudios.animeapp.setSafeOnClickListener
-import com.animestudios.animeapp.setSlideIn
-import com.animestudios.animeapp.setSlideUp
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.ui.activity.DetailActivity
+import java.io.Serializable
 
 class SearchItemAdapter(
     var type: Int,
@@ -138,13 +139,13 @@ class SearchItemAdapter(
     fun clicked(position: Int) {
         if ((mediaList?.size ?: 0) > position && position != -1) {
             val media = mediaList?.get(position)
-//            ContextCompat.startActivity(
-//                activity,
-//                Intent(activity, MediaDetailsActivity::class.java).putExtra(
-//                    "media",
-//                    media as Serializable
-//                ), null
-//            )
+            ContextCompat.startActivity(
+                activity,
+                Intent(activity, DetailActivity::class.java).putExtra(
+                    "media",
+                    media as Serializable
+                ), null
+            )
         }
     }
 

@@ -8,10 +8,8 @@ import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.media.Media
-import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.viewmodel.AniListViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.zip
@@ -119,20 +117,7 @@ class AniListViewModelImp() : AniListViewModel, ViewModel() {
     }
 
     override fun loadFullDataByMedia(media: Media) {
-        loadBannerFullData.postValue(Resource.Loading)
-        repository.getFullDataById(media).onEach {
-            it.onSuccess {
-                loadBannerFullData.postValue(
-                    Resource.Success(it)
-                )
-            }
-            it.onFailure {
-                loadBannerFullData.postValue(
-                    Resource.Error(it)
-                )
-            }
 
-        }.launchIn(viewModelScope)
     }
 
 }

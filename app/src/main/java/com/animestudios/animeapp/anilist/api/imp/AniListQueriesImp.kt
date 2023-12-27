@@ -2,19 +2,16 @@ package com.animestudios.animeapp.anilist.api.imp
 
 import android.app.Activity
 import android.util.Log
-import com.animestudios.animeapp.anilist.response.Page
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.AniListQueries
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.api.common.Anilist.executeQuery
 import com.animestudios.animeapp.anilist.api.common.Anilist.userid
-import com.animestudios.animeapp.anilist.response.FuzzyDate
-import com.animestudios.animeapp.anilist.response.Genre
-import com.animestudios.animeapp.anilist.response.Query
-import com.animestudios.animeapp.anilist.response.SearchResults
+import com.animestudios.animeapp.anilist.response.*
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.media.Studio
 import com.animestudios.animeapp.others.MalScraper
+import com.animestudios.animeapp.tools.logError
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
@@ -531,6 +528,7 @@ Page(page:$page,perPage:50) {
         } else snackString("Check Internet Your internet Bad ?")
         return null
     }
+
 
     override suspend fun getMediaLists(
         animes: Boolean,

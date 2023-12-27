@@ -1,7 +1,10 @@
-package com.animestudios.animeapp
+package com.animestudios.animeapp.tools
 
 import android.content.Context
 import android.os.Build
+import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.snackString
+import com.animestudios.animeapp.toast
 import dev.brahmkshatriya.nicehttp.Requests
 import dev.brahmkshatriya.nicehttp.ResponseParser
 import dev.brahmkshatriya.nicehttp.addGenericDns

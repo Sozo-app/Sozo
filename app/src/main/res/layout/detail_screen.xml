@@ -8,336 +8,481 @@
     android:background="@color/detail_Bg"
     tools:ignore="contentDescription">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/mediaAppBar"
+        android:visibility="gone"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/detail_Bg"
+        android:orientation="vertical"
+        android:theme="@style/Theme.AnimeApp.AppBarOverlay"
+        android:translationZ="5dp">
 
-        <RelativeLayout
-            android:id="@+id/constraintLayout"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/mediaCollapsing"
             android:layout_width="match_parent"
-            android:layout_height="340dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="false"
+            app:collapsedTitleTextColor="@color/detail_Bg"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:contentScrim="@color/detail_Bg"
+            app:expandedTitleTextColor="@color/detail_Bg"
+            app:layout_scrollEffect="compress"
+            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
+            app:titleCollapseMode="fade">
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_scrollFlags="scroll|enterAlways">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fab_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="28dp"
-                android:translationZ="7dp"
-                app:cardBackgroundColor="#74000000"
-                app:cardCornerRadius="34dp"
-                app:elevation="12dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_round_arrow_back_ios_new_24" />
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/itemCompactBannerNoKenCard"
-                android:layout_width="wrap_content"
-                android:layout_height="305dp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <com.flaviofaria.kenburnsview.KenBurnsView
-                    android:id="@+id/itemCompactBannerNoKen"
-                    android:layout_width="408dp"
-                    android:layout_height="305dp"
-                    android:elevation="0dp"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"
+                <RelativeLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.cardview.widget.CardView>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="scroll|enterAlways">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/shapeableImageView2"
-                android:layout_width="408dp"
-                android:layout_height="305dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="@+id/itemCompactBannerNoKenCard"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/banner_img" />
 
-            <ImageView
-                android:id="@+id/imageView"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/itemCompactBannerNoKenCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        app:cardBackgroundColor="@color/detail_Bg"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <com.flaviofaria.kenburnsview.KenBurnsView
+                            android:id="@+id/itemCompactBannerNoKen"
+                            android:layout_width="match_parent"
+                            android:layout_height="350dp"
+                            android:elevation="0dp"
+                            android:scaleType="centerCrop"
+                            app:layout_collapseMode="parallax"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/shapeableImageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemCompactBannerNoKenCard"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/banner_img" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="350dp"
+                        android:src="@drawable/linear_gradient_detailbg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/itemCompactBannerNoKenCard" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/animeCover"
+
+                        android:layout_width="114dp"
+                        android:layout_height="166dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp">
+
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/coverImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/source_img" />
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mediaStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:insetTop="0dp"
+
+                    android:insetBottom="0dp"
+                    android:text="RELEASING"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/buttonColor"
+                    app:cornerRadius="4dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/mediaStatus"
+                    app:layout_constraintStart_toEndOf="@+id/mediaStatus"
+                    app:layout_constraintTop_toTopOf="@+id/mediaStatus">
+
+                    <TextView
+                        android:id="@+id/itemTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:text="Total of "
+                        android:textColor="#A9A8A8"
+
+                        android:textSize="14sp"
+                        tools:ignore="SpUsage,TextContrastCheck" />
+
+
+                    <TextView
+                        android:id="@+id/itemCompactTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        tools:ignore="SpUsage,TextContrastCheck"
+                        tools:text="/??" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mediaCollapseContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/mediaStatus"
+                    app:layout_constraintTop_toBottomOf="@+id/mediaStatus">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Chainsaw Man"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/mainData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:text="2023 • Action / Horror • 1 Season"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/title"
+                        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+                    <LinearLayout
+                        android:id="@+id/materialButton2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mainData">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="0dp"
+                            android:layout_height="55dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="8"
+                            android:fontFamily="@font/poppins_bold"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            android:text="Play"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="10dp"
+                            app:icon="@drawable/play_banner"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/white" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/floatingActionButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1.4"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardBackgroundColor="#3B3B3B"
+                            app:cardCornerRadius="12dp"
+                            app:iconGravity="textStart"
+                            app:shapeAppearanceOverlay="@style/roundedImageView"
+                            app:tint="@color/white">
+
+                            <ImageView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center"
+                                android:adjustViewBounds="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_download" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/mediaInfoDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:gravity="start"
+                        android:maxLines="2"
+                        android:overScrollMode="never"
+                        android:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
+                        android:visibility="visible"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/materialButton2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+
+                android:id="@+id/mediaTitleContainer"
                 android:layout_width="match_parent"
-
-                android:layout_height="305dp"
-                android:src="@drawable/linear_gradient_detailbg"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/itemCompactBannerNoKenCard" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="114dp"
-                android:layout_height="160dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="end"
-                android:layout_marginEnd="22dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@color/detail_Bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                tools:ignore="UselessParent">
 
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/coverImage"
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/mediaTitleToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/source_img" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="72dp"
+                    android:gravity="center|start"
+                    android:visibility="gone"
+                    android:paddingTop="4dp"
+                    app:buttonGravity="center_vertical"
+                    android:layout_gravity="center|start"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetRight="0dp"
+                    app:contentInsetStart="0dp">
 
-        </RelativeLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="start|center"
+                        android:layout_marginStart="8dp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:translationZ="7dp"
+                        app:cardBackgroundColor="@color/nav_bg"
+                        app:cardCornerRadius="34dp"
+                        app:cardElevation="12dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="18dp"
-            android:fontFamily="@font/poppins"
-            android:insetTop="0dp"
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_round_arrow_back_ios_new_24" />
+                    </androidx.cardview.widget.CardView>
 
-            android:insetBottom="0dp"
-            android:text="RELEASING"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:backgroundTint="@color/buttonColor"
-            app:cornerRadius="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintStart_toStartOf="parent" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mediaTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="start"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="14dp"
+                        android:scrollHorizontally="true"
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/materialButton"
-            app:layout_constraintStart_toEndOf="@+id/materialButton"
-            app:layout_constraintTop_toTopOf="@+id/materialButton">
-
-            <TextView
-                android:id="@+id/itemTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:text="Total of "
-                android:textColor="#A9A8A8"
-
-                android:textSize="14sp"
-                tools:ignore="SpUsage,TextContrastCheck" />
-
-
-            <TextView
-                android:id="@+id/itemCompactUserProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                tools:ignore="SpUsage,TextContrastCheck"
-                tools:text="0" />
-
-            <TextView
-                android:id="@+id/itemCompactTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                tools:ignore="SpUsage,TextContrastCheck"
-                tools:text="/??" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Chainsaw Man"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/materialButton"
-            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
-
-         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:text="2023 • Action / Horror • 1 Season"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                        android:singleLine="true"
+                        android:text="One Piece"
+                        android:textSize="16sp"
+                        android:transitionName="mediaTitle" />
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton2"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_bold"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:text="Play"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:cornerRadius="10dp"
-            app:icon="@drawable/play_banner"
-            app:iconGravity="textStart"
-            app:iconTint="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                </com.google.android.material.appbar.MaterialToolbar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="22dp"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:src="@drawable/ic_download"
-            app:backgroundTint="#3B3B3B"
-            app:cornerRadius="10dp"
-            app:fabCustomSize="55dp"
-            app:iconGravity="textStart"
-            app:layout_constraintBottom_toBottomOf="@+id/materialButton2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/materialButton2"
-            app:tint="@color/white" />
+            </FrameLayout>
 
-        <TextView
-            android:id="@+id/mediaInfoDescription"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ellipsize="end"
-            android:gravity="start"
-            android:maxLines="5"
-            android:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
-            app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
-            app:layout_constraintStart_toStartOf="@+id/materialButton2"
-            app:layout_constraintTop_toBottomOf="@+id/materialButton2" />
+            <LinearLayout
+                android:id="@+id/mediaAccessContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/linearLayoutCompat"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/mediaInfoDescription"
-            app:layout_constraintStart_toStartOf="@+id/mediaInfoDescription"
-            app:layout_constraintTop_toBottomOf="@+id/mediaInfoDescription">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="25dp"
+                    <ImageView
 
-                android:src="@drawable/ic_bookmark" />
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+
+                        android:src="@drawable/ic_bookmark" />
 
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="25dp"
+                    <ImageView
+                        android:id="@+id/mediaFav"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
 
-                android:src="@drawable/ic_heart" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="25dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_close" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="25dp"
-
-                android:src="@drawable/ic_share" />
+                        android:src="@drawable/ic_heart" />
 
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="25dp"
+                    <ImageView
+                        android:id="@+id/mediaNotify"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_share" />
 
-                android:src="@drawable/ic_network" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_network" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="376dp"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="12dp"
-            android:background="#4B4B4B"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayoutCompat"
-            app:layout_constraintStart_toStartOf="@+id/linearLayoutCompat"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
+                </LinearLayout>
 
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#4B4B4B" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:background="@color/detail_Bg"
+
             android:clipToPadding="false"
             android:requiresFadingEdge="vertical"
             android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
             app:tabBackground="@null"
+            app:tabGravity="center"
             app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="@color/fav"
-            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorColor="#D81E1E"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorGravity="bottom"
             app:tabIndicatorHeight="2dp"
             app:tabInlineLabel="true"
-
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabPaddingBottom="4dp"
             app:tabRippleColor="@null"
             app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/textAppearance"
             app:tabTextColor="#878787" />
 
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fab_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28.5dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:translationZ="7dp"
+        app:cardBackgroundColor="@color/nav_bg"
+        app:cardCornerRadius="34dp"
+        app:cardElevation="12dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_round_arrow_back_ios_new_24" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animeDetailProgress"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+
+        app:lottie_rawRes="@raw/loading" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

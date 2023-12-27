@@ -3,16 +3,13 @@ package com.animestudios.animeapp.app
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.multidex.MultiDex
 import androidx.work.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.initializeNetwork
+import com.animestudios.animeapp.tools.initializeNetwork
 import com.animestudios.animeapp.worker.NotificationWorker
 import com.animestudios.animeapp.worker.NotificationWorkerFactory
 import dagger.hilt.android.HiltAndroidApp
@@ -30,7 +27,7 @@ class App : Application(), Configuration.Provider {
         super.onCreate()
         Anilist.getSavedToken(this)
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
-        initializeNetwork(baseContext)
+        initializeNetwork(this)
         if (Anilist.token != null) {
             setupNotificationWorker()
         }
@@ -75,7 +72,6 @@ class App : Application(), Configuration.Provider {
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .setRequiresBatteryNotLow(false)
         .build()
-
 
 
     init {

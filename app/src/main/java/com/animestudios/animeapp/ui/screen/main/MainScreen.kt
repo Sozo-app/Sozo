@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.ui.screen.main
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.MainScreenBinding
@@ -20,6 +22,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.Serializable
 
 
 @AndroidEntryPoint
@@ -28,6 +35,7 @@ class MainScreen : Fragment() {
     private val binding get() = _binding!!
     private val model by viewModels<MainViewModelImp>()
     private var uiSettings = UISettings()
+    private val load = false
 
     @SuppressLint("ResourceAsColor", "NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +46,7 @@ class MainScreen : Fragment() {
         ) {
             if (it != null) {
                 if (it) {
+
                     val mainViewPager = binding.viewPager
                     val navbar = binding.navbar
                     binding.navbar.visibility = View.VISIBLE
@@ -45,13 +54,6 @@ class MainScreen : Fragment() {
                     binding.viewPager.setPageTransformer(ZoomOutPageTransformer(uiSettings))
                     binding.viewPager.adapter = BottomNavigationAdapter(requireActivity())
                     navbar.visible()
-                    model.unReadNotificationCountLiveData.observe(viewLifecycleOwner) {
-                        if (it == 0)
-                            binding.navbar.removeBadge(R.id.notification)
-                        else
-                            binding.navbar.getOrCreateBadge(R.id.notification).number = it
-
-                    }
                     navbar.setOnItemSelectedListener {
                         when (it.itemId) {
                             R.id.home -> {
@@ -107,6 +109,7 @@ class MainScreen : Fragment() {
                 }
             }
         }
+
     }
 
     override fun onCreateView(

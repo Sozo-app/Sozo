@@ -1,4 +1,4 @@
-package ani.saikou.media
+package com.animestudios.animeapp.media
 
 import java.io.Serializable
 

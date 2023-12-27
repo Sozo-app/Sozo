@@ -50,8 +50,6 @@ class AnimeScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.isMotionEventSplittingEnabled = false
-
         var height = statusBarHeight
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val displayCutout = activity?.window?.decorView?.rootWindowInsets?.displayCutout
@@ -69,7 +67,6 @@ class AnimeScreen : Fragment() {
         }
         binding.apply {
             initRv(height)
-            initView()
         }
 
         val animePageAdapter = AnimePageAdapter(this@AnimeScreen)
@@ -83,7 +80,6 @@ class AnimeScreen : Fragment() {
                 if (animePageAdapter.trendingViewPager != null) {
                     model.loadPopular.observe(viewLifecycleOwner) {
                         binding.animeRefresh.isRefreshing = false
-
                         binding.mainScrollView.isNestedScrollingEnabled = true
                         if (it != null) {
                             binding.animeTrendingProgressBar.gone()
@@ -114,16 +110,6 @@ class AnimeScreen : Fragment() {
     }
 
 
-    @SuppressLint("NewApi")
-    private fun initView() {
-        binding.apply {
-            lifecycleScope.launch(Dispatchers.Main)
-            {
-
-            }
-
-        }
-    }
 
     @SuppressLint("NewApi")
     private fun initRv(height: Int) {
@@ -173,7 +159,6 @@ class AnimeScreen : Fragment() {
 
     override fun onResume() {
         if (!loaded) Refresh.activity[1]!!.postValue(true)
-
         super.onResume()
     }
 }

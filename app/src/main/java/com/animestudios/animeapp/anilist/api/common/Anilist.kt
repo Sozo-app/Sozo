@@ -5,8 +5,10 @@ import android.content.Context
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
-import com.animestudios.animeapp.defaultHeaders
-import com.animestudios.animeapp.tryWithSuspend
+import com.animestudios.animeapp.anilist.response.Query
+import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.tools.defaultHeaders
+import com.animestudios.animeapp.tools.tryWithSuspend
 import dev.brahmkshatriya.nicehttp.Requests
 import okhttp3.OkHttpClient
 import java.io.File
@@ -41,6 +43,17 @@ object Anilist {
 
 
     val aniListQueries = AniListQueriesImp()
+    suspend fun getMedia(id: Int, mal: Boolean = false): Media? {
+        val response = executeQuery<Query.Media>(
+            """{Media(${if (!mal) "id:" else "idMal:"}$id){id idMal status chapters episodes nextAiringEpisode{episode}type meanScore isAdult isFavourite bannerImage coverImage{large}title{english romaji userPreferred}mediaListEntry{progress private score(format:POINT_100)status}}}""",
+            force = true
+        )
+        val fetchedMedia = response?.data?.media ?: return null
+        return Media(fetchedMedia)
+    }
+
+
+
     suspend inline fun <reified T : Any> executeQuery(
         query: String,
         variables: String = "",

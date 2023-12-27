@@ -13,6 +13,7 @@ android {
     namespace 'com.animestudios.animeapp'
     compileSdk 33
     apollo {
+
         packageName.set("com.animestudios.animeapp")
         generateKotlinModels.set(true)
         excludes.add("**/schema.json.graphql")
@@ -96,7 +97,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10"
+
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation "androidx.core:core-splashscreen:1.0.0"
 
@@ -178,5 +180,6 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation 'androidx.hilt:hilt-work:1.0.0'
     implementation "androidx.startup:startup-runtime:1.1.1"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
 
 }

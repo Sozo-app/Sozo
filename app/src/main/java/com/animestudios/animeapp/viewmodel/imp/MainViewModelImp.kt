@@ -31,11 +31,6 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
     }
 
     override fun getUnreadNotificationsCount() {
-        notificationRepository.getNotificationUnReadCount().onEach {
-            it.onSuccess{
-                unReadNotificationCountLiveData.postValue(it)
-            }
-        }.launchIn(viewModelScope)
     }
 
     fun loadProfile(runnable: Runnable) {
@@ -48,7 +43,7 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
     }
 
     override fun getGenres(activity: Activity) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             genres.postValue(
                 queriesImp.getGenresAndTags(
                     activity

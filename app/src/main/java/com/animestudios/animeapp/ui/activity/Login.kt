@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.logError
+import com.animestudios.animeapp.tools.logError
 import com.animestudios.animeapp.logger
 import com.animestudios.animeapp.startMainActivity
 

@@ -1,5 +1,7 @@
 package com.animestudios.animeapp.ui.screen.anime
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.slideStart
 import com.animestudios.animeapp.tools.slideUp
+import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 
 class AnimePageAdapter(private val fragmentAdapter: Fragment) :
@@ -42,7 +45,8 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             trendingViewPager = binding.viewPager2
 
             binding.search.setOnClickListener {
-                fragmentAdapter.findNavController().navigate(com.animestudios.animeapp.R.id.action_mainScreen_to_searchScreen)
+                fragmentAdapter.findNavController()
+                    .navigate(com.animestudios.animeapp.R.id.action_mainScreen_to_searchScreen)
             }
 
             if (ready.value == false)
@@ -57,7 +61,12 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
 
         adapter.submitLit(list.toMutableList())
         adapter.setItemClickListener {
-            fragmentAdapter.findNavController().navigate(R.id.detailScreen)
+
+            val intent = Intent(
+                fragmentAdapter.requireActivity(), DetailActivity::class.java
+            )
+            intent.putExtra("media", it)
+            fragmentAdapter.requireActivity().startActivity(intent)
         }
         binding.animePageRecyclerView.setHasFixedSize(true)
         binding.animePageRecyclerView.adapter = adapter
@@ -103,6 +112,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
 
     }
 
+    @SuppressLint("NewApi")
     fun updateTrending(list: MutableList<Media>) {
         val uiSettings =
             readData<UISettings>("ui_settings") ?: UISettings()
@@ -111,7 +121,10 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             AnimeTitleWithScoreAdapter(fragmentAdapter.requireActivity())
         animeTitleWithScoreAdapter.submitLit(list)
         animeTitleWithScoreAdapter.setItemClickListener {
-            fragmentAdapter.findNavController().navigate(R.id.detailScreen)
+
+            val intent = Intent(fragmentAdapter.requireActivity(), DetailActivity::class.java)
+            intent.putExtra("media", it)
+            fragmentAdapter.requireActivity().startActivity(intent)
         }
         binding.apply {
 

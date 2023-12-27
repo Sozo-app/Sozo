@@ -8,6 +8,7 @@ import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.randomSelectFromList
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
@@ -35,7 +36,7 @@ class AniListRepositoryImp() : AniListRepository {
         if (response != null) {
             ((response.page)).also { currentPage = it }
             emit(Result.success(response))
-            }
+        }
 
     }.flowOn(Dispatchers.IO)
 
@@ -43,9 +44,9 @@ class AniListRepositoryImp() : AniListRepository {
         return api.loadProfile()
     }
 
-    override fun getFullDataById(media: Media) = flow<Result<Media>> {
+    override fun getFullDataById(media: Media): Flow<Media> = flow<Media> {
         val response = api.getMediaFullData(media)
-        emit(Result.success(response))
+        emit(response)
     }.flowOn(Dispatchers.IO)
 
     override fun getAnimeListByGenre(genre: MutableList<String>) = flow<Result<SearchResults>> {

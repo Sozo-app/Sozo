@@ -50,15 +50,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_gravity="end"
+                android:layout_gravity="end|center"
                 android:layout_marginEnd="29dp">
 
 
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/search"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="30dp"
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
                     app:srcCompat="@drawable/ic_search"
                     app:tint="@color/white"
                     tools:ignore="ContentDescription,ImageContrastCheck" />

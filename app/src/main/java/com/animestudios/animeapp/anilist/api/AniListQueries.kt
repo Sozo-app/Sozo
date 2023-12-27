@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.anilist.api
 
 import android.app.Activity
+import com.animestudios.animeapp.anilist.response.Episode
 import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
@@ -36,6 +37,8 @@ interface AniListQueries {
         id: Int? = null,
         hd: Boolean = false,
     ): SearchResults?
+
+
 
     suspend fun getMediaLists(
         anime: Boolean,

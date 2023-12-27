@@ -44,14 +44,17 @@
 
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <ProgressBar
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animeTrendingProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:lottie_colorFilter="@color/basic_color"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
+
         app:lottie_rawRes="@raw/loading" />
 
 </FrameLayout>
+
+
+

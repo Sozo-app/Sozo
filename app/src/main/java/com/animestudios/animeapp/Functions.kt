@@ -2,6 +2,7 @@ package com.animestudios.animeapp
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -21,6 +22,7 @@ import android.widget.ImageView
 import android.widget.Scroller
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
 import androidx.lifecycle.MutableLiveData
@@ -30,7 +32,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.app.App
+import com.animestudios.animeapp.databinding.ItemCountDownBinding
+import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.tools.FileUrl
+import com.animestudios.animeapp.tools.client
+import com.animestudios.animeapp.tools.tryWithSuspend
 import com.animestudios.animeapp.ui.activity.MainActivity
 import com.animestudios.animeapp.ui.screen.search.dialog.tab.model.FilterTabModel
 import com.bumptech.glide.Glide
@@ -38,17 +45,18 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.lang.Runnable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 
 var statusBarHeight = 0
@@ -63,6 +71,26 @@ const val EMPTY_VALUE_INT = 0
 const val EMPTY_VALUE_FLOAT = 0F
 
 lateinit var bottomBar: BottomNavigationView
+@SuppressLint("SetTextI18n")
+fun countDown(media: Media, view: ViewGroup) {
+    if (media.anime?.nextAiringEpisode != null && media.anime.nextAiringEpisodeTime != null && (media.anime.nextAiringEpisodeTime!! - System.currentTimeMillis() / 1000) <= 86400 * 7.toLong()) {
+        val v = ItemCountDownBinding.inflate(LayoutInflater.from(view.context), view, false)
+        view.addView(v.root, 0)
+        v.mediaCountdownText.text = "Episode ${media.anime.nextAiringEpisode!! + 1} will be released in"
+        object : CountDownTimer((media.anime.nextAiringEpisodeTime!! + 10000) * 1000 - System.currentTimeMillis(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val a = millisUntilFinished / 1000
+                v.mediaCountdown.text =
+                    "${a / 86400} days ${a % 86400 / 3600} hrs ${a % 86400 % 3600 / 60} mins ${a % 86400 % 3600 % 60} secs"
+            }
+
+            override fun onFinish() {
+                v.mediaCountdownContainer.visibility = View.GONE
+                snackString("Congrats Vro")
+            }
+        }.start()
+    }
+}
 
 fun <T> randomSelectFromList(list: List<T>): T? {
     if (Anilist.adult) {
@@ -76,6 +104,63 @@ fun <T> randomSelectFromList(list: List<T>): T? {
     }
 
 }
+
+
+class PopImageButton(
+    private val scope: CoroutineScope,
+    private val image: ImageView,
+    private val d1: Int,
+    private val d2: Int,
+    private val c1: Int,
+    private val c2: Int,
+    var clicked: Boolean,
+    callback: suspend (Boolean) -> (Unit)
+) {
+    private var disabled = false
+    private val context = image.context
+    private var pressable = true
+
+    init {
+        enabled(true)
+        scope.launch {
+            clicked()
+        }
+        image.setOnClickListener {
+            if (pressable && !disabled) {
+                pressable = false
+                clicked = !clicked
+                scope.launch {
+                    launch(Dispatchers.IO) {
+                        callback.invoke(clicked)
+                    }
+                    clicked()
+                    pressable = true
+                }
+            }
+        }
+    }
+
+    suspend fun clicked() {
+        if (clicked) {
+            ObjectAnimator.ofArgb(image,
+                "ColorFilter",
+                ContextCompat.getColor(context, c1)
+            ).setDuration(120).start()
+            image.setImageDrawable(AppCompatResources.getDrawable(context, d1))
+        } else image.setImageDrawable(AppCompatResources.getDrawable(context, d2))
+        if (clicked) ObjectAnimator.ofArgb(
+            image,
+            "ColorFilter",
+            ContextCompat.getColor(context, c1)
+        ).setDuration(200).start()
+    }
+
+    fun enabled(enabled: Boolean) {
+        disabled = !enabled
+        image.alpha = if(disabled)  0.33f else 1f
+    }
+}
+
 
 fun isOnline(context: Context): Boolean {
     val connectivityManager =
@@ -601,6 +686,8 @@ fun setAnimation(
     }
 }
 
+
+
 fun setSlideIn(uiSettings: UISettings) = AnimationSet(false).apply {
     if (uiSettings.layoutAnimations) {
         var animation: Animation = AlphaAnimation(0.0f, 1.0f)
@@ -825,5 +912,38 @@ enum class MediaStatusAnimity {
         }
     }
 }
+
+fun updateAnilistProgress(media: Media, number: String) {
+    if (Anilist.userid != null) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val a = number.toFloatOrNull()?.roundToInt()
+            if (a != media.userProgress) {
+//                Anilist.editList(
+//                    media.id,
+//                    a,
+//                    status = if (media.userStatus == "REPEATING") media.userStatus else "CURRENT"
+//                )
+            }
+            media.userProgress = a
+            Refresh.all()
+        }
+    } else {
+        toast("Please Login into anilist account!")
+    }
+}
+fun String.findBetween(a: String, b: String): String? {
+    val start = this.indexOf(a)
+    val end = if (start != -1) this.indexOf(b, start) else return null
+    return if (end != -1) this.subSequence(start, end).removePrefix(a).removeSuffix(b).toString() else null
+}
+suspend fun getSize(file: FileUrl): Double? {
+    return tryWithSuspend {
+        client.head(file.url, file.headers, timeout = 1000).size?.toDouble()?.div(1024 * 1024)
+    }
+}
+suspend fun getSize(file: String): Double? {
+    return getSize(FileUrl(file))
+}
+
 
 

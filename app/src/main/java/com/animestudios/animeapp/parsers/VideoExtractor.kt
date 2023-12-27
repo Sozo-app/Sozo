@@ -1,6 +1,6 @@
 package com.animestudios.animeapp.parsers
 
-import com.animestudios.animeapp.FileUrl
+import com.animestudios.animeapp.tools.FileUrl
 import java.io.Serializable
 
 /**

@@ -1,11 +1,9 @@
 package com.animestudios.animeapp.worker
 
-import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -65,6 +63,10 @@ class NotificationWorker @AssistedInject constructor(
         val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
             .setContentTitle(applicationContext.getString(R.string.app_name))
+            .setColorized(true)
+            .setColor(ContextCompat.getColor(applicationContext, R.color.basic_color))
+            .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentText(notification.getFormattedNotification())
             .setAutoCancel(true)
 

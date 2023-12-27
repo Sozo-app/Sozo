@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface AniListRepository {
     fun getGenre(): kotlinx.coroutines.flow.Flow<Result<Query.GenreCollection>>
-    fun getFullDataById(media: Media): kotlinx.coroutines.flow.Flow<Result<Media>>
+    fun getFullDataById(media: Media): kotlinx.coroutines.flow.Flow<Media>
     fun getAnimeListByGenre(genre: MutableList<String>): Flow<Result<SearchResults>>
     fun getSearch(search: SearchResults): Flow<Result<SearchResults>>
     fun recentlyUpdated(): Flow<Result<MutableList<Media>?>>
     fun forYouAnimeList(): Flow<Result<MutableList<Media>>>
     fun randomAnimeList(): Flow<Result<SearchResults>>
-  suspend  fun getMediaLists(
+    suspend fun getMediaLists(
         anime: Boolean,
         userId: Int,
         sortOrder: String? = null

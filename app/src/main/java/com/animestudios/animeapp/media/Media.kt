@@ -1,6 +1,5 @@
 package com.animestudios.animeapp.media
 
-import ani.saikou.media.Selected
 import com.animestudios.animeapp.anilist.response.*
 import java.io.Serializable
 import com.animestudios.animeapp.anilist.response.Media as ApiMedia
@@ -108,5 +107,4 @@ data class  Media(
     }
 
     fun mainName() = nameMAL ?: name ?: nameRomaji
-    fun mangaName() = if (countryOfOrigin != "JP") mainName() else nameRomaji
 }

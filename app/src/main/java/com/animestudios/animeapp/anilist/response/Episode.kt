@@ -1,9 +1,8 @@
 package com.animestudios.animeapp.anilist.response
 
-import com.animestudios.animeapp.FileUrl
+import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.parsers.VideoExtractor
 import java.io.Serializable
-
 data class Episode(
     val number: String,
     var link: String? = null,
@@ -22,5 +21,4 @@ data class Episode(
     val extra: Map<String,String>?=null,
 
     ) : Serializable
-
 

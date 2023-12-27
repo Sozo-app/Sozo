@@ -1,15 +1,17 @@
 <resources>
 
-    <style name="Widget.Theme.AnimeApp.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
-    </style>
+    <style name="Widget.Theme.AnimeApp.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar"></style>
 
-    <style name="Widget.Theme.AnimeApp.ButtonBar.Fullscreen" parent="">
-    </style>
+    <style name="Widget.Theme.AnimeApp.ButtonBar.Fullscreen" parent=""></style>
 
-    <style name="Widget.AnimeApp.AppWidget.Container" parent="android:Widget">
-    </style>
+    <style name="Widget.AnimeApp.AppWidget.Container" parent="android:Widget"></style>
 
-    <style name="Widget.AnimeApp.AppWidget.InnerView" parent="android:Widget">
+    <style name="Widget.AnimeApp.AppWidget.InnerView" parent="android:Widget"></style>
+
+    <style name="textAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="textAllCaps">false</item>
     </style>
 
 

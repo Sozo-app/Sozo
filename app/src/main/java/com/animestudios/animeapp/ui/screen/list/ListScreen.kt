@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.ui.screen.list
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -13,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.*
@@ -21,6 +21,7 @@ import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.ListScreenBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.anime.AnimeTitleWithScoreAdapter
 import com.animestudios.animeapp.viewmodel.imp.ListViewModelImp
 import com.skydoves.powermenu.CircularEffect
@@ -72,7 +73,7 @@ class ListScreen : Fragment() {
             binding.horizontalSpace.animation = setSlideUp(uiSettings)
 
             val powerList = ArrayList<PowerMenuItem>()
-            keys.onEach {its->
+            keys.onEach { its ->
                 powerList.add(PowerMenuItem(its))
             }
             initClicks(powerList, keys, values)
@@ -96,10 +97,12 @@ class ListScreen : Fragment() {
 
     private fun update(list: ArrayList<Media>) {
         screenWidth = resources.displayMetrics.run { widthPixels / density }
-        val adapter = AnimeTitleWithScoreAdapter(this.requireActivity(),true)
+        val adapter = AnimeTitleWithScoreAdapter(this.requireActivity(), true)
         adapter.submitLit(list)
         adapter.setItemClickListener {
-            findNavController().navigate(R.id.detailScreen)
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
+            intent.putExtra("media", it)
+            startActivity(intent)
         }
         binding.listViewPager.layoutManager =
             GridLayoutManager(requireContext(), (screenWidth / 124f).toInt())
@@ -207,10 +210,20 @@ class ListScreen : Fragment() {
         })
     }
 
+    var state: Parcelable? = null
 
     private val uiSettings =
         readData<UISettings>("ui_settings") ?: UISettings()
 
+    override fun onPause() {
+        super.onPause()
+        state = binding.listViewPager.layoutManager?.onSaveInstanceState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.listViewPager.layoutManager?.onRestoreInstanceState(state)
+    }
 
 }
 

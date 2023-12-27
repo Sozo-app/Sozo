@@ -31,6 +31,7 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimeApp"
+
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <profileable
@@ -47,8 +48,6 @@
                 android:value="androidx.startup"
                 tools:node="remove" />
         </provider>
-
-
 
 
         <receiver
@@ -99,7 +98,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:launchMode="singleTask">
-            <intent-filter android:label="Watch on Saikou">
+            <intent-filter android:label="Watch on Sozo">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -111,6 +110,14 @@
                 <data android:host="myanimelist.net" />
                 <data android:pathPrefix="/anime" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".ui.activity.DetailActivity"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:theme="@style/Theme.AnimeApp.NeverCutout">
+
 
         </activity>
 
