@@ -10,14 +10,15 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/mediaAppBar"
-        android:visibility="gone"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="@color/detail_Bg"
         android:orientation="vertical"
         android:theme="@style/Theme.AnimeApp.AppBarOverlay"
-        android:translationZ="5dp">
+        android:translationZ="5dp"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/mediaCollapsing"
@@ -242,8 +243,6 @@
                             android:foreground="?android:attr/selectableItemBackground"
                             app:cardBackgroundColor="#3B3B3B"
                             app:cardCornerRadius="12dp"
-                            app:iconGravity="textStart"
-                            app:shapeAppearanceOverlay="@style/roundedImageView"
                             app:tint="@color/white">
 
                             <ImageView
@@ -263,10 +262,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:layout_marginEnd="6dp"
                         android:ellipsize="end"
+
                         android:fontFamily="@font/poppins_semi_bold"
                         android:gravity="start"
-                        android:maxLines="2"
+                        android:maxLines="3"
                         android:overScrollMode="never"
                         android:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
                         android:visibility="visible"
@@ -291,8 +292,8 @@
                 android:id="@+id/mediaTitleContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:background="@color/detail_Bg"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -304,11 +305,11 @@
                     android:id="@+id/mediaTitleToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
-                    android:gravity="center|start"
-                    android:visibility="gone"
-                    android:paddingTop="4dp"
-                    app:buttonGravity="center_vertical"
                     android:layout_gravity="center|start"
+                    android:gravity="center|start"
+                    android:paddingTop="4dp"
+                    android:visibility="gone"
+                    app:buttonGravity="center_vertical"
                     app:contentInsetLeft="0dp"
                     app:contentInsetRight="0dp"
                     app:contentInsetStart="0dp">
@@ -322,7 +323,7 @@
                         android:translationZ="7dp"
                         app:cardBackgroundColor="@color/nav_bg"
                         app:cardCornerRadius="34dp"
-                        app:cardElevation="12dp">
+                        app:cardElevation="4dp">
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="20dp"
@@ -354,12 +355,14 @@
 
                 </com.google.android.material.appbar.MaterialToolbar>
 
+
             </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/mediaAccessContainer"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+
                 android:layout_gravity="bottom"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
@@ -368,6 +371,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
+                    android:layout_marginHorizontal="20dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -382,11 +386,9 @@
 
                     <ImageView
                         android:id="@+id/mediaFav"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
-                        android:background="?selectableItemBackgroundBorderless"
-
                         android:src="@drawable/ic_heart" />
 
 
@@ -397,6 +399,14 @@
                         android:layout_weight="1"
                         android:background="?selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_share" />
+
+                    <ImageView
+                        android:id="@+id/wrongTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/cross" />
 
 
                     <ImageView
@@ -470,11 +480,12 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animeDetailProgress"
         android:layout_width="80dp"

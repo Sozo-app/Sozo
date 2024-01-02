@@ -7,13 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.TooltipCompat
-import androidx.cardview.widget.CardView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.math.MathUtils.clamp
 import androidx.core.text.HtmlCompat
@@ -25,7 +22,7 @@ import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.DetailScreenBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
-import com.animestudios.animeapp.tools.slideTop
+import com.animestudios.animeapp.tools.ImageUtil
 import com.animestudios.animeapp.ui.screen.detail.adapter.TabAdapter
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator
@@ -67,7 +64,6 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         media = intent.getSerializableExtra("media") as Media ?: return
         initUiLayoutParams()
         setTab()
-        loadImages(media)
         observerData()
         binding.mediaAppBar.addOnOffsetChangedListener(this)
         val live = Refresh.activity.getOrPut(this.hashCode()) { MutableLiveData(true) }
@@ -102,6 +98,8 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 media.isFav
             ) {
                 media.isFav = it
+                model.toggleFavorite(media.id)
+                Refresh.all()
             }
         } else {
             binding.mediaFav.visibility = View.GONE
@@ -120,6 +118,7 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
             if (it != null) {
                 //Load Media Data By Id
                 media = it
+                loadImages(media)
 
                 binding.title.text = it.mainName()
                 binding.mediaTitle.text = it.userPreferredName
@@ -147,6 +146,9 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 scope.launch {
                     if (it.isFav != initFabClick()?.clicked) initFabClick()?.clicked()
                 }
+
+
+
                 binding.mediaAppBar.visible()
                 binding.viewPager.visible()
                 binding.animeDetailProgress.gone()
@@ -199,7 +201,9 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         banner.loadImage(media.banner ?: media.cover, 400)
 
         binding.mediaStatus.text = media.status ?: ""
-
+        binding.coverImage.setOnClickListener {
+            ImageUtil.showFullScreenImage(binding.root.context, media.extraLarge.toString(), binding.coverImage)
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.animestudios.animeapp.anilist.apollo.client.AniListClient
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Episode
 import com.animestudios.animeapp.jikan.Jikan
@@ -17,15 +18,22 @@ import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.sourcers.WatchSources
 import com.animestudios.animeapp.tools.tryWithSuspend
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsViewModelImpl : ViewModel() {
+@HiltViewModel
+class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniListClient) :
+    ViewModel() {
     private val repositoryImp: AniListRepositoryImp = AniListRepositoryImp()
     val scrolledToTop = MutableLiveData(true)
+    private val _coverImageForPreview = MutableLiveData<String>()
+    val coverImageForPreview: LiveData<String>
+        get() = _coverImageForPreview
 
     fun saveSelected(id: Int, data: Selected, activity: Activity? = null) {
         saveData("$id-select", data, activity)
@@ -51,8 +59,19 @@ class DetailsViewModelImpl : ViewModel() {
     fun loadMedia(m: Media) {
         if (!loading) {
             loading = true
+            viewModelScope.launch {
+            }
             repositoryImp.getFullDataById(m).onEach {
-                media.postValue(it)
+                val data = aniListClient.getExtraLargeImage(m.id)
+                if (data.data != null) {
+                    val extraLarge = data.data?.Media?.coverImage?.extraLarge
+                    val color = data.data?.Media?.coverImage?.color
+                    println(color)
+                    println(extraLarge)
+                    val newMedia = it.copy(extraLarge = extraLarge)
+                    println(newMedia.extraLarge)
+                    media.postValue(newMedia)
+                }
             }.launchIn(viewModelScope)
         }
         loading = false
@@ -60,6 +79,12 @@ class DetailsViewModelImpl : ViewModel() {
 
     fun setMedia(m: Media) {
         media.postValue(m)
+    }
+
+    fun toggleFavorite(id:Int){
+        viewModelScope.launch {
+            aniListClient.toggleFavorite(id)
+        }
     }
 
     val responses = MutableLiveData<List<ShowResponse>?>(null)

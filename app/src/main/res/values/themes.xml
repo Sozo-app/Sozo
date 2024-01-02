@@ -9,6 +9,7 @@
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorPrimaryVariant">@color/bg_white</item>
         <item name="themePrimaryButton">@style/ButtonPrimary</item>
+        <item name="themeContentColor">@color/bg</item>
         <item name="themeRegularFont">@style/FontRegular</item>
         <item name="themeRegularBoldFont">@style/FontRegularBold</item>
         <item name="themeRegularClickableFont">@style/FontRegularClickable</item>

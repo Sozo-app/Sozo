@@ -40,6 +40,7 @@ interface AniListQueries {
 
 
 
+
     suspend fun getMediaLists(
         anime: Boolean,
         userId: Int,

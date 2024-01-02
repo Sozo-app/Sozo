@@ -25,7 +25,10 @@ class LoginScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.login.setOnClickListener {
+            val data = arguments?.getInt("selected", 1)
+            Anilist.selected = data?:1
             Anilist.loginIntent(requireActivity())
+
         }
     }
 

@@ -6,6 +6,7 @@ import java.io.Serializable
 data class Character(
     val id: Int,
     val name: String?,
+    val native:String?,
     val image: String?,
     val banner: String?,
     val role: String,

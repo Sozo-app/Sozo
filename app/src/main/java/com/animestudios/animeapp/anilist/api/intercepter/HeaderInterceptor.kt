@@ -1,8 +1,7 @@
 package com.animestudios.animeapp.anilist.api.intercepter
 
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import com.animestudios.animeapp.readData
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -20,16 +19,44 @@ class HeaderInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
 
-        val token = Anilist.token ?: return chain.proceed(originalRequest)
-        println("token :::::::::::::::::::::::$token")
-        /* Adding the header to the request. */
-        val newRequest = originalRequest.newBuilder()
-            .addHeader("Authorization", "Bearer $token")
-            .addHeader("Accept", "application/json")
-            .addHeader("Content-Type", "application/json")
-            .build()
+        val selectedAccountType = readData<Int>("selectedAccount") ?: 1
 
-        val response = chain.proceed(newRequest)
-        return response
+        when (selectedAccountType) {
+            1 -> {
+                val token = Anilist.token ?: return chain.proceed(originalRequest)
+                /* Adding the header to the request. */
+                val newRequest = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer $token")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                val response = chain.proceed(newRequest)
+                return response
+            }
+            2 -> {
+                val token = Anilist.token2 ?: return chain.proceed(originalRequest)
+                /* Adding the header to the request. */
+                val newRequest = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer $token")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                val response = chain.proceed(newRequest)
+                return response
+            }
+            else -> {
+                val token = Anilist.token3 ?: return chain.proceed(originalRequest)
+                /* Adding the header to the request. */
+                val newRequest = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer $token")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                val response = chain.proceed(newRequest)
+                return response
+            }
+        }
+
+
     }
 }

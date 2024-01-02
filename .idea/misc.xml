@@ -11,6 +11,8 @@
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/custom_sample.xml" value="0.2485" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/gradient_shadow.xml" value="0.2485" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/home.xml" value="0.2605" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_admin.xml" value="0.2745" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2745" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.275" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_close.xml" value="0.275" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/ic_download.xml" value="0.284" />
@@ -32,6 +34,7 @@
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/play.xml" value="0.171" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/search.xml" value="0.284" />
         <entry key="..\:/AnimeApp/app/src/main/res/drawable/search_bg.xml" value="0.193" />
+        <entry key="..\:/AnimeApp/app/src/main/res/drawable/shape_oval_with_border.xml" value="0.2745" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout-night/item_count_down.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/activity_home.xml" value="0.3169230769230769" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/activity_main.xml" value="0.3169230769230769" />
@@ -45,11 +48,16 @@
         <entry key="..\:/AnimeApp/app/src/main/res/layout/banner_item.xml" value="0.2988679352838745" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/bookmarks_load_state.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/borwse_screen.xml" value="0.3169230769230769" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/bottom_sheet_account.xml" value="0.4528302049755674" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/bottom_sheet_custom.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/bottom_sheet_search_filter.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/bottomsheet_media_list.xml" value="0.30885416666666665" />
-        <entry key="..\:/AnimeApp/app/src/main/res/layout/cast_screen.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/cast_page_item.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/cast_screen.xml" value="0.3532608695652174" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/category_item.xml" value="0.321875" />
-        <entry key="..\:/AnimeApp/app/src/main/res/layout/detail_screen.xml" value="0.24140625" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/character_item.xml" value="0.2264151024877837" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/detail_page.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/detail_screen.xml" value="0.2988679352838745" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/episode_screen.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/filter_single_click_screen.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/fragment_all_anime.xml" value="0.321875" />
@@ -77,6 +85,7 @@
         <entry key="..\:/AnimeApp/app/src/main/res/layout/notification_screen.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/profile_category_item.xml" value="0.3098958333333333" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/profile_screen.xml" value="0.3098958333333333" />
+        <entry key="..\:/AnimeApp/app/src/main/res/layout/search_big_item.xml" value="0.2988679352838745" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/search_screen.xml" value="0.4528302049755674" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/splash_screen.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/layout/subscribtions_screen.xml" value="0.321875" />
@@ -86,6 +95,7 @@
         <entry key="..\:/AnimeApp/app/src/main/res/layout/year_item.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/menu-v26/bottom_navbar_menu.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/menu/bottom_navbar_menu.xml" value="0.321875" />
+        <entry key="..\:/AnimeApp/app/src/main/res/menu/manga_menu_detail.xml" value="0.321875" />
         <entry key="..\:/AnimeApp/app/src/main/res/xml/network_security_config.xml" value="0.3098958333333333" />
       </map>
     </option>

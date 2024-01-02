@@ -1,0 +1,10 @@
+mutation ToggleFavouriteMutation ($id:Int) {
+    ToggleFavourite(animeId:$id){
+        anime{
+            edges {
+                id
+            }
+        }
+    }
+
+}

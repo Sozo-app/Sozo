@@ -6,8 +6,7 @@ import com.animestudios.animeapp.tools.lazyList
 
 object AnimeSources : WatchSources() {
     override val list: List<Lazier<BaseParser>> = lazyList(
-        "AnimePahe" to ::AnimePahe,
-        "Consume Bili" to ::ConsumeBili,
+        "Gogo" to ::Gogo,
     )
 }
 

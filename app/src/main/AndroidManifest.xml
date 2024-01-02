@@ -78,7 +78,7 @@
         <activity
             android:name=".ui.activity.Login"
             android:configChanges="orientation|screenSize|layoutDirection"
-            android:excludeFromRecents="true"
+            android:excludeFromRecents="false"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter android:label="Anilist Login for animeapp">

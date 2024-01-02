@@ -30,6 +30,13 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
         }
     }
 
+    fun getSavedTokenByType(activity: Activity,type:Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Anilist.getSavedToken(activity,type, byType = true)
+        }
+    }
+
+
     override fun getUnreadNotificationsCount() {
     }
 

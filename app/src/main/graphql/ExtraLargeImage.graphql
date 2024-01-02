@@ -1,0 +1,13 @@
+query  GetImage($id:Int) {
+    Media(id:$id){
+        title {
+             userPreferred
+        }
+        coverImage {
+            large
+            medium
+            color
+            extraLarge
+        }
+    }
+}

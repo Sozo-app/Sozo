@@ -22,16 +22,19 @@
 
         <TextView
             android:id="@+id/animeSourceTitle"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="8dp"
+
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:ellipsize="marquee"
             android:fontFamily="@font/poppins_bold"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
+            android:visibility="visible"
             tools:text="@string/get_recommendations" />
 
         <TextView
@@ -40,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_weight="0.5"
-            android:visibility="gone"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_bold"
@@ -48,6 +50,7 @@
             android:text="@string/wrong"
             android:textAlignment="textEnd"
             android:textColor="?attr/colorSecondary"
+            android:visibility="gone"
             tools:ignore="TextContrastCheck" />
 
         <LinearLayout

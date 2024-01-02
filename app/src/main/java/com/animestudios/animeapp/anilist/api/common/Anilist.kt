@@ -2,11 +2,17 @@ package com.animestudios.animeapp.anilist.api.common
 
 import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.provider.Settings
+import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import androidx.browser.customtabs.CustomTabsIntent
 import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
 import com.animestudios.animeapp.anilist.response.Query
+import com.animestudios.animeapp.currContext
 import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.tools.defaultHeaders
 import com.animestudios.animeapp.tools.tryWithSuspend
 import dev.brahmkshatriya.nicehttp.Requests
@@ -16,7 +22,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 object Anilist {
-    val BASE_URL ="https://graphql.anilist.co/"
+    val BASE_URL = "https://graphql.anilist.co/"
     val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
@@ -31,7 +37,10 @@ object Anilist {
     )
     var genres: ArrayList<String>? = null
     var tags: Map<Boolean, List<String>>? = null
+    var selected = 1
     var token: String? = null
+    var token2: String? = null
+    var token3: String? = null
 
     var username: String? = null
     var userid: Int? = null
@@ -51,7 +60,6 @@ object Anilist {
         val fetchedMedia = response?.data?.media ?: return null
         return Media(fetchedMedia)
     }
-
 
 
     suspend inline fun <reified T : Any> executeQuery(
@@ -74,7 +82,24 @@ object Anilist {
 
 
             if (token != null || force) {
-                if (token != null && useToken) headers["Authorization"] = "Bearer $token"
+                if (token != null && useToken) {
+                    val selectedType = readData<Int>("selectedAccount") ?: 1
+
+                    when (selectedType) {
+                        1 -> {
+                            headers["Authorization"] = "Bearer $token"
+
+                        }
+                        2 -> {
+                            headers["Authorization"] = "Bearer $token2"
+
+                        }
+                        3 -> {
+                            headers["Authorization"] = "Bearer $token3"
+
+                        }
+                    }
+                }
                 val json = client.post(
                     "https://graphql.anilist.co/",
                     headers,
@@ -90,58 +115,81 @@ object Anilist {
 
     }
 
-    fun getSavedToken(context: Context): Boolean {
-        if ("anilistToken" in context.fileList()) {
-            token = File(context.filesDir, "anilistToken").readText()
-            return true
+    fun getSavedToken(context: Context, type: Int = 1, byType: Boolean = false): Boolean {
+
+        if (byType) {
+            when (type) {
+                1 -> {
+                    if ("anilistToken" in context.fileList()) {
+                        token = File(context.filesDir, "anilistToken").readText()
+                        return true
+                    }
+                }
+                2 -> {
+
+                    if ("anilistToken2" in context.fileList()) {
+                        token2 = File(context.filesDir, "anilistToken").readText()
+                        return true
+                    }
+                }
+                3 -> {
+                    if ("anilistToken3" in context.fileList()) {
+                        token3 = File(context.filesDir, "anilistToken").readText()
+                        return true
+                    }
+                }
+            }
+        } else {
+            val selectedAccountType = readData<Int>("selectedAccount") ?: 1
+
+            when (selectedAccountType) {
+                1 -> {
+
+                    if ("anilistToken" in context.fileList()) {
+                        token = File(context.filesDir, "anilistToken").readText()
+                        return true
+                    }
+                }
+                2 -> {
+
+                    if ("anilistToken2" in context.fileList()) {
+                        token2 = File(context.filesDir, "anilistToken").readText()
+                        return true
+                    }
+                }
+                3 -> {
+                    if ("anilistToken3" in context.fileList()) {
+                        token3 = File(context.filesDir, "anilistToken").readText()
+                        return true
+                    }
+                }
+            }
         }
+
         return false
     }
 
     fun loginIntent(context: Context) {
         val clientID = 14066
-//        val uri = Uri.Builder().scheme("https")
-//            .authority("anilist.co")
-//            .appendPath("api")
-//            .appendPath("v2")
-//            .appendPath("oauth")
-//            .appendPath("authorize")
-//            .appendQueryParameter("client_id", clientID.toString())
-//            .appendQueryParameter("redirect_uri", "senzo://animeapp")
-//            .appendQueryParameter("response_type", "code")
-//            .build()
 
-//        )
         try {
-            CustomTabsIntent.Builder().build().launchUrl(
-                context,
-                Uri.parse("https://anilist.co/api/v2/oauth/authorize?client_id=$clientID&response_type=token")
-            )
+            CustomTabsIntent.Builder().build()
+                .launchUrl(
+                    context,
+                    Uri.parse("https://anilist.co/api/v2/oauth/authorize?client_id=$clientID&response_type=token")
+                        .apply {
+                        }
+                )
 
         } catch (e: ActivityNotFoundException) {
             println("GGG" + e.message + "GGG")
         }
     }
 
-
-    fun removeSavedToken(context: Context) {
-        token = null
-        username = null
-        adult = false
-        userid = null
-        avatar = null
-        bg = null
-        episodesWatched = null
-        if ("anilistToken" in context.fileList()) {
-            File(context.filesDir, "anilistToken").delete()
-        }
-    }
-
-
     val years = (1970 until 2024).map { it }.reversed().toMutableList()
 
 
-        val sortBy = mapOf(
+    val sortBy = mapOf(
         "Score" to "SCORE_DESC",
         "Popular" to "POPULARITY_DESC",
         "Trending" to "TRENDING_DESC",
@@ -175,6 +223,18 @@ object Anilist {
         6, 7, 8 -> 2
         9, 10, 11 -> 3
         else -> 0
+    }
+    fun removeSavedToken(context: Context) {
+        token = null
+        username = null
+        adult = false
+        userid = null
+        avatar = null
+        bg = null
+        episodesWatched = null
+        if ("anilistToken" in context.fileList()) {
+            File(context.filesDir, "anilistToken").delete()
+        }
     }
 
 

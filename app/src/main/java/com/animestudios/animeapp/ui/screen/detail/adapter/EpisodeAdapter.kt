@@ -34,7 +34,7 @@ class EpisodeAdapter(
 
                 val thumb = ep.thumb?.let { if(it.url.isNotEmpty()) GlideUrl(it.url) { it.headers } else null }
                 Glide.with(binding.itemEpisodeImage).load(thumb?:media.cover).override(400,0).into(binding.itemEpisodeImage)
-                binding.itemEpisodeNumber.text = (absoluteAdapterPosition+1).toString()
+                binding.itemEpisodeNumber.text = (absoluteAdapterPosition).toString()
                 binding.itemEpisodeTitle.text = title
                 logger(ep.maxLength.toString(),true)
                 if (ep.filler) {

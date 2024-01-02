@@ -12,6 +12,7 @@ plugins {
 android {
     namespace 'com.animestudios.animeapp'
     compileSdk 33
+
     apollo {
 
         packageName.set("com.animestudios.animeapp")
@@ -22,6 +23,7 @@ android {
         applicationId "com.animestudios.animeapp"
         minSdk 24
         targetSdk 33
+
         versionCode 1
         versionName "1.0"
 
@@ -144,12 +146,14 @@ dependencies {
     implementation 'com.github.brahmkshatriya:NiceHttp:1.1.0'
     implementation 'com.github.SabriGhazali:Shadout-Android:1.0.2'
     implementation 'androidx.browser:browser:1.5.0'
-    implementation 'com.google.android.flexbox:flexbox:3.0.0'
-    implementation 'com.github.iammert:ScalingLayout:1.2.1'
     implementation 'com.irozon.sneaker:sneaker:2.0.0'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.github.dueeeke:dk-tablayout:1.0.2'
     implementation "com.github.skydoves:powermenu:2.2.4"
+    implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.27'
+    implementation 'com.github.zend10:OverlapImageListView:v1.0.1'
+
+
 
 //    Exoplayer
     ext.exo_version = '1.0.0'
@@ -181,5 +185,11 @@ dependencies {
     implementation 'androidx.hilt:hilt-work:1.0.0'
     implementation "androidx.startup:startup-runtime:1.1.1"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
+
+    // Coil
+    def coil_version = "1.4.0"
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation "io.coil-kt:coil-gif:$coil_version"
+    implementation "io.coil-kt:coil-svg:$coil_version"
 
 }

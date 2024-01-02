@@ -5,9 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.tools.logError
 import com.animestudios.animeapp.logger
+import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.startMainActivity
+import com.animestudios.animeapp.tools.logError
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,11 +17,58 @@ class Login : AppCompatActivity() {
         val data: Uri? = intent?.data
         logger(data.toString())
         try {
-            Anilist.token =
-                Regex("""(?<=access_token=).+(?=&token_type)""").find(data.toString())!!.value
-            val filename = "anilistToken"
+            val selectedAccountType = Anilist.selected
+
+            var filename = "anilistToken"
+
+            when (selectedAccountType) {
+                1 -> {
+                    saveData("countAccount", 1)
+
+                    filename ="anilistToken"
+                    Anilist.token =
+                        Regex("""(?<=access_token=).+(?=&token_type)""").find(data.toString())!!.value
+
+                }
+                2 -> {
+                    saveData("countAccount", 2)
+                    filename ="anilistToken2"
+                    saveData("selectedAccount",2)
+
+                    Anilist.token2 =
+                        Regex("""(?<=access_token=).+(?=&token_type)""").find(data.toString())!!.value
+
+                }
+
+                3 -> {
+
+                    saveData("selectedAccount",3)
+                    saveData("countAccount", 3)
+                    filename ="anilistToken3"
+                    Anilist.token3 =
+                        Regex("""(?<=access_token=).+(?=&token_type)""").find(data.toString())!!.value
+
+                }
+            }
+
+
+
+
             this.openFileOutput(filename, Context.MODE_PRIVATE).use {
-                it.write(Anilist.token!!.toByteArray())
+                when (selectedAccountType) {
+                    1 -> {
+                        it.write(Anilist.token!!.toByteArray())
+
+                    }
+                    2 -> {
+                        it.write(Anilist.token2!!.toByteArray())
+
+                    }
+
+                    else -> {
+                        it.write(Anilist.token3!!.toByteArray())
+                    }
+                }
             }
         } catch (e: Exception) {
             logError(e)

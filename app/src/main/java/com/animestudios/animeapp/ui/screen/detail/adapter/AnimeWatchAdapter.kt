@@ -1,28 +1,17 @@
 package com.animestudios.animeapp.ui.screen.detail.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
-import android.text.method.Touch.scrollTo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.core.app.NotificationCompat.getChannelId
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.animestudios.animeapp.*
+import com.animestudios.animeapp.countDown
 import com.animestudios.animeapp.databinding.ItemAnimeWatchBinding
-import com.animestudios.animeapp.databinding.ItemChipBinding
 import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.sourcers.WatchSources
-import com.animestudios.animeapp.tools.FileUrl
-import com.animestudios.animeapp.tools.post
 import com.animestudios.animeapp.ui.screen.detail.pages.episodes.EpisodeScreen
-import com.animestudios.animeapp.widget.handleProgress
-import com.google.android.material.chip.Chip
+import com.animestudios.animeapp.visible
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -44,27 +33,43 @@ class AnimeWatchAdapter(
         val binding = holder.binding
         _binding = binding
 
-        //Youtube
-//        if (media.anime!!.youtube != null && fragment.uiSettings.showYtButton) {
-//            binding.animeSourceYT.visibility = View.VISIBLE
-//            binding.animeSourceYT.setOnClickListener {
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(media.anime.youtube))
-//                fragment.requireContext().startActivity(intent)
-//            }
-//        }
-
         binding.animeSourceTitle.isSelected = true
         val source = media.selected!!.source.let { if (it >= watchSources.names.size) 0 else it }
 
         watchSources[source].apply {
             this.selectDub = media.selected!!.preferDub
             binding.animeSourceTitle.text = showUserText
+            binding.animeSourceTitle.visible()
             showUserTextListener = { MainScope().launch { binding.animeSourceTitle.text = it } }
         }
 
 
+        handleEpisodes()
     }
 
+    @SuppressLint("SetTextI18n")
+    fun handleEpisodes() {
+        val binding = _binding
+        if (binding != null) {
+            if (media.anime?.episodes != null) {
+                val episodes = media.anime.episodes!!.keys.toTypedArray()
+
+                val anilistEp = (media.userProgress ?: 0).plus(1)
+                val appEp = readData<String>("${media.id}_current_ep")?.toIntOrNull() ?: 1
+
+                var continueEp = (if (anilistEp > appEp) anilistEp else appEp).toString()
+                if (episodes.contains(continueEp)) {
+
+                    if (media.anime.episodes!!.isNotEmpty())
+                        binding.animeSourceNotFound.visibility = View.GONE
+                    else
+                        binding.animeSourceNotFound.visibility = View.VISIBLE
+                } else {
+                    binding.animeSourceNotFound.visibility = View.GONE
+                }
+            }
+        }
+    }
 
     override fun getItemCount(): Int = 1
 

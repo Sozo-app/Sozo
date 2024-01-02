@@ -114,6 +114,8 @@ class EpisodeScreen : Fragment() {
                 style = media.selected!!.recyclerStyle
                 reverse = media.selected!!.recyclerReversed
 
+                progress = View.GONE
+                binding.mediaInfoProgressBar.visibility = progress
 
                 if (!loaded) {
                     model.watchSources = if (media.isAdult) HAnimeSources else AnimeSources
@@ -163,8 +165,6 @@ class EpisodeScreen : Fragment() {
                         val arr = media.anime!!.episodes!!.keys.toTypedArray()
                         start = 0
                         end = total
-                    progress = View.GONE
-                    binding.mediaInfoProgressBar.visibility = progress
 
                     reload()
                 }
@@ -240,6 +240,7 @@ class EpisodeScreen : Fragment() {
             media.userProgress?.toFloat()?.takeIf { selected.latest < it } ?: selected.latest
 
         model.saveSelected(media.id, selected, requireActivity())
+        headerAdapter.handleEpisodes()
         episodeAdapter.notifyItemRangeRemoved(0, episodeAdapter.arr.size)
         var arr: ArrayList<Episode> = arrayListOf()
         if (media.anime!!.episodes != null) {

@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -44,6 +45,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import java.io.FileInputStream
@@ -943,6 +946,21 @@ suspend fun getSize(file: FileUrl): Double? {
 }
 suspend fun getSize(file: String): Double? {
     return getSize(FileUrl(file))
+}
+open class BottomSheetDialogFragment : BottomSheetDialogFragment() {
+    override fun onStart() {
+        super.onStart()
+        if (this.resources.configuration.orientation != Configuration.ORIENTATION_PORTRAIT) {
+            val behavior = BottomSheetBehavior.from(requireView().parent as View)
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+    override fun show(manager: FragmentManager, tag: String?) {
+        val ft = manager.beginTransaction()
+        ft.add(this, tag)
+        ft.commitAllowingStateLoss()
+    }
 }
 
 

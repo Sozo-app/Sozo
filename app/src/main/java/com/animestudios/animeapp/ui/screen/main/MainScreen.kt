@@ -1,7 +1,6 @@
 package com.animestudios.animeapp.ui.screen.main
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -10,23 +9,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.TooltipCompat
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.MainScreenBinding
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.ui.screen.main.account.AccountBottomSheetDialog
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.Serializable
 
 
 @AndroidEntryPoint
@@ -104,6 +101,10 @@ class MainScreen : Fragment() {
                             })
                         binding.mainProgressBar.gone()
                         mainViewPager.visible()
+                        overrideOnMenuItemLongClickListener(navbar)
+                        for (item in navbar.children) {
+                            TooltipCompat.setTooltipText(item, null)
+                        }
                     }
 
                 }
@@ -149,6 +150,16 @@ class MainScreen : Fragment() {
         super.onResume()
     }
 
+    private fun overrideOnMenuItemLongClickListener(bottomNavigationView: BottomNavigationView?) {
+        if (bottomNavigationView != null && bottomNavigationView.getChildCount() > 0) {
+            val menuView = bottomNavigationView.getChildAt(0) as ViewGroup
+            menuView.getChildAt(4).setOnLongClickListener {
+                println("Profile Bosildi")
+                AccountBottomSheetDialog(this).show(parentFragmentManager, "dialog")
+                true
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
