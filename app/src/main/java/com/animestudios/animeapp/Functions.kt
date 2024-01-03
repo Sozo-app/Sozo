@@ -4,17 +4,17 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.database.Cursor
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.*
+import android.provider.Browser
 import android.util.AttributeSet
+import android.util.Log
 import android.view.*
 import android.view.animation.*
 import android.widget.FrameLayout
@@ -56,7 +56,6 @@ import java.io.ObjectOutputStream
 import java.lang.Runnable
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -605,6 +604,7 @@ class CustomViewPagerScroll : ViewPager {
 }
 
 var loadMedia: Int? = null
+
 
 fun startMainActivity(activity: Activity, bundle: Bundle? = null) {
     activity.finishAffinity()

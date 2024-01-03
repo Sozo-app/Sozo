@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
@@ -49,23 +50,16 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
 
                 2 -> {
                     binding.addAccountContainer.visible()
-                    model.getSavedTokenByType(requireActivity(), 1)
-                    model.loadProfile() {
-                        binding.accountContainer.visible()
-                        devName1.text = Anilist.username
-                        devProfile1.loadImage(Anilist.avatar)
-                    }
+                    binding.accountContainer.visible()
+                    devName1.text = readData("userName") ?: "Account Name"
+                    devProfile1.loadImage(readData("userImage") ?: "")
 
-                    model.getSavedTokenByType(requireActivity(), 2)
-                    model.loadProfile() {
-                        binding.accountContainer2.visible()
-                        binding.accountContainer3.gone()
-                        devName2.text = Anilist.username
-                        devProfile2.loadImage(Anilist.avatar)
-                    }
-
+                    //Account 2
+                    binding.accountContainer2.visible()
+                    binding.accountContainer3.gone()
+                    devName2.text = readData("user2Name") ?: "Account 2 Name"
+                    devProfile2.loadImage(readData("user2Image") ?: "")
                     model.getGenresAndTags(requireActivity())
-
                     when (selectedAccount) {
                         1 -> {
                             selected1.visible()
@@ -78,6 +72,8 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
                             selected2.isChecked = true
                         }
                     }
+
+
                 }
                 3 -> {
                     binding.addAccountContainer.gone()
@@ -148,6 +144,49 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
                 }
             }
 
+        }
+
+        binding.accountContainer.setOnClickListener {
+            binding.selected3.gone()
+            binding.selected1.visible()
+            binding.selected1.isChecked = true
+            binding.selected2.gone()
+            saveData("selectedAccount", 1)
+            model.getGenresAndTags(requireActivity())
+            dismiss()
+            activity.findNavController().navigate(
+                R.id.splashScreen,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+            )
+        }
+        binding.accountContainer2.setOnClickListener {
+            binding.selected3.gone()
+            binding.selected2.visible()
+            binding.selected2.isChecked = true
+            binding.selected1.gone()
+            saveData("selectedAccount", 2)
+            model.getGenresAndTags(requireActivity())
+            dismiss()
+            activity.findNavController().navigate(
+                R.id.splashScreen,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+            )
+        }
+        binding.accountContainer3.setOnClickListener {
+            binding.selected2.gone()
+            binding.selected3.visible()
+            binding.selected3.isChecked = true
+            binding.selected1.gone()
+            saveData("selectedAccount", 3)
+            model.getGenresAndTags(requireActivity())
+            dismiss()
+            activity.findNavController().navigate(
+                R.id.mainScreen,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+            )
         }
     }
 }

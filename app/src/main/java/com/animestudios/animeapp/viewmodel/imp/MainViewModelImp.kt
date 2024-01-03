@@ -9,11 +9,8 @@ import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
 import com.animestudios.animeapp.anilist.repo.imp.NotificationRepositoryImp
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.viewmodel.MainViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +20,8 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
     private val queriesImp = AniListQueriesImp()
     override val genres: MutableLiveData<Boolean?> = MutableLiveData(null)
     override val unReadNotificationCountLiveData: MutableLiveData<Int> = MutableLiveData()
+    val loadedProfile2: MutableLiveData<Unit> = MutableLiveData()
+    val loadedProfile: MutableLiveData<Unit> = MutableLiveData()
 
     override fun getGenresAndTags(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,9 +29,9 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
         }
     }
 
-    fun getSavedTokenByType(activity: Activity,type:Int) {
+    fun getSavedTokenByType(activity: Activity, type: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            Anilist.getSavedToken(activity,type, byType = true)
+            Anilist.getSavedToken(activity, type, byType = true)
         }
     }
 
@@ -40,10 +39,23 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
     override fun getUnreadNotificationsCount() {
     }
 
-    fun loadProfile(runnable: Runnable) {
+    fun loadProfile(success: (() -> Unit)) {
         viewModelScope.launch {
             if (queriesImp.loadProfile()) {
-                runnable.run()
+                success.invoke()
+            } else
+                snackString("Error loading Anilist User Data")
+        }
+    }
+
+    fun loadProfile2(type: Int) {
+        viewModelScope.launch {
+            if (queriesImp.loadProfile()) {
+                if (type==2){
+                    loadedProfile2.postValue(Unit)
+                }else{
+                    loadedProfile.postValue(Unit)
+                }
             } else
                 snackString("Error loading Anilist User Data")
         }

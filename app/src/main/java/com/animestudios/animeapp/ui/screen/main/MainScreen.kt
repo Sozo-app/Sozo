@@ -79,7 +79,12 @@ class MainScreen : Fragment() {
                         true
                     }
                     model.loadProfile() {
-
+                        if ((readData("selectedAccount") ?: 1) == 1) {
+                            println("Tuushdi")
+                            saveData("userImage", Anilist.avatar)
+                            saveData("userId", Anilist.userid)
+                            saveData("userName", Anilist.username)
+                        }
                         val item = bottomBar.menu.getItem(4)
                         item.iconTintList = null
                         item.iconTintMode = PorterDuff.Mode.DST

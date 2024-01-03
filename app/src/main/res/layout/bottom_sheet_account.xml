@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_marginVertical="12dp"
             android:visibility="visible"
-            app:cardBackgroundColor="@color/bg"
+            app:cardBackgroundColor="@color/nav_bg"
             app:cardCornerRadius="16dp"
             tools:visibility="visible">
 
@@ -51,8 +51,8 @@
 
                     <ImageView
                         android:id="@+id/devProfile1"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         tools:ignore="ContentDescription,ImageContrastCheck"
                         tools:srcCompat="@tools:sample/avatars" />
 
@@ -88,8 +88,8 @@
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/selected1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="end|center"
                 android:checked="true" />
 
@@ -102,7 +102,7 @@
             android:layout_marginVertical="8dp"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:cardBackgroundColor="@color/bg"
+            app:cardBackgroundColor="@color/nav_bg"
             app:cardCornerRadius="16dp"
             tools:visibility="visible">
 
@@ -119,8 +119,8 @@
 
                     <ImageView
                         android:id="@+id/devProfile2"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         tools:ignore="ContentDescription,ImageContrastCheck"
                         tools:srcCompat="@tools:sample/avatars" />
                 </androidx.cardview.widget.CardView>
@@ -156,8 +156,8 @@
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/selected2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
 
                 android:layout_gravity="end|center"
                 android:checked="true"
@@ -172,7 +172,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:visibility="gone"
-            app:cardBackgroundColor="@color/bg"
+            app:cardBackgroundColor="@color/nav_bg"
             app:cardCornerRadius="16dp"
             tools:visibility="visible">
 
@@ -189,8 +189,8 @@
 
                     <ImageView
                         android:id="@+id/devProfile3"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         tools:ignore="ContentDescription,ImageContrastCheck"
                         tools:srcCompat="@tools:sample/avatars" />
                 </androidx.cardview.widget.CardView>
@@ -225,8 +225,8 @@
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/selected3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
 
                 android:layout_gravity="end|center"
                 android:checked="true"
@@ -247,8 +247,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addAccountBtn"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:backgroundTint="@color/nav_bg"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/dark_500"
                 android:fontFamily="@font/poppins_bold"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"

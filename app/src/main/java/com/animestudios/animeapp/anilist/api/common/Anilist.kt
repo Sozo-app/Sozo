@@ -3,16 +3,13 @@ package com.animestudios.animeapp.anilist.api.common
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.provider.Settings
-import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import androidx.browser.customtabs.CustomTabsIntent
 import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
 import com.animestudios.animeapp.anilist.response.Query
-import com.animestudios.animeapp.currContext
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.tools.defaultHeaders
 import com.animestudios.animeapp.tools.tryWithSuspend
 import dev.brahmkshatriya.nicehttp.Requests
@@ -37,7 +34,7 @@ object Anilist {
     )
     var genres: ArrayList<String>? = null
     var tags: Map<Boolean, List<String>>? = null
-    var selected = 1
+    var selected = 0
     var token: String? = null
     var token2: String? = null
     var token3: String? = null
@@ -87,10 +84,13 @@ object Anilist {
 
                     when (selectedType) {
                         1 -> {
+                            selected=1
+                            println("1 TOKEN")
                             headers["Authorization"] = "Bearer $token"
 
                         }
                         2 -> {
+                            println("2 TOKEN")
                             headers["Authorization"] = "Bearer $token2"
 
                         }
@@ -122,25 +122,31 @@ object Anilist {
                 1 -> {
                     if ("anilistToken" in context.fileList()) {
                         token = File(context.filesDir, "anilistToken").readText()
+                        saveData("selectedAccount",1)
                         return true
                     }
+
                 }
                 2 -> {
 
                     if ("anilistToken2" in context.fileList()) {
-                        token2 = File(context.filesDir, "anilistToken").readText()
+                        token2 = File(context.filesDir, "anilistToken2").readText()
+                        saveData("selectedAccount",2)
                         return true
                     }
                 }
                 3 -> {
                     if ("anilistToken3" in context.fileList()) {
-                        token3 = File(context.filesDir, "anilistToken").readText()
+                        token3 = File(context.filesDir, "anilistToken3").readText()
+                        saveData("selectedAccount",3)
                         return true
                     }
                 }
             }
         } else {
             val selectedAccountType = readData<Int>("selectedAccount") ?: 1
+
+            println(selectedAccountType)
 
             when (selectedAccountType) {
                 1 -> {
@@ -153,13 +159,13 @@ object Anilist {
                 2 -> {
 
                     if ("anilistToken2" in context.fileList()) {
-                        token2 = File(context.filesDir, "anilistToken").readText()
+                        token2 = File(context.filesDir, "anilistToken2").readText()
                         return true
                     }
                 }
                 3 -> {
                     if ("anilistToken3" in context.fileList()) {
-                        token3 = File(context.filesDir, "anilistToken").readText()
+                        token3 = File(context.filesDir, "anilistToken3").readText()
                         return true
                     }
                 }
@@ -170,16 +176,22 @@ object Anilist {
     }
 
     fun loginIntent(context: Context) {
-        val clientID = 14066
+            val clientID = 14066
 
         try {
-            CustomTabsIntent.Builder().build()
-                .launchUrl(
-                    context,
-                    Uri.parse("https://anilist.co/api/v2/oauth/authorize?client_id=$clientID&response_type=token")
-                        .apply {
-                        }
-                )
+
+            val CHROME_PACKAGE_NAME = "com.android.chrome"
+
+            val intent = CustomTabsIntent.Builder().build()
+
+            intent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            intent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.intent.setPackage(CHROME_PACKAGE_NAME);
+            intent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.launchUrl(
+                context,
+                Uri.parse("https://anilist.co/api/v2/oauth/authorize?client_id=$clientID&response_type=token")
+            )
 
         } catch (e: ActivityNotFoundException) {
             println("GGG" + e.message + "GGG")
@@ -224,6 +236,7 @@ object Anilist {
         9, 10, 11 -> 3
         else -> 0
     }
+
     fun removeSavedToken(context: Context) {
         token = null
         username = null
