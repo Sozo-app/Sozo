@@ -11,14 +11,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.LoginScreenBinding
-import com.animestudios.animeapp.readData
-import com.animestudios.animeapp.saveData
-import com.animestudios.animeapp.startMainActivity
 import com.animestudios.animeapp.tools.logError
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
-import com.animestudios.animeapp.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -133,6 +130,8 @@ class LoginScreen : Fragment() {
                             binding.webLogin.destroy()
                             binding.webLogin.canGoBack()
                             binding.webLogin.goBack()
+                            clearCookies(binding.webLogin)
+                            clearCookies(requireContext())
                             startMainActivity(requireActivity())
 
                             return true

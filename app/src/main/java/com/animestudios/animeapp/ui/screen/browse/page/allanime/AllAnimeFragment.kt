@@ -187,7 +187,6 @@ class AllAnimeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        result.page = 0
     }
 
 }

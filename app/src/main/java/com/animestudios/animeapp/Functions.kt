@@ -17,6 +17,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.*
 import android.view.animation.*
+import android.webkit.CookieManager
+import android.webkit.CookieSyncManager
+import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Scroller
@@ -963,5 +966,29 @@ open class BottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 }
 
+// Function to clear cookies in a WebView
+fun clearCookies(webView: WebView) {
+    val cookieManager = CookieManager.getInstance()
+    cookieManager.removeAllCookies(null)
+    cookieManager.flush()
+    // Reload the WebView after clearing cookies if needed
+    webView.reload()
+}
+
+@SuppressWarnings("deprecation")
+fun clearCookies(context: Context?) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+        CookieManager.getInstance().removeAllCookies(null)
+        CookieManager.getInstance().flush()
+    } else if (context != null) {
+        val cookieSyncManager = CookieSyncManager.createInstance(context)
+        cookieSyncManager.startSync()
+        val cookieManager: CookieManager = CookieManager.getInstance()
+        cookieManager.removeAllCookie()
+        cookieManager.removeSessionCookie()
+        cookieSyncManager.stopSync()
+        cookieSyncManager.sync()
+    }
+}
 
 
