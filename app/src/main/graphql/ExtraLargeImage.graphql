@@ -1,8 +1,20 @@
 query  GetImage($id:Int) {
     Media(id:$id){
         title {
+            native
+            romaji
+            english
              userPreferred
         }
+        popularity
+        meanScore
+
+        averageScore
+        favourites
+        rankings {
+           rank
+        }
+
         coverImage {
             large
             medium

@@ -102,6 +102,11 @@ class LoginScreen : Fragment() {
                                         Anilist.token3 =
                                             accessToken
 
+                                        model.loadProfile() {
+                                            saveData("user3Image", Anilist.avatar)
+                                            saveData("user3Id", Anilist.userid)
+                                            saveData("user3Name", Anilist.username)
+                                        }
                                     }
                                 }
 

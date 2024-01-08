@@ -39,7 +39,6 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
             when (selectedAccountCount) {
                 1 -> {
                     binding.addAccountContainer.visible()
-
                     model.getGenresAndTags(requireActivity())
                     model.loadProfile() {
                         devName1.text = Anilist.username
@@ -53,7 +52,6 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
                     binding.accountContainer.visible()
                     devName1.text = readData("userName") ?: "Account Name"
                     devProfile1.loadImage(readData("userImage") ?: "")
-
                     //Account 2
                     binding.accountContainer2.visible()
                     binding.accountContainer3.gone()
@@ -77,27 +75,19 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
                 }
                 3 -> {
                     binding.addAccountContainer.gone()
-                    model.getSavedTokenByType(requireActivity(), 1)
-                    model.loadProfile() {
-                        binding.accountContainer.visible()
-                        devName1.text = Anilist.username
-                        devProfile1.loadImage(Anilist.avatar)
-                    }
 
-                    model.getSavedTokenByType(requireActivity(), 2)
-                    model.loadProfile() {
-                        binding.accountContainer2.visible()
-                        devName2.text = Anilist.username
-                        devProfile2.loadImage(Anilist.avatar)
-                    }
+                    devName1.text = readData("userName") ?: "Account Name"
+                    devProfile1.loadImage(readData("userImage") ?: "")
+                    //Account 2
+                    binding.accountContainer2.visible()
+                    binding.accountContainer3.gone()
+                    devName2.text = readData("user2Name") ?: "Account 2 Name"
+                    devProfile2.loadImage(readData("user2Image") ?: "")
 
-                    model.getSavedTokenByType(requireActivity(), 3)
-                    model.loadProfile() {
-                        binding.accountContainer3.visible()
-                        devName3.text = Anilist.username
-                        devProfile3.loadImage(Anilist.avatar)
-                    }
-                    model.getGenresAndTags(requireActivity())
+                    binding.accountContainer3.visible()
+                    devName3.text = readData("user3Name") ?: "Account 3 Name"
+                    devProfile3.loadImage(readData("user3Image") ?: "")
+
                     when (selectedAccount) {
                         1 -> {
                             selected1.visible()

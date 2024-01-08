@@ -131,9 +131,15 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                     binding.itemCompactTotal.text = "1"
                 }
 
-                binding.mainData.text = "${it.anime!!.seasonYear ?: "??"} · ${it.genres.get(0)}  ${
-                    if (it.genres.size != 1) "/" + it.genres.get(1) else ""
-                } · ${it.format}"
+                if (it.genres.isNotEmpty()){
+                    binding.mainData.text = "${it.anime!!.seasonYear ?: "??"} · ${it.genres.get(0)}  ${
+                        if (it.genres.size != 1) "/" + it.genres.get(1) else ""
+                    } · ${it.format}"
+
+                }else{
+                    binding.mainData.text = "${it.anime!!.seasonYear ?: "??"} · ${it.format}"
+
+                }
 
 
                 val desc = HtmlCompat.fromHtml(

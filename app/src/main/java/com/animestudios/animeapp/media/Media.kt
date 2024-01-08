@@ -11,6 +11,8 @@ data class Media(
 
     var idMAL: Int? = null,
     var typeMAL: String? = null,
+    var nativeName: String? = null,
+    var englishName: String? = null,
 
     val name: String?,
     val nameRomaji: String,
@@ -64,7 +66,9 @@ data class Media(
     var nameMAL: String? = null,
     var shareLink: String? = null,
     var selected: Selected? = null,
-
+    val averageScore: Int = 0,
+    val trending: Int = 0,
+    val favourites: Int = 0,
     var cameFromContinue: Boolean = false
 ) : Serializable {
 

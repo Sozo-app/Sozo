@@ -105,6 +105,6 @@ class NotificationWorker @AssistedInject constructor(
     companion object {
         private const val TAG = "NotificationWorker"
         private const val CHANNEL_ID = "SOZO_NOTIFICATIONS_CHANNEL_ID"
-        private const val NOTIFICATION_ID = 0x1
+        private const val NOTIFICATION_ID = 0x21
     }
 }

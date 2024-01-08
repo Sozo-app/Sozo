@@ -68,7 +68,15 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
                     val color = data.data?.Media?.coverImage?.color
                     println(color)
                     println(extraLarge)
-                    val newMedia = it.copy(extraLarge = extraLarge)
+                    val newMedia = it.copy(
+                        nativeName = data.data!!.Media!!.title!!.native ?: "",
+                        englishName = data.data!!.Media!!.title?.english ?: "",
+                        extraLarge = extraLarge,
+                        averageScore = data.data!!.Media!!.averageScore ?: 0,
+                        popularity = data.data!!.Media!!.popularity ?: 0,
+                        meanScore = data.data!!.Media!!.meanScore ?: 0,
+                        favourites = data.data!!.Media!!.favourites ?: 0
+                    )
                     println(newMedia.extraLarge)
                     media.postValue(newMedia)
                 }
@@ -81,7 +89,7 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
         media.postValue(m)
     }
 
-    fun toggleFavorite(id:Int){
+    fun toggleFavorite(id: Int) {
         viewModelScope.launch {
             aniListClient.toggleFavorite(id)
         }
