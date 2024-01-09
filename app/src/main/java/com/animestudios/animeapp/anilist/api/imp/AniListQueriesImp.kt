@@ -633,6 +633,9 @@ Page(page:$page,perPage:50) {
         Anilist.avatar = user.avatar?.medium
         Anilist.episodesWatched = user.statistics?.anime?.episodesWatched
         Anilist.adult = user.options?.displayAdultContent ?: false
+        Log.d("TAG", "loadProfile: ${user.id}")
+        Log.d("TAG", "loadToke: ${Anilist.token}")
+        Log.d("TAG", "loadToke: ${Anilist.token2}")
         return true
     }
 

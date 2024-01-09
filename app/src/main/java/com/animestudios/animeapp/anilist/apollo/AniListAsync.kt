@@ -1,9 +1,6 @@
 package com.animestudios.animeapp.anilist.apollo
 
-import com.animestudios.animeapp.GetImageQuery
-import com.animestudios.animeapp.NotificationsQuery
-import com.animestudios.animeapp.ToggleFavouriteMutation
-import com.animestudios.animeapp.UnreadNotificationCountQuery
+import com.animestudios.animeapp.*
 import com.apollographql.apollo3.api.ApolloResponse
 
 interface AniListAsync {
@@ -11,5 +8,14 @@ interface AniListAsync {
     suspend fun getNotificationsUnreadCount():ApolloResponse<UnreadNotificationCountQuery.Data>
     suspend fun getExtraLargeImage(id:Int):ApolloResponse<GetImageQuery.Data>
     suspend fun toggleFavorite(animeId:Int):ApolloResponse<ToggleFavouriteMutation.Data>
+    suspend fun getUserDataById(userId:Int):ApolloResponse<UserQuery.Data>
+    suspend fun sendMessage(
+        recipientId: Int,
+        message: String,
+        parentId: Int?
+    ): ApolloResponse<SendMessageMutation.Data>
+
+    suspend fun getMessages(recipientId: Int): ApolloResponse<GetMessagesQuery.Data>
+
 
 }

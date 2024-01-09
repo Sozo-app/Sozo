@@ -21,6 +21,7 @@ class AniListRepositoryImp() : AniListRepository {
             emit(Result.success(response))
     }.flowOn(Dispatchers.IO)
 
+
     override fun getPopularBanner(
         i: Int
     ) = flow<Result<SearchResults>> {

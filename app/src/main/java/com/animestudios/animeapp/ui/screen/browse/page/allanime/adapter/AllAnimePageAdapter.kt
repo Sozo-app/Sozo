@@ -36,6 +36,7 @@ class AllAnimePageAdapter(
         }
         fun onBind(media: Media) {
             binding.apply {
+                titleItem.isSelected=true
                 setAnimation(activity, binding.root, uiSettings)
                 itemImg.loadImage(media!!.cover)
 //                binding.itemCompactScore.text = ((if (media.userScore == 0) (media.meanScore

@@ -11,3 +11,5 @@ fun Context.getAttrValue(attrResId: Int): Int {
     theme.resolveAttribute(attrResId, typedValue, true)
     return typedValue.data
 }
+
+fun Int?.or1() = this ?: 1
