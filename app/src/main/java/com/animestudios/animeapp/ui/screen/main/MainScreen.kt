@@ -13,6 +13,7 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.MainScreenBinding
@@ -163,6 +164,12 @@ class MainScreen : Fragment() {
                 AccountBottomSheetDialog(this).show(parentFragmentManager, "dialog")
                 true
             }
+            menuView.getChildAt(0).setOnLongClickListener {
+                println("Home  Bosildi")
+                findNavController().navigate(R.id.messageScreen)
+                true
+            }
+
         }
     }
 

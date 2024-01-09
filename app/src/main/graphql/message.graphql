@@ -152,3 +152,65 @@ query UserQuery($id: Int) {
         siteUrl
     }
 }
+
+mutation SaveMessageActivityMutation($id:Int, $recipientId:Int, $message:String, $private:Boolean) {
+    SaveMessageActivity(id:$id, recipientId:$recipientId, message:$message, private:$private) {
+        ... onMessageActivity
+    }
+}
+fragment onMessageActivity on MessageActivity {
+    id
+    recipientId
+    messengerId
+    type
+    replyCount
+    message(asHtml:false)
+    isLocked
+    isSubscribed
+    likeCount
+    isLiked
+    isPrivate
+    siteUrl
+    createdAt
+    recipient {
+        ... activityUser
+    }
+    messenger {
+        ... activityUser
+    }
+    replies {
+        ... activityReply
+    }
+    likes {
+        ... activityUser
+    }
+}
+
+fragment activityReply on ActivityReply {
+    id
+    userId
+    activityId
+    text(asHtml:false)
+    likeCount
+    isLiked
+    createdAt
+    user {
+        ... activityUser
+    }
+    likes {
+        ... activityUser
+    }
+}
+fragment activityUser on User {
+    id
+    name
+    avatar {
+        large
+        medium
+    }
+    isFollowing
+    isFollower
+    donatorTier
+    donatorBadge
+    moderatorRoles
+}

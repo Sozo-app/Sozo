@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/messageRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/messageInputLayout"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_sender_message"
         tools:visibility="visible" />
 
@@ -17,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:padding="8dp">
 
@@ -24,21 +27,22 @@
             android:id="@+id/messageInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
             android:layout_weight="1"
             android:hint="Type a message"
             android:inputType="textMultiLine"
-            android:maxLines="4" />
+            android:maxLines="4"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <ImageButton
             android:id="@+id/sendMessageButton"
             android:layout_width="wrap_content"
-            android:padding="10dp"
-            android:layout_marginStart="@dimen/dp_10"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+
+            android:layout_marginStart="10dp"
             android:background="@drawable/send_button_background"
+            android:padding="10dp"
             android:src="@drawable/ic_send" />
 
     </LinearLayout>

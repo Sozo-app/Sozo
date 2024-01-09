@@ -29,6 +29,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right_out" />
+        <action
+            android:id="@+id/action_mainScreen_to_messageScreen"
+            app:destination="@id/messageScreen" />
 
     </fragment>
     <fragment
@@ -54,4 +57,8 @@
         android:name="com.animestudios.animeapp.ui.screen.login.LoginScreen"
         android:label="LoginScreen"
         tools:layout="@layout/login_screen" />
+    <fragment
+        android:id="@+id/messageScreen"
+        android:name="com.animestudios.animeapp.ui.screen.message.MessageScreen"
+        android:label="MessageScreen" />
 </navigation>

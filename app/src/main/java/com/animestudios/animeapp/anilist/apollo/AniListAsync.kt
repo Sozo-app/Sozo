@@ -13,7 +13,7 @@ interface AniListAsync {
         recipientId: Int,
         message: String,
         parentId: Int?
-    ): ApolloResponse<SendMessageMutation.Data>
+    ): ApolloResponse<SaveMessageActivityMutation.Data>
 
     suspend fun getMessages(recipientId: Int): ApolloResponse<GetMessagesQuery.Data>
 

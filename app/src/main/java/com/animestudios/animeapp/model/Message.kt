@@ -14,6 +14,7 @@ data class Message(
     val parentId: Int? = null, // Add parentId field
     val replies: List<Reply> = listOf()
 ) {
+
     fun convertUnixTimeToFormattedTime(): String {
         val date = Date(createdAt * 1000L)
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())

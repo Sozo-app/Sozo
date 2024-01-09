@@ -55,6 +55,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
     packagingOptions {
         exclude 'AndroidManifest.xml'
@@ -146,19 +147,11 @@ dependencies {
     implementation 'com.github.brahmkshatriya:NiceHttp:1.1.0'
     implementation 'com.github.SabriGhazali:Shadout-Android:1.0.2'
     implementation 'androidx.browser:browser:1.5.0'
-    implementation 'com.google.code.gson:gson:2.10.1'
-
-    //Sneaker
     implementation 'com.irozon.sneaker:sneaker:2.0.0'
-
-    //PowerMenu
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation "com.github.skydoves:powermenu:2.2.4"
-
-    //ImageViewer
     implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.27'
-
-    //OverlapImageListView
     implementation 'com.github.zend10:OverlapImageListView:v1.0.1'
 
 
@@ -173,7 +166,6 @@ dependencies {
     implementation "androidx.media3:media3-session:$exo_version"
 
 
-    //Apollo
     def apolloVersion = '3.7.0'
     implementation "com.apollographql.apollo3:apollo-runtime:$apolloVersion"
 
@@ -200,7 +192,13 @@ dependencies {
     implementation "io.coil-kt:coil:$coil_version"
     implementation "io.coil-kt:coil-gif:$coil_version"
     implementation "io.coil-kt:coil-svg:$coil_version"
-    def avatarView = '1.0.6'
-    implementation "io.getstream:avatarview-coil:$avatarView"
+
+    //Epoxy
+    def epoxyVersion = "5.1.1"
+    implementation "com.airbnb.android:epoxy:$epoxyVersion"
+    implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
+    implementation "com.airbnb.android:epoxy-paging3:$epoxyVersion"
+    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
+
 
 }

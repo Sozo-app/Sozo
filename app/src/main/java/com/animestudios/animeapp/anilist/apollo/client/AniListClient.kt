@@ -34,7 +34,7 @@ class AniListClient @Inject constructor(
             recipientId,
             message,
             Optional.presentIfNotNull(parentId),
-            parentId != null
+            false
         )
         return apolloClient.mutation(sendMessageMutation).execute()
     }
