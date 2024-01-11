@@ -1,0 +1,27 @@
+query Review {
+
+    Page(perPage:50,page:1){
+        reviews(sort: RATING_DESC){
+            id
+            userId
+            mediaId
+            mediaType
+            summary
+            body,
+            rating,
+            ratingAmount
+            score,
+            user {
+                id
+                name
+                avatar {
+                    large,medium
+                }
+            }
+            media {
+                ...HomeMedia
+            }
+
+        }
+    }
+}

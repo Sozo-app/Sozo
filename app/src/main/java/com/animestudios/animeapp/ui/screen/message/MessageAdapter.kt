@@ -11,6 +11,7 @@ import com.animestudios.animeapp.databinding.ItemSenderMessageBinding
 import com.animestudios.animeapp.loadImage
 import com.animestudios.animeapp.model.Message
 import com.animestudios.animeapp.tools.BaseViewHolder
+import com.animestudios.animeapp.ui.screen.anime.AnimePageAdapter
 
 
 ///Add MEssage Screen
@@ -34,7 +35,6 @@ class MessageAdapter(
                 messageTimeTextView.text = item.convertUnixTimeToFormattedTime()
                 avatarImageView.loadImage(item.recipient.avatarMedium)
                 usernameTextView.text = item.recipient.name
-
             }
         }
     }

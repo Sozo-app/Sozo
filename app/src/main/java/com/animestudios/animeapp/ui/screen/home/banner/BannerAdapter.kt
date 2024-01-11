@@ -1,7 +1,6 @@
 package com.animestudios.animeapp.ui.screen.home.banner
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -33,7 +32,7 @@ class BannerAdapter(
 
     @SuppressLint("ClickableViewAccessibility")
     inner class MediaPageSmallViewHolder(val binding: BannerItemBinding) :
-           RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnTouchListener { _, _ -> true }
         }
@@ -64,7 +63,7 @@ class BannerAdapter(
             val banner =
                 if (uiSettings.layoutAnimations) b.itemCompactBanner else b.itemCompactBannerNoKen
             val context = b.itemCompactBanner.context
-            if (!(context as Activity).isDestroyed)
+            if (!(activity).isDestroyed)
                 Glide.with(context as Context)
                     .load(GlideUrl(media.banner ?: media.cover))
                     .diskCacheStrategy(DiskCacheStrategy.ALL).override(400)
@@ -82,22 +81,22 @@ class BannerAdapter(
                 }
             }
             var genresL = ""
-                media.genres.apply {
-                    var count = 0
-                    if (isNotEmpty()) {
-                        forEach {
-                            if (count <= 2) {
+            media.genres.apply {
+                var count = 0
+                if (isNotEmpty()) {
+                    forEach {
+                        if (count <= 2) {
 
 
-                                count++
-                                genresL += "$it • "
-                            }
+                            count++
+                            genresL += "$it • "
                         }
-                        genresL = genresL.removeSuffix(" • ")
                     }
+                    genresL = genresL.removeSuffix(" • ")
+                }
 
-                    val genres =
-                        "${media.anime?.totalEpisodes} Episodes\n${genresL} "
+                val genres =
+                    "${media.anime?.totalEpisodes} Episodes\n${genresL} "
                 b.itemDescription.text = genres
             }
             @SuppressLint("NotifyDataSetChanged")

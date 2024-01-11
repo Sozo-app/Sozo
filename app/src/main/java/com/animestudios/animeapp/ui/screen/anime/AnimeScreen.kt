@@ -20,11 +20,12 @@ import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.statusBarHeight
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 import com.animestudios.animeapp.viewmodel.imp.AniListViewModelImp
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.min
 
+@AndroidEntryPoint
 class AnimeScreen : Fragment() {
     private var _binding: AnimeScreenBinding? = null
     private val binding get() = _binding!!
@@ -105,10 +106,14 @@ class AnimeScreen : Fragment() {
                         animePageAdapter.updateRecently(it)
                     }
                 }
+                model.getReview.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        animePageAdapter.updateReview(it)
+                    }
+                }
             }
         }
     }
-
 
 
     @SuppressLint("NewApi")

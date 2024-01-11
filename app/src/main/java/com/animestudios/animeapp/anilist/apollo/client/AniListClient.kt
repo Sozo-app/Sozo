@@ -43,4 +43,9 @@ class AniListClient @Inject constructor(
         GetMessagesQuery(recipientId)
     ).execute()
 
+    override suspend fun getReview(perPage: Int, page: Int): ApolloResponse<ReviewQuery.Data> =apolloClient.query(
+        ReviewQuery(
+        )
+    ).execute()
+
 }

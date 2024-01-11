@@ -2,10 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="380dp"
+    android:layout_width="300dp"
     android:layout_height="190dp"
+    android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="4dp"
-    android:layout_marginHorizontal="12dp"
     app:cardCornerRadius="18dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,15 +24,27 @@
             android:layout_height="match_parent"
             android:src="@drawable/gradient_back" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView2"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/photoCard"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="12dp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/img" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="mediaCover"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                app:srcCompat="@drawable/profile_photo" />
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/title"
@@ -42,9 +54,9 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Zax_69"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView2"
-            app:layout_constraintStart_toEndOf="@+id/circleImageView2"
-            app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/photoCard"
+            app:layout_constraintStart_toEndOf="@+id/photoCard"
+            app:layout_constraintTop_toTopOf="@+id/photoCard" />
 
         <RatingBar
             android:id="@+id/ratingReview"
@@ -56,13 +68,13 @@
             android:numStars="5"
             android:progressBackgroundTint="#FFFFFF"
             android:progressTint="#FFD028"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/photoCard"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/circleImageView2"
+            app:layout_constraintTop_toTopOf="@+id/photoCard"
             tools:rating="4.5" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -74,8 +86,8 @@
             android:text="Attack on Titan has definately got some thing in it that's why you r reading this and other reviews enlisted here...,but believe me or not u just can't judge it without watching it."
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/circleImageView2"
-            app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
+            app:layout_constraintStart_toStartOf="@+id/photoCard"
+            app:layout_constraintTop_toBottomOf="@+id/photoCard" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"
@@ -86,7 +98,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView6">
+            app:layout_constraintStart_toStartOf="@+id/description">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemCompactImage"
@@ -99,6 +111,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/animeTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

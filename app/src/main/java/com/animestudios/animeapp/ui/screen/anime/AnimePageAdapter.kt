@@ -16,7 +16,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.AnimePageItemBinding
 import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.model.Review
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.slideStart
 import com.animestudios.animeapp.tools.slideUp
 import com.animestudios.animeapp.ui.activity.DetailActivity
@@ -135,6 +137,32 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 binding.onlOnYouRecyclerView.layoutAnimation =
                     LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
                 binding.forYouTxt.slideStart(700, 0)
+            }
+        }
+    }
+
+    fun updateReview(it: Resource<List<Review>>) {
+        when (it) {
+            is Resource.Loading -> {
+                println("Loading")
+            }
+            is Resource.Success -> {
+                val uiSettings =
+                    readData<UISettings>("ui_settings") ?: UISettings()
+                val reviewAdapter =
+                    ReviewAdapter(it.data!!, activity = fragmentAdapter.requireActivity())
+                binding.reviewTxt.visible()
+                binding.reviewRecyclerview.adapter = reviewAdapter
+                if (uiSettings!!.layoutAnimations) {
+                    binding.reviewRecyclerview.layoutAnimation =
+                        LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
+                    binding.reviewTxt.slideStart(700, 0)
+                }
+
+                println("Success")
+            }
+            is Resource.Error -> {
+                println("Error")
             }
         }
     }

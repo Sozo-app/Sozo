@@ -179,15 +179,16 @@
             android:text="Reviews"
             android:textSize="22sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@id/forYouTxt"
-            app:layout_constraintTop_toBottomOf="@id/onlOnYouRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@id/onlOnYouRecyclerView"
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reviewRecyclerview"
             android:layout_width="0dp"
             android:layout_height="220dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:requiresFadingEdge="horizontal"
@@ -197,7 +198,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/reviewTxt"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/anime_hd_item" />
+            tools:listitem="@layout/review_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

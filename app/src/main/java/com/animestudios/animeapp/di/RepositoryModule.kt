@@ -1,9 +1,9 @@
 package com.animestudios.animeapp.di
 
-import com.animestudios.animeapp.anilist.repo.AniListRepository
 import com.animestudios.animeapp.anilist.repo.NotificationRepository
-import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
+import com.animestudios.animeapp.anilist.repo.ReviewRepository
 import com.animestudios.animeapp.anilist.repo.imp.NotificationRepositoryImp
+import com.animestudios.animeapp.anilist.repo.imp.ReviewRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,5 +16,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 abstract class RepositoryModule {
     @Binds
     abstract fun bindFavoritesRepository(repository: NotificationRepositoryImp): NotificationRepository
+
+    @Binds
+    abstract fun bindReviewRepository(repository: ReviewRepositoryImpl): ReviewRepository
+
 
 }
