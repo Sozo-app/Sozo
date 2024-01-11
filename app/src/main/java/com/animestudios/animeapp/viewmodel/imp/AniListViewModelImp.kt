@@ -128,6 +128,7 @@ class AniListViewModelImp @Inject constructor(private val repositoryImpl: Review
         viewModelScope.launch(Dispatchers.IO) {
             if (!isLoaded) {
                 isLoaded = true
+                println("Wow")
                 getReview.postValue(Resource.Loading)
                 repositoryImpl.getReview(50, 1)
                     .onEach {

@@ -61,6 +61,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
         val uiSettings =
             readData<UISettings>("ui_settings") ?: UISettings()
 
+
         adapter.submitLit(list.toMutableList())
         adapter.setItemClickListener {
 
