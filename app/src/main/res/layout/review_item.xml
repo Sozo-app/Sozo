@@ -48,9 +48,11 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:selectable="true"
+            android:ellipsize="marquee"
             android:fontFamily="@font/poppins_bold"
             android:text="Zax_69"
             android:textSize="14sp"
@@ -78,7 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="44dp"
             android:ellipsize="end"
             android:fontFamily="@font/poppins_semi_bold"
             android:includeFontPadding="false"
@@ -91,8 +93,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:translationZ="8dp"
             app:cardCornerRadius="8dp"
