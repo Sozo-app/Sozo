@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="380dp"
+    android:layout_height="190dp"
+    android:layout_marginVertical="4dp"
+    android:layout_marginHorizontal="12dp"
+    app:cardCornerRadius="18dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bannerGradient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/banner_img" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/gradient_back" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Zax_69"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView2"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView2"
+            app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
+
+        <RatingBar
+            android:id="@+id/ratingReview"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="10dp"
+            android:numStars="5"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FFD028"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/circleImageView2"
+            tools:rating="4.5" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:includeFontPadding="false"
+            android:maxLines="4"
+            android:text="Attack on Titan has definately got some thing in it that's why you r reading this and other reviews enlisted here...,but believe me or not u just can't judge it without watching it."
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/circleImageView2"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:translationZ="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView6">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/itemCompactImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="mediaCover"
+                tools:ignore="ContentDescription,ImageContrastCheck"
+                tools:srcCompat="@drawable/anime_img" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="One Pioece"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView5"
+            app:layout_constraintStart_toEndOf="@+id/cardView5"
+            app:layout_constraintTop_toTopOf="@+id/cardView5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
