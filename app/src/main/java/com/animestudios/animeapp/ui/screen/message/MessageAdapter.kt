@@ -12,6 +12,8 @@ import com.animestudios.animeapp.loadImage
 import com.animestudios.animeapp.model.Message
 import com.animestudios.animeapp.tools.BaseViewHolder
 
+
+///Add MEssage Screen
 class MessageAdapter(
     private val activity: FragmentActivity,
     private val matchParent: Boolean = false,
