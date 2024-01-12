@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.ReviewItemBinding
-import com.animestudios.animeapp.loadImage
 import com.animestudios.animeapp.model.Review
-import com.animestudios.animeapp.readData
-import com.animestudios.animeapp.setAnimation
-import com.animestudios.animeapp.setSlideIn
 import com.animestudios.animeapp.settings.UISettings
 
 class ReviewAdapter(private val list: List<Review>, private val activity: FragmentActivity) :
@@ -22,7 +19,9 @@ class ReviewAdapter(private val list: List<Review>, private val activity: Fragme
                 if (uiSettings.layoutAnimations) {
                     setAnimation(activity, binding.root, uiSettings)
                     binding.title.animation = setSlideIn(uiSettings)
-                    binding.profilePhoto.animation = setSlideIn(uiSettings)
+                    binding.animeTxt.animation = setSlideIn(uiSettings)
+                    binding.profilePhoto.animation = setSlideUp(uiSettings)
+                    binding.itemCompactImage.animation = setSlideUp(uiSettings)
                 }
                 title.text = data.user.name
                 animeTxt.text = data.aniListMedia.title.userPreferred

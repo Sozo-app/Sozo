@@ -176,8 +176,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 binding.reviewTxt.visible()
                 binding.reviewRecyclerview.adapter = reviewAdapter
                 if (uiSettings!!.layoutAnimations) {
-                    binding.reviewRecyclerview.layoutAnimation =
-                        LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
+                    binding.reviewRecyclerview.layoutAnimation = LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
                     binding.reviewTxt.slideStart(700, 0)
                 }
                 val chipGroup: ChipGroup = binding.chipGroup
@@ -186,6 +185,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                     for (data in chipData) {
                         val chip = Chip(binding.root.context)
                         chip.text = data.title
+                        chip.chipCornerRadius = 50f
                         chip.isCheckable = true
                         chipGroup.addView(chip)
                     }
@@ -195,7 +195,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 chipGroup.setOnCheckedChangeListener { group, checkedId ->
                     val selectedChip = group.findViewById<Chip>(checkedId)
                     val reviewSort =
-                        chipData[group.indexOfChild(selectedChip) ].value // is this correct? /** thanks this is correct **/
+                        chipData[group.indexOfChild(selectedChip)].value // is this correct? /** thanks this is correct **/
                     selectedChipListener.invoke(reviewSort)
 
                 }

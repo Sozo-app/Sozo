@@ -191,7 +191,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:clipToPadding="false"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:requiresFadingEdge="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

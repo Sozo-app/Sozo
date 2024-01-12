@@ -2,10 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="190dp"
     android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="2dp"
+    android:layout_marginVertical="4dp"
     app:cardCornerRadius="18dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
                 android:scaleType="centerCrop"
                 android:transitionName="mediaCover"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
-                app:srcCompat="@drawable/profile_photo" />
+                tools:srcCompat="@drawable/profile_photo" />
 
         </androidx.cardview.widget.CardView>
 
@@ -53,8 +53,8 @@
             android:layout_marginStart="16dp"
             android:ellipsize="marquee"
             android:fontFamily="@font/poppins_bold"
-            android:selectable="true"
             android:maxLines="1"
+            android:selectable="true"
             android:text="Zax_69"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/photoCard"
