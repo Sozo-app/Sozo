@@ -10,6 +10,7 @@ import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.model.Review
 import com.animestudios.animeapp.tools.Resource
+import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.viewmodel.AniListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -119,18 +120,18 @@ class AniListViewModelImp @Inject constructor(private val repositoryImpl: Review
                     recentlyTrendList.postValue(it)
                 }
             }.launchIn(viewModelScope)
-            loadReview()
+            loadReview(reviewSort = ReviewSort.RATING)
 
         }
     }
 
-    override fun loadReview() {
+    override fun loadReview(reviewSort: ReviewSort) {
         viewModelScope.launch(Dispatchers.IO) {
             if (!isLoaded) {
                 isLoaded = true
                 println("Wow")
                 getReview.postValue(Resource.Loading)
-                repositoryImpl.getReview(50, 1)
+                repositoryImpl.getReview(reviewSort)
                     .onEach {
                         getReview.postValue(Resource.Success(it))
                         loadedList.clear()

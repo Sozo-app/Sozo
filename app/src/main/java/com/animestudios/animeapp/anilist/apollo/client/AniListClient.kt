@@ -2,6 +2,7 @@ package com.animestudios.animeapp.anilist.apollo.client
 
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.apollo.AniListAsync
+import com.animestudios.animeapp.type.ReviewSort
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.apollographql.apollo3.api.Optional
@@ -43,9 +44,11 @@ class AniListClient @Inject constructor(
         GetMessagesQuery(recipientId)
     ).execute()
 
-    override suspend fun getReview(perPage: Int, page: Int): ApolloResponse<ReviewQuery.Data> =apolloClient.query(
-        ReviewQuery(
-        )
-    ).execute()
+    override suspend fun getReview(reviewSort: ReviewSort): ApolloResponse<ReviewQuery.Data> =
+        apolloClient.query(
+            ReviewQuery(
+                Optional.present(listOf(reviewSort))
+            )
+        ).execute()
 
 }

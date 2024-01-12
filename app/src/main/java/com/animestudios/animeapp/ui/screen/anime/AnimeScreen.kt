@@ -111,6 +111,10 @@ class AnimeScreen : Fragment() {
                         animePageAdapter.updateReview(it)
                     }
                 }
+
+                animePageAdapter.setSelectedChipListener {
+                    model.loadReview(it)
+                }
             }
         }
     }

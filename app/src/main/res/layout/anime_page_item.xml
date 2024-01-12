@@ -189,19 +189,51 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:clipToPadding="false"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="10dp"
+            android:clipToPadding="false"
             android:orientation="horizontal"
             android:requiresFadingEdge="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/reviewTxt"
+            app:layout_constraintTop_toBottomOf="@id/sortGroup"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/review_item" />
 
+
+        <ProgressBar
+            android:id="@+id/reviewProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/reviewRecyclerview"
+            tools:visibility="visible" />
+
+        <HorizontalScrollView
+            android:id="@+id/sortGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="@id/reviewTxt"
+            app:layout_constraintTop_toBottomOf="@+id/reviewTxt">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true">
+                <!-- Chips will be added programmatically -->
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

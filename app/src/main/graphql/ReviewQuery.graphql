@@ -1,7 +1,7 @@
-query Review {
+query Review ($reviewSort:[ReviewSort]){
 
     Page(perPage:50,page:1){
-        reviews(sort: RATING_DESC){
+        reviews(sort: $reviewSort){
             id
             userId
             mediaId

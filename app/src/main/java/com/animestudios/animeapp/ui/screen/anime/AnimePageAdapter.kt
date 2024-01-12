@@ -18,11 +18,15 @@ import com.animestudios.animeapp.databinding.AnimePageItemBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.model.Review
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.tools.EnumItem
 import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.slideStart
 import com.animestudios.animeapp.tools.slideUp
+import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class AnimePageAdapter(private val fragmentAdapter: Fragment) :
     RecyclerView.Adapter<AnimePageAdapter.AnimePageVh>() {
@@ -34,6 +38,12 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             fragmentAdapter.requireActivity()
         )
     }
+    private lateinit var selectedChipListener: (ReviewSort) -> Unit
+
+    fun setSelectedChipListener(listener: (ReviewSort) -> Unit) {
+        selectedChipListener = listener
+    }
+
     var height = statusBarHeight
     val ready = MutableLiveData(false)
     lateinit var binding: AnimePageItemBinding
@@ -143,11 +153,16 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
     }
 
     fun updateReview(it: Resource<List<Review>>) {
+
         when (it) {
             is Resource.Loading -> {
+                binding.reviewRecyclerview.invisible()
+                binding.reviewProgressBar.visible()
                 println("Loading")
             }
             is Resource.Success -> {
+                binding.reviewRecyclerview.visible()
+                binding.reviewProgressBar.gone()
                 val uiSettings =
                     readData<UISettings>("ui_settings") ?: UISettings()
                 val reviewAdapter =
@@ -159,11 +174,34 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                         LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
                     binding.reviewTxt.slideStart(700, 0)
                 }
+                val chipGroup: ChipGroup = binding.chipGroup
+                val chipData = listOf(
+                    EnumItem("Top Score", ReviewSort.SCORE),
+                    EnumItem("Created at", ReviewSort.CREATED_AT),
+                    EnumItem("Updated at", ReviewSort.UPDATED_AT),
+                    EnumItem("Rating Desc", ReviewSort.RATING_DESC),
+                )
+                for (data in chipData) {
+                    val chip = Chip(binding.root.context)
+                    chip.text = data.title
+                    chip.isCheckable = true
+                    chipGroup.addView(chip)
+                }
+                chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                    val selectedChip = group.findViewById<Chip>(checkedId)
+                    var reviewSort =
+                        chipData[group.indexOfChild(selectedChip)].value // is this correct? /** thanks this is correct **/
+                    selectedChipListener.invoke(reviewSort)
+
+                }
+
+
 
                 println("Success")
             }
             is Resource.Error -> {
-                println("Error")
+                binding.reviewRecyclerview.visible()
+                binding.reviewProgressBar.gone()
             }
         }
     }

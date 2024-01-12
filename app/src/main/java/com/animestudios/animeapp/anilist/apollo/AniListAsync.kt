@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.anilist.apollo
 
 import com.animestudios.animeapp.*
+import com.animestudios.animeapp.type.ReviewSort
 import com.apollographql.apollo3.api.ApolloResponse
 
 interface AniListAsync {
@@ -17,6 +18,6 @@ interface AniListAsync {
 
     suspend fun getMessages(recipientId: Int): ApolloResponse<GetMessagesQuery.Data>
 
-    suspend fun getReview(perPage: Int, page: Int): ApolloResponse<ReviewQuery.Data>
+    suspend fun getReview(reviewSort: ReviewSort): ApolloResponse<ReviewQuery.Data>
 
 }

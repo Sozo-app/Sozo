@@ -6,6 +6,7 @@ import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.model.Review
 import com.animestudios.animeapp.tools.Resource
+import com.animestudios.animeapp.type.ReviewSort
 
 interface AniListViewModel {
     val recentlyUpdatedList: MutableLiveData<MutableList<Media>>
@@ -20,6 +21,6 @@ interface AniListViewModel {
     fun loadHome()
     fun loadFullDataByMedia(media: Media)
     fun loadAnimeSection(i: Int)
-    fun loadReview()
+    fun loadReview(reviewSort: ReviewSort)
 
 }
