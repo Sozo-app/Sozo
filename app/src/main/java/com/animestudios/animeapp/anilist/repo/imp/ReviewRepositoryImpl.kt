@@ -12,10 +12,14 @@ class ReviewRepositoryImpl @Inject constructor(private val client: AniListClient
     ReviewRepository {
     override fun getReview(reviewSort: ReviewSort) = flow<List<Review>> {
         val reviewList = mutableListOf<Review>()
-        val response = client.getReview(reviewSort).data?.Page?.reviews
+        val response = client.getReview(reviewSort)
 
-        if (response != null) {
-            reviewList.addAll(response.map { it.convert() })
+        if (!response.hasErrors()) {
+            reviewList.addAll(response.data?.Page?.reviews!!.map { it.convert() })
+            emit(reviewList)
+        } else {
+            val response2 = client.getReview(reviewSort)
+            reviewList.addAll(response2.data?.Page?.reviews!!.map { it.convert() })
             emit(reviewList)
         }
 

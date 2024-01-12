@@ -19,7 +19,16 @@ query Review ($reviewSort:[ReviewSort]){
                 }
             }
             media {
-                ...HomeMedia
+                id
+                title {
+                    userPreferred
+                }
+                bannerImage
+                coverImage {
+                    large
+                    medium
+                }
+
             }
 
         }

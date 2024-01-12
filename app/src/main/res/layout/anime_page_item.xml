@@ -208,6 +208,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="4dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -215,13 +216,11 @@
             app:layout_constraintTop_toTopOf="@+id/reviewRecyclerview"
             tools:visibility="visible" />
 
-        <HorizontalScrollView
+        <LinearLayout
             android:id="@+id/sortGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            android:padding="16dp"
             app:layout_constraintStart_toStartOf="@id/reviewTxt"
             app:layout_constraintTop_toBottomOf="@+id/reviewTxt">
 
@@ -233,7 +232,7 @@
                 <!-- Chips will be added programmatically -->
             </com.google.android.material.chip.ChipGroup>
 
-        </HorizontalScrollView>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

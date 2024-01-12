@@ -161,6 +161,12 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 println("Loading")
             }
             is Resource.Success -> {
+                val chipData = listOf(
+                    EnumItem("Top", ReviewSort.SCORE),
+                    EnumItem("Created", ReviewSort.CREATED_AT),
+                    EnumItem("Updated", ReviewSort.UPDATED_AT),
+                    EnumItem("Rating", ReviewSort.RATING_DESC),
+                )
                 binding.reviewRecyclerview.visible()
                 binding.reviewProgressBar.gone()
                 val uiSettings =
@@ -175,22 +181,21 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                     binding.reviewTxt.slideStart(700, 0)
                 }
                 val chipGroup: ChipGroup = binding.chipGroup
-                val chipData = listOf(
-                    EnumItem("Top Score", ReviewSort.SCORE),
-                    EnumItem("Created at", ReviewSort.CREATED_AT),
-                    EnumItem("Updated at", ReviewSort.UPDATED_AT),
-                    EnumItem("Rating Desc", ReviewSort.RATING_DESC),
-                )
-                for (data in chipData) {
-                    val chip = Chip(binding.root.context)
-                    chip.text = data.title
-                    chip.isCheckable = true
-                    chipGroup.addView(chip)
+                if ((fragmentAdapter as AnimeScreen).isLoaded) {
+
+                    for (data in chipData) {
+                        val chip = Chip(binding.root.context)
+                        chip.text = data.title
+                        chip.isCheckable = true
+                        chipGroup.addView(chip)
+                    }
+                    fragmentAdapter.isLoaded = false
                 }
+
                 chipGroup.setOnCheckedChangeListener { group, checkedId ->
                     val selectedChip = group.findViewById<Chip>(checkedId)
-                    var reviewSort =
-                        chipData[group.indexOfChild(selectedChip)].value // is this correct? /** thanks this is correct **/
+                    val reviewSort =
+                        chipData[group.indexOfChild(selectedChip) ].value // is this correct? /** thanks this is correct **/
                     selectedChipListener.invoke(reviewSort)
 
                 }

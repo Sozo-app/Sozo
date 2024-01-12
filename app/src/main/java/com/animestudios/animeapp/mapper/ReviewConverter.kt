@@ -23,12 +23,12 @@ fun ReviewQuery.Review?.convert(): Review {
             )
         ),
         aniListMedia = AniListMedia(
-            idAniList = this?.media?.homeMedia?.id ?: 0,
-            title = MediaTitle(userPreferred = this?.media?.homeMedia?.title?.userPreferred.orEmpty()),
-            bannerImage = this?.media?.homeMedia?.bannerImage.orEmpty(),
+            idAniList = this?.media?.id ?: 0,
+            title = MediaTitle(userPreferred = this?.media?.title?.userPreferred.orEmpty()),
+            bannerImage = this?.media?.bannerImage.orEmpty(),
             coverImage = MediaCoverImage(
-                large = this?.media?.homeMedia?.coverImage?.large.orEmpty(),
-                medium = this?.media?.homeMedia?.coverImage?.medium.orEmpty()
+                large = this?.media?.coverImage?.large.orEmpty(),
+                medium = this?.media?.coverImage?.medium.orEmpty()
             )
         )
     )

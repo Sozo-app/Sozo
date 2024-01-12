@@ -14,7 +14,6 @@ import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.viewmodel.AniListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.zip
@@ -118,29 +117,20 @@ class AniListViewModelImp @Inject constructor(private val repositoryImpl: Review
             repository.forYouAnimeList().onEach {
                 it.onSuccess {
                     recentlyTrendList.postValue(it)
+                    loadReview(reviewSort = ReviewSort.RATING)
                 }
             }.launchIn(viewModelScope)
-            loadReview(reviewSort = ReviewSort.RATING)
 
         }
     }
 
     override fun loadReview(reviewSort: ReviewSort) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (!isLoaded) {
-                isLoaded = true
-                println("Wow")
-                getReview.postValue(Resource.Loading)
-                repositoryImpl.getReview(reviewSort)
-                    .onEach {
-                        getReview.postValue(Resource.Success(it))
-                        loadedList.clear()
-                        loadedList.addAll(it)
-                    }.launchIn(viewModelScope)
-            } else {
-                delay(1000)
-                getReview.postValue(Resource.Success(loadedList))
-            }
+            getReview.postValue(Resource.Loading)
+            repositoryImpl.getReview(reviewSort)
+                .onEach {
+                    getReview.postValue(Resource.Success(it))
+                }.launchIn(viewModelScope)
         }
     }
 

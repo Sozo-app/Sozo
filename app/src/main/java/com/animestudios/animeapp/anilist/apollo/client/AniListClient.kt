@@ -45,6 +45,8 @@ class AniListClient @Inject constructor(
     ).execute()
 
     override suspend fun getReview(reviewSort: ReviewSort): ApolloResponse<ReviewQuery.Data> =
+
+
         apolloClient.query(
             ReviewQuery(
                 Optional.present(listOf(reviewSort))

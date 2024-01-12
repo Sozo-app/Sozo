@@ -29,6 +29,7 @@ import kotlin.math.min
 class AnimeScreen : Fragment() {
     private var _binding: AnimeScreenBinding? = null
     private val binding get() = _binding!!
+    var isLoaded = true
     private val model by viewModels<AniListViewModelImp>()
     var height = statusBarHeight
     override fun onCreateView(
