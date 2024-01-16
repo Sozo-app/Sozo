@@ -16,6 +16,7 @@ import com.animestudios.animeapp.services.BatteryCheckService
 import com.animestudios.animeapp.services.receiver.BatteryReceiver
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
+import com.animestudios.animeapp.widget.ThemeManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -34,7 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+        ThemeManager(this).applyTheme()
+
         val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         val receiver = BatteryReceiver()
         registerReceiver(receiver, filter)

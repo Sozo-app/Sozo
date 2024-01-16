@@ -9,7 +9,7 @@
     android:layout_marginBottom="@dimen/marginSmall"
     app:cardElevation="0dp"
 
-    app:cardBackgroundColor="@color/violet_400"
+    app:cardBackgroundColor="?attr/colorSecondary"
     xmlns:tools="http://schemas.android.com/tools"
     app:contentPadding="@dimen/marginClose"
     app:rippleColor="@android:color/transparent">

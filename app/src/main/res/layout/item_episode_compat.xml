@@ -8,7 +8,7 @@
     android:layout_margin="6dp"
     android:backgroundTintMode="src_atop"
     android:longClickable="true"
-    app:cardBackgroundColor="@color/banner_bg"
+    app:cardBackgroundColor="?attr/colorOnSurface"
     app:cardCornerRadius="16dp">
 
     <View
@@ -35,7 +35,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:cardBackgroundColor="@color/nav_bg"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="16dp">
 
                 <ProgressBar
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="-10dp"
                     android:layout_marginTop="-18dp"
-                    app:cardBackgroundColor="@color/nav_bg"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="16dp">
 
                     <TextView
@@ -133,6 +133,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/itemEpisodeDesc"
             android:layout_width="match_parent"
@@ -161,8 +162,8 @@
         android:layout_gravity="end"
         android:layout_margin="8dp"
         android:visibility="gone"
-        tools:visibility="visible"
         app:srcCompat="@drawable/ic_round_remove_red_eye_24"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
 
 </androidx.cardview.widget.CardView>

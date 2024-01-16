@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:foreground="?selectableItemBackground"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="#B0171717"
+    android:foreground="?selectableItemBackground"
+    app:cardBackgroundColor="?attr/colorControlNormal"
 
     app:cardCornerRadius="15dp">
 
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:layout_marginVertical="1dp"
-            app:cardBackgroundColor="@color/banner_bg"
+            app:cardBackgroundColor="?attr/colorControlNormal"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:background="@drawable/item_number"
-                android:backgroundTint="#BFFFFFFF"
-                android:backgroundTintMode="multiply"
                 android:orientation="horizontal"
                 android:paddingStart="8dp"
                 android:paddingEnd="6dp">
@@ -92,9 +90,9 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="221dp"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
 
@@ -147,14 +145,14 @@
             android:layout_marginStart="4dp"
             android:fontFamily="@font/inter_bold"
             android:text="Play"
-            android:textColor="@color/bg_black"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="20sp"
 
             app:backgroundTint="@color/white"
             app:cornerRadius="10dp"
             app:icon="@drawable/play_banner"
             app:iconSize="25dp"
-            app:iconTint="@color/bg_black"
+            app:iconTint="?attr/colorOnBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/genreList"
             app:layout_constraintTop_toBottomOf="@id/genreList" />

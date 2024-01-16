@@ -2,14 +2,17 @@ package com.animestudios.animeapp.ui.screen.list
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class ListScreen : Fragment() {
     private var _binding: ListScreenBinding? = null
@@ -116,6 +120,24 @@ class ListScreen : Fragment() {
         values: List<ArrayList<Media>>
     ) {
         binding.imageView3.setOnClickListener {
+            val typedValue = TypedValue()
+            val theme: Resources.Theme = requireContext().theme
+            theme.resolveAttribute(
+                com.google.android.material.R.attr.colorOnPrimary,
+                typedValue,
+                true
+            )
+            @ColorInt val selectedcolor: Int = typedValue.data
+
+
+            val typedValueBg = TypedValue()
+            val themeBg: Resources.Theme = requireContext().theme
+            themeBg.resolveAttribute(
+                com.google.android.material.R.attr.colorSurface,
+                typedValueBg,
+                true
+            )
+            @ColorInt val bgColor: Int = typedValueBg.data
             val powerMenu = PowerMenu.Builder(requireContext()).addItemList(
                 mutableListOf(
                     PowerMenuItem(requireContext().getString(R.string.sort_by_score)),
@@ -131,8 +153,8 @@ class ListScreen : Fragment() {
                 .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
                 .setSelectedTextColor(Color.WHITE)
 
-                .setSelectedMenuColorResource(R.color.basic_color_500)
-                .setMenuColor(requireActivity().getColor(R.color.banner_bg)).build()
+                .setSelectedMenuColor(selectedcolor)
+                .setMenuColor(bgColor).build()
             powerMenu.selectedPosition = selectedPosition
             powerMenu.showAsAnchorLeftBottom(binding.imageView3)
 
@@ -161,6 +183,24 @@ class ListScreen : Fragment() {
 
         }
         binding.sort.setOnClickListener {
+            val typedValue = TypedValue()
+            val theme: Resources.Theme = requireContext().theme
+            theme.resolveAttribute(
+                com.google.android.material.R.attr.colorOnPrimary,
+                typedValue,
+                true
+            )
+            @ColorInt val selectedcolor: Int = typedValue.data
+
+
+            val typedValueBg = TypedValue()
+            val themeBg: Resources.Theme = requireContext().theme
+            themeBg.resolveAttribute(
+                com.google.android.material.R.attr.colorSurface,
+                typedValueBg,
+                true
+            )
+            @ColorInt val bgColor: Int = typedValueBg.data
             val powerMenu = PowerMenu.Builder(requireContext()).addItemList(
                 powerList
             ).setAnimation(MenuAnimation.SHOWUP_BOTTOM_RIGHT).setIsClipping(true)
@@ -170,8 +210,8 @@ class ListScreen : Fragment() {
                 .setCircularEffect(CircularEffect.INNER) // Shows circular revealed effects for the content view of the popup menu.
                 .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
                 .setSelectedTextColor(Color.WHITE)
-                .setSelectedMenuColorResource(R.color.basic_color_500)
-                .setMenuColor(requireActivity().getColor(R.color.banner_bg)).build()
+                .setSelectedMenuColor(selectedcolor)
+                .setMenuColor(bgColor).build()
             powerMenu.selectedPosition = selectedPositionF
 
             powerMenu.showAsAnchorLeftBottom(

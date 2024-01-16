@@ -226,6 +226,7 @@ fun loadDetailTabs(): ArrayList<String> {
     list.add("Cast")
     list.add("Relations")
     list.add("Details")
+    list.add("Cast")
     return list
 }
 

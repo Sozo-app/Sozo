@@ -5,21 +5,23 @@
     android:id="@+id/bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/colorOnBackground"
     android:orientation="vertical"
     tools:context=".ui.screen.main.MainScreen">
 
-    <ProgressBar
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/mainProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+
+        android:layout_height="80dp"
         android:layout_gravity="center"
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-       />
+        app:lottie_colorFilter="?attr/colorPrimary"
+        app:lottie_rawRes="@raw/loading" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

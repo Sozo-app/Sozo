@@ -31,24 +31,24 @@
             android:layout_height="?actionBarSize"
             android:clipToPadding="false"
             android:translationZ="12dp"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
             android:visibility="visible"
             app:tabBackground="@null"
-            app:tabIndicator="@color/bg"
+            app:tabGravity="fill"
+            app:tabIndicator="?attr/colorOnBackground"
             app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="@color/basic_color"
+            app:tabIndicatorColor="?attr/colorPrimary"
             app:tabIndicatorHeight="2dp"
             app:tabInlineLabel="true"
+            app:tabMode="fixed"
             app:tabRippleColor="@null"
-            app:tabSelectedTextColor="@color/white"
+            app:tabSelectedTextColor="?attr/titleTextColor"
             app:tabTextColor="#878787"
             tools:visibility="visible" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                 android:text="@string/grid"
                 android:textColor="@color/white"
                 android:visibility="gone"
-                app:thumbTint="@color/dark_200" />
+                app:thumbTint="?attr/colorSecondary" />
         </LinearLayout>
 
 
@@ -210,7 +210,7 @@
                 android:text="@string/apply"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:backgroundTint="@color/basic_color"
+                app:backgroundTint="?attr/colorPrimary"
                 app:cornerRadius="16dp"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>

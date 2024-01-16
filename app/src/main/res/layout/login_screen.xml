@@ -48,7 +48,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="@string/login"
             android:textColor="@color/button_icon"
-            app:backgroundTint="#F70004"
+            app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="100dp"
             app:icon="@drawable/anilistlogo"
             app:iconGravity="textStart"

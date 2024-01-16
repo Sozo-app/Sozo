@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="-16dp"
     android:layout_marginEnd="-16dp"
-    android:background="@color/bg"
+    android:background="?attr/colorOnBackground"
     android:clipToPadding="false"
     android:orientation="vertical"
     android:padding="8dp">
@@ -21,14 +21,14 @@
             android:id="@+id/searchBarText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
-            android:paddingVertical="12dp"
-            android:layout_weight="1"
             android:layout_height="60dp"
             android:layout_margin="14dp"
+            android:layout_weight="1"
             android:background="@drawable/search_bg"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="20dp"
             android:hint="@string/anime"
+            android:paddingVertical="12dp"
             android:paddingStart="20dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -36,16 +36,16 @@
 
         <ImageButton
             android:id="@+id/searchFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
 
-            android:layout_weight="0.11"
-            android:src="@drawable/ic_filter"
-            android:background="@drawable/filter_bg"
-
-            app:tint="@color/basic_color"
             android:layout_margin="8dp"
+            android:layout_weight="0.11"
+            android:background="@drawable/search_bg"
+
+            android:src="@drawable/ic_filter"
+            app:tint="?attr/colorPrimary"
             tools:ignore="ContentDescription,TextContrastCheck" />
 
 
@@ -113,8 +113,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.33"
-            android:visibility="gone"
             android:padding="8dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_round_grid_view_24"
             app:tint="@color/white"
             tools:ignore="ContentDescription,ImageContrastCheck" />

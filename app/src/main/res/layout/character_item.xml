@@ -2,22 +2,21 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:clickable="true"
-    android:focusable="true"
-    app:strokeWidth="0dp"
-    app:cardBackgroundColor="#141313"
-    app:cardCornerRadius="10dp"
-    android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="14dp"
     android:layout_marginVertical="8dp"
-    >
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/colorOnBackground"
+    app:cardCornerRadius="10dp"
+    app:strokeWidth="0dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_margin="2dp"
         android:layout_height="wrap_content"
-        >
+        android:layout_margin="2dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/characterPic"
@@ -35,16 +34,16 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_marginEnd="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="12dp"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/sourcesanspro_semibold"
             android:includeFontPadding="false"
             android:text="Denji"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/characterPic"
             app:layout_constraintTop_toTopOf="@+id/characterPic" />
 
@@ -54,13 +53,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:maxLines="1"
             android:fontFamily="@font/ubuntu_medium"
+            android:maxLines="1"
             android:text="Kikunosuke ToyaKikunosuke ToyaKikunosuke ToyaKikunosuke ToyaKikunosuke Toya"
 
-            app:layout_constraintEnd_toStartOf="@id/go_character"
-            android:textColor="#8B8B8B"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/go_character"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -69,22 +68,22 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/ubuntu_medium"
             android:text="Main"
-            android:textColor="#8B8B8B"
-
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="12sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/titleRomanji"
             app:layout_constraintTop_toBottomOf="@+id/titleRomanji" />
 
         <ImageView
             android:id="@+id/go_character"
             android:layout_width="24dp"
-            android:layout_marginTop="0.1dp"
             android:layout_height="24dp"
+            android:layout_marginTop="0.1dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"

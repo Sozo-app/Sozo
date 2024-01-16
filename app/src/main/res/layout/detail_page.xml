@@ -13,7 +13,7 @@
         android:layout_height="1.5dp"
         android:layout_marginHorizontal="22dp"
         android:layout_marginTop="24dp"
-        android:background="#5D5D5D"
+        android:background="?attr/colorOnSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -134,7 +134,7 @@
         android:layout_height="1.5dp"
         android:layout_marginTop="10dp"
 
-        android:background="#5D5D5D"
+        android:background="?attr/colorOnSurfaceVariant"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />

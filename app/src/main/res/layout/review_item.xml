@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/banner_img" />
+            tools:src="@drawable/banner_img" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/gradient_back" />
+            android:src="@drawable/linear_gradient_bg" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/photoCard"

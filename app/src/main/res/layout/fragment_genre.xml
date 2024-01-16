@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="center"
+        app:lottie_colorFilter="?attr/colorPrimary"
         android:layout_margin="32dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"

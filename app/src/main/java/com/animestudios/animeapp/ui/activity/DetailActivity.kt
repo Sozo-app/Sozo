@@ -156,6 +156,7 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
 
                 binding.mediaAppBar.visible()
+                binding.fabBack.visible()
                 binding.viewPager.visible()
                 binding.animeDetailProgress.gone()
                 binding.mediaNotify.setOnClickListener {

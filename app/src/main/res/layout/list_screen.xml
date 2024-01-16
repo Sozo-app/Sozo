@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/bg"
+            android:background="?attr/colorOnBackground"
             android:orientation="vertical"
 
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -28,7 +28,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/bg"
+                android:background="?attr/colorOnBackground"
                 android:clipToPadding="false"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
 
-                        android:background="@color/bg"
+                        android:background="?attr/colorOnBackground"
                         android:orientation="horizontal">
 
                         <TextView
@@ -209,7 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_3x"
-                android:background="@color/bg"
+                android:background="?attr/colorOnBackground"
                 android:orientation="vertical"
                 android:requiresFadingEdge="vertical">
 
@@ -267,14 +267,14 @@
             android:id="@+id/sort"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:animateLayoutChanges="true"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
+            android:animateLayoutChanges="true"
             android:src="@drawable/list_icon"
             android:visibility="invisible"
-            app:backgroundTint="#FFBABA"
-            app:tint="@color/backward_color"
+            app:backgroundTint="?attr/colorSecondaryContainer"
+            app:tint="?attr/colorSecondary"
             tools:ignore="RtlCompat"
             tools:visibility="visible" />
 

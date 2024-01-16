@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="?attr/colorOnBackground"
     android:clipToPadding="false"
     android:fadingEdge="vertical"
     android:orientation="vertical"
@@ -51,7 +51,7 @@
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-
+        app:lottie_colorFilter="?attr/colorPrimary"
         app:lottie_rawRes="@raw/loading" />
 
 </FrameLayout>

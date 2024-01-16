@@ -5,6 +5,7 @@
     android:layout_height="80dp"
     app:lottie_loop="true"
     app:lottie_autoPlay="true"
+    app:lottie_colorFilter="?attr/colorPrimary"
     app:lottie_rawRes="@raw/loading"
     android:layout_gravity="center"
     android:visibility="gone"/>

@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_marginVertical="12dp"
             android:visibility="visible"
-            app:cardBackgroundColor="@color/nav_bg"
+            app:cardBackgroundColor="?attr/colorOnSurface"
             app:cardCornerRadius="16dp"
             tools:visibility="visible">
 
@@ -102,7 +102,7 @@
             android:layout_marginVertical="8dp"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:cardBackgroundColor="@color/nav_bg"
+            app:cardBackgroundColor="?attr/colorOnSurface"
             app:cardCornerRadius="16dp"
             tools:visibility="visible">
 
@@ -172,7 +172,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:visibility="gone"
-            app:cardBackgroundColor="@color/nav_bg"
+            app:cardBackgroundColor="?attr/colorOnSurface"
             app:cardCornerRadius="16dp"
             tools:visibility="visible">
 
@@ -248,7 +248,7 @@
                 android:id="@+id/addAccountBtn"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:backgroundTint="@color/dark_500"
+                android:backgroundTint="?attr/colorOnSurface"
                 android:fontFamily="@font/poppins_bold"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
