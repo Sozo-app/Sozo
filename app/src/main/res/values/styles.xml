@@ -14,5 +14,10 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="AppTheme.Amoled" parent="">
+        <item name="android:colorBackground">@color/darkest_Black</item>
+        <!-- set colorSurface to black -->
+        <item name="colorSurface">@color/darkest_Black</item>
+    </style>
 
 </resources>

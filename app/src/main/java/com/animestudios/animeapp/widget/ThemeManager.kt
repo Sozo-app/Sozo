@@ -97,7 +97,7 @@ class ThemeManager(private val context: Activity) {
         }
 
         if (useOLED) {
-            builder.setThemeOverlay(R.style.Theme_AnimeApp_SaikouOLED)
+            builder.setThemeOverlay(R.style.AppTheme_Amoled)
         }
         if (needMaterial && !useMaterialYou) return true
 
@@ -110,7 +110,7 @@ class ThemeManager(private val context: Activity) {
 
         if (useOLED) {
             val options2 = DynamicColorsOptions.Builder()
-                .setThemeOverlay(R.style.Theme_AnimeApp)
+                .setThemeOverlay(R.style.AppTheme_Amoled)
                 .build()
             DynamicColors.applyToActivityIfAvailable(activity, options2)
         }
@@ -134,7 +134,6 @@ class ThemeManager(private val context: Activity) {
             GREEN("GREEN"),
             PURPLE("PURPLE"),
             PINK("PINK"),
-            SAIKOU("SAIKOU"),
             RED("RED"),
             LAVENDER("LAVENDER"),
             OCEAN("OCEAN"),

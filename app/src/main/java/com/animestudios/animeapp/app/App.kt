@@ -10,8 +10,10 @@ import androidx.multidex.MultiDex
 import androidx.work.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.tools.initializeNetwork
+import com.animestudios.animeapp.widget.ThemeManager
 import com.animestudios.animeapp.worker.NotificationWorker
 import com.animestudios.animeapp.worker.NotificationWorkerFactory
+import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -26,7 +28,12 @@ class App : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         Anilist.getSavedToken(this)
-        registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
+        val sharedPreferences = getSharedPreferences("Sozo", Context.MODE_PRIVATE)
+        val useMaterialYou = sharedPreferences.getBoolean("use_material_you", true)
+        if (useMaterialYou) {
+            DynamicColors.applyToActivitiesIfAvailable(this)
+            //TODO: HarmonizedColors
+        }
         initializeNetwork(this)
         if (Anilist.token != null) {
             setupNotificationWorker()
