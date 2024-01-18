@@ -2,6 +2,7 @@ package com.animestudios.animeapp.anilist.api.imp
 
 import android.app.Activity
 import android.util.Log
+import androidx.annotation.Keep
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.AniListQueries
 import com.animestudios.animeapp.anilist.api.common.Anilist
@@ -17,6 +18,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
+@Keep
 class AniListQueriesImp constructor() : AniListQueries {
     override suspend fun getMediaFullData(media: Media): Media {
         val query =

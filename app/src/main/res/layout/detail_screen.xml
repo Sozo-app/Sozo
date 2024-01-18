@@ -5,7 +5,7 @@
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/detail_Bg"
+    android:background="?attr/colorOnSurface"
     tools:ignore="contentDescription">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="@color/detail_Bg"
+        android:background="?attr/colorOnSurface"
         android:orientation="vertical"
         android:theme="@style/Theme.AnimeApp.AppBarOverlay"
         android:translationZ="5dp"
@@ -25,13 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false"
-            app:collapsedTitleTextColor="@color/detail_Bg"
+            app:collapsedTitleTextColor="?attr/colorOnSurface"
             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
-            app:contentScrim="@color/detail_Bg"
-            app:expandedTitleTextColor="@color/detail_Bg"
+            app:contentScrim="?attr/colorOnSurface"
+            app:expandedTitleTextColor="?attr/colorOnSurface"
             app:layout_scrollEffect="compress"
             app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
             app:titleCollapseMode="fade">
@@ -55,7 +55,7 @@
                         android:id="@+id/itemCompactBannerNoKenCard"
                         android:layout_width="match_parent"
                         android:layout_height="350dp"
-                        app:cardBackgroundColor="@color/detail_Bg"
+                        app:cardBackgroundColor="?attr/colorOnSurface"
                         app:cardCornerRadius="4dp"
                         app:cardElevation="0dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="12sp"
-                    app:backgroundTint="@color/buttonColor"
+                    app:backgroundTint="?attr/colorAccent"
                     app:cornerRadius="4dp"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -218,6 +218,7 @@
                             android:layout_height="55dp"
                             android:layout_marginEnd="10dp"
                             android:layout_weight="8"
+                            app:backgroundTint="?attr/colorPrimary"
                             android:fontFamily="@font/poppins_bold"
                             android:insetLeft="0dp"
                             android:insetTop="0dp"
@@ -241,7 +242,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            app:cardBackgroundColor="#3B3B3B"
+                            app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                             app:cardCornerRadius="12dp"
                             app:tint="@color/white">
 

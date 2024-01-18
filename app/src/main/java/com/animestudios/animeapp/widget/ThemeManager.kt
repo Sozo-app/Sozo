@@ -43,13 +43,14 @@ class ThemeManager(private val context: Activity) {
             if (!returnedEarly) return
         }
         val theme = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-            .getString("theme", "OCEAN")!!
+            .getString("theme", "RED")!!
 
         val themeToApply = when (theme) {
             "BLUE" -> if (useOLED) R.style.Theme_AnimeApp_BlueOLED else R.style.Theme_AnimeApp_Blue
             "GREEN" -> if (useOLED) R.style.Theme_AnimeApp_GreenOLED else R.style.Theme_AnimeApp_Green
             "PURPLE" -> if (useOLED) R.style.Theme_AnimeApp_PurpleOLED else R.style.Theme_AnimeApp_Purple
             "PINK" -> if (useOLED) R.style.Theme_AnimeApp_PinkOLED else R.style.Theme_AnimeApp_Pink
+            "YELLOW" -> if (useOLED) R.style.Theme_AnimeApp_Yellow else R.style.Theme_AnimeApp_Yellow
             "SAIKOU" -> if (useOLED) R.style.Theme_AnimeApp_SaikouOLED else R.style.Theme_AnimeApp_Saikou
             "RED" -> if (useOLED) R.style.Theme_AnimeApp_RedOLED else R.style.Theme_AnimeApp_Red
             "LAVENDER" -> if (useOLED) R.style.Theme_AnimeApp_LavenderOLED else R.style.Theme_AnimeApp_Lavender
@@ -92,7 +93,7 @@ class ThemeManager(private val context: Activity) {
             builder.setContentBasedSource(bitmap)
             needMaterial = false
         } else if (useCustom != null) {
-            builder.setContentBasedSource(bitmap!!)
+            builder.setThemeOverlay(useCustom)
             needMaterial = false
         }
 
@@ -121,8 +122,8 @@ class ThemeManager(private val context: Activity) {
     private fun isDarkThemeActive(context: Context): Boolean {
         return when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_YES -> true
-            Configuration.UI_MODE_NIGHT_NO -> false
-            Configuration.UI_MODE_NIGHT_UNDEFINED -> false
+            Configuration.UI_MODE_NIGHT_YES -> false
+            Configuration.UI_MODE_NIGHT_YES -> false
             else -> false
         }
     }
