@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:srcCompat="@drawable/source_img" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -29,14 +29,28 @@
             android:layout_height="100dp"
             android:layout_marginStart="14dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/anime_img"
+            android:src="@drawable/kbot09"
             app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
             app:layout_constraintStart_toStartOf="@+id/profile_bg"
             app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
 
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="KBOT09"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
-            android:layout_width="295dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/dark_500"
@@ -50,28 +64,117 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:id="@+id/linearLayout4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
                     android:gravity="center"
-                    android:layout_marginStart="12dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
                         app:srcCompat="@drawable/ic_statistics" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Statistics"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
+
+
+                <View
+                    android:id="@+id/barview"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:background="?attr/colorOnSurface"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/barview"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_round_favorite_24"
+                        app:tint="@color/bg_white" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Favorites"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/barview2"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="30dp"
+                    android:background="?attr/colorOnSurface"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/barview2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_lock"
+                        app:tint="@color/bg_white" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Accounts"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/anime_item.xml" value="0.1901886860897383" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/fragment_profile_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/profile_category_item.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/profile_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/Sozo/app/src/main/res/drawable/background_gradient_two.xml" value="0.2515" />
         <entry key="..\:/AndroidStudioProjects/Sozo/app/src/main/res/drawable/banner_bg.xml" value="0.2515" />
         <entry key="..\:/AndroidStudioProjects/Sozo/app/src/main/res/drawable/baseline_more_vert_24.xml" value="0.2515" />

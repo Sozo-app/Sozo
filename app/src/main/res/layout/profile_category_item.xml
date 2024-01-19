@@ -2,40 +2,57 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    android:layout_marginHorizontal="25dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="18dp"
     android:layout_marginBottom="12dp"
-    app:cardBackgroundColor="@color/dark_700"
+    app:cardBackgroundColor="?attr/colorOnBackground"
     app:cardCornerRadius="10dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="start"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="14dp"/>
+            android:id="@+id/shapeableImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="2dp"
+            android:src="@drawable/appearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Appearance"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:fontFamily="@font/inter_bold"
-            android:text="General Settings"
-            android:textSize="18sp" />
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="4dp"
+            android:text="Adjust the app to your liking"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    </LinearLayout>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center|end"
-        android:layout_marginEnd="18dp"
-        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-        app:tint="@color/white" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            app:tint="@color/color_white"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
