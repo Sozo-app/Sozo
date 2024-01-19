@@ -16,6 +16,9 @@
 
     <style name="AppTheme.Amoled" parent="">
         <item name="android:colorBackground">@color/darkest_Black</item>
+        <item name="colorOnBackground">@color/bg</item>
+        <item name="themeContentColor">@color/detail_Bg</item>
+        <item name="colorOnSurface">@color/detail_Bg</item>
         <!-- set colorSurface to black -->
         <item name="colorSurface">@color/darkest_Black</item>
     </style>

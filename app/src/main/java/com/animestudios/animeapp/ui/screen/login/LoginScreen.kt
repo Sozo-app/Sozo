@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
+import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.databinding.LoginScreenBinding
 import com.animestudios.animeapp.tools.logError
+import com.animestudios.animeapp.tools.tryWithSuspend
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +25,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginScreen : Fragment() {
     private var _binding: LoginScreenBinding? = null
     private val binding get() = _binding!!
+
+
+
 
     private val model by viewModels<MainViewModelImp>()
 
