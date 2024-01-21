@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start">
+        <OnSwipe
+            motion:onTouchUp="autoComplete"
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/scrollView" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start"></ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/ivAvatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/icEdit"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            motion:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            motion:layout_constraintEnd_toEndOf="@id/ivAvatar"
+            motion:layout_constraintStart_toEndOf="@id/ivAvatar"
+            motion:layout_constraintTop_toBottomOf="@id/circleImageView"
+            motion:layout_constraintTop_toTopOf="@id/ivAvatar"
+            motion:visibilityMode="ignore" />
+        <Constraint
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="invisible"
+            motion:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+
+        <Constraint android:id="@+id/scrollView" />
+    </ConstraintSet>
+</MotionScene>

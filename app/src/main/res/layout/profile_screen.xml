@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--  Fake Toolbar  -->
+
     <View
         android:id="@+id/movieFakeToolbar"
         android:layout_width="0dp"

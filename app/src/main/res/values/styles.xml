@@ -22,5 +22,9 @@
         <!-- set colorSurface to black -->
         <item name="colorSurface">@color/darkest_Black</item>
     </style>
+    <style name="PopupTheme" parent="Theme.AppCompat.DayNight">
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textColor">?themeContentColor</item>
+    </style>
 
 </resources>
