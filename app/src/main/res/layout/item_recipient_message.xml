@@ -1,75 +1,62 @@
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/nav_bg"
+    app:cardCornerRadius="10dp">
 
-    <data>
 
-        <variable
-            name="message"
-            type="com.animestudios.animeapp.model.Message" />
-    </data>
-
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/nav_bg"
-        app:cardCornerRadius="10dp">
-
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/usernameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{message.recipient.name}"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    tools:text="klejvi" />
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatarImageView"
-                    image="@{message.recipient.avatarMedium}"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center_vertical"
-                    tools:src="@tools:sample/avatars" />
-
-            </LinearLayout>
+            android:gravity="end"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/messageTextView"
-                markdown="@{message.message}"
+                android:id="@+id/usernameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="56dp"
-                android:textSize="16sp"
-                tools:text="ckemi klejvi sample messageeee" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="klejvi" />
 
-            <TextView
-                android:id="@+id/messageTimeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="4dp"
-                android:text="@{message.convertUnixTimeToFormattedTime}"
-                android:textSize="12sp"
-                tools:text="12:00 AM" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatarImageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
+                tools:src="@tools:sample/avatars" />
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-</layout>
+        <TextView
+            android:id="@+id/messageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="56dp"
+            android:textSize="16sp"
+            tools:text="ckemi klejvi sample messageeee" />
+
+        <TextView
+            android:id="@+id/messageTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            tools:text="12:00 AM" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+

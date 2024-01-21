@@ -44,97 +44,97 @@ class MessageScreen(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            sendMessagesButtonSetUp()
-            setupMessages()
+//            sendMessagesButtonSetUp()
+//            setupMessages()
         }
     }
 
-    private fun sendMessagesButtonSetUp() {
-        binding?.sendMessageButton?.setOnClickListener {
-            val messageText = binding?.messageInput?.text.toString().trim()
-            if (messageText.isNotEmpty()) {
-                model.sendMessage(if (Anilist.userid == 6292651) 6136028 else 6292651, messageText)
-                binding?.messageInput?.setText("")
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val lastPosition = model.messageList.count() + 1
-                    logError(Exception("$lastPosition"))
-                    withContext(Dispatchers.Main) {
-                        binding?.messageRv?.scrollToPosition(lastPosition)
-                    }
-                }
-            }
-        }
-    }
+//    private fun sendMessagesButtonSetUp() {
+//        binding?.sendMessageButton?.setOnClickListener {
+//            val messageText = binding?.messageInput?.text.toString().trim()
+//            if (messageText.isNotEmpty()) {
+//                model.sendMessage(if (Anilist.userid == 6292651) 6136028 else 6292651, messageText)
+//                binding?.messageInput?.setText("")
+//                lifecycleScope.launch(Dispatchers.IO) {
+//                    val lastPosition = model.messageList.count() + 1
+//                    logError(Exception("$lastPosition"))
+//                    withContext(Dispatchers.Main) {
+//                        binding?.messageRv?.scrollToPosition(lastPosition)
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    private fun setupMessages() {
-        collect(model.messageList) { messages ->
-            binding?.messageRv?.withModels {
-                when (messages) {
-                    is Result.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Couldn't load messages",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        binding?.loadingIndicator?.text = "No messages here sorry :p"
-                    }
-
-                    Result.Loading -> {
-                        binding?.loadingIndicator?.isVisible = true
-                    }
-
-                    is Result.Success -> {
-                        binding?.loadingIndicator?.isVisible = false
-                        messages.data.forEach { message ->
-
-                            if (message.senderUserId == Anilist.userid) {
-                                senderMessage {
-                                    id(message.id)
-                                    message(message)
-                                }
-                            } else {
-                                recipientMessage {
-                                    id(message.id)
-                                    message(message)
-                                }
-                            }
-
-                            message.replies.forEach { reply ->
-                                if (reply.user.id == Anilist.userid) {
-                                    senderMessage {
-                                        id(reply.id)
-                                        message(
-                                            Message(
-                                                id = reply.id,
-                                                senderUserId = reply.user.id,
-                                                message = reply.message,
-                                                createdAt = reply.createdAt,
-                                                recipient = message.recipient,
-                                                messenger = message.messenger
-                                            )
-                                        )
-                                    }
-                                } else {
-                                    recipientMessage {
-                                        id(reply.id)
-                                        message(
-                                            Message(
-                                                id = reply.id,
-                                                senderUserId = reply.user.id,
-                                                message = reply.message,
-                                                createdAt = reply.createdAt,
-                                                recipient = message.recipient,
-                                                messenger = message.messenger
-                                            )
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-    }
+//    private fun setupMessages() {
+//        collect(model.messageList) { messages ->
+//            binding?.messageRv?.withModels {
+//                when (messages) {
+//                    is Result.Error -> {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Couldn't load messages",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        binding?.loadingIndicator?.text = "No messages here sorry :p"
+//                    }
+//
+//                    Result.Loading -> {
+//                        binding?.loadingIndicator?.isVisible = true
+//                    }
+//
+//                    is Result.Success -> {
+//                        binding?.loadingIndicator?.isVisible = false
+//                        messages.data.forEach { message ->
+//
+//                            if (message.senderUserId == Anilist.userid) {
+//                                senderMessage {
+//                                    id(message.id)
+//                                    message(message)
+//                                }
+//                            } else {
+//                                recipientMessage {
+//                                    id(message.id)
+//                                    message(message)
+//                                }
+//                            }
+//
+//                            message.replies.forEach { reply ->
+//                                if (reply.user.id == Anilist.userid) {
+//                                    senderMessage {
+//                                        id(reply.id)
+//                                        message(
+//                                            Message(
+//                                                id = reply.id,
+//                                                senderUserId = reply.user.id,
+//                                                message = reply.message,
+//                                                createdAt = reply.createdAt,
+//                                                recipient = message.recipient,
+//                                                messenger = message.messenger
+//                                            )
+//                                        )
+//                                    }
+//                                } else {
+//                                    recipientMessage {
+//                                        id(reply.id)
+//                                        message(
+//                                            Message(
+//                                                id = reply.id,
+//                                                senderUserId = reply.user.id,
+//                                                message = reply.message,
+//                                                createdAt = reply.createdAt,
+//                                                recipient = message.recipient,
+//                                                messenger = message.messenger
+//                                            )
+//                                        )
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
 }

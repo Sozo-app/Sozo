@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet>
+
+
+            <KeyAttribute
+                android:rotation="-45"
+                android:rotationY="15"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/circleImageView" />
+            <KeyPosition
+                motion:framePosition="20"
+                motion:keyPositionType="deltaRelative"
+                motion:motionTarget="@+id/circleImageView"
+                motion:percentY="0.65" />
+        </KeyFrameSet>
+        <OnSwipe motion:touchAnchorId="@+id/movieScroll" />
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/movieCoverImg"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/movieFakeToolbar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/movieCoverImg" />
+
+        <Constraint
+            android:id="@+id/movieScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/movieCoverImg" />
+
+        <Constraint
+            android:id="@+id/moviePosterImg"
+            android:layout_width="125dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:elevation="1dp"
+            motion:layout_constraintBottom_toBottomOf="@id/movieCoverImg"
+            motion:layout_constraintDimensionRatio="h,1:1.5"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+        <Constraint
+            android:id="@+id/movieNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:alpha="1"
+            android:elevation="2dp"
+            motion:layout_constraintStart_toEndOf="@id/moviePosterImg"
+            motion:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+        <Constraint
+            android:id="@+id/movieGenreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:alpha="1"
+            motion:layout_constraintStart_toEndOf="@id/moviePosterImg"
+            motion:layout_constraintTop_toBottomOf="@id/movieNameTxt" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/movieCoverImg"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/moviePosterImg"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="0dp"
+            motion:layout_constraintDimensionRatio="h,1:1.5"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+        <Constraint
+            android:id="@+id/movieFakeToolbar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:elevation="1dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+
+        <Constraint
+            android:id="@+id/movieNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:alpha="1"
+            android:elevation="2dp"
+            motion:layout_constraintBottom_toBottomOf="@id/movieFakeToolbar"
+            motion:layout_constraintTop_toBottomOf="@id/movieCoverImg"
+            motion:layout_constraintEnd_toEndOf="@+id/movieInfoLayout"
+            motion:layout_constraintVertical_bias="0.0" />
+
+        <Constraint
+            android:id="@+id/movieScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="1dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+
+
+        <Constraint
+            android:id="@+id/movieGenreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:alpha="0"
+            motion:layout_constraintStart_toEndOf="@id/moviePosterImg"
+            motion:layout_constraintTop_toBottomOf="@id/movieNameTxt" />
+    </ConstraintSet>
+</MotionScene>

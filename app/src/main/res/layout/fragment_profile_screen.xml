@@ -1,278 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="220dp"
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/profileAppBarLayout"
+            android:scaleType="centerCrop"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/source_img" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@drawable/linear_gradient_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="14dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/kbot09"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
+            app:layout_constraintStart_toStartOf="@+id/profile_bg"
+            app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="KBOT09"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="?attr/colorOnSurface"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent">
+                android:layout_height="match_parent">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/profileCollapsingToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    app:contentScrim="@android:color/transparent"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:scrimAnimationDuration="200"
-                    app:toolbarId="@id/profileToolbar">
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                        <FrameLayout
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="@+id/profileBannerContentLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_statistics" />
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/profileBannerImage"
-                                android:scaleType="centerCrop"
-                                app:srcCompat="@drawable/headbg"
-                                android:adjustViewBounds="true"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
 
-                            <View
-                                android:background="@drawable/background_gradient_three"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
-                        </FrameLayout>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:id="@+id/profileBannerContentLayout"
-                            android:orientation="vertical"
-                            android:paddingBottom="@dimen/marginFar"
-                            android:gravity="center_horizontal"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <View
-                                android:id="@+id/profileHeaderGap"
-                                android:minHeight="@dimen/toolbarBigHeight"
-                                android:layout_width="match_parent"
-                                android:layout_height="?actionBarSize"/>
-
-                            <FrameLayout
-                                android:layout_marginTop="@dimen/marginPageBig"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:visibility="invisible"
-                                    android:id="@+id/profileAvatarCircleImage"
-                                    android:adjustViewBounds="true"
-                                    android:layout_width="@dimen/imageCircleSize"
-                                    android:layout_height="@dimen/imageCircleSize"/>
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:visibility="invisible"
-                                    android:id="@+id/profileAvatarRectangleImage"
-                                    android:adjustViewBounds="true"
-                                    android:layout_width="@dimen/imageCircleSize"
-                                    android:layout_height="@dimen/imageCircleSize"/>
-
-                            </FrameLayout>
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/profileUsernameText"
-                                style="?themeTitleFont"
-                                android:layout_marginTop="@dimen/marginNormal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-
-                            <androidx.appcompat.widget.LinearLayoutCompat
-                                android:visibility="gone"
-                                android:id="@+id/profileBadgeLayout"
-                                android:layout_marginTop="@dimen/marginNormal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.card.MaterialCardView
-                                    android:visibility="gone"
-                                    android:id="@+id/profileModCard"
-                                    app:cardElevation="0dp"
-                                    app:contentPadding="@dimen/marginClose"
-                                    app:cardBackgroundColor="?themeSecondaryColor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/profileModText"
-                                        style="?themeSmallFont"
-                                        android:textColor="@color/color_white"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
-
-                                </com.google.android.material.card.MaterialCardView>
-
-                            </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/profileToolbar"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/transparent"
-                        android:elevation="0dp"
-                        android:minHeight="@dimen/toolbarBigHeight"
-                        app:layout_collapseMode="pin"
-                        app:menu="@menu/menu_profile"
-                        app:popupTheme="@style/PopupTheme" />
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Statistics"
+                        android:textSize="10sp" />
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                </LinearLayout>
 
-            </com.google.android.material.appbar.AppBarLayout>
-            <androidx.cardview.widget.CardView
-                app:layout_anchor="@id/profileCollapsingToolbar"
-                android:layout_gravity="center"
-                android:id="@+id/cardView4"
 
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/dark_500"
-                app:cardCornerRadius="10dp">
+                <View
+                    android:id="@+id/barview"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:background="?attr/colorOnSurface"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/barview"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_round_favorite_24"
+                        app:tint="@color/bg_white" />
+
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Favorites"
+                        android:textSize="10sp" />
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_statistics" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/barview2"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="30dp"
+                    android:background="?attr/colorOnSurface"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/barview2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_lock"
+                        app:tint="@color/bg_white" />
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/inter_bold"
-                            android:text="Statistics"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>
-
-
-                    <View
-                        android:id="@+id/barview"
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:background="?attr/colorOnSurface"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout5"
-
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/barview"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Accounts"
+                        android:textSize="10sp" />
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_round_favorite_24"
-                            app:tint="@color/bg_white" />
+                </LinearLayout>
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/inter_bold"
-                            android:text="Favorites"
-                            android:textSize="10sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-                    </LinearLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="?attr/colorSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/circleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
-                    <View
-                        android:id="@+id/barview2"
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="30dp"
-                        android:background="?attr/colorOnSurface"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Settings"
+            android:textColor="@color/bg_white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/circleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginEnd="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/barview2"
-                        app:layout_constraintTop_toTopOf="parent">
+        <com.animestudios.animeapp.FadingEdgeRecyclerView
+            android:id="@+id/profileRv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_lock"
-                            app:tint="@color/bg_white" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:itemCount="3"
+            tools:listitem="@layout/profile_category_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/inter_bold"
-                            android:text="Accounts"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

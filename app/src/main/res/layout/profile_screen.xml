@@ -1,166 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_main_scene">
+    android:layout_height="match_parent">
 
-    <!--  cover  -->
-    <ImageView
-        android:id="@+id/movieCoverImg"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@drawable/headbg"        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/listRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
 
-    <!--  Fake Toolbar  -->
+        tools:visibility="visible">
 
-    <View
-        android:id="@+id/movieFakeToolbar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="#EFF0ED"
-        android:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="?attr/colorOnBackground"
+            android:orientation="vertical"
+
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorOnBackground"
+                android:clipToPadding="false"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_scrollEffect="compress"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
-    <!--  Scroll  -->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/movieScroll"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#EFF0ED"
-        android:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movieCoverImg">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+
+                        android:scaleType="centerCrop"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/source_img" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/linear_gradient_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleImageView"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="14dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/kbot09"
+                        app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
+                        app:layout_constraintStart_toStartOf="@+id/profile_bg"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
+
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="KBOT09"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        app:cardBackgroundColor="?attr/colorOnSurface"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/circleImageView">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="30dp"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_statistics" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="Statistics"
+                                    android:textSize="10sp" />
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/barview"
+                                android:layout_width="1dp"
+                                android:layout_height="0dp"
+                                android:layout_marginHorizontal="30dp"
+                                android:background="?attr/colorOnSurface"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout5"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="30dp"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/barview"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_round_favorite_24"
+                                    app:tint="@color/bg_white" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="Favorites"
+                                    android:textSize="10sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/barview2"
+                                android:layout_width="1dp"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="30dp"
+                                android:background="?attr/colorOnSurface"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="30dp"
+                                android:layout_marginEnd="30dp"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/barview2"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_lock"
+                                    app:tint="@color/bg_white" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="Accounts"
+                                    android:textSize="10sp" />
+
+                            </LinearLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="?attr/colorSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Settings"
+                android:textColor="@color/bg_white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <!--      Info      -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/movieInfoLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/movieRate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_bold"
-                    android:gravity="center"
-                    android:text="6.4"
-                    android:textColor="#222831"
-                    android:textSize="12sp"
-                    app:drawableTint="#222831"
-                    app:drawableTopCompat="@drawable/ic_round_star_24"
-                    app:flow_horizontalBias="0.5"
-                    app:layout_constraintEnd_toStartOf="@id/movieDuration"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/movieDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_bold"
-                    android:gravity="center"
-                    android:text="127 minutes"
-                    android:textColor="#222831"
-                    android:textSize="12sp"
-                    app:drawableTint="#222831"
-                    app:drawableTopCompat="@drawable/add"
-                    app:flow_horizontalBias="0.5"
-                    app:layout_constraintEnd_toStartOf="@id/movieStatus"
-                    app:layout_constraintStart_toEndOf="@id/movieRate"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/movieStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_bold"
-                    android:gravity="center"
-                    android:text="Released"
-                    android:textColor="#222831"
-                    android:textSize="12sp"
-                    app:drawableTint="#222831"
-                    app:flow_horizontalBias="0.5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/movieDuration"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!--      Desc      -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:fontFamily="@font/ubuntu_medium"
-                android:lineSpacingExtra="5dp"
-                android:text="@string/app_name"
-                android:textColor="#222831"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movieInfoLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        <com.animestudios.animeapp.FadingEdgeRecyclerView
+            android:id="@+id/profileRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:itemCount="3"
+            tools:listitem="@layout/profile_category_item" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!--  poster  -->
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/moviePosterImg"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="20dp"
-        android:elevation="1dp"
-        android:src="@drawable/anime_img"
-        app:layout_constraintBottom_toBottomOf="@id/movieCoverImg"
-        app:layout_constraintDimensionRatio="h,1:1.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
-
-    <!--  Name  -->
-    <TextView
-        android:id="@+id/movieNameTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/app_name"
-        android:textColor="#FF3700B3"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/moviePosterImg"
-        app:layout_constraintTop_toBottomOf="@id/movieCoverImg" />
-
-    <!--  genre  -->
-    <TextView
-        android:id="@+id/movieGenreTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="Action"
-        android:textColor="#606060"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/moviePosterImg"
-        app:layout_constraintTop_toBottomOf="@id/movieNameTxt" />
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</FrameLayout>

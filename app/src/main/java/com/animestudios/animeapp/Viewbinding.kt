@@ -23,7 +23,6 @@ import io.noties.markwon.Markwon
  * @param image ImageView - The ImageView that we want to bind the image to.
  * @param url The URL of the image to load.
  */
-@BindingAdapter("image")
 fun ImageView.provideImageBinding(url: String?) {
     if (!url.isNullOrEmpty()) {
         GlideApp.with(context)
@@ -33,7 +32,6 @@ fun ImageView.provideImageBinding(url: String?) {
     }
 }
 
-@BindingAdapter("avatarImage")
 fun ImageView.setAvatarImage(url: String?) {
     if (!url.isNullOrEmpty()) {
         load(url) {
