@@ -115,8 +115,7 @@
                             android:id="@+id/coverImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/source_img" />
+                            android:scaleType="centerCrop"/>
                     </androidx.cardview.widget.CardView>
 
                 </RelativeLayout>

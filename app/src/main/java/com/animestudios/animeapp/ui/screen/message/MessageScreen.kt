@@ -12,8 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.MessageScreenBinding
 import com.animestudios.animeapp.model.Message
-import com.animestudios.animeapp.recipientMessage
-import com.animestudios.animeapp.senderMessage
 import com.animestudios.animeapp.tools.Result
 import com.animestudios.animeapp.tools.collect
 import com.animestudios.animeapp.tools.logError
@@ -31,19 +29,19 @@ class MessageScreen(
     private val binding get() = _binding!!
     private var adapter: MessageAdapter? = null
     private val model by viewModels<MessageViewModelImpl>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = MessageScreenBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        // Inflate the layout for this fragment
+//        _binding = MessageScreenBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
+//        binding.apply {
 //            sendMessagesButtonSetUp()
 //            setupMessages()
         }
@@ -137,4 +135,3 @@ class MessageScreen(
 //        }
 //
 //    }
-}

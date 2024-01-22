@@ -55,7 +55,6 @@ android {
     }
     buildFeatures {
         viewBinding true
-        dataBinding true
     }
     packagingOptions {
         exclude 'AndroidManifest.xml'

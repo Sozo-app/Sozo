@@ -1,66 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profile_bg"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="?attr/colorOnBackground"
+        android:orientation="vertical"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+        <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-
-            android:scaleType="centerCrop"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/source_img" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@drawable/linear_gradient_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="14dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/kbot09"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
-            app:layout_constraintStart_toStartOf="@+id/profile_bg"
-            app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
-
-
-        <TextView
-            android:id="@+id/profile_name"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter_bold"
-            android:text="KBOT09"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/circleImageView"
-            app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+            android:background="?attr/colorOnBackground"
+            android:clipToPadding="false"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollEffect="compress"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/source_img" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:background="@drawable/linear_gradient_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="14dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kbot09"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
+                    app:layout_constraintStart_toStartOf="@+id/profile_bg"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
+                <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="KBOT09"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/circleImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
             app:cardBackgroundColor="?attr/colorOnSurface"
             app:cardCornerRadius="10dp"
@@ -89,7 +109,6 @@
                         android:layout_marginTop="8dp"
                         app:srcCompat="@drawable/ic_statistics" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,9 +117,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:text="Statistics"
                         android:textSize="10sp" />
-
                 </LinearLayout>
-
 
                 <View
                     android:id="@+id/barview"
@@ -114,7 +131,6 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout5"
-
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="30dp"
@@ -131,7 +147,6 @@
                         app:srcCompat="@drawable/ic_round_favorite_24"
                         app:tint="@color/bg_white" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,7 +155,6 @@
                         android:fontFamily="@font/inter_bold"
                         android:text="Favorites"
                         android:textSize="10sp" />
-
                 </LinearLayout>
 
                 <View
@@ -172,7 +186,6 @@
                         app:srcCompat="@drawable/ic_lock"
                         app:tint="@color/bg_white" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -181,47 +194,54 @@
                         android:fontFamily="@font/inter_bold"
                         android:text="Accounts"
                         android:textSize="10sp" />
-
                 </LinearLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <View
-            android:id="@+id/view2"
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="20dp"
-            android:background="?attr/colorSurface"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/circleImageView"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/inter_bold"
-            android:text="Settings"
-            android:textColor="@color/bg_white"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/circleImageView"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            android:orientation="vertical" >
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="?attr/colorSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/circleImageView"
+                app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
-        <com.animestudios.animeapp.FadingEdgeRecyclerView
-            android:id="@+id/profileRv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Settings"
+                android:textColor="@color/bg_white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/circleImageView"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:itemCount="3"
-            tools:listitem="@layout/profile_category_item" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.animestudios.animeapp.FadingEdgeRecyclerView
+                android:id="@+id/profileRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
 
-</FrameLayout>
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:itemCount="3"
+                tools:listitem="@layout/profile_category_item" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

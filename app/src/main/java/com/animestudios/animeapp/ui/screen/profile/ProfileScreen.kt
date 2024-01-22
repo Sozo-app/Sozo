@@ -20,9 +20,7 @@ class ProfileScreen : Fragment(R.layout.fragment_profile_screen) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.apply {
 
-        }
 
     }
 
