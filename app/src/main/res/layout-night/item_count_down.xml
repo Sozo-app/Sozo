@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:ignore="MissingDefaultResource">
 
     <TextView
         android:id="@+id/mediaCountdownText"

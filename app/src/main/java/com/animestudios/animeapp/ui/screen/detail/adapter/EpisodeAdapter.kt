@@ -44,6 +44,7 @@ class EpisodeAdapter(
                     binding.itemEpisodeFiller.visibility = View.GONE
                     binding.itemEpisodeFillerView.visibility = View.GONE
                 }
+                binding.itemEpisodeDesc.visibility = if (ep.desc != null && ep.desc?.trim(' ') != "") View.VISIBLE else View.GONE
                 binding.itemEpisodeDesc.text = ep.desc ?: ""
 
                 if (media.userProgress != null) {
