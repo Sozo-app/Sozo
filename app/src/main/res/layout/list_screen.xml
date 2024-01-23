@@ -256,7 +256,7 @@
             android:overScrollMode="never"
             android:paddingTop="10dp"
             android:requiresFadingEdge="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:spanCount="3"
