@@ -11,22 +11,20 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.databinding.LoginScreenBinding
 import com.animestudios.animeapp.tools.logError
-import com.animestudios.animeapp.tools.tryWithSuspend
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class LoginScreen : Fragment() {
     private var _binding: LoginScreenBinding? = null
     private val binding get() = _binding!!
-
-
 
 
     private val model by viewModels<MainViewModelImp>()
@@ -89,12 +87,14 @@ class LoginScreen : Fragment() {
                                         saveData("countAccount", 2)
                                         filename = "anilistToken2"
                                         saveData("selectedAccount", 2)
-                                        Anilist.token2 =
-                                            accessToken
-                                        model.loadProfile() {
-                                            saveData("user2Image", Anilist.avatar)
-                                            saveData("user2Id", Anilist.userid)
-                                            saveData("user2Name", Anilist.username)
+                                        lifecycleScope.launch {
+                                            Anilist.token2 = accessToken
+                                            model.loadProfile() {
+                                                println("DATA SAVED ${Anilist.username}")
+                                                saveData("user2Image", Anilist.avatar)
+                                                saveData("user2Id", Anilist.userid)
+                                                saveData("user2Name", Anilist.username)
+                                            }
                                         }
 
                                     }
@@ -104,13 +104,15 @@ class LoginScreen : Fragment() {
                                         saveData("selectedAccount", 2)
                                         saveData("countAccount", 3)
                                         filename = "anilistToken3"
-                                        Anilist.token3 =
-                                            accessToken
+                                        lifecycleScope.launch {
+                                            Anilist.token3 =
+                                                accessToken
 
-                                        model.loadProfile() {
-                                            saveData("user3Image", Anilist.avatar)
-                                            saveData("user3Id", Anilist.userid)
-                                            saveData("user3Name", Anilist.username)
+                                            model.loadProfile() {
+                                                saveData("user3Image", Anilist.avatar)
+                                                saveData("user3Id", Anilist.userid)
+                                                saveData("user3Name", Anilist.username)
+                                            }
                                         }
                                     }
                                 }

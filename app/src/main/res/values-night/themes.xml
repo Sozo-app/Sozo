@@ -3,6 +3,7 @@
     <style name="Theme.AnimeApp" parent="Theme.Base">
         <item name="colorPrimary">@color/basic_color</item>
         <item name="colorAccent">@color/basic_color_500</item>
+        <item name="colorSecondaryContainer">@color/basic_color_400</item>
         <item name="colorSurface">@color/nav_bg</item>
         <item name="android:statusBarColor">@color/status</item>
         <item name="colorOnPrimary">@color/bg_black</item>
@@ -56,7 +57,7 @@
         <item name="colorPrimary">@color/md_theme_dark_2_primary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_2_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_2_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/md_theme_dark_2_onPrimaryContainer</item>
+            <item name="colorOnPrimaryContainer">@color/md_theme_dark_2_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_dark_2_secondary</item>
         <item name="colorOnSecondary">@color/md_theme_dark_2_onSecondary</item>
         <item name="colorSecondaryContainer">@color/md_theme_dark_2_secondaryContainer</item>
@@ -182,7 +183,7 @@
         <item name="colorOnPrimaryContainer">@color/md_theme_dark_6_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_dark_6_secondary</item>
         <item name="colorOnSecondary">@color/nav_bg</item>
-        <item name="colorSecondaryContainer">@color/basic_color_500</item>
+        <item name="colorSecondaryContainer">@color/basic_color_400</item>
         <item name="colorTertiary">@color/md_theme_dark_6_tertiary</item>
         <item name="colorOnTertiary">@color/md_theme_dark_6_onTertiary</item>
         <item name="colorTertiaryContainer">@color/md_theme_dark_6_tertiaryContainer</item>

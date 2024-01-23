@@ -39,7 +39,7 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
     override fun getUnreadNotificationsCount() {
     }
 
-    fun loadProfile(success: (() -> Unit)) {
+   suspend  fun loadProfile(success: (() -> Unit)) {
         viewModelScope.launch {
             if (queriesImp.loadProfile()) {
                 success.invoke()

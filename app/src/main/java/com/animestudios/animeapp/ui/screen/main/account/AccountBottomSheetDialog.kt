@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.*
@@ -13,6 +14,7 @@ import com.animestudios.animeapp.databinding.BottomSheetAccountBinding
 import com.animestudios.animeapp.ui.screen.main.MainScreen
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AccountBottomSheetDialog(private val activity: MainScreen) :
@@ -40,10 +42,12 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
                 1 -> {
                     binding.addAccountContainer.visible()
                     model.getGenresAndTags(requireActivity())
-                    model.loadProfile() {
-                        devName1.text = Anilist.username
-                        devProfile1.loadImage(Anilist.avatar)
-                        selected1.isChecked = true
+                    lifecycleScope.launch {
+                        model.loadProfile() {
+                            devName1.text = Anilist.username
+                            devProfile1.loadImage(Anilist.avatar)
+                            selected1.isChecked = true
+                        }
                     }
                 }
 

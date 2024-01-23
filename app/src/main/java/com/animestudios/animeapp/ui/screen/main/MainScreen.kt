@@ -13,6 +13,7 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
@@ -25,6 +26,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -79,40 +81,42 @@ class MainScreen : Fragment() {
                         }
                         true
                     }
-                    model.loadProfile() {
-                        if ((readData("selectedAccount") ?: 1) == 1) {
-                            println("Tuushdi")
-                            saveData("userImage", Anilist.avatar)
-                            saveData("userId", Anilist.userid)
-                            saveData("userName", Anilist.username)
-                        }
-                        val item = bottomBar.menu.getItem(4)
-                        item.iconTintList = null
-                        item.iconTintMode = PorterDuff.Mode.DST
-                        Glide.with(requireView())
-                            .load(Anilist.avatar)
-                            .circleCrop()
-                            .into(object : CustomTarget<Drawable>() {
-                                override fun onResourceReady(
-                                    resource: Drawable,
-                                    transition: Transition<in Drawable>?
-                                ) {
-                                    println(resource.current)
-                                    item.setIcon(resource)
-                                }
+                    lifecycleScope.launch {
+                        model.loadProfile() {
+                            if ((readData("selectedAccount") ?: 1) == 1) {
+                                println("Tuushdi")
+                                saveData("userImage", Anilist.avatar)
+                                saveData("userId", Anilist.userid)
+                                saveData("userName", Anilist.username)
+                            }
+                            val item = bottomBar.menu.getItem(4)
+                            item.iconTintList = null
+                            item.iconTintMode = PorterDuff.Mode.DST
+                            Glide.with(requireView())
+                                .load(Anilist.avatar)
+                                .circleCrop()
+                                .into(object : CustomTarget<Drawable>() {
+                                    override fun onResourceReady(
+                                        resource: Drawable,
+                                        transition: Transition<in Drawable>?
+                                    ) {
+                                        println(resource.current)
+                                        item.setIcon(resource)
+                                    }
 
-                                override fun onLoadCleared(placeholder: Drawable?) {
-                                    item.setIcon(placeholder)
-                                }
-                            })
-                        binding.mainProgressBar.gone()
-                        mainViewPager.visible()
-                        overrideOnMenuItemLongClickListener(navbar)
-                        for (item in navbar.children) {
-                            TooltipCompat.setTooltipText(item, null)
+                                    override fun onLoadCleared(placeholder: Drawable?) {
+                                        item.setIcon(placeholder)
+                                    }
+                                })
+                            binding.mainProgressBar.gone()
+                            mainViewPager.visible()
+                            overrideOnMenuItemLongClickListener(navbar)
+                            for (item in navbar.children) {
+                                TooltipCompat.setTooltipText(item, null)
+                            }
                         }
+
                     }
-
                 }
             }
         }
