@@ -24,7 +24,7 @@ class ThemeManager(private val context: Activity) {
         val useSource = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
             .getBoolean("use_source_theme", false)
         val useMaterial = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-            .getBoolean("use_material_you", false)
+            .getBoolean("use_material_you", true)
         if (useSource) {
             val returnedEarly = applyDynamicColors(
                 useMaterial,

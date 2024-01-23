@@ -4,17 +4,17 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.*
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.database.Cursor
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.*
-import android.provider.Browser
 import android.util.AttributeSet
-import android.util.Log
 import android.view.*
 import android.view.animation.*
 import android.webkit.CookieManager
@@ -38,6 +38,7 @@ import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.ItemCountDownBinding
 import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.model.ProfileCategoryModel
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.tools.client
@@ -51,12 +52,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
-import java.lang.Runnable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.max
@@ -76,13 +79,64 @@ const val EMPTY_VALUE_INT = 0
 const val EMPTY_VALUE_FLOAT = 0F
 
 lateinit var bottomBar: BottomNavigationView
+
 @SuppressLint("SetTextI18n")
+
+
+fun loadProfileCategory(): ArrayList<ProfileCategoryModel> {
+    val list = ArrayList<ProfileCategoryModel>()
+    list.add(
+        ProfileCategoryModel(
+            "Appearance",
+            "Adjust the app to your liking",
+            R.drawable.appearance
+        )
+    )
+    list.add(
+        ProfileCategoryModel(
+            "Anime Source",
+            "Change Source according to you",
+            R.drawable.ic_profile_item
+        )
+    )
+    list.add(
+        ProfileCategoryModel(
+            "Player",
+            "Player appearance , playback controls , Subtitles",
+            R.drawable.ic_player
+        )
+    )
+    list.add(
+        ProfileCategoryModel(
+            "Anilist Settings",
+            "Change your anilist setting",
+            R.drawable.anilistlogo
+        )
+    )
+
+    list.add(
+        ProfileCategoryModel(
+            "About",
+            "FAQ , Contact Developer, About App",
+            R.drawable.ic_about
+        )
+    )
+
+    return list
+
+
+}
+
 fun countDown(media: Media, view: ViewGroup) {
     if (media.anime?.nextAiringEpisode != null && media.anime.nextAiringEpisodeTime != null && (media.anime.nextAiringEpisodeTime!! - System.currentTimeMillis() / 1000) <= 86400 * 7.toLong()) {
         val v = ItemCountDownBinding.inflate(LayoutInflater.from(view.context), view, false)
         view.addView(v.root, 0)
-        v.mediaCountdownText.text = "Episode ${media.anime.nextAiringEpisode!! + 1} will be released in"
-        object : CountDownTimer((media.anime.nextAiringEpisodeTime!! + 10000) * 1000 - System.currentTimeMillis(), 1000) {
+        v.mediaCountdownText.text =
+            "Episode ${media.anime.nextAiringEpisode!! + 1} will be released in"
+        object : CountDownTimer(
+            (media.anime.nextAiringEpisodeTime!! + 10000) * 1000 - System.currentTimeMillis(),
+            1000
+        ) {
             override fun onTick(millisUntilFinished: Long) {
                 val a = millisUntilFinished / 1000
                 v.mediaCountdown.text =
@@ -147,7 +201,8 @@ class PopImageButton(
 
     suspend fun clicked() {
         if (clicked) {
-            ObjectAnimator.ofArgb(image,
+            ObjectAnimator.ofArgb(
+                image,
                 "ColorFilter",
                 ContextCompat.getColor(context, c1)
             ).setDuration(120).start()
@@ -162,7 +217,7 @@ class PopImageButton(
 
     fun enabled(enabled: Boolean) {
         disabled = !enabled
-        image.alpha = if(disabled)  0.33f else 1f
+        image.alpha = if (disabled) 0.33f else 1f
     }
 }
 
@@ -466,7 +521,7 @@ fun ImageView.loadImage(file: FileUrl?, size: Int = 0) {
 var loaded: Boolean = false
 
 
-fun loadIcons():ArrayList<Int>{
+fun loadIcons(): ArrayList<Int> {
     val list = ArrayList<Int>()
     list.add(com.animestudios.animeapp.R.drawable.ic_bookmark)
     list.add(R.drawable.ic_heart)
@@ -485,8 +540,9 @@ fun View.preventTwoClick() {
 
 
 fun String.toFirstUpperCase(): String {
-    val kattaHarf = this[0].toUpperCase()  // Birinchi harfni katta qilish
-    val qolganQism = this.substring(1).toLowerCase()  // Qolgan qismni olib tashlash
+    val kattaHarf = this[0].uppercaseChar()  // Birinchi harfni katta qilish
+    val qolganQism =
+        this.substring(1).lowercase(Locale.getDefault())  // Qolgan qismni olib tashlash
     val yangiSoz = kattaHarf + qolganQism  // Yangi sozni yaratish
     return yangiSoz
 }
@@ -640,8 +696,8 @@ fun pageTransformer(): ViewPager.PageTransformer = ViewPager.PageTransformer { p
 
 fun setGenreItemAnimation(activity: Activity?, view: View) {
     val animator1: ObjectAnimator = ObjectAnimator.ofFloat(view, "translationX", -200f)
-    animator1.setRepeatCount(0)
-    animator1.setDuration(1000)
+    animator1.repeatCount = 0
+    animator1.duration = 1000
 
     val animator2 = ObjectAnimator.ofFloat(view, "translationX", 100f)
     animator2.repeatCount = 0
@@ -692,7 +748,6 @@ fun setAnimation(
         viewToAnimate.startAnimation(anim)
     }
 }
-
 
 
 fun setSlideIn(uiSettings: UISettings) = AnimationSet(false).apply {
@@ -938,19 +993,24 @@ fun updateAnilistProgress(media: Media, number: String) {
         toast("Please Login into anilist account!")
     }
 }
+
 fun String.findBetween(a: String, b: String): String? {
     val start = this.indexOf(a)
     val end = if (start != -1) this.indexOf(b, start) else return null
-    return if (end != -1) this.subSequence(start, end).removePrefix(a).removeSuffix(b).toString() else null
+    return if (end != -1) this.subSequence(start, end).removePrefix(a).removeSuffix(b)
+        .toString() else null
 }
+
 suspend fun getSize(file: FileUrl): Double? {
     return tryWithSuspend {
         client.head(file.url, file.headers, timeout = 1000).size?.toDouble()?.div(1024 * 1024)
     }
 }
+
 suspend fun getSize(file: String): Double? {
     return getSize(FileUrl(file))
 }
+
 open class BottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onStart() {
         super.onStart()
