@@ -10,22 +10,23 @@
         android:id="@+id/itemBg"
         android:layout_width="130dp"
         android:layout_height="190dp"
-        app:cardBackgroundColor="?attr/colorOnSurface"
+        app:cardBackgroundColor="?attr/colorControlNormal"
         app:cardCornerRadius="16dp"
         app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="?attr/colorOnPrimaryContainer"
+        app:strokeColor="?attr/colorPrimary"
         app:strokeWidth="2dp">
 
 
-        <FrameLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/cornered_bg">
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/cornered_bg"
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -40,19 +41,95 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/app_name"
-                    android:textColor="?attr/colorPrimaryContainer"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="14sp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="17dp"
                     android:layout_height="17dp"
+
                     android:layout_gravity="center|end"
-                    android:layout_marginStart="30dp"
-                    app:cardBackgroundColor="?attr/colorPrimaryContainer"
-                    app:cardCornerRadius="99dp" />
+                    android:layout_marginStart="20dp"
+                    app:cardBackgroundColor="?attr/colorPrimary"
+                    app:cardCornerRadius="99dp">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_admin"/>
+                </androidx.cardview.widget.CardView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/cornered_bg"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="45dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
+                    app:cardBackgroundColor="?attr/colorControlNormal"
+                    app:cardCornerRadius="6dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="45dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="?attr/colorControlNormal"
+                    app:cardCornerRadius="6dp" />
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </FrameLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginStart="16dp"
+
+                android:background="?attr/colorPrimary" />
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+
+                android:background="?attr/colorPrimary" />
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+
+                android:background="?attr/colorPrimary" />
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+
+                android:background="?attr/colorPrimary" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </com.google.android.material.card.MaterialCardView>

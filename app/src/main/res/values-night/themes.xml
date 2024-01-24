@@ -44,7 +44,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_1_background</item>
         <item name="colorControlNormal">#222527</item>
         <item name="colorSurface">@color/md_theme_dark_1_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_1_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_1_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_1_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_1_outline</item>
@@ -57,7 +56,7 @@
         <item name="colorPrimary">@color/md_theme_dark_2_primary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_2_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_2_primaryContainer</item>
-            <item name="colorOnPrimaryContainer">@color/md_theme_dark_2_onPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_2_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_dark_2_secondary</item>
         <item name="colorOnSecondary">@color/md_theme_dark_2_onSecondary</item>
         <item name="colorSecondaryContainer">@color/md_theme_dark_2_secondaryContainer</item>
@@ -75,7 +74,6 @@
         <item name="colorControlNormal">#24282B</item>
         <item name="colorButtonNormal">@color/md_theme_dark_1_background</item>
         <item name="colorSurface">@color/md_theme_dark_2_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_2_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_2_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_2_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_2_outline</item>
@@ -106,7 +104,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_3_background</item>
         <item name="colorControlNormal">#2A242C</item>
         <item name="colorSurface">@color/md_theme_dark_3_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_3_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_3_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_3_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_3_outline</item>
@@ -137,7 +134,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_4_background</item>
         <item name="colorControlNormal">#372C2E</item>
         <item name="colorSurface">@color/md_theme_dark_4_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_4_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_4_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_4_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_4_outline</item>
@@ -168,7 +164,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_5_background</item>
         <item name="colorControlNormal">#2B292E</item>
         <item name="colorSurface">@color/md_theme_dark_5_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_5_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_5_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_5_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_5_outline</item>
@@ -178,8 +173,8 @@
     </style>
 
     <style name="Theme.AnimeApp.Red" parent="Theme.Base">
-        <item name="colorOnPrimary">@color/basic_color_500</item>
-        <item name="colorPrimaryContainer">@color/md_theme_dark_6_primaryContainer</item>
+        <item name="colorOnPrimary">@color/bg_filter_dialog</item>
+        <item name="colorPrimaryContainer">@color/basic_color_500</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_dark_6_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_dark_6_secondary</item>
         <item name="colorOnSecondary">@color/nav_bg</item>
@@ -195,7 +190,7 @@
         <item name="windowActionBar">false</item>
         <item name="colorErrorContainer">@color/md_theme_dark_6_errorContainer</item>
         <item name="colorPrimary">@color/basic_color</item>
-        <item name="colorAccent">@color/basic_color_500</item>
+        <item name="colorAccent">@color/md_theme_dark_6_secondary</item>
         <item name="colorSurface">@color/nav_bg</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorOnError">@color/md_theme_dark_6_onError</item>
@@ -203,7 +198,7 @@
         <item name="android:colorBackground">@color/bg</item>
         <item name="colorOnBackground">@color/bg</item>
         <item name="colorControlNormal">@color/nav_bg</item>
-        <item name="colorSurfaceVariant">@color/basic_color_500</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_6_surfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_6_outline</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_6_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_dark_6_inverseSurface</item>
@@ -232,7 +227,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_7_background</item>
         <item name="colorControlNormal">#323035</item>
         <item name="colorSurface">@color/md_theme_dark_7_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_7_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_7_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_7_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_7_outline</item>
@@ -263,7 +257,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_8_background</item>
         <item name="colorControlNormal">#202525</item>
         <item name="colorSurface">@color/md_theme_dark_8_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_8_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_8_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_8_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_8_outline</item>
@@ -294,7 +287,6 @@
         <item name="colorOnBackground">@color/md_theme_dark_9_background</item>
         <item name="colorControlNormal">#252520</item>
         <item name="colorSurface">@color/md_theme_dark_9_surface</item>
-        <item name="colorOnSurface">@color/md_theme_dark_9_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_9_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_9_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_9_outline</item>
