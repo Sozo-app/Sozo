@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.animestudios.animeapp.databinding.ProfileScreenBinding
+import androidx.navigation.fragment.findNavController
+import com.animestudios.animeapp.R
 import com.animestudios.animeapp.loadProfileCategory
+import com.animestudios.animeapp.tools.animationTransaction
 import com.animestudios.animeapp.ui.screen.profile.adapter.ProfileAdapter
 
 
@@ -21,7 +23,11 @@ class ProfileScreen : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = com.animestudios.animeapp.databinding.FragmentProfileScreenBinding.inflate(inflater, container, false)
+        _binding = com.animestudios.animeapp.databinding.FragmentProfileScreenBinding.inflate(
+            inflater,
+            container,
+            false
+        )
         return _binding?.root
     }
 
@@ -31,6 +37,10 @@ class ProfileScreen : Fragment() {
         binding.apply {
             adapter.submitList(loadProfileCategory())
             profileRv.adapter = adapter
+
+            linearLayout5.setOnClickListener {
+                findNavController().navigate(R.id.themeScreen, null, animationTransaction().build())
+            }
 
         }
 

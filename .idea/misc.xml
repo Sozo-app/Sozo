@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/background_gradient_three.xml" value="0.3175" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/banner_bg.xml" value="0.3015" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/cornered_bg.xml" value="0.308" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_moon.xml" value="0.3015" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/play.xml" value="0.1245" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/thumb_selector.xml" value="0.3015" />
@@ -26,6 +27,7 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/list_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/profile_category_item.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/profile_screen.xml" value="0.2988679352838745" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/theme_item.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/theme_screen.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/menu/menu_profile.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/xml/main_fragment_scene.xml" value="0.321875" />

@@ -12,7 +12,7 @@
         android:id="@+id/materialToolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,6 +22,7 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -36,7 +37,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Appearance"
-            android:textColor="?attr/colorSecondaryContainer"
+            android:textColor="?attr/colorPrimary"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -51,7 +52,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_moon"
-                app:tint="?attr/colorTertiaryContainer" />
+                app:tint="?attr/colorPrimaryContainer" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="14dp"
-                    android:background="?attr/colorSurfaceVariant" />
+                    android:background="?attr/colorSurface" />
 
                 <com.google.android.material.materialswitch.MaterialSwitch
                     android:layout_width="wrap_content"
@@ -105,10 +106,77 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="App Theme"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/itemBg"
+            android:layout_width="130dp"
+            android:layout_height="190dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="?attr/colorControlNormal"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="?attr/colorPrimary"
+            app:strokeWidth="2dp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/cornered_bg">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="@string/app_name"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="center|end"
+                        android:layout_marginStart="25dp"
+                        app:cardBackgroundColor="?attr/colorPrimary"
+                        app:cardCornerRadius="99dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </FrameLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

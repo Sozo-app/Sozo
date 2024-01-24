@@ -143,6 +143,7 @@
         <item name="colorPrimaryContainer">@color/md_theme_light_1_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_light_1_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_light_1_secondary</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnSecondary">@color/md_theme_light_1_onSecondary</item>
         <item name="colorSecondaryContainer">@color/md_theme_light_1_secondaryContainer</item>
         <item name="titleTextColor">@color/white</item>
@@ -324,7 +325,7 @@
         <item name="colorOnPrimary">@color/md_theme_light_6_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_light_6_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_light_6_onPrimaryContainer</item>
-        <item name="colorSecondary">@color/md_theme_light_6_secondary</item>
+        <item name="colorSecondary">@color/basic_color_500</item>
         <item name="titleTextColor">@color/white</item>
         <item name="colorOnSecondary">@color/md_theme_light_6_onSecondary</item>
         <item name="colorSecondaryContainer">@color/md_theme_light_6_secondaryContainer</item>
@@ -429,8 +430,6 @@
         <item name="colorOnErrorContainer">@color/bg_white</item>
         <item name="android:colorBackground">@color/bg_white</item>
         <item name="colorOnBackground">@color/bg_black</item>
-        <item name="colorSurface">@color/bg_white</item>
-        <item name="colorOnSurface">@color/bg_black</item>
         <item name="colorSurfaceVariant">@color/bg_white</item>
         <item name="colorOnSurfaceVariant">@color/bg_black</item>
         <item name="colorOutline">@color/bg_black</item>

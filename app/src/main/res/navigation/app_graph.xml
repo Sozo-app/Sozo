@@ -61,4 +61,9 @@
         android:id="@+id/messageScreen"
         android:name="com.animestudios.animeapp.ui.screen.message.MessageScreen"
         android:label="MessageScreen" />
+    <fragment
+        android:id="@+id/themeScreen"
+        android:name="com.animestudios.animeapp.ui.screen.profile.page.theme.ThemeScreen"
+        android:label="theme_screen"
+        tools:layout="@layout/theme_screen" />
 </navigation>
