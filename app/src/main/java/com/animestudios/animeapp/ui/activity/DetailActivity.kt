@@ -23,6 +23,8 @@ import com.animestudios.animeapp.databinding.DetailScreenBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.ImageUtil
+import com.animestudios.animeapp.tools.slideStart
+import com.animestudios.animeapp.tools.slideUp
 import com.animestudios.animeapp.ui.screen.detail.adapter.TabAdapter
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator
@@ -159,6 +161,16 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 binding.fabBack.visible()
                 binding.viewPager.visible()
                 binding.animeDetailProgress.gone()
+                binding.mediaInfoDescription.slideUp(700,1)
+                binding.fabBack.slideUp(700,1)
+                binding.playMedia.slideUp(700,1)
+                binding.animeCover.slideUp(700,1)
+                binding.floatingActionButton.slideUp(700,1)
+                binding.mediaStatus.slideStart(700,1)
+                binding.title.slideStart(700,1)
+                binding.mainData.slideStart(700,1)
+                binding.linearLayout3.slideStart(700,1)
+
                 binding.mediaNotify.setOnClickListener {
                     val i = Intent(Intent.ACTION_SEND)
                     i.type = "text/plain"
@@ -295,6 +307,8 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 .setDuration(duration).start()
             ObjectAnimator.ofFloat(binding.mediaCollapseContainer, "translationX", 0f)
                 .setDuration(duration).start()
+            binding.mediaCollapseContainer.alphaAnim()
+            binding.mediaAccessContainer.slideStart(700,1)
             binding.fabBack.visible()
             binding.mediaTitleToolbar.gone()
             binding.mediaAccessContainer.visible()

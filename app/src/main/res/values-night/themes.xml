@@ -42,7 +42,7 @@
         <item name="colorOnErrorContainer">@color/md_theme_dark_1_onErrorContainer</item>
         <item name="android:colorBackground">@color/md_theme_dark_1_background</item>
         <item name="colorOnBackground">@color/md_theme_dark_1_background</item>
-        <item name="colorControlNormal">#222527</item>
+        <item name="colorControlNormal">@color/md_theme_dark_1_colorControlNormal</item>
         <item name="colorSurface">@color/md_theme_dark_1_surface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_1_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_1_onSurfaceVariant</item>

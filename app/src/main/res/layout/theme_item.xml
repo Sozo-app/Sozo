@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
@@ -35,6 +36,8 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/pieceTitle"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -45,6 +48,7 @@
                     android:textSize="14sp" />
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/itemCard"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
 
@@ -54,10 +58,15 @@
                     app:cardCornerRadius="99dp">
 
                     <ImageView
+
+                        android:id="@+id/selectedImg"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_correct"
                         android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_admin"/>
+                        app:tint="?attr/colorControlNormal"
+                        tools:visibility="visible" />
                 </androidx.cardview.widget.CardView>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -69,6 +78,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/bigPiece"
                     android:layout_width="45dp"
                     android:layout_height="55dp"
                     android:layout_marginStart="8dp"
@@ -77,6 +87,7 @@
                     app:cardCornerRadius="6dp" />
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/bigPiece2"
                     android:layout_width="45dp"
                     android:layout_height="55dp"
                     android:layout_gravity="bottom"
@@ -97,37 +108,48 @@
             android:layout_gravity="bottom"
             android:orientation="horizontal">
 
-            <View
+            <androidx.cardview.widget.CardView
+                android:id="@+id/piece1"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginStart="16dp"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
-                android:background="?attr/colorPrimary" />
-
-            <View
+            <androidx.cardview.widget.CardView
+                android:id="@+id/piece2"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
 
-                android:background="?attr/colorPrimary" />
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
-            <View
+            <androidx.cardview.widget.CardView
+                android:id="@+id/piece3"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
 
-                android:background="?attr/colorPrimary" />
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
-            <View
+            <androidx.cardview.widget.CardView
+                android:id="@+id/piece4"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
 
-                android:background="?attr/colorPrimary" />
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

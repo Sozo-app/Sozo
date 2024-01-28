@@ -223,6 +223,8 @@
                             android:insetTop="0dp"
                             android:insetRight="0dp"
                             android:insetBottom="0dp"
+                            android:id="@+id/playMedia"
+
                             android:text="Play"
                             android:textColor="@color/white"
                             android:textSize="16sp"

@@ -39,6 +39,7 @@ import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.ItemCountDownBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.model.ProfileCategoryModel
+import com.animestudios.animeapp.model.ThemeModel
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.tools.client
@@ -82,6 +83,73 @@ lateinit var bottomBar: BottomNavigationView
 
 @SuppressLint("SetTextI18n")
 
+fun loadThemes(): ArrayList<ThemeModel> {
+    val list = ArrayList<ThemeModel>()
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_1_primary,
+            R.color.md_theme_dark_1_colorControlNormal,
+            "BLUE"
+        )
+    )
+
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_2_primary,
+            R.color.md_theme_dark_2_colorControlNormal,
+            "GREEN"
+        )
+    )
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_3_primary,
+            R.color.md_theme_dark_3_colorControlNormal,
+            "PURPLE"
+        )
+    )
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_4_primary,
+            R.color.md_theme_dark_4_colorControlNormal,
+            "PINK"
+        )
+    )
+
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_5_primary,
+            R.color.md_theme_dark_1_colorControlNormal,
+            "SAIKOU"
+        )
+    )
+    list.add(
+        ThemeModel(R.color.basic_color, R.color.banner_bg, "RED")
+    )
+
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_7_primary,
+            R.color.md_theme_dark_7_colorControlNormal,
+            "LAVENDER"
+        )
+    )
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_8_primary,
+            R.color.md_theme_dark_8_colorControlNormal,
+            "OCEAN"
+        )
+    )
+    list.add(
+        ThemeModel(
+            R.color.md_theme_dark_9_primary,
+            R.color.md_theme_dark_9_colorControlNormal,
+            "YELLOW"
+        )
+    )
+    return list
+}
+
 
 fun loadProfileCategory(): ArrayList<ProfileCategoryModel> {
     val list = ArrayList<ProfileCategoryModel>()
@@ -121,7 +189,27 @@ fun loadProfileCategory(): ArrayList<ProfileCategoryModel> {
             R.drawable.ic_about
         )
     )
-
+    list.add(
+        ProfileCategoryModel(
+            "Appearance",
+            "Adjust the app to your liking",
+            R.drawable.appearance
+        )
+    )
+    list.add(
+        ProfileCategoryModel(
+            "Anime Source",
+            "Change Source according to you",
+            R.drawable.ic_profile_item
+        )
+    )
+    list.add(
+        ProfileCategoryModel(
+            "Player",
+            "Player appearance , playback controls , Subtitles",
+            R.drawable.ic_player
+        )
+    )
     return list
 
 
