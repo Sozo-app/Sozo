@@ -163,7 +163,7 @@ class MainScreen : Fragment() {
     private fun overrideOnMenuItemLongClickListener(bottomNavigationView: BottomNavigationView?) {
         if (bottomNavigationView != null && bottomNavigationView.getChildCount() > 0) {
             val menuView = bottomNavigationView.getChildAt(0) as ViewGroup
-            menuView.getChildAt(4).setOnLongClickListener {
+            menuView.getChildAt(3).setOnLongClickListener {
                 println("Profile Bosildi")
                 AccountBottomSheetDialog(this).show(parentFragmentManager, "dialog")
                 true
