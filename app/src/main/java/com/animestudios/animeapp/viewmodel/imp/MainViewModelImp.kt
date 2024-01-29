@@ -44,7 +44,7 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
             if (queriesImp.loadProfile()) {
                 success.invoke()
             } else
-                snackString("Error loading Anilist User Data")
+                snackString("Error loading AniList User Data")
         }
     }
 
