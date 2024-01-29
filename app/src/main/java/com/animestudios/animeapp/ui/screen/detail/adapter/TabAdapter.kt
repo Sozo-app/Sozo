@@ -14,6 +14,8 @@ import com.animestudios.animeapp.ui.screen.profile.ProfileScreen
 
 class TabAdapter( fragmentManager: FragmentManager,lifecycle:Lifecycle) :
     FragmentStateAdapter(fragmentManager,lifecycle) {
+
+
     override fun getItemCount(): Int {
         return 4
     }
@@ -21,10 +23,14 @@ class TabAdapter( fragmentManager: FragmentManager,lifecycle:Lifecycle) :
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
-                EpisodeScreen()
+           val screen  =     EpisodeScreen()
+
+
+                screen
             }
             1-> {
-                CastScreen()
+                val screen =CastScreen()
+               screen
             }
             2->{
                 CastScreen()

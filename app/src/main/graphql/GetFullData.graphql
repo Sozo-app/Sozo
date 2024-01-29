@@ -1,0 +1,42 @@
+query GetFullDataById($id:Int){
+    Media(id: $id){
+        episodes
+        duration
+
+        startDate {
+            year
+            month
+            day
+        }
+        endDate {
+            year
+            month
+            day
+        }
+        status
+        studios{
+            nodes {
+                name
+            }
+        }
+        staff{
+            nodes {
+                name {
+                     first
+                }
+            }
+        }
+        stats {
+            scoreDistribution {
+                score
+                amount
+            }
+
+            statusDistribution {
+                amount
+                status
+            }
+        }
+    }
+
+}

@@ -6,7 +6,6 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.math.MathUtils
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.animestudios.animeapp.anilist.response.Episode
-import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.EpisodeScreenBinding
 import com.animestudios.animeapp.dp
 import com.animestudios.animeapp.media.Media
@@ -34,9 +32,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import okio.`-DeprecatedOkio`.source
-import java.text.DecimalFormat
-import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -61,6 +56,8 @@ class EpisodeScreen : Fragment() {
 
     private val model by activityViewModels<DetailsViewModelImpl>()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,7 +75,12 @@ class EpisodeScreen : Fragment() {
 
         var maxGridSize = (screenWidth / 100f).roundToInt()
         maxGridSize = max(4, maxGridSize - (maxGridSize % 2))
-        uiSettings = readData("ui_settings", toast = false) ?: UISettings().apply { saveData("ui_settings", this) }
+        uiSettings = readData("ui_settings", toast = false) ?: UISettings().apply {
+            saveData(
+                "ui_settings",
+                this
+            )
+        }
 
         val gridLayoutManager = GridLayoutManager(requireContext(), maxGridSize)
 
@@ -87,11 +89,11 @@ class EpisodeScreen : Fragment() {
                 val style = episodeAdapter.getItemViewType(position)
 
                 return when (position) {
-                    0    -> maxGridSize
+                    0 -> maxGridSize
                     else -> when (style) {
-                        0    -> maxGridSize
-                        1    -> 2
-                        2    -> 1
+                        0 -> maxGridSize
+                        1 -> 2
+                        2 -> 1
                         else -> maxGridSize
                     }
                 }
@@ -121,9 +123,10 @@ class EpisodeScreen : Fragment() {
                     model.watchSources = if (media.isAdult) HAnimeSources else AnimeSources
 
                     headerAdapter = AnimeWatchAdapter(it, this, model.watchSources!!)
-                    episodeAdapter = EpisodeAdapter( media, this)
+                    episodeAdapter = EpisodeAdapter(media, this)
 
-                    binding.animeSourceRecycler.adapter = ConcatAdapter(headerAdapter, episodeAdapter)
+                    binding.animeSourceRecycler.adapter =
+                        ConcatAdapter(headerAdapter, episodeAdapter)
 
                     lifecycleScope.launch(Dispatchers.IO) {
                         awaitAll(
@@ -145,15 +148,20 @@ class EpisodeScreen : Fragment() {
                     episodes.forEach { (i, episode) ->
                         if (media.anime?.fillerEpisodes != null) {
                             if (media.anime!!.fillerEpisodes!!.containsKey(i)) {
-                                episode.title = episode.title ?: media.anime!!.fillerEpisodes!![i]?.title
+                                episode.title =
+                                    episode.title ?: media.anime!!.fillerEpisodes!![i]?.title
                                 episode.filler = media.anime!!.fillerEpisodes!![i]?.filler ?: false
                             }
                         }
                         if (media.anime?.kitsuEpisodes != null) {
                             if (media.anime!!.kitsuEpisodes!!.containsKey(i)) {
-                                episode.desc = episode.desc ?: media.anime!!.kitsuEpisodes!![i]?.desc
-                                episode.title = episode.title ?: media.anime!!.kitsuEpisodes!![i]?.title
-                                episode.thumb = episode.thumb ?: media.anime!!.kitsuEpisodes!![i]?.thumb ?: FileUrl[media.cover]
+                                episode.desc =
+                                    episode.desc ?: media.anime!!.kitsuEpisodes!![i]?.desc
+                                episode.title =
+                                    episode.title ?: media.anime!!.kitsuEpisodes!![i]?.title
+                                episode.thumb =
+                                    episode.thumb ?: media.anime!!.kitsuEpisodes!![i]?.thumb
+                                            ?: FileUrl[media.cover]
                             }
                         }
                     }
@@ -162,9 +170,9 @@ class EpisodeScreen : Fragment() {
                     //CHIP GROUP
                     val total = episodes.size
 
-                        val arr = media.anime!!.episodes!!.keys.toTypedArray()
-                        start = 0
-                        end = total
+                    val arr = media.anime!!.episodes!!.keys.toTypedArray()
+                    start = 0
+                    end = total
 
                     reload()
                 }

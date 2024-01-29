@@ -20,24 +20,15 @@ class CastScreen : Fragment() {
     private val binding get() = _binding!!
     private val model by activityViewModels<DetailsViewModelImpl>()
     lateinit var uiSettings: UISettings
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = CastScreenBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         uiSettings = readData("ui_settings", toast = false) ?: UISettings().apply {
             saveData(
                 "ui_settings",
                 this
             )
         }
-        model.getMedia().observe(viewLifecycleOwner) {
+        model.getMedia().observe(this) {
             if (it != null) {
                 val supportList = ArrayList<com.animestudios.animeapp.media.Character>()
                 val mainList = ArrayList<Character>()
@@ -56,5 +47,19 @@ class CastScreen : Fragment() {
         }
 
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = CastScreenBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
 
 }

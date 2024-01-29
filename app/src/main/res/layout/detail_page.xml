@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,288 +7,599 @@
     tools:context=".ui.screen.detail.pages.detail.DetailPage">
 
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1.5dp"
-        android:layout_marginHorizontal="22dp"
-        android:layout_marginTop="24dp"
-        android:background="?attr/colorOnSurfaceVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@id/divider">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/averageScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="87%"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:text="Average"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/meanScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="88%"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:text="Mean"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/popularityScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/poppins_bold"
-                android:text="2,01,456"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:text="Popularity"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/favoritesScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/poppins_bold"
-                android:text="10,282"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:text="Favorites"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="0dp"
-        android:layout_height="1.5dp"
-        android:layout_marginTop="10dp"
-
-        android:background="?attr/colorOnSurfaceVariant"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Information"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/view4"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
-
-    <TextView
-        android:id="@+id/mediaInfoDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:layout_marginEnd="4dp"
-        android:fontFamily="@font/poppins_semi_bold"
-        android:gravity="start"
-        android:maxLines="5"
-        android:overScrollMode="never"
-        android:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
-        android:visibility="visible"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-
-    <TableLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        android:paddingStart="24dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="36dp"
-        android:paddingBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/mediaInfoDescription">
+        android:layout_height="match_parent">
 
-
-        <TableRow
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="6dp"
-            android:orientation="horizontal">
+            android:id="@+id/detailContainer"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/mediaInfoTotalTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.58"
-                android:text="Romanji"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/mediaTitleRomanji"
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1.5dp"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginTop="24dp"
+                android:background="?attr/colorOnSurfaceVariant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Chainsaw Man"
-                android:textAlignment="textEnd" />
-        </TableRow>
 
-        <TableRow
-            android:id="@+id/mediaTitleContainerEnglish"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="6dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@id/divider">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/averageScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="87%"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="Average"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/meanScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="88%"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="Mean"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/popularityScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="2,01,456"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="Popularity"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/favoritesScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="10,282"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="Favorites"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="1.5dp"
+                android:layout_marginTop="10dp"
+
+                android:background="?attr/colorOnSurfaceVariant"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
 
             <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.58"
-                android:text="English"
-                android:textStyle="bold" />
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Information"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/view4"
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
 
             <TextView
-                android:id="@+id/mediaTitleEnglish"
+                android:id="@+id/mediaInfoDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_bold"
-                android:textAlignment="textEnd" />
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="start"
+                android:maxLines="5"
+                android:overScrollMode="never"
+                android:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
+                android:visibility="visible"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Chainsaw Man"
-                android:textAlignment="textEnd" />
-        </TableRow>
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="36dp"
+                android:paddingBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/mediaInfoDescription">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="6dp"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.58"
-                android:text="Native"
-                android:textStyle="bold" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/mediaTitleNative"
+                    <TextView
+                        android:id="@+id/mediaInfoTotalTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Romanji"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mediaTitleRomanji"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Chainsaw Man"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/mediaTitleContainerEnglish"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="English"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mediaTitleEnglish"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Chainsaw Man"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Native"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mediaTitleNative"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="チェンソーマン"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/synonymsRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Synonyms"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/synonymsTitle1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:maxLines="1"
+                            android:text="CSM"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/synonymsTitle2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:maxLines="1"
+                            android:text="链锯人"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/synonymsTitle3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:maxLines="1"
+                            android:text="Человек-бензопила"
+                            android:textAlignment="textEnd" />
+
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/formatRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Format"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/formatTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="Tv"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/episodesRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Episodes"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/episodeTotal"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="8"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/episodeDurationRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Episodes Duration"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/episodeDurationTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="25 minutes"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/sourceTypeRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Source"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sourceTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="Anime"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/statusRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Status"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/statusTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="Finished"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/startDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Start Date"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/startDateTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="12 Oct 2022"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/endDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="End Date"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/endDateTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="28 Dec 2022"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/studiosRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Studios"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/studiosTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="MAPPA"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/producersRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginVertical="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.58"
+                        android:text="Producers"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/producerTitle"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="3"
+                        android:text="Shueisha"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+            </TableLayout>
+
+            <View
+                android:id="@+id/view5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_bold"
-                android:text="チェンソーマン"
-                android:textAlignment="textEnd" />
-        </TableRow>
+                android:layout_height="1.5dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/colorOnSurfaceVariant"
 
-        <TableRow
-            android:id="@+id/synonymsRow"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="6dp"
-            android:orientation="horizontal">
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@id/tableLayout" />
 
             <TextView
+                android:id="@+id/titleGenre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.58"
-                android:text="Synonyms"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/synonymsTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
-                android:maxLines="4"
-                android:text="CSM\n链锯人\nЧеловек-бензопила"
-                android:textAlignment="textEnd" />
-        </TableRow>
+                android:text="Genres"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/textView4"
+                app:layout_constraintTop_toBottomOf="@id/view5" />
+
+            <com.animestudios.animeapp.FadingEdgeRecyclerView
+                android:id="@+id/genreRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginVertical="8dp"
+                android:orientation="horizontal"
+                android:paddingStart="22dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/titleGenre"
+                app:layout_constraintTop_toBottomOf="@+id/titleGenre"
+                app:spanCount="2"
+                tools:listitem="@layout/genres_item" />
 
 
-    </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/detailProgress"
+            />
+    </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

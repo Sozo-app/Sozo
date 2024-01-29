@@ -11,7 +11,7 @@ plugins {
 
 android {
     namespace 'com.animestudios.animeapp'
-    compileSdk 33
+    compileSdk 32
     apollo {
 
         packageName.set("com.animestudios.animeapp")
@@ -21,7 +21,7 @@ android {
     defaultConfig {
         applicationId "com.animestudios.animeapp"
         minSdk 24
-        targetSdk 33
+        targetSdk 32
 
         versionCode 1
         versionName "1.0"
@@ -197,7 +197,9 @@ dependencies {
     implementation "com.airbnb.android:epoxy-paging3:$epoxyVersion"
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
-    implementation 'com.github.sina-seyfi:AdvancedCardView:1.0.1'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
 
 }

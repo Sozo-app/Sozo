@@ -9,11 +9,20 @@ import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.animestudios.animeapp.databinding.DetailPageBinding
 import com.animestudios.animeapp.gone
+import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.getNumberFormatting
+import com.animestudios.animeapp.ui.screen.browse.page.genre.adapter.GenreAdapter
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
+import com.animestudios.animeapp.viewmodel.imp.GenresViewModelImp
+import com.animestudios.animeapp.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailPage : Fragment() {
@@ -21,6 +30,7 @@ class DetailPage : Fragment() {
     private val model by activityViewModels<DetailsViewModelImpl>()
     private var _binding: DetailPageBinding? = null
     private val binding get() = _binding!!
+    private val genreModel: GenresViewModelImp by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,41 +50,111 @@ class DetailPage : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun observeData() {
         model.getMedia().observe(viewLifecycleOwner) {
+            val media = it
             binding.apply {
-                averageScore.text = it.averageScore.getNumberFormatting() + "%"
-                meanScore.text = it.meanScore?.getNumberFormatting() + "%"
-                popularityScore.text = it.popularity!!.getNumberFormatting()
-                favoritesScore.text = it.favourites.getNumberFormatting()
-                mediaTitleRomanji.text = it.nameRomaji
+                model.getFulDataById(it)
+            }
 
-                mediaTitleEnglish.text=it.englishName
-                mediaTitleNative.text=it.nativeName
 
-                if (it.synonyms.isNotEmpty()&&it.synonyms.size>2){
-                    synonymsTitle.text="${it.synonyms.get(0)}\n${it.synonyms.get(1)}\n${it.synonyms.get(2)}"
-                }else{
-                    binding.synonymsTitle.gone()
-                    binding.synonymsRow.gone()
-                }
+            model.getFullData.observe(viewLifecycleOwner) {
+                when (it) {
+                    is Resource.Error -> TODO()
+                    Resource.Loading -> {
+                        binding.apply {
+                            detailContainer.gone()
+                            detailProgress.visible()
+                        }
+                    }
+                    is Resource.Success -> {
+                        val mediaFull = it.data
+                        binding.apply {
 
-            ///Description
-                val desc = HtmlCompat.fromHtml(
-                    (it.description ?: "null").replace("\\n", "<br>").replace("\\\"", "\""),
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
-                binding.mediaInfoDescription.text =
-                    "\t\t\t" + if (desc.toString() != "null") desc else "No Description Available"
 
-                binding.mediaInfoDescription.setOnClickListener {
-                    if (binding.mediaInfoDescription.maxLines == 5) {
-                        ObjectAnimator.ofInt(binding.mediaInfoDescription, "maxLines", 100)
-                            .setDuration(950).start()
-                    } else {
-                        ObjectAnimator.ofInt(binding.mediaInfoDescription, "maxLines", 5)
-                            .setDuration(400).start()
+                            detailProgress.gone()
+                            detailContainer.visible()
+
+
+                            binding.studiosTitle.text =
+                                mediaFull.Media?.studios?.nodes?.get(0)?.name ?: "XXX"
+                            binding.statusTitle.text = mediaFull.Media?.status?.rawValue ?: "XXX"
+
+                            binding.producerTitle.text =
+                                mediaFull.Media?.staff?.nodes?.get(0)?.name?.first ?: "XXX"
+
+                            startDateTitle.text =media.startDate?.toISOString()
+                            endDateTitle.text =media.endDate?.toISOString()
+
+
+                            averageScore.text = media.averageScore.getNumberFormatting() + "%"
+                            meanScore.text = media.meanScore?.getNumberFormatting() + "%"
+                            popularityScore.text = media.popularity!!.getNumberFormatting()
+                            favoritesScore.text = media.favourites.getNumberFormatting()
+                            mediaTitleRomanji.text = media.nameRomaji
+
+                            mediaTitleEnglish.text = media.englishName
+                            mediaTitleNative.text = media.nativeName
+
+                            if (media.synonyms.isNotEmpty() && media.synonyms.size > 2) {
+                                binding.synonymsTitle1.text = media.synonyms.get(0)
+                                binding.synonymsTitle2.text = media.synonyms.get(1)
+                                binding.synonymsTitle3.text = media.synonyms.get(2)
+                            } else {
+                                binding.synonymsTitle1.gone()
+                                binding.synonymsTitle2.gone()
+                                binding.synonymsTitle3.gone()
+                                binding.synonymsRow.gone()
+                            }
+
+                            ///Description
+                            val desc = HtmlCompat.fromHtml(
+                                (media.description ?: "null").replace("\\n", "<br>")
+                                    .replace("\\\"", "\""),
+                                HtmlCompat.FROM_HTML_MODE_LEGACY
+                            )
+                            binding.mediaInfoDescription.text =
+                                "\t\t\t" + if (desc.toString() != "null") desc else "No Description Available"
+
+                            binding.mediaInfoDescription.setOnClickListener {
+                                if (binding.mediaInfoDescription.maxLines == 5) {
+                                    ObjectAnimator.ofInt(
+                                        binding.mediaInfoDescription,
+                                        "maxLines",
+                                        100
+                                    )
+                                        .setDuration(950).start()
+                                } else {
+                                    ObjectAnimator.ofInt(
+                                        binding.mediaInfoDescription,
+                                        "maxLines",
+                                        5
+                                    )
+                                        .setDuration(400).start()
+                                }
+                            }
+
+
+                            //Genre Rv
+                            val adapter = GenreAdapter(false)
+                            val screenWidth = resources.displayMetrics.run { widthPixels / density }
+                            if (genreModel.genres != null) {
+                                adapter.genres = genreModel.genres!!
+                                adapter.pos = ArrayList(genreModel.genres!!.keys)
+                                if (genreModel.done) genreModel.doneListener?.invoke()
+                            }
+                            binding.genreRv.adapter = adapter
+                            binding.genreRv.layoutManager =
+                                GridLayoutManager(requireActivity(), (screenWidth / 156f).toInt())
+
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                genreModel.loadGenres(media.genres) {
+                                    MainScope().launch {
+                                        adapter.addGenre(it)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-
             }
         }
     }

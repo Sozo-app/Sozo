@@ -34,9 +34,9 @@ data class FuzzyDate(
     fun toISOString(): String {
         return "${
             year.toString().padStart(4, '0')
-        }-${
+        } ${
             month.toString().padStart(2, '0')
-        }-${
+        } ${
             day.toString().padStart(2, '0')
         }"
     }

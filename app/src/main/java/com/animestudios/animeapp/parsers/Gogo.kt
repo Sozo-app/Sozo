@@ -22,11 +22,13 @@ class Gogo : AnimeParser() {
         val animeId = pageBody.select("input#movie_id").attr("value").toString()
 
         val epList = client
-            .get("https://ajax.gogo-load.com/ajax/load-list-episode?ep_start=0&ep_end=$lastEpisode&id=$animeId").document
-            .select("ul > li > a").reversed()
-        epList.forEach {
+            .get("https://ajax.gogo-load.com/ajax/load-list-episode?ep_start=0&ep_end=$lastEpisode&id=$animeId")
+        println(epList.body.string())
+
+        epList.document
+            .select("ul > li > a").reversed().forEach {
             val num = it.select(".name").text().replace("EP", "").trim()
-            list.add(Episode(num,hostUrl + it.attr("href").trim()))
+            list.add(Episode(num,hostUrl + it.attr("href").trim(),))
         }
 
         return list

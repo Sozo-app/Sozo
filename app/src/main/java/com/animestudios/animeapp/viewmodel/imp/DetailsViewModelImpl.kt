@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.animestudios.animeapp.GetFullDataByIdQuery
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Episode
@@ -17,6 +18,7 @@ import com.animestudios.animeapp.parsers.VideoExtractor
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.sourcers.WatchSources
+import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.tryWithSuspend
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +36,11 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     private val _coverImageForPreview = MutableLiveData<String>()
     val coverImageForPreview: LiveData<String>
         get() = _coverImageForPreview
+
+    private val _getFullData = MutableLiveData<Resource<GetFullDataByIdQuery.Data>>()
+    val getFullData: LiveData<Resource<GetFullDataByIdQuery.Data>>
+        get() = _getFullData
+
 
     fun saveSelected(id: Int, data: Selected, activity: Activity? = null) {
         saveData("$id-select", data, activity)
@@ -175,6 +182,14 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
                 episode.value = null
             }
         }
+    }
+
+    fun getFulDataById(media: Media) {
+        _getFullData.value = Resource.Loading
+        viewModelScope.launch {
+            _getFullData.value = Resource.Success(aniListClient.getFullDataById(media).data!!)
+        }
+
     }
 
 

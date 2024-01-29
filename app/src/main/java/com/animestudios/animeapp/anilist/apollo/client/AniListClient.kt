@@ -2,6 +2,7 @@ package com.animestudios.animeapp.anilist.apollo.client
 
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.apollo.AniListAsync
+import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.type.ReviewSort
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
@@ -53,4 +54,6 @@ class AniListClient @Inject constructor(
             )
         ).execute()
 
+    override suspend fun getFullDataById(media: Media): ApolloResponse<GetFullDataByIdQuery.Data> =
+        apolloClient.query(GetFullDataByIdQuery(Optional.present(media.id))).execute()
 }
