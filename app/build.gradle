@@ -11,7 +11,7 @@ plugins {
 
 android {
     namespace 'com.animestudios.animeapp'
-    compileSdk 32
+    compileSdk 33
     apollo {
 
         packageName.set("com.animestudios.animeapp")
@@ -21,7 +21,7 @@ android {
     defaultConfig {
         applicationId "com.animestudios.animeapp"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
 
         versionCode 1
         versionName "1.0"

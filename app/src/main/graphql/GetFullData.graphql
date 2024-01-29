@@ -32,6 +32,7 @@ query GetFullDataById($id:Int){
                 amount
             }
 
+
             statusDistribution {
                 amount
                 status

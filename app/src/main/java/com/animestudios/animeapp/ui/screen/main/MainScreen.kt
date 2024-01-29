@@ -89,7 +89,7 @@ class MainScreen : Fragment() {
                                 saveData("userId", Anilist.userid)
                                 saveData("userName", Anilist.username)
                             }
-                            val item = bottomBar.menu.getItem(4)
+                            val item = bottomBar.menu.getItem(3)
                             item.iconTintList = null
                             item.iconTintMode = PorterDuff.Mode.DST
                             Glide.with(requireView())

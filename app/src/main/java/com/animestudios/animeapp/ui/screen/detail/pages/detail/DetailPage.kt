@@ -2,23 +2,33 @@ package com.animestudios.animeapp.ui.screen.detail.pages.detail
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.animestudios.animeapp.GetFullDataByIdQuery
 import com.animestudios.animeapp.databinding.DetailPageBinding
+import com.animestudios.animeapp.databinding.LayoutMediaStatusDistributionBinding
 import com.animestudios.animeapp.gone
-import com.animestudios.animeapp.tools.Resource
-import com.animestudios.animeapp.tools.getNumberFormatting
+import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.tools.*
+import com.animestudios.animeapp.type.MediaListStatus
+import com.animestudios.animeapp.type.MediaType
 import com.animestudios.animeapp.ui.screen.browse.page.genre.adapter.GenreAdapter
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.animestudios.animeapp.viewmodel.imp.GenresViewModelImp
 import com.animestudios.animeapp.visible
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -51,9 +61,7 @@ class DetailPage : Fragment() {
     private fun observeData() {
         model.getMedia().observe(viewLifecycleOwner) {
             val media = it
-            binding.apply {
-                model.getFulDataById(it)
-            }
+            model.getFulDataById(it)
 
 
             model.getFullData.observe(viewLifecycleOwner) {
@@ -68,11 +76,14 @@ class DetailPage : Fragment() {
                     is Resource.Success -> {
                         val mediaFull = it.data
                         binding.apply {
-
+                            val parent = binding.parentView
 
                             detailProgress.gone()
                             detailContainer.visible()
 
+                            //Score Distribution
+
+                            loadChart(mediaFull, binding, parent, media)
 
                             binding.studiosTitle.text =
                                 mediaFull.Media?.studios?.nodes?.get(0)?.name ?: "XXX"
@@ -81,8 +92,8 @@ class DetailPage : Fragment() {
                             binding.producerTitle.text =
                                 mediaFull.Media?.staff?.nodes?.get(0)?.name?.first ?: "XXX"
 
-                            startDateTitle.text =media.startDate?.toISOString()
-                            endDateTitle.text =media.endDate?.toISOString()
+                            startDateTitle.text = media.startDate?.toISOString()
+                            endDateTitle.text = media.endDate?.toISOString()
 
 
                             averageScore.text = media.averageScore.getNumberFormatting() + "%"
@@ -156,6 +167,92 @@ class DetailPage : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun getStatusLabel(status: MediaListStatus?, mediaType: MediaType?): String {
+        return status?.getString(if (mediaType == MediaType.MANGA) MediaType.MANGA else MediaType.ANIME)
+            ?: ""
+    }
+
+    private fun loadChart(
+        mediaFull: GetFullDataByIdQuery.Data,
+        binding: DetailPageBinding,
+        parent: ViewGroup,
+        media: Media
+    ) {
+        val scoreDistributionBinding = LayoutMediaStatusDistributionBinding.inflate(
+            LayoutInflater.from(context),
+            parent,
+            false
+        )
+
+        scoreDistributionBinding.apply {
+            val chart = ArrayList<Chart>()
+
+            mediaFull.Media?.stats?.statusDistribution?.forEach {
+                val hexColor = it!!.status?.getColor()
+                val color = ColorStateList.valueOf(Color.parseColor(hexColor))
+                val label = getStatusLabel(it.status, MediaType.ANIME)
+                val amount = it.amount!!.getNumberFormatting()
+
+                chart.add(Chart(hexColor, label, it.amount.toDouble()))
+
+                when (it.status) {
+                    MediaListStatus.CURRENT -> {
+                        mediaStatsCurrentIcon.imageTintList = color
+                        mediaStatsCurrentLabel.text = label
+                        mediaStatsCurrentText.text = amount
+                    }
+                    MediaListStatus.PLANNING -> {
+                        mediaStatsPlanningIcon.imageTintList = color
+                        mediaStatsPlanningLabel.text = label
+                        mediaStatsPlanningText.text = amount
+                    }
+                    MediaListStatus.COMPLETED -> {
+                        mediaStatsCompletedIcon.imageTintList = color
+                        mediaStatsCompletedLabel.text = label
+                        mediaStatsCompletedText.text = amount
+                    }
+                    MediaListStatus.DROPPED -> {
+                        mediaStatsDroppedIcon.imageTintList = color
+                        mediaStatsDroppedLabel.text = label
+                        mediaStatsDroppedText.text = amount
+                    }
+                    MediaListStatus.PAUSED -> {
+                        mediaStatsPausedIcon.imageTintList = color
+                        mediaStatsPausedLabel.text = label
+                        mediaStatsPausedText.text = amount
+                    }
+                    else -> {
+                        // do nothing
+                    }
+                }
+            }
+
+            val pieEntries =
+                chart.mapIndexed { _, chart -> PieEntry(chart.value.toFloat(), chart.label) }
+            val pieDataSet = PieDataSet(pieEntries, "")
+            pieDataSet.colors = chart.map {
+                if (it.color.isNullOrBlank()) binding.root.context!!.getAttrValue(com.google.android.material.R.attr.colorOnPrimary) else Color.parseColor(
+                    it.color
+                )
+            }
+
+            val pieData = PieData(pieDataSet)
+            pieData.setDrawValues(false)
+
+            mediaStatsChart.statsPieChart.apply {
+                setHoleColor(ContextCompat.getColor(context, android.R.color.transparent))
+                setDrawEntryLabels(false)
+                setTouchEnabled(false)
+                description.isEnabled = false
+                legend.isEnabled = false
+                data = pieData
+                invalidate()
+            }
+            parent.addView(scoreDistributionBinding.root)
+
         }
     }
 

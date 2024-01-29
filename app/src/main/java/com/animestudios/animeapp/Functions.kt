@@ -43,7 +43,9 @@ import com.animestudios.animeapp.model.ThemeModel
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.tools.client
+import com.animestudios.animeapp.tools.convertFromSnakeCase
 import com.animestudios.animeapp.tools.tryWithSuspend
+import com.animestudios.animeapp.type.MediaType
 import com.animestudios.animeapp.ui.activity.MainActivity
 import com.animestudios.animeapp.ui.screen.search.dialog.tab.model.FilterTabModel
 import com.bumptech.glide.Glide
@@ -80,8 +82,6 @@ const val EMPTY_VALUE_INT = 0
 const val EMPTY_VALUE_FLOAT = 0F
 
 lateinit var bottomBar: BottomNavigationView
-
-@SuppressLint("SetTextI18n")
 
 fun loadThemes(): ArrayList<ThemeModel> {
     val list = ArrayList<ThemeModel>()
@@ -148,6 +148,13 @@ fun loadThemes(): ArrayList<ThemeModel> {
         )
     )
     return list
+}
+
+@SuppressLint("SetTextI18n")
+
+
+fun MediaType.getString(): String {
+    return name.convertFromSnakeCase(false)
 }
 
 
