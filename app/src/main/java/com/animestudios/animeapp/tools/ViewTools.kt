@@ -15,7 +15,7 @@ import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.settings.UISettings
 
 fun View.slideTop(animTime: Long, startOffset: Long) {
-    val slideUp = AnimationUtils.loadAnimation(App.currentContext(), R.anim.slide_top).apply {
+    val slideUp = AnimationUtils.loadAnimation(App.instance, R.anim.slide_top).apply {
         duration = animTime
         interpolator = FastOutSlowInInterpolator()
         this.startOffset = startOffset
@@ -26,7 +26,7 @@ fun View.slideTop(animTime: Long, startOffset: Long) {
 fun View.slideUp(animTime: Long, startOffset: Long) {
     val uiSettings = readData<UISettings>("ui_settings") ?: UISettings()
     if (uiSettings.layoutAnimations) {
-        val slideUp = AnimationUtils.loadAnimation(App.currentContext(), R.anim.slide_up).apply {
+        val slideUp = AnimationUtils.loadAnimation(App.instance, R.anim.slide_up).apply {
             duration = animTime
             interpolator = FastOutSlowInInterpolator()
             this.startOffset = startOffset
@@ -59,7 +59,7 @@ fun View.slideStart(animTime: Long, startOffset: Long) {
     val uiSettings =
         readData<UISettings>("ui_settings") ?: UISettings()
     if (uiSettings.layoutAnimations) {
-        val slideUp = AnimationUtils.loadAnimation(App.currentContext(), R.anim.slide_start).apply {
+        val slideUp = AnimationUtils.loadAnimation(App.instance, R.anim.slide_start).apply {
             duration = animTime
             interpolator = FastOutSlowInInterpolator()
             this.startOffset = startOffset

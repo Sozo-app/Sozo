@@ -30,6 +30,8 @@ import kotlin.math.round
 class StatisticsScreen : Fragment() {
     private var _binding: StatisticsScreenBinding? = null
     private val binding get() = _binding!!
+    private var isAdded=false
+    private var isAddedForStatus=false
     private val model by activityViewModels<DetailsViewModelImpl>()
 
     override fun onCreateView(
@@ -48,7 +50,6 @@ class StatisticsScreen : Fragment() {
             if (it != null) {
                 val media = it
                 binding.apply {
-                    val parent = binding.parentStatistics
                     model.getFulDataById(it)
                     model.getFullData.observe(viewLifecycleOwner) {
                         when (it) {
@@ -59,6 +60,7 @@ class StatisticsScreen : Fragment() {
                             }
                             is Resource.Success -> {
                                 val fullData = it.data
+                                val parent = binding.parentStatistics
 
                                 //Ranking
                                 val rankingAdapter = RankingAdapter(
@@ -73,12 +75,7 @@ class StatisticsScreen : Fragment() {
                                     parent = parent,
                                     media = media
                                 )
-                                loadChart(
-                                    fullData,
-                                    binding = binding,
-                                    parent = parent,
-                                    media = media
-                                )
+                                loadChart(fullData,binding,parent,media)
 
                             }
 
@@ -169,8 +166,11 @@ class StatisticsScreen : Fragment() {
                 data = pieData
                 invalidate()
             }
-            parent.addView(scoreDistributionBinding.root)
 
+            if (!isAddedForStatus){
+                parent.addView(scoreDistributionBinding.root)
+                isAddedForStatus=true
+            }
         }
 
 
@@ -184,7 +184,7 @@ class StatisticsScreen : Fragment() {
         media: Media
     ) {
         val scoreDistributionBinding = ListStatsChartBarBinding.inflate(
-            LayoutInflater.from(App.context),
+            LayoutInflater.from(parent.context),
             parent,
             false
         )
@@ -274,7 +274,11 @@ class StatisticsScreen : Fragment() {
             data = barData
             invalidate()
         }
-        parent.addView(scoreDistributionBinding.root)
+
+        if (!isAdded){
+            parent.addView(scoreDistributionBinding.root)
+            isAdded=true
+        }
     }
 
     private fun getStatusLabel(

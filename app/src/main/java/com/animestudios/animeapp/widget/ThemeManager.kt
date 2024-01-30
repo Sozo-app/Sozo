@@ -43,14 +43,13 @@ class ThemeManager(private val context: Activity) {
             if (!returnedEarly) return
         }
         val theme = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-            .getString("theme", "RED")!!
+            .getString("theme", "OCEAN")!!
 
         val themeToApply = when (theme) {
             "BLUE" -> if (useOLED) R.style.Theme_AnimeApp_BlueOLED else R.style.Theme_AnimeApp_Blue
             "GREEN" -> if (useOLED) R.style.Theme_AnimeApp_GreenOLED else R.style.Theme_AnimeApp_Green
             "PURPLE" -> if (useOLED) R.style.Theme_AnimeApp_PurpleOLED else R.style.Theme_AnimeApp_Purple
             "PINK" -> if (useOLED) R.style.Theme_AnimeApp_PinkOLED else R.style.Theme_AnimeApp_Pink
-            "YELLOW" -> if (useOLED) R.style.Theme_AnimeApp_Yellow else R.style.Theme_AnimeApp_Yellow
             "SAIKOU" -> if (useOLED) R.style.Theme_AnimeApp_SaikouOLED else R.style.Theme_AnimeApp_Saikou
             "RED" -> if (useOLED) R.style.Theme_AnimeApp_RedOLED else R.style.Theme_AnimeApp_Red
             "LAVENDER" -> if (useOLED) R.style.Theme_AnimeApp_LavenderOLED else R.style.Theme_AnimeApp_Lavender
@@ -60,7 +59,6 @@ class ThemeManager(private val context: Activity) {
         }
 
         val window = context.window
-
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = 0x00000000
@@ -94,7 +92,7 @@ class ThemeManager(private val context: Activity) {
             builder.setContentBasedSource(bitmap)
             needMaterial = false
         } else if (useCustom != null) {
-            builder.setThemeOverlay(useCustom)
+            builder.setContentBasedSource(bitmap!!)
             needMaterial = false
         }
 
@@ -123,8 +121,8 @@ class ThemeManager(private val context: Activity) {
     private fun isDarkThemeActive(context: Context): Boolean {
         return when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_YES -> true
-            Configuration.UI_MODE_NIGHT_YES -> false
-            Configuration.UI_MODE_NIGHT_YES -> false
+            Configuration.UI_MODE_NIGHT_NO -> false
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> false
             else -> false
         }
     }

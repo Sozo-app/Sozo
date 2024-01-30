@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import androidx.work.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.tools.initializeNetwork
@@ -20,7 +21,7 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 @SuppressLint("StaticFieldLeak")
-class App : Application(), Configuration.Provider {
+class App : MultiDexApplication(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: NotificationWorkerFactory
 
@@ -29,12 +30,12 @@ class App : Application(), Configuration.Provider {
         super.onCreate()
         Anilist.getSavedToken(this)
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
-        val sharedPreferences = getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-        val useMaterialYou = sharedPreferences.getBoolean("use_material_you", true)
-        if (useMaterialYou) {
-            DynamicColors.applyToActivitiesIfAvailable(this)
-            //TODO: HarmonizedColors
-        }
+//        val sharedPreferences = getSharedPreferences("Sozo", Context.MODE_PRIVATE)
+//        val useMaterialYou = sharedPreferences.getBoolean("use_material_you", true)
+//        if (useMaterialYou) {
+//            DynamicColors.applyToActivitiesIfAvailable(this)
+//            //TODO: HarmonizedColors
+//        }
         initializeNetwork(this)
         if (Anilist.token != null) {
             setupNotificationWorker()
@@ -115,7 +116,7 @@ class App : Application(), Configuration.Provider {
     companion object {
         const val SOZO_NOTIFICATIONS_CHANNEL_ID = "SOZO_NOTIFICATIONS_CHANNEL_ID"
         const val TAG_PERIODIC_WORK_REQUEST = "periodic_work_request"
-        private var instance: App? = null
+        var instance: App? = null
         var context: Context? = null
         fun currentContext(): Context? {
             return instance?.mFTActivityLifecycleCallbacks?.currentActivity ?: context

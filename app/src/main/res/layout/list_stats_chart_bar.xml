@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="40dp"
     android:paddingBottom="@dimen/marginPageNormal">
 
     <TextView
@@ -19,7 +20,7 @@
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/statsBarChart"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_marginHorizontal="@dimen/marginPageNormal"
         android:layout_marginTop="8dp"
         app:layout_constraintDimensionRatio="1:1"
