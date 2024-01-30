@@ -15,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.animestudios.animeapp.GetFullDataByIdQuery
+import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.DetailPageBinding
 import com.animestudios.animeapp.databinding.LayoutMediaStatusDistributionBinding
 import com.animestudios.animeapp.gone
@@ -81,9 +82,9 @@ class DetailPage : Fragment() {
                             detailProgress.gone()
                             detailContainer.visible()
 
-                            //Score Distribution
-
-                            loadChart(mediaFull, binding, parent, media)
+//                            //Score Distribution
+//
+//                            loadChart(mediaFull, binding, parent, media)
 
                             binding.studiosTitle.text =
                                 mediaFull.Media?.studios?.nodes?.get(0)?.name ?: "XXX"
@@ -106,9 +107,9 @@ class DetailPage : Fragment() {
                             mediaTitleNative.text = media.nativeName
 
                             if (media.synonyms.isNotEmpty() && media.synonyms.size > 2) {
-                                binding.synonymsTitle1.text = media.synonyms.get(0)
-                                binding.synonymsTitle2.text = media.synonyms.get(1)
-                                binding.synonymsTitle3.text = media.synonyms.get(2)
+                                binding.synonymsTitle1.text = removeSpaces(media.synonyms.get(0))
+                                binding.synonymsTitle2.text = removeSpaces(media.synonyms.get(1))
+                                binding.synonymsTitle3.text = removeSpaces(media.synonyms.get(2))
                             } else {
                                 binding.synonymsTitle1.gone()
                                 binding.synonymsTitle2.gone()
@@ -143,26 +144,6 @@ class DetailPage : Fragment() {
                                 }
                             }
 
-
-                            //Genre Rv
-                            val adapter = GenreAdapter(false)
-                            val screenWidth = resources.displayMetrics.run { widthPixels / density }
-                            if (genreModel.genres != null) {
-                                adapter.genres = genreModel.genres!!
-                                adapter.pos = ArrayList(genreModel.genres!!.keys)
-                                if (genreModel.done) genreModel.doneListener?.invoke()
-                            }
-                            binding.genreRv.adapter = adapter
-                            binding.genreRv.layoutManager =
-                                GridLayoutManager(requireActivity(), (screenWidth / 156f).toInt())
-
-                            lifecycleScope.launch(Dispatchers.IO) {
-                                genreModel.loadGenres(media.genres) {
-                                    MainScope().launch {
-                                        adapter.addGenre(it)
-                                    }
-                                }
-                            }
                         }
                     }
                 }
@@ -182,7 +163,7 @@ class DetailPage : Fragment() {
         media: Media
     ) {
         val scoreDistributionBinding = LayoutMediaStatusDistributionBinding.inflate(
-            LayoutInflater.from(context),
+            LayoutInflater.from(App.context),
             parent,
             false
         )
@@ -254,6 +235,21 @@ class DetailPage : Fragment() {
             parent.addView(scoreDistributionBinding.root)
 
         }
+
+
+    }
+
+    fun removeSpaces(inputString: String): String {
+        return inputString.replace(" ", "")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
+
+
+
+

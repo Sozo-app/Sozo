@@ -20,8 +20,6 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
     private val queriesImp = AniListQueriesImp()
     override val genres: MutableLiveData<Boolean?> = MutableLiveData(null)
     override val unReadNotificationCountLiveData: MutableLiveData<Int> = MutableLiveData()
-    val loadedProfile2: MutableLiveData<Unit> = MutableLiveData()
-    val loadedProfile: MutableLiveData<Unit> = MutableLiveData()
 
     override fun getGenresAndTags(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,18 +46,6 @@ class MainViewModelImp @Inject constructor(private var notificationRepository: N
         }
     }
 
-    fun loadProfile2(type: Int) {
-        viewModelScope.launch {
-            if (queriesImp.loadProfile()) {
-                if (type==2){
-                    loadedProfile2.postValue(Unit)
-                }else{
-                    loadedProfile.postValue(Unit)
-                }
-            } else
-                snackString("Error loading Anilist User Data")
-        }
-    }
 
     override fun getGenres(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO) {

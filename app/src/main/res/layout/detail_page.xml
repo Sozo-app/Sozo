@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?attr/colorOnSurface"
     android:layout_height="match_parent"
     tools:context=".ui.screen.detail.pages.detail.DetailPage">
 
@@ -296,17 +297,20 @@
 
                         <TextView
                             android:id="@+id/synonymsTitle1"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="end"
                             android:fontFamily="@font/poppins_bold"
                             android:maxLines="1"
                             android:text="CSM"
+
                             android:textAlignment="textEnd" />
 
                         <TextView
                             android:id="@+id/synonymsTitle2"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="end"
                             android:fontFamily="@font/poppins_bold"
                             android:maxLines="1"
                             android:text="链锯人"
@@ -314,10 +318,12 @@
 
                         <TextView
                             android:id="@+id/synonymsTitle3"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="end"
                             android:fontFamily="@font/poppins_bold"
                             android:maxLines="1"
+
                             android:text="Человек-бензопила"
                             android:textAlignment="textEnd" />
 
@@ -597,6 +603,7 @@
                 android:orientation="horizontal"
                 android:paddingStart="22dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/titleGenre"
                 app:layout_constraintTop_toBottomOf="@+id/titleGenre"

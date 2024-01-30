@@ -2,10 +2,12 @@ package com.animestudios.animeapp.ui.screen.browse.page.genre.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.databinding.GenresItemBinding
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.loadImage
+import com.animestudios.animeapp.px
 import com.animestudios.animeapp.settings.UISettings
 
 class GenreAdapter(private val big: Boolean = false) :
@@ -17,6 +19,7 @@ class GenreAdapter(private val big: Boolean = false) :
 
     inner class GenreVh(val binding: GenresItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind() {
+            if (big) binding.genreCard.updateLayoutParams { height = 72f.px }
             val genre = genres[pos[bindingAdapterPosition]]
             binding.genreTitle.text = pos[bindingAdapterPosition]
             binding.genreImage.loadImage(genre)
