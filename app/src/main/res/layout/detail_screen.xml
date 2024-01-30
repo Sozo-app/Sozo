@@ -115,7 +115,7 @@
                             android:id="@+id/coverImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
                     </androidx.cardview.widget.CardView>
 
                 </RelativeLayout>
@@ -213,22 +213,22 @@
                         app:layout_constraintTop_toBottomOf="@+id/mainData">
 
                         <com.google.android.material.button.MaterialButton
+                            android:id="@+id/playMedia"
                             android:layout_width="0dp"
                             android:layout_height="55dp"
                             android:layout_marginEnd="10dp"
                             android:layout_weight="8"
-                            app:backgroundTint="?attr/colorPrimary"
                             android:fontFamily="@font/poppins_bold"
                             android:insetLeft="0dp"
                             android:insetTop="0dp"
                             android:insetRight="0dp"
                             android:insetBottom="0dp"
-                            android:id="@+id/playMedia"
-
                             android:text="Play"
+
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold"
+                            app:backgroundTint="?attr/colorPrimary"
                             app:cornerRadius="10dp"
                             app:icon="@drawable/play_banner"
                             app:iconGravity="textStart"
@@ -372,8 +372,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="bottom"
                     android:layout_marginHorizontal="20dp"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -452,8 +452,9 @@
             app:tabIndicatorHeight="2dp"
             app:tabInlineLabel="true"
             app:tabMaxWidth="0dp"
-            app:tabMode="scrollable"
+            app:tabMode="auto"
             app:tabPaddingBottom="4dp"
+            app:tabPaddingEnd="8dp"
             app:tabRippleColor="@null"
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/textAppearance"
@@ -466,11 +467,11 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="start"
-        android:visibility="gone"
         android:layout_marginStart="10dp"
         android:layout_marginTop="28.5dp"
         android:background="?selectableItemBackgroundBorderless"
         android:translationZ="7dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/nav_bg"
         app:cardCornerRadius="34dp"
         app:cardElevation="12dp">

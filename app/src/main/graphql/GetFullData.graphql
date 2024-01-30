@@ -22,9 +22,17 @@ query GetFullDataById($id:Int){
         staff{
             nodes {
                 name {
-                     first
+                    first
                 }
             }
+        }
+        rankings {
+            year
+            rank
+            allTime
+            season
+            context
+
         }
         stats {
             scoreDistribution {

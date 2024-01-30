@@ -12,8 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import com.animestudios.animeapp.GetFullDataByIdQuery
 import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.DetailPageBinding
@@ -23,7 +21,6 @@ import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.tools.*
 import com.animestudios.animeapp.type.MediaListStatus
 import com.animestudios.animeapp.type.MediaType
-import com.animestudios.animeapp.ui.screen.browse.page.genre.adapter.GenreAdapter
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.animestudios.animeapp.viewmodel.imp.GenresViewModelImp
 import com.animestudios.animeapp.visible
@@ -31,9 +28,6 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailPage : Fragment() {
@@ -84,10 +78,12 @@ class DetailPage : Fragment() {
 
 //                            //Score Distribution
 //
-//                            loadChart(mediaFull, binding, parent, media)
+                            if (mediaFull.Media?.studios?.nodes?.isNotEmpty() == true) {
 
-                            binding.studiosTitle.text =
-                                mediaFull.Media?.studios?.nodes?.get(0)?.name ?: "XXX"
+                                binding.studiosTitle.text =
+                                    mediaFull.Media.studios.nodes.get(0)?.name ?: "XXX"
+
+                            }
                             binding.statusTitle.text = mediaFull.Media?.status?.rawValue ?: "XXX"
 
                             binding.producerTitle.text =
@@ -151,93 +147,8 @@ class DetailPage : Fragment() {
         }
     }
 
-    private fun getStatusLabel(status: MediaListStatus?, mediaType: MediaType?): String {
-        return status?.getString(if (mediaType == MediaType.MANGA) MediaType.MANGA else MediaType.ANIME)
-            ?: ""
-    }
-
-    private fun loadChart(
-        mediaFull: GetFullDataByIdQuery.Data,
-        binding: DetailPageBinding,
-        parent: ViewGroup,
-        media: Media
-    ) {
-        val scoreDistributionBinding = LayoutMediaStatusDistributionBinding.inflate(
-            LayoutInflater.from(App.context),
-            parent,
-            false
-        )
-
-        scoreDistributionBinding.apply {
-            val chart = ArrayList<Chart>()
-
-            mediaFull.Media?.stats?.statusDistribution?.forEach {
-                val hexColor = it!!.status?.getColor()
-                val color = ColorStateList.valueOf(Color.parseColor(hexColor))
-                val label = getStatusLabel(it.status, MediaType.ANIME)
-                val amount = it.amount!!.getNumberFormatting()
-
-                chart.add(Chart(hexColor, label, it.amount.toDouble()))
-
-                when (it.status) {
-                    MediaListStatus.CURRENT -> {
-                        mediaStatsCurrentIcon.imageTintList = color
-                        mediaStatsCurrentLabel.text = label
-                        mediaStatsCurrentText.text = amount
-                    }
-                    MediaListStatus.PLANNING -> {
-                        mediaStatsPlanningIcon.imageTintList = color
-                        mediaStatsPlanningLabel.text = label
-                        mediaStatsPlanningText.text = amount
-                    }
-                    MediaListStatus.COMPLETED -> {
-                        mediaStatsCompletedIcon.imageTintList = color
-                        mediaStatsCompletedLabel.text = label
-                        mediaStatsCompletedText.text = amount
-                    }
-                    MediaListStatus.DROPPED -> {
-                        mediaStatsDroppedIcon.imageTintList = color
-                        mediaStatsDroppedLabel.text = label
-                        mediaStatsDroppedText.text = amount
-                    }
-                    MediaListStatus.PAUSED -> {
-                        mediaStatsPausedIcon.imageTintList = color
-                        mediaStatsPausedLabel.text = label
-                        mediaStatsPausedText.text = amount
-                    }
-                    else -> {
-                        // do nothing
-                    }
-                }
-            }
-
-            val pieEntries =
-                chart.mapIndexed { _, chart -> PieEntry(chart.value.toFloat(), chart.label) }
-            val pieDataSet = PieDataSet(pieEntries, "")
-            pieDataSet.colors = chart.map {
-                if (it.color.isNullOrBlank()) binding.root.context!!.getAttrValue(com.google.android.material.R.attr.colorOnPrimary) else Color.parseColor(
-                    it.color
-                )
-            }
-
-            val pieData = PieData(pieDataSet)
-            pieData.setDrawValues(false)
-
-            mediaStatsChart.statsPieChart.apply {
-                setHoleColor(ContextCompat.getColor(context, android.R.color.transparent))
-                setDrawEntryLabels(false)
-                setTouchEnabled(false)
-                description.isEnabled = false
-                legend.isEnabled = false
-                data = pieData
-                invalidate()
-            }
-            parent.addView(scoreDistributionBinding.root)
-
-        }
 
 
-    }
 
     fun removeSpaces(inputString: String): String {
         return inputString.replace(" ", "")

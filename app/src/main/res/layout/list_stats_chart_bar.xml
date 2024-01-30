@@ -12,7 +12,7 @@
         android:layout_marginStart="18sp"
         android:fontFamily="@font/poppins_bold"
         android:text="Score Distribution"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
