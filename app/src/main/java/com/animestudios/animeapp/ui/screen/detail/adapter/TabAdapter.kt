@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.animestudios.animeapp.ui.screen.detail.pages.cast.CastScreen
+import com.animestudios.animeapp.ui.screen.detail.pages.detail.DetailPage
 import com.animestudios.animeapp.ui.screen.detail.pages.episodes.EpisodeScreen
 import com.animestudios.animeapp.ui.screen.detail.pages.statistics.StatisticsScreen
 
@@ -31,6 +32,9 @@ class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
             2 -> {
                 CastScreen()
 
+            }
+            3->{
+                DetailPage()
             }
             else -> {
                 StatisticsScreen()
