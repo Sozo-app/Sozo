@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.animestudios.animeapp.GetFullDataByIdQuery
 import com.animestudios.animeapp.R
-import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.LayoutMediaStatusDistributionBinding
 import com.animestudios.animeapp.databinding.ListStatsChartBarBinding
 import com.animestudios.animeapp.databinding.StatisticsScreenBinding
@@ -184,7 +183,7 @@ class StatisticsScreen : Fragment() {
         media: Media
     ) {
         val scoreDistributionBinding = ListStatsChartBarBinding.inflate(
-            LayoutInflater.from(App.context),
+            LayoutInflater.from(parent.context),
             parent,
             false
         )
