@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mediaListContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/colorOnSurface">
+
 
     <ProgressBar
         android:id="@+id/mediaListProgressBar"
@@ -12,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:indeterminate="true"
+        android:visibility="gone"
         tools:visibility="invisible" />
 
     <LinearLayout
@@ -48,16 +50,20 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            app:boxStrokeColor="@color/basic_color_400"
             android:layout_marginTop="16dp"
             android:hint="@string/status"
+            android:textColorHint="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
+
             app:boxCornerRadiusTopStart="16dp"
-            app:startIconTint="@color/basic_color_400"
+            app:boxStrokeColor="?attr/colorOutline"
             app:hintAnimationEnabled="true"
-            app:startIconDrawable="@drawable/ic_round_playlist_play_24">
+            app:hintTextColor="@color/white"
+
+            app:startIconDrawable="@drawable/ic_round_playlist_play_24"
+            app:startIconTint="?attr/colorAccent">
 
             <AutoCompleteTextView
                 android:id="@+id/mediaListStatus"
@@ -68,7 +74,8 @@
                 android:inputType="none"
                 android:padding="8dp"
                 android:textAllCaps="true"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:ignore="LabelFor,TextContrastCheck,DuplicateSpeakableTextCheck" />
@@ -82,20 +89,22 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mediaListProgressLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="0dp"
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/progress"
+                android:textColorHint="?attr/colorOutline"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
-                app:boxStrokeColor="@color/basic_color_400"
-                app:startIconTint="@color/basic_color_400"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusTopStart="16dp"
                 app:endIconMode="none"
                 app:hintAnimationEnabled="true"
+                app:boxStrokeColor="?attr/colorOutline"
+                app:hintTextColor="?attr/colorOutline"
                 app:startIconDrawable="@drawable/ic_round_add_circle_outline_24"
+                app:startIconTint="?attr/colorAccent"
                 app:suffixTextAppearance="@style/Suffix">
 
                 <AutoCompleteTextView
@@ -107,7 +116,8 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:padding="8dp"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="14sp"
                     tools:ignore="LabelFor,TextContrastCheck" />
 
@@ -145,14 +155,18 @@
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:hint="@string/score"
+            android:textColorHint="@color/white"
             app:boxCornerRadiusBottomEnd="16dp"
-            app:startIconTint="@color/basic_color_400"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
+
             app:endIconMode="none"
             app:hintAnimationEnabled="true"
+            app:boxStrokeColor="?attr/colorOutline"
+            app:hintTextColor="@color/white"
             app:startIconDrawable="@drawable/ic_round_star_24"
+            app:startIconTint="?attr/colorAccent"
             app:suffixText="@string/score_suffix"
             app:suffixTextAppearance="@style/Suffix">
 
@@ -164,21 +178,21 @@
                 android:fontFamily="@font/poppins_bold"
                 android:inputType="numberDecimal"
                 android:padding="8dp"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_white"
                 android:textSize="14sp"
                 tools:ignore="LabelFor,TextContrastCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/mediaListPrivate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            app:trackTint="#878787"
-            app:thumbTint="#EDEDED"
             android:fontFamily="@font/poppins_bold"
             android:text="List Private"
+            android:textColor="@color/white"
+            app:track="@drawable/treck_switch"
             tools:ignore="HardcodedText" />
 
         <com.google.android.material.button.MaterialButton
@@ -188,12 +202,12 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_bold"
             android:insetTop="0dp"
-            app:backgroundTint="@color/basic_color"
             android:insetBottom="0dp"
-            android:textColor="@color/white"
             android:padding="8dp"
             android:text="@string/save"
+            android:textColor="@color/white"
             android:textSize="16sp"
+            app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="16dp" />
 
 
@@ -206,10 +220,9 @@
         android:layout_marginTop="14dp"
         app:cardBackgroundColor="@color/nav_tab"
         app:cardCornerRadius="2dp"
-        app:cardElevation="0dp" >
+        app:cardElevation="0dp">
 
     </androidx.cardview.widget.CardView>
-
 
 
 </FrameLayout>

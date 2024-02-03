@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -6,8 +7,11 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/banner_bg.xml" value="0.3015" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/cornered_bg.xml" value="0.308" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_moon.xml" value="0.3015" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_round_add_circle_outline_24.xml" value="0.231" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_round_playlist_play_24.xml" value="0.231" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/linear_gradient_bg.xml" value="0.308" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/play.xml" value="0.1245" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/stroke_checker.xml" value="0.231" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/thumb_selector.xml" value="0.3015" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/treck_switch.xml" value="0.3015" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout-night/bottom_sheet_custom.xml" value="0.321875" />
@@ -18,6 +22,7 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/anime_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/borwse_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/bottom_sheet_custom.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/bottomsheet_media_list.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/character_item.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/detail_page.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/detail_screen.xml" value="0.321875" />
