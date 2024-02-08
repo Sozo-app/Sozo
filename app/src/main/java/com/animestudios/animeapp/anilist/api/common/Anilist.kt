@@ -107,7 +107,6 @@ object Anilist {
                     cacheTime = cache ?: 10
                 )
                 if (!json.text.startsWith("{")) throw Exception("Seems like Anilist is down, maybe try using a VPN or you can wait for it to comeback.")
-                if (show) println("Response : ${json.text}")
                 json.parsed()
             } else null
 

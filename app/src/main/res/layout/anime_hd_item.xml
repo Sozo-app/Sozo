@@ -32,6 +32,15 @@
                 android:transitionName="mediaCover"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/isFav"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                app:srcCompat="@drawable/ic_baseline_bookmark_24"
+                app:tint="?attr/colorAccent" />
 
             <LinearLayout
                 android:id="@+id/itemCompactScoreBG"
@@ -81,13 +90,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="2.5dp"
             android:ellipsize="marquee"
-
-            android:fontFamily="@font/poppins_family"
-            android:includeFontPadding="false"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLines="1"
             android:scrollHorizontally="true"
             android:singleLine="true"
+
+            android:marqueeRepeatLimit="marquee_forever"
+            android:fontFamily="@font/poppins_family"
+            android:includeFontPadding="false"
+            android:maxLines="1"
             android:textFontWeight="550"
             android:textSize="14dp"
             android:transitionName="mediaTitle"

@@ -1,19 +1,21 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.AnimeApp.AppWidget.Container"
-    android:theme="@style/Theme.AnimeApp.AppWidgetContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorControlNormal"
+    android:theme="@style/Theme.AnimeApp.AppWidgetContainer">
 
     <TextView
-        style="@style/Widget.AnimeApp.AppWidget.InnerView"
-        android:id="@+id/appwidget_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
+        android:layout_gravity="center"
         android:layout_margin="8dp"
-        android:contentDescription="@string/appwidget_text" />
-</RelativeLayout>
+        android:fontFamily="@font/poppins_bold"
+        android:text="Trending Anime"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

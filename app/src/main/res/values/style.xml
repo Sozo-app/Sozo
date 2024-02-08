@@ -5,12 +5,14 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">41dp</item>
     </style>
+
     <style name="NavBarText">
         <item name="android:textAllCaps">true</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:padding">2sp</item>
     </style>
+
     <style name="Outlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="android:textColorHint">@color/white</item>
         <item name="startIconTint">@color/basic_color</item>
@@ -30,6 +32,8 @@
     <style name="Suffix">
         <item name="android:height">54dp</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColorHint">?attr/colorPrimaryContainer</item>
+        <item name="android:textColor">?attr/colorPrimaryContainer</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_gravity">center</item>
     </style>
@@ -122,12 +126,15 @@
         <item name="android:alpha">0.7</item>
         <item name="android:fontFamily">@font/ubuntu_medium</item>
     </style>
+
     <style name="TextLabelAlpha">
         <item name="android:alpha">0.5</item>
     </style>
+
     <style name="TextValue">
         <item name="android:alpha">0.9</item>
     </style>
+
     <style name="TitleText">
         <item name="fontFamily">
             @font/poppins_bold

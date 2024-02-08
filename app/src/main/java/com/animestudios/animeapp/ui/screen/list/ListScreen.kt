@@ -14,8 +14,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -90,12 +92,19 @@ class ListScreen : Fragment() {
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        scope.launch(Dispatchers.IO) {
-            model.loadLists(
-                true, Anilist.userid!!
-            )
-        }
-
+            Refresh.activity[1]!!.postValue(true)
+            val live = Refresh.activity.getOrPut(
+                1
+            ) { MutableLiveData(false) }
+            live.observe(viewLifecycleOwner) {
+                if (it) {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        model.loadLists(
+                            true, Anilist.userid!!
+                        )
+                    }
+                }
+            }
     }
 
 

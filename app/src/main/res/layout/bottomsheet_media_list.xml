@@ -5,8 +5,7 @@
     android:id="@+id/mediaListContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorOnSurface">
-
+    android:background="?attr/colorControlNormal">
 
     <ProgressBar
         android:id="@+id/mediaListProgressBar"
@@ -15,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:visibility="gone"
         tools:visibility="invisible" />
 
     <LinearLayout
@@ -36,48 +34,52 @@
                 android:id="@+id/mediaTitle"
                 android:layout_width="0dp"
                 android:layout_height="54dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:text="@string/list_editor"
-                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:hint="@string/status"
-            android:textColorHint="@color/white"
+            android:textColorHint="?attr/colorSecondary"
+            app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
-
             app:boxCornerRadiusTopStart="16dp"
-            app:boxStrokeColor="?attr/colorOutline"
+
             app:hintAnimationEnabled="true"
-            app:hintTextColor="@color/white"
+            app:hintTextColor="?attr/colorSecondary"
 
             app:startIconDrawable="@drawable/ic_round_playlist_play_24"
-            app:startIconTint="?attr/colorAccent">
+            app:startIconTint="?attr/colorSecondary">
 
             <AutoCompleteTextView
                 android:id="@+id/mediaListStatus"
+
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
                 android:freezesText="false"
                 android:inputType="none"
                 android:padding="8dp"
+
+                android:text="@string/watch"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColor="?attr/colorSecondary"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 tools:ignore="LabelFor,TextContrastCheck,DuplicateSpeakableTextCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,22 +91,23 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mediaListProgressLayout"
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"                android:layout_width="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/progress"
-                android:textColorHint="?attr/colorOutline"
+                android:textColorHint="?attr/colorSecondary"
+                app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="?attr/colorPrimaryContainer"
                 app:endIconMode="none"
                 app:hintAnimationEnabled="true"
-                app:boxStrokeColor="?attr/colorOutline"
-                app:hintTextColor="?attr/colorOutline"
+                app:hintTextColor="?attr/colorSecondary"
                 app:startIconDrawable="@drawable/ic_round_add_circle_outline_24"
-                app:startIconTint="?attr/colorAccent"
+                app:startIconTint="?attr/colorSecondary"
                 app:suffixTextAppearance="@style/Suffix">
 
                 <AutoCompleteTextView
@@ -116,8 +119,7 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:padding="8dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="?attr/colorPrimaryContainer"
                     android:textSize="14sp"
                     tools:ignore="LabelFor,TextContrastCheck" />
 
@@ -150,23 +152,23 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/mediaListScoreLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:hint="@string/score"
-            android:textColorHint="@color/white"
+            android:textColorHint="?attr/colorSecondary"
+            app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-
+            app:boxStrokeColor="?attr/colorPrimaryContainer"
             app:endIconMode="none"
             app:hintAnimationEnabled="true"
-            app:boxStrokeColor="?attr/colorOutline"
-            app:hintTextColor="@color/white"
+            app:hintTextColor="?attr/colorSecondary"
             app:startIconDrawable="@drawable/ic_round_star_24"
-            app:startIconTint="?attr/colorAccent"
+            app:startIconTint="?attr/colorSecondary"
             app:suffixText="@string/score_suffix"
             app:suffixTextAppearance="@style/Suffix">
 
@@ -178,8 +180,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:inputType="numberDecimal"
                 android:padding="8dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/color_white"
+                android:textColor="?attr/colorPrimaryContainer"
                 android:textSize="14sp"
                 tools:ignore="LabelFor,TextContrastCheck" />
 
@@ -189,14 +190,13 @@
             android:id="@+id/mediaListPrivate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:fontFamily="@font/poppins_bold"
-            android:text="List Private"
-            android:textColor="@color/white"
-            app:track="@drawable/treck_switch"
-            tools:ignore="HardcodedText" />
+            android:text="List Private" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/mediaListSave"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
@@ -205,9 +205,8 @@
             android:insetBottom="0dp"
             android:padding="8dp"
             android:text="@string/save"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorSecondary"
             android:textSize="16sp"
-            app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="16dp" />
 
 

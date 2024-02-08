@@ -1,5 +1,6 @@
 package com.animestudios.animeapp.widget
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -36,16 +37,16 @@ class SearchAppWidget : AppWidgetProvider() {
     }
 }
 
+@SuppressLint("RemoteViewLayout")
 @RequiresApi(Build.VERSION_CODES.S)
 internal fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val widgetText = context.getString(R.string.appwidget_text)
+    val widgetText = context.getString(R.string.app_name)
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.search_app_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
 
 
     // Instruct the widget manager to update the widget

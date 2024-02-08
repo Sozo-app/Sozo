@@ -9,7 +9,7 @@ import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.AnimeItemBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.settings.UISettings
-import com.animestudios.animeapp.ui.widgets.MediaListSmallDialog
+import com.animestudios.animeapp.ui.screen.list.bottomsheet.MediaListDialogSmallFragment
 
 class
 AnimeTitleWithScoreAdapter(
@@ -40,6 +40,7 @@ AnimeTitleWithScoreAdapter(
                     setAnimation(activity, binding.root, uiSettings)
                     binding.titleItem.animation = setSlideIn(uiSettings)
                 }
+                if (datA.isFav) binding.isFav.visible() else binding.isFav.gone()
                 itemImg.loadImage(datA.cover ?: datA.banner)
                 binding.itemCompactScore.text = ((if (datA.userScore == 0) (datA.meanScore
                     ?: 0) else datA.userScore) / 10.0).toString()
@@ -56,7 +57,7 @@ AnimeTitleWithScoreAdapter(
         if (list.size > position && position != -1) {
             val media = list.get(position)
             if (activity.supportFragmentManager.findFragmentByTag("list") == null) {
-                MediaListSmallDialog.newInstance(media)
+                MediaListDialogSmallFragment.newInstance(media)
                     .show(activity.supportFragmentManager, "list")
                 return true
             }

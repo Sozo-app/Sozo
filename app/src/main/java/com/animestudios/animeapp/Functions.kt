@@ -348,6 +348,9 @@ object Refresh {
     }
 
     val activity = mutableMapOf<Int, MutableLiveData<Boolean>>()
+
+
+
 }
 
 fun View.visible() {
@@ -614,6 +617,7 @@ fun ImageView.loadImage(file: FileUrl?, size: Int = 0) {
 
 
 var loaded: Boolean = false
+var loadedBrowse: Boolean = false
 
 
 fun loadIcons(): ArrayList<Int> {

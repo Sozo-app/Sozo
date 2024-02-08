@@ -5,7 +5,6 @@
     android:initialLayout="@layout/search_app_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/example_appwidget_preview"
     android:previewLayout="@layout/search_app_widget"
     android:resizeMode="horizontal"
     android:targetCellWidth="1"
