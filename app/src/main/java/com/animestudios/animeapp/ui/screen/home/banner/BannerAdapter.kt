@@ -13,6 +13,7 @@ import com.animestudios.animeapp.loadImage
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.ui.screen.list.bottomsheet.MediaListDialogSmallFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
@@ -73,12 +74,7 @@ class BannerAdapter(
             b.itemCompactImage.loadImage(media.cover)
             b.title.text = media.userPreferredName
             b.addToListBtn.setOnClickListener {
-                if ((mediaList?.size ?: 0) > position && position != -1) {
-                    val media = mediaList?.get(position)
-                    if (activity.supportFragmentManager.findFragmentByTag("list") == null) {
-//                        MediaListDialogSmallFragment.newInstance(media).show(activity.supportFragmentManager, "list")
-                    }
-                }
+                longClicked(position)
             }
             var genresL = ""
             media.genres.apply {
@@ -107,6 +103,18 @@ class BannerAdapter(
             }
         }
 
+    }
+
+    fun longClicked(position: Int): Boolean {
+        if (mediaList!!.size > position && position != -1) {
+            val media = mediaList!!.get(position)
+            if (activity.supportFragmentManager.findFragmentByTag("list") == null) {
+                MediaListDialogSmallFragment.newInstance(media)
+                    .show(activity.supportFragmentManager, "list")
+                return true
+            }
+        }
+        return false
     }
 
     override fun getItemCount(): Int {
