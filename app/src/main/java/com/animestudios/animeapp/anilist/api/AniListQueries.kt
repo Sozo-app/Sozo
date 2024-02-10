@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.anilist.api
 
 import android.app.Activity
+import com.animestudios.animeapp.UserQuery
 import com.animestudios.animeapp.anilist.response.Episode
 import com.animestudios.animeapp.anilist.response.Genre
 import com.animestudios.animeapp.anilist.response.Query

@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/detailAppbar"
         android:layout_width="match_parent"
@@ -43,8 +45,7 @@
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/banner_img" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -83,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="16dp"
                     app:cardBackgroundColor="?attr/colorSurfaceVariant"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="2dp"
@@ -189,8 +190,9 @@
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+
                                 android:layout_marginTop="8dp"
-                                app:srcCompat="@drawable/ic_lock"
+                                app:srcCompat="@drawable/ic_logout_svg"
                                 app:tint="@color/bg_white" />
 
                             <TextView
@@ -199,7 +201,7 @@
                                 android:layout_gravity="bottom"
                                 android:layout_marginTop="4dp"
                                 android:fontFamily="@font/inter_bold"
-                                android:text="Accounts"
+                                android:text="Log Out"
                                 android:textSize="10sp" />
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -196,27 +196,8 @@ fun loadProfileCategory(): ArrayList<ProfileCategoryModel> {
             R.drawable.ic_about
         )
     )
-    list.add(
-        ProfileCategoryModel(
-            "Appearance",
-            "Adjust the app to your liking",
-            R.drawable.appearance
-        )
-    )
-    list.add(
-        ProfileCategoryModel(
-            "Anime Source",
-            "Change Source according to you",
-            R.drawable.ic_profile_item
-        )
-    )
-    list.add(
-        ProfileCategoryModel(
-            "Player",
-            "Player appearance , playback controls , Subtitles",
-            R.drawable.ic_player
-        )
-    )
+
+
     return list
 
 
