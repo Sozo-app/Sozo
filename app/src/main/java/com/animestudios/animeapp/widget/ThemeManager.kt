@@ -43,7 +43,7 @@ class ThemeManager(private val context: Activity) {
             if (!returnedEarly) return
         }
         val theme = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-            .getString("theme", "OCEAN")!!
+            .getString("theme", "RED")!!
 
         val themeToApply = when (theme) {
             "BLUE" -> if (useOLED) R.style.Theme_AnimeApp_BlueOLED else R.style.Theme_AnimeApp_Blue
@@ -54,6 +54,7 @@ class ThemeManager(private val context: Activity) {
             "RED" -> if (useOLED) R.style.Theme_AnimeApp_RedOLED else R.style.Theme_AnimeApp_Red
             "LAVENDER" -> if (useOLED) R.style.Theme_AnimeApp_LavenderOLED else R.style.Theme_AnimeApp_Lavender
             "OCEAN" -> if (useOLED) R.style.Theme_AnimeApp_OceanOLED else R.style.Theme_AnimeApp_Ocean
+            "YELLOW" -> if (useOLED) R.style.Theme_AnimeApp_Yellow else R.style.Theme_AnimeApp_Yellow
             "MONOCHROME (BETA)" -> if (useOLED) R.style.Theme_AnimeApp_MonochromeOLED else R.style.Theme_AnimeApp_Monochrome
             else -> if (useOLED) R.style.Theme_AnimeApp_PurpleOLED else R.style.Theme_AnimeApp_Purple
         }

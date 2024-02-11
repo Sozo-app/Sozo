@@ -7,17 +7,36 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable-v24/ic_round_auto_awesome_24.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/background_gradient_three.xml" value="0.3175" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/banner_bg.xml" value="0.3015" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/bg_driver_tab_unselected.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/cornered_bg.xml" value="0.308" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_close.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_correct.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_download.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_filter.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_folder.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_github.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_heart.xml" value="0.231" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_heart_outline.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_logout_svg.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_moon.xml" value="0.3015" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_more.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_notification.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_round_add_circle_outline_24.xml" value="0.231" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_round_playlist_play_24.xml" value="0.231" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_send.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/item_bg.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/item_navbar_bg.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/item_number.xml" value="0.231" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/linear_gradient_bg.xml" value="0.308" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/play.xml" value="0.1245" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/search_bg.xml" value="0.231" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/shape_oval_with_border.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/stroke_checker.xml" value="0.231" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/tab_item_unselected.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/tab_selected.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/thumb_selector.xml" value="0.3015" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/treck_switch.xml" value="0.3015" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout-night/bottom_sheet_custom.xml" value="0.321875" />
@@ -36,7 +55,7 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/detail_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/episode_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/fragment_all_anime.xml" value="0.321875" />
-        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/fragment_profile_screen.xml" value="0.4528302049755674" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/fragment_profile_screen.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_anime_watch.xml" value="0.2264151024877837" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_episode_compat.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_recipient_message.xml" value="0.321875" />
@@ -46,11 +65,16 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/list_stats_chart_bar.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/list_stats_chart_line.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/list_stats_chart_pie.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/main_screen.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/notification_screen.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/profile_category_item.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/profile_screen.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/raking_item.xml" value="0.32083333333333336" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/search_app_widget.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/statistics_screen.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/tab_item.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/tab_item_selected.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/tab_item_unselected.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/theme_item.xml" value="0.4528302049755674" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/theme_screen.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/menu/bottom_navbar_menu.xml" value="0.321875" />

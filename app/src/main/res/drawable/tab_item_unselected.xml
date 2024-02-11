@@ -2,9 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     >
-    <solid android:color="@color/white"/>
     <stroke android:width="1.2dp"
-        android:color="#E6E9EB"/>
+        android:color="?attr/colorSurfaceInverse"/>
     <corners android:radius="12dp"/>
 
 </shape>

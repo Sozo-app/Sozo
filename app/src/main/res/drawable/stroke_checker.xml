@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Color when the view is focused -->
-
-
-    <!-- Default color when none of the above states are true -->
-</selector>

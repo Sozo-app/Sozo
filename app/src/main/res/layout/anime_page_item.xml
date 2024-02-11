@@ -59,7 +59,16 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
                     app:srcCompat="@drawable/ic_search"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/notification"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_notification"
                     app:tint="@color/white"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 

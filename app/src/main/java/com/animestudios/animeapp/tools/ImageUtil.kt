@@ -51,20 +51,20 @@ object ImageUtil {
         imageView.load(uri)
     }
 
-    fun loadCircleImage(context: Context, url: String, imageView: AppCompatImageView)  {
-        imageView.background = ContextCompat.getDrawable(context, R.drawable.shape_oval_with_border)
-        imageView.backgroundTintList = ColorStateList.valueOf(context.getAttrValue(R.attr.themeSmallNegativeFont))
-        imageView.setPadding(context.resources.getDimensionPixelSize(R.dimen.lineWidth))
-        imageView.load(url) {
-            transformations(CircleCropTransformation())
-        }
-    }
-
-    fun loadRectangleImage(context: Context, url: String, imageView: AppCompatImageView) {
-        imageView.background = ContextCompat.getDrawable(context, R.drawable.shape_rectangle)
-        imageView.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, android.R.color.transparent))
-        imageView.load(url)
-    }
+//    fun loadCircleImage(context: Context, url: String, imageView: AppCompatImageView)  {
+//        imageView.background = ContextCompat.getDrawable(context, R.drawable.shape_oval_with_border)
+//        imageView.backgroundTintList = ColorStateList.valueOf(context.getAttrValue(R.attr.themeSmallNegativeFont))
+//        imageView.setPadding(context.resources.getDimensionPixelSize(R.dimen.lineWidth))
+//        imageView.load(url) {
+//            transformations(CircleCropTransformation())
+//        }
+//    }
+//
+//    fun loadRectangleImage(context: Context, url: String, imageView: AppCompatImageView) {
+//        imageView.background = ContextCompat.getDrawable(context, R.drawable.shape_rectangle)
+//        imageView.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, android.R.color.transparent))
+//        imageView.load(url)
+//    }
 
     fun showFullScreenImage(context: Context, url: String, imageView: AppCompatImageView) {
         StfalconImageViewer.Builder<String>(context, arrayOf(url)) { view, image ->

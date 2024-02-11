@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.LayoutAnimationController
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -18,10 +19,7 @@ import com.animestudios.animeapp.databinding.AnimePageItemBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.model.Review
 import com.animestudios.animeapp.settings.UISettings
-import com.animestudios.animeapp.tools.EnumItem
-import com.animestudios.animeapp.tools.Resource
-import com.animestudios.animeapp.tools.slideStart
-import com.animestudios.animeapp.tools.slideUp
+import com.animestudios.animeapp.tools.*
 import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
@@ -59,6 +57,13 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             binding.search.setOnClickListener {
                 fragmentAdapter.findNavController()
                     .navigate(com.animestudios.animeapp.R.id.action_mainScreen_to_searchScreen)
+            }
+            binding.notification.setOnClickListener {
+                fragmentAdapter.findNavController().navigate(
+                    R.id.action_mainScreen_to_notificationScreen,
+                    null,
+                    fragmentAdapter.animationTransaction().build()
+                )
             }
 
             if (ready.value == false)
@@ -176,7 +181,8 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 binding.reviewTxt.visible()
                 binding.reviewRecyclerview.adapter = reviewAdapter
                 if (uiSettings!!.layoutAnimations) {
-                    binding.reviewRecyclerview.layoutAnimation = LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
+                    binding.reviewRecyclerview.layoutAnimation =
+                        LayoutAnimationController(setSlideIn(uiSettings), 0.25f)
                     binding.reviewTxt.slideStart(700, 0)
                 }
                 val chipGroup: ChipGroup = binding.chipGroup

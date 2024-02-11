@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_mainScreen_to_messageScreen"
             app:destination="@id/messageScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_notificationScreen"
+            app:destination="@id/notificationScreen" />
 
     </fragment>
     <fragment
@@ -66,4 +69,9 @@
         android:name="com.animestudios.animeapp.ui.screen.profile.page.theme.ThemeScreen"
         android:label="theme_screen"
         tools:layout="@layout/theme_screen" />
+    <fragment
+        android:id="@+id/notificationScreen"
+        android:name="com.animestudios.animeapp.ui.screen.notification.NotificationScreen"
+        android:label="notification_screen"
+        tools:layout="@layout/notification_screen" />
 </navigation>

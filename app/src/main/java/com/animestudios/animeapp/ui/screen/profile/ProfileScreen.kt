@@ -15,19 +15,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.animestudios.animeapp.R
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.anilist.repo.imp.ProfileRepositoryImpl
-import com.animestudios.animeapp.loadImage
-import com.animestudios.animeapp.loadProfileCategory
-import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.animationTransaction
 import com.animestudios.animeapp.tools.slideStart
 import com.animestudios.animeapp.tools.slideUp
 import com.animestudios.animeapp.ui.screen.profile.adapter.ProfileAdapter
-import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
 import com.animestudios.animeapp.viewmodel.imp.ProfileViewModelImpl
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
@@ -57,24 +52,6 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model.userData.observe(this){
-            when(it){
-                is Resource.Error -> {
-
-                }
-                Resource.Loading -> {
-
-                }
-                is Resource.Success -> {
-                    val userResponse =it.data.user
-                    lifecycleScope.launch {
-                        binding.profileName.text = userResponse!!.name
-                        Glide.with(this@ProfileScreen).load(userResponse.avatar?.medium).into(binding.circleImageView)
-                        binding.profileBg.loadImage(userResponse.bannerImage)
-                    }
-                }
-            }
-        }
     }
 
 
@@ -92,6 +69,32 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
             }
 
         }
+
+        model.userData.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Error -> {
+                    binding.progressBar.gone()
+                    binding.nestedScrollView.visible()
+                }
+                Resource.Loading -> {
+                    binding.progressBar.visible()
+                    binding.nestedScrollView.gone()
+                }
+                is Resource.Success -> {
+
+                    binding.progressBar.gone()
+                    binding.nestedScrollView.visible()
+                    val userResponse = it.data.user
+                    lifecycleScope.launch {
+                        binding.profileName.text = userResponse!!.name
+                        Glide.with(this@ProfileScreen).load(userResponse.avatar?.medium)
+                            .into(binding.circleImageView)
+                        binding.profileBg.loadImage(userResponse.bannerImage)
+                    }
+                }
+            }
+        }
+
 
         model.loadUserById(Anilist.userid!!.toInt())
 
