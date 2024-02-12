@@ -15,6 +15,7 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.*
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.*
 import android.view.animation.*
 import android.webkit.CookieManager
@@ -24,10 +25,13 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Scroller
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +72,26 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+
+
+fun Fragment.applyColorByAttr(@AttrRes attrColor: Int): Int {
+    val typedValue = TypedValue()
+    val theme: Resources.Theme = requireContext().theme
+    theme.resolveAttribute(
+        attrColor, typedValue,
+        true
+    )
+    @ColorInt val selectedcolor: Int = typedValue.data
+
+    val typedValueBg = TypedValue()
+    val themeBg: Resources.Theme = requireContext().theme
+    themeBg.resolveAttribute(
+        attrColor, typedValueBg,
+        true
+    )
+
+    return selectedcolor
+}
 
 
 var statusBarHeight = 0
@@ -329,7 +353,6 @@ object Refresh {
     }
 
     val activity = mutableMapOf<Int, MutableLiveData<Boolean>>()
-
 
 
 }

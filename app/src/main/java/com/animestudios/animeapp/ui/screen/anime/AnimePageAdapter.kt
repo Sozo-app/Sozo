@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.animation.LayoutAnimationController
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -23,8 +22,11 @@ import com.animestudios.animeapp.tools.*
 import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+
 
 class AnimePageAdapter(private val fragmentAdapter: Fragment) :
     RecyclerView.Adapter<AnimePageAdapter.AnimePageVh>() {
@@ -50,6 +52,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
 
     inner class AnimePageVh(val bin: AnimePageItemBinding) :
         RecyclerView.ViewHolder(bin.root) {
+        @SuppressLint("ResourceAsColor")
         fun onBind() {
             binding = bin
             trendingViewPager = binding.viewPager2

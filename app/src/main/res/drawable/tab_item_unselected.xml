@@ -3,7 +3,7 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     >
     <stroke android:width="1.2dp"
-        android:color="?attr/colorSurfaceInverse"/>
+        android:color="?attr/colorOnSurfaceVariant"/>
     <corners android:radius="12dp"/>
 
 </shape>

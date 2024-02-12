@@ -12,6 +12,7 @@
         android:id="@+id/materialToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,16 +23,17 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/notificationTab"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
-        app:tabGravity="center"
-        app:tabIndicatorAnimationMode="fade"
+        app:tabBackground="?attr/colorOnBackground"
+        app:tabGravity="start"
+        app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="?attr/colorOnBackground"
-        app:tabInlineLabel="true"
-        app:tabMode="scrollable" />
+        app:tabMode="scrollable"
+        app:tabPadding="2dp" />
 
 
     <androidx.viewpager2.widget.ViewPager2

@@ -3,7 +3,7 @@
     android:id="@+id/polisContainer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+    android:layout_marginHorizontal="2dp"
     android:background="@drawable/tab_selected"
     android:gravity="center">
 
@@ -11,10 +11,10 @@
         android:id="@+id/titleCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="9dp"
+        android:layout_marginVertical="9dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Действующие"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 </LinearLayout>
