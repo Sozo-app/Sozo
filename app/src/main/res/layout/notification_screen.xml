@@ -31,9 +31,11 @@
         app:tabBackground="?attr/colorOnBackground"
         app:tabGravity="start"
         app:tabIndicatorAnimationMode="elastic"
+
         app:tabIndicatorColor="?attr/colorOnBackground"
         app:tabMode="scrollable"
-        app:tabPadding="2dp" />
+        app:tabPaddingEnd="6dp"
+        app:tabPaddingStart="6dp" />
 
 
     <androidx.viewpager2.widget.ViewPager2

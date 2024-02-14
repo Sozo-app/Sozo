@@ -3,16 +3,24 @@
     android:id="@+id/polisContainer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="2dp"
     android:background="@drawable/tab_selected"
     android:gravity="center">
+
+    <ImageView
+        android:id="@+id/icTab"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginVertical="9dp"
+        android:layout_marginStart="6dp"
+        android:src="@drawable/ic_forum" />
 
     <TextView
         android:id="@+id/titleCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="9dp"
         android:layout_marginVertical="9dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="9dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Действующие"
         android:textColor="@color/white"

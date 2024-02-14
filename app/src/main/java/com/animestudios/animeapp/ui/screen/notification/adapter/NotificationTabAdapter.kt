@@ -6,6 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.animestudios.animeapp.ui.screen.browse.page.allanime.AllAnimeFragment
 import com.animestudios.animeapp.ui.screen.browse.page.genre.GenreFragment
 import com.animestudios.animeapp.ui.screen.login.LoginScreen
+import com.animestudios.animeapp.ui.screen.notification.page.AllPage
 
 class NotificationTabAdapter(var arrayList: ArrayList<String>, fragmentManager: FragmentActivity) :
     FragmentStateAdapter(fragmentManager) {
@@ -15,8 +16,8 @@ class NotificationTabAdapter(var arrayList: ArrayList<String>, fragmentManager: 
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> LoginScreen()
-            else -> LoginScreen()
+            0 -> AllPage()
+            else -> AllPage()
         }
     }
 }

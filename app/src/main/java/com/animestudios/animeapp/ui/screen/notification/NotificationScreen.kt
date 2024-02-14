@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.animestudios.animeapp.R
 import com.animestudios.animeapp.applyColorByAttr
 import com.animestudios.animeapp.databinding.NotificationScreenBinding
+import com.animestudios.animeapp.gone
 import com.animestudios.animeapp.ui.screen.notification.adapter.NotificationTabAdapter
+import com.animestudios.animeapp.visible
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -36,18 +39,22 @@ class NotificationScreen : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 val customView = tab?.customView
+                val img = customView?.findViewById<ImageView>(R.id.icTab)
                 customView?.findViewById<LinearLayout>(R.id.polisContainer)
                     ?.setBackgroundResource(R.drawable.tab_selected)
                 customView?.findViewById<TextView>(R.id.titleCat)
                     ?.setTextColor(applyColorByAttr(com.google.android.material.R.attr.colorControlNormal))
+                img!!.setColorFilter(applyColorByAttr(com.google.android.material.R.attr.colorControlNormal))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 val customView = tab?.customView
+                val img = customView?.findViewById<ImageView>(R.id.icTab)
                 customView?.findViewById<LinearLayout>(R.id.polisContainer)
                     ?.setBackgroundResource(R.drawable.tab_item_unselected)
                 customView?.findViewById<TextView>(R.id.titleCat)
                     ?.setTextColor(applyColorByAttr(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                img!!.setColorFilter(applyColorByAttr(com.google.android.material.R.attr.colorOnSurfaceVariant))
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -69,7 +76,20 @@ class NotificationScreen : Fragment() {
 
                 tab?.customView = tabView
                 tabView.findViewById<TextView>(R.id.titleCat).text = tabList()[i]
+                val img = tabView.findViewById<ImageView>(R.id.icTab)
+
+                if (tabIconList()[i].second) {
+                    img.setImageResource(tabIconList()[i].first)
+                    img.visible()
+                } else {
+                    img.gone()
+                }
+
+
+
                 if (i == 0) {
+
+                    img.setColorFilter(applyColorByAttr(com.google.android.material.R.attr.colorControlNormal))
 
                     tabView?.findViewById<LinearLayout>(R.id.polisContainer)
                         ?.setBackgroundResource(R.drawable.tab_selected)
@@ -78,11 +98,11 @@ class NotificationScreen : Fragment() {
 
                 } else {
 
-
                     tabView?.findViewById<LinearLayout>(R.id.polisContainer)
                         ?.setBackgroundResource(R.drawable.tab_item_unselected)
                     tabView?.findViewById<TextView>(R.id.titleCat)
                         ?.setTextColor(applyColorByAttr(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                    img.setColorFilter(applyColorByAttr(com.google.android.material.R.attr.colorOnSurfaceVariant))
                 }
             }
 
@@ -92,13 +112,26 @@ class NotificationScreen : Fragment() {
     fun tabList(): ArrayList<String> {
         return arrayListOf(
             "All",
-            "Unread",
             "Airing",
-            "Completed",
             "Forum",
-            "On Hold",
+            "Follows",
             "Media",
         )
+    }
+
+    fun tabIconList(): ArrayList<Pair<Int, Boolean>> {
+        return arrayListOf(
+            Pair(0, false),
+            Pair(
+                R.drawable.ic_unread,
+                true
+            ),
+            Pair(R.drawable.ic_airing, true),
+            Pair(R.drawable.ic_forum, true),
+            Pair(R.drawable.ic_follow, true),
+            Pair(R.drawable.ic_pic, true),
+
+            )
     }
 
 }
