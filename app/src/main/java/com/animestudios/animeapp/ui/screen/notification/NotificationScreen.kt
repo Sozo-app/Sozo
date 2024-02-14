@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.R
 import com.animestudios.animeapp.applyColorByAttr
 import com.animestudios.animeapp.databinding.NotificationScreenBinding
@@ -35,6 +36,10 @@ class NotificationScreen : Fragment() {
         binding.notificationPager.adapter = NotificationTabAdapter(tabList(), requireActivity())
         TabLayoutMediator(binding.notificationTab, binding.notificationPager) { _, _ ->
         }.attach()
+
+        binding.materialToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.notificationTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
