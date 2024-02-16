@@ -43,7 +43,7 @@ import java.lang.Math.abs
  * @constructor Create an Empty
  **/
 @AndroidEntryPoint
-class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
+class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
     private var _binding: DetailScreenBinding? = null
     lateinit var media: Media
     private val binding get() = _binding!!

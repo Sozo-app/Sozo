@@ -113,6 +113,8 @@
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/coverImage"
+                            android:transitionName="coverImage"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop" />

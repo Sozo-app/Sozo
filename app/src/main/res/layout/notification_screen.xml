@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,43 +7,62 @@
     android:background="?attr/colorOnBackground"
     tools:context=".ui.screen.notification.NotificationScreen">
 
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_back"
-        app:title="Notification"
-        app:titleTextAppearance="@style/textAppearanceMaterialToolbar" />
+        android:backgroundTint="?attr/colorOnBackground"
+        android:orientation="vertical"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Notification"
+            app:titleTextAppearance="@style/textAppearanceMaterialToolbar"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollEffect="compress"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/notificationTab"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+            app:tabBackground="?attr/colorOnBackground"
+            app:tabGravity="start"
+            app:tabIndicatorAnimationMode="elastic"
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/notificationTab"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
-        app:tabBackground="?attr/colorOnBackground"
-        app:tabGravity="start"
-        app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorColor="?attr/colorOnBackground"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="6dp"
+            app:tabPaddingStart="6dp" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        app:tabIndicatorColor="?attr/colorOnBackground"
-        app:tabMode="scrollable"
-        app:tabPaddingEnd="6dp"
-        app:tabPaddingStart="6dp" />
 
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/notificationPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationTab" />
+        app:layout_constraintTop_toBottomOf="@+id/notificationTab"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
