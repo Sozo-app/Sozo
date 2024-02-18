@@ -27,6 +27,10 @@ class SearchViewModelImp:ViewModel(),SearchViewModel {
         }.launchIn(viewModelScope)
     }
 
+    override fun loadSearchCharacter(r: SearchResults) {
+        TODO("Not yet implemented")
+    }
+
     override fun loadNextPage(r: SearchResults) {
         val data = r.copy(page = r.page+1)
         repository.getSearch(data).onEach {
@@ -38,5 +42,25 @@ class SearchViewModelImp:ViewModel(),SearchViewModel {
                 result.postValue(it)
             }
         }.launchIn(viewModelScope)
+    }
+
+    override fun loadNextPageCharacter(r: SearchResults) {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadNextPageUser(r: SearchResults) {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadNextPageStaff(r: SearchResults) {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadSearchUser(r: SearchResults) {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadSearchStaff(r: SearchResults) {
+        TODO("Not yet implemented")
     }
 }

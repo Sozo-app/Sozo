@@ -21,7 +21,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="45dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="24dp"
         app:contentPadding="12dp">
@@ -32,6 +32,56 @@
             android:rotation="90"
             app:srcCompat="@drawable/ic_round_arrow_back_ios_new_24"
             tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchToolContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="45dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="24dp"
+        app:contentPadding="4dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/micSearch"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_mic"
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
+
+
+            <ImageView
+                android:id="@+id/changeSearchType"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                app:srcCompat="@drawable/list_icon"
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginVertical="2dp"
+            android:background="?attr/colorOnSecondaryContainer" />
+
     </androidx.cardview.widget.CardView>
 
 

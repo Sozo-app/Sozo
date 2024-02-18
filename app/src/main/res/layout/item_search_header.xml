@@ -14,38 +14,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:padding="8dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_back"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/searchBarText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_margin="14dp"
+            android:layout_height="55dp"
+            android:layout_margin="12dp"
             android:layout_weight="1"
             android:background="@drawable/search_bg"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="20dp"
-            android:hint="@string/anime"
-            android:paddingVertical="12dp"
-            android:paddingStart="20dp"
+            android:fontFamily="@font/poppins"
+            android:hint="Search Anime"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:paddingVertical="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            android:textSize="16sp"
             android:transitionName="@string/search" />
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/searchFilter"
-            android:layout_width="55dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-
-            android:layout_margin="8dp"
             android:layout_weight="0.11"
-            android:background="@drawable/search_bg"
-
             android:src="@drawable/ic_filter"
-            app:tint="?attr/colorPrimary"
+            app:backgroundTint="?attr/colorOnSurface"
             tools:ignore="ContentDescription,TextContrastCheck" />
 
 
@@ -60,8 +68,59 @@
         android:orientation="horizontal" />
 
     <LinearLayout
+        android:id="@+id/historyTitleContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/poppins"
+            android:text="Recent Searches"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/searchClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Clear All"
+            android:textColor="?attr/colorPrimaryContainer"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/historyContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/parentTags"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent" />
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/genreContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="6dp"
         android:baselineAligned="false"
         android:clipToPadding="false"
         android:orientation="horizontal"
@@ -90,22 +149,29 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="4dp"
+        android:background="?attr/colorOnSurface" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginVertical="6dp"
+        android:layout_marginStart="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/search_results"
-            android:textSize="20sp" />
+            android:fontFamily="@font/poppins"
+            android:text="Search Results"
+            android:textSize="18sp" />
 
 
         <ImageView
@@ -123,6 +189,7 @@
             android:id="@+id/searchResultList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
             android:alpha="0.33"
             android:padding="8dp"
             android:visibility="gone"
@@ -130,7 +197,15 @@
             app:tint="@color/white"
             tools:ignore="ContentDescription,ImageContrastCheck" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/defaultPageContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     </LinearLayout>
+
 
 </LinearLayout>

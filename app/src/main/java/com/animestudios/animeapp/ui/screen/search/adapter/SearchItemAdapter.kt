@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.animestudios.animeapp.databinding.AnimeItemBinding
 import com.animestudios.animeapp.databinding.SearchBigItemBinding
+import com.animestudios.animeapp.databinding.SearchItemBinding
 import com.animestudios.animeapp.loadImage
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.model.Genre
@@ -35,7 +36,7 @@ class SearchItemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (type) {
             0 -> MediaViewHolder(
-                AnimeItemBinding.inflate(
+                SearchItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -65,9 +66,6 @@ class SearchItemAdapter(
                 if (media != null) {
                     holder.binding.apply {
                         itemImg.loadImage(media.cover ?: media.cover)
-                        b.itemCompactScore.text =
-                            ((if (media.userScore == 0) (media.meanScore
-                                ?: 0) else media.userScore) / 10.0).toString()
                         titleItem.text = media.userPreferredName
                     }
                 }
@@ -119,7 +117,7 @@ class SearchItemAdapter(
         return type
     }
 
-    inner class MediaViewHolder(val binding: AnimeItemBinding) :
+    inner class MediaViewHolder(val binding: SearchItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             if (matchParent) itemView.updateLayoutParams { width = -1 }

@@ -2,7 +2,6 @@ package com.animestudios.animeapp.ui.screen.search
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -23,6 +22,7 @@ import com.animestudios.animeapp.others.ProgressAdapter
 import com.animestudios.animeapp.px
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.statusBarHeight
+import com.animestudios.animeapp.tools.SearchType
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchAdapter
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchItemAdapter
 import com.animestudios.animeapp.viewmodel.imp.SearchViewModelImp
@@ -45,6 +45,7 @@ class SearchScreen : Fragment() {
 
     lateinit var result: SearchResults
     lateinit var updateChips: (() -> Unit)
+    var type: SearchType = SearchType.ANIME
     val model: SearchViewModelImp by viewModels()
 
     private var _binding: SearchScreenBinding? = null
@@ -72,7 +73,7 @@ class SearchScreen : Fragment() {
             top = statusBarHeight,
             bottom = navBarHeight + 80f.px
         )
-        style = readData<Int>("searchStyle") ?: 1
+        style = readData<Int>("searchStyle") ?: 0
         if (model.notSet) {
             model.notSet = false
             model.searchResults = SearchResults(
@@ -109,7 +110,7 @@ class SearchScreen : Fragment() {
         }
 //        hideNavigation()
 
-        concatAdapter = ConcatAdapter(headerAdaptor, mediaAdaptor, progressAdapter)
+        checkSearchType(headerAdaptor)
         binding.searchRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(v: RecyclerView, dx: Int, dy: Int) {
@@ -203,6 +204,17 @@ class SearchScreen : Fragment() {
         }
 
 
+    }
+
+    private fun checkSearchType(headerAdaptor: SearchAdapter) {
+        when (type) {
+            SearchType.ANIME -> {
+                concatAdapter = ConcatAdapter(headerAdaptor, mediaAdaptor, progressAdapter)
+            }
+            SearchType.CHARACTER -> TODO()
+            SearchType.STAFF -> TODO()
+            SearchType.USER -> TODO()
+        }
     }
 
 

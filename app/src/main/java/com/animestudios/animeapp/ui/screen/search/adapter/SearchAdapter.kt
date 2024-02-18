@@ -1,31 +1,36 @@
 package com.animestudios.animeapp.ui.screen.search.adapter
 
 import android.annotation.SuppressLint
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.ItemChipBinding
+import com.animestudios.animeapp.databinding.ItemHistorySearchBinding
 import com.animestudios.animeapp.databinding.ItemSearchHeaderBinding
-import com.animestudios.animeapp.preventTwoClick
-import com.animestudios.animeapp.saveData
-import com.animestudios.animeapp.toFirstUpperCase
 import com.animestudios.animeapp.ui.screen.search.SearchScreen
 import com.animestudios.animeapp.ui.screen.search.dialog.SearchFilterBottomDialog
+import kotlinx.coroutines.*
+import java.lang.Runnable
+import kotlin.coroutines.CoroutineContext
 
 
 class SearchAdapter(private val activity: SearchScreen) :
     RecyclerView.Adapter<SearchAdapter.SearchHeaderViewHolder>() {
     private val itemViewType = 6969
+    var isAddedHistory = false
     var search: Runnable? = null
     var requestFocus: Runnable? = null
     private var textWatcher: TextWatcher? = null
+    private var job: Job? = null // coroutine job
+    private val coroutineContext: CoroutineContext = Dispatchers.Main + SupervisorJob()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHeaderViewHolder {
         val binding =
@@ -77,22 +82,84 @@ class SearchAdapter(private val activity: SearchScreen) :
         }
 
         fun searchTitle() {
+            if (binding.searchBarText.text.isEmpty()) {
+                binding.genreContainer.gone()
+
+                binding.historyContainer.visible()
+                binding.historyTitleContainer.visible()
+                var count = 0
+                val list = readData<ArrayList<String>>("historyList") ?: arrayListOf()
+                val parentView = binding.parentTags
+                parentView.removeAllViews();
+                list.onEach {
+                    val chipView = ItemHistorySearchBinding.inflate(
+                        LayoutInflater.from(activity.requireContext()),
+                        parentView,
+                        false
+                    )
+                    if (count >= 7) return@onEach
+                    chipView.root.text = it
+                    chipView.root.setOnClickListener {
+                        binding.searchBarText.setText(chipView.root.text)
+                        searchTitle()
+                    }
+                    parentView.addView(chipView.root)
+                    count++
+
+
+                }
+            } else {
+                binding.genreContainer.visible()
+                binding.historyContainer.gone()
+                binding.historyTitleContainer.gone()
+            }
+
+
             activity.result.apply {
                 search =
                     if (binding.searchBarText.text.toString() != "") binding.searchBarText.text.toString() else null
                 onList = listOnly
                 isAdult = adult
             }
-            if (binding.searchBarText.text.isNotEmpty())
+            if (binding.searchBarText.text.isNotEmpty()) {
                 activity.search()
+            }
+        }
+        binding.searchClear.setOnClickListener {
+            saveData("historyList", arrayListOf<String>())
+            binding.parentTags.removeAllViews()
+
+        }
+
+        fun delayedSaveText(enteredText: String) {
+            // Coroutine boshlaymiz
+            job = CoroutineScope(coroutineContext).launch {
+                // 1.5 soniya (1500 millisekund) ichida matnni tekshirib, o'zgarmagan bo'lsa saqlash
+                delay(1500)
+                if (enteredText == binding.searchBarText.text.toString()) {
+                    var historyList = readData<ArrayList<String>>("historyList")
+                    val history = binding.searchBarText.text.toString()
+                    if (historyList == null) historyList = ArrayList()
+                    if (!historyList.contains(history)) {
+                        historyList.add(history)
+                        println(historyList.toString())
+                        saveData("historyList", historyList)
+                    }
+                    searchTitle()
+                }
+            }
         }
 
         textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                delayedSaveText(s.toString())
+            }
+
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
                 searchTitle()
             }
         }
@@ -100,25 +167,27 @@ class SearchAdapter(private val activity: SearchScreen) :
 
         binding.searchBarText.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
-                EditorInfo.IME_ACTION_SEARCH -> {
-                    searchTitle()
-                    binding.searchBarText.clearFocus()
-                    imm.hideSoftInputFromWindow(binding.searchBarText.windowToken, 0)
+                EditorInfo.IME_ACTION_DONE -> {
+                    var historyList = readData<ArrayList<String>>("historyList")
+                    if (binding.searchBarText.text.isNotEmpty()) {
+                        val history = binding.searchBarText.text.toString()
+                        if (historyList == null) historyList = ArrayList()
+                        if (!historyList!!.contains(history)) {
+                            historyList!!.add(history)
+                            println(historyList.toString())
+                            saveData("historyList", historyList)
+                        }
+                        searchTitle()
+                        binding.searchBarText.clearFocus()
+                        imm.hideSoftInputFromWindow(binding.searchBarText.windowToken, 0)
+                    }
+
                     true
                 }
                 else -> false
             }
         }
-        binding.searchBarText.setOnTouchListener { v, event ->
 
-            if (event.action == MotionEvent.ACTION_UP) {
-                if (event.rawX <= (binding.searchBarText.left + binding.searchBarText.compoundPaddingLeft)) {
-                    searchTitle()
-                    return@setOnTouchListener true
-                }
-            }
-            return@setOnTouchListener false
-        }
 
         binding.searchResultGrid.setOnClickListener {
             it.alpha = 1f
@@ -138,6 +207,7 @@ class SearchAdapter(private val activity: SearchScreen) :
 
         search = Runnable { searchTitle() }
         requestFocus = Runnable { binding.searchBarText.requestFocus() }
+
     }
 
 
