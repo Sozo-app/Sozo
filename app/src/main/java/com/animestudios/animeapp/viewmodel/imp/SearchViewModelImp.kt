@@ -5,12 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.SearchResults
+import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.viewmodel.SearchViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-class SearchViewModelImp:ViewModel(),SearchViewModel {
-    private val repository =AniListRepositoryImp()
+class SearchViewModelImp : ViewModel(), SearchViewModel {
+    private val repository = AniListRepositoryImp()
     override val result: MutableLiveData<SearchResults?> = MutableLiveData()
     var searched = false
     var notSet = true
@@ -32,7 +34,7 @@ class SearchViewModelImp:ViewModel(),SearchViewModel {
     }
 
     override fun loadNextPage(r: SearchResults) {
-        val data = r.copy(page = r.page+1)
+        val data = r.copy(page = r.page + 1)
         repository.getSearch(data).onEach {
             it.onFailure {
 

@@ -15,13 +15,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.response.SearchResults
 import com.animestudios.animeapp.databinding.SearchScreenBinding
-import com.animestudios.animeapp.navBarHeight
 import com.animestudios.animeapp.others.ProgressAdapter
-import com.animestudios.animeapp.px
-import com.animestudios.animeapp.readData
-import com.animestudios.animeapp.statusBarHeight
 import com.animestudios.animeapp.tools.SearchType
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchAdapter
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchItemAdapter
@@ -34,7 +31,7 @@ import java.util.*
 
 class SearchScreen : Fragment() {
     private val scope = lifecycleScope
-
+     var lastSearchedText =""
     var style: Int = 1
     private var screenWidth: Float = 0f
 
@@ -130,6 +127,7 @@ class SearchScreen : Fragment() {
 
         model.result.observe(viewLifecycleOwner) {
             if (it != null) {
+
                 model.searchResults.apply {
                     onList = it.onList
                     isAdult = it.isAdult
@@ -146,6 +144,7 @@ class SearchScreen : Fragment() {
                     page = it.page
                     hasNextPage = it.hasNextPage
                 }
+                headerAdaptor.delayedSaveText(lastSearchedText)
 
                 val prev = model.searchResults.results.size
                 model.searchResults.results.addAll(it.results)
@@ -261,6 +260,7 @@ class SearchScreen : Fragment() {
                 scope.launch(Dispatchers.IO) {
                     loading = true
                     model.loadSearch(result)
+
                     loading = false
                 }
             }

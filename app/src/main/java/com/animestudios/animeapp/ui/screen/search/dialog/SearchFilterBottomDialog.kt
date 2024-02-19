@@ -56,6 +56,8 @@ class SearchFilterBottomDialog(
         binding.searchFilterApply.setOnClickListener {
             activity.result.apply {
 
+
+
                 genres = selectedGenres
                 sort = selectedSort.ifBlank { null }
 

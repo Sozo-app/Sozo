@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.11"
+            app:rippleColor="#16100E0E"
             android:src="@drawable/ic_filter"
             app:backgroundTint="?attr/colorOnSurface"
             tools:ignore="ContentDescription,TextContrastCheck" />
@@ -104,6 +105,7 @@
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         android:scrollbars="vertical"
+
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +114,7 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/parentTags"
             android:layout_width="match_parent"
-
+            app:singleSelection="true"
             android:layout_height="match_parent" />
     </androidx.core.widget.NestedScrollView>
 
