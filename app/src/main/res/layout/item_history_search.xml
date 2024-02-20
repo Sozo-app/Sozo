@@ -20,7 +20,8 @@
     app:chipCornerRadius="18dp"
     app:chipIcon="@drawable/ic_clock"
     app:chipStrokeWidth="0dp"
-    app:closeIcon="@drawable/ic_close"
+    app:closeIcon="@drawable/ic_close_png"
+
     app:closeIconEnabled="true"
     app:closeIconSize="14dp"
     app:closeIconTint="@color/white"

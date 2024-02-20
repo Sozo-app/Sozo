@@ -39,7 +39,7 @@
             android:imeOptions="actionDone"
             android:inputType="text"
             android:paddingVertical="10dp"
-            android:paddingStart="10dp"
+            android:paddingStart="16dp"
             android:paddingEnd="10dp"
             android:textColor="@color/white"
             android:textColorHint="?attr/colorOnSurfaceVariant"
@@ -52,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.11"
-            app:rippleColor="#16100E0E"
             android:src="@drawable/ic_filter"
             app:backgroundTint="?attr/colorOnSurface"
+            app:rippleColor="#16100E0E"
             tools:ignore="ContentDescription,TextContrastCheck" />
 
 
@@ -67,57 +67,6 @@
         android:layout_marginBottom="-4dp"
         android:minHeight="16dp"
         android:orientation="horizontal" />
-
-    <LinearLayout
-        android:id="@+id/historyTitleContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:fontFamily="@font/poppins"
-            android:text="Recent Searches"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/searchClear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Clear All"
-            android:textColor="?attr/colorPrimaryContainer"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/historyContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="14dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        android:scrollbars="vertical"
-
-        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/parentTags"
-            android:layout_width="match_parent"
-            app:singleSelection="true"
-            android:layout_height="match_parent" />
-    </androidx.core.widget.NestedScrollView>
-
     <LinearLayout
         android:id="@+id/genreContainer"
         android:layout_width="match_parent"
@@ -151,6 +100,59 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/historyTitleContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Recent Searches"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/searchClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Clear All"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/historyContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/parentTags"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:singleSelection="true" />
+    </androidx.core.widget.NestedScrollView>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -162,7 +164,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="6dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

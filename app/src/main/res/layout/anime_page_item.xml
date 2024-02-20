@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_gravity="end|center"
-                android:layout_marginEnd="29dp">
+                android:layout_marginEnd="18dp">
 
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -59,10 +59,11 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="10dp"
                     app:srcCompat="@drawable/ic_search"
                     app:tint="@color/white"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/notification"
                     android:layout_width="30dp"

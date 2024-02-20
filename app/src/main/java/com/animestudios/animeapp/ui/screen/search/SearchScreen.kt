@@ -1,13 +1,22 @@
 package com.animestudios.animeapp.ui.screen.search
 
+import android.Manifest
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.updatePaddingRelative
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,7 +40,7 @@ import java.util.*
 
 class SearchScreen : Fragment() {
     private val scope = lifecycleScope
-     var lastSearchedText =""
+    var lastSearchedText = ""
     var style: Int = 1
     private var screenWidth: Float = 0f
 
@@ -39,6 +48,7 @@ class SearchScreen : Fragment() {
     private lateinit var progressAdapter: ProgressAdapter
 
     private lateinit var concatAdapter: ConcatAdapter
+    lateinit var isMicClickedListener: (String) -> Unit
 
     lateinit var result: SearchResults
     lateinit var updateChips: (() -> Unit)
@@ -53,6 +63,9 @@ class SearchScreen : Fragment() {
 
     }
 
+    fun setIsMicClickedListener(isMicClickedListener: (String) -> Unit) {
+        this.isMicClickedListener = isMicClickedListener
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,6 +117,36 @@ class SearchScreen : Fragment() {
                     }
                 }
             }
+        }
+
+        binding.micSearch.setOnClickListener {
+            if (!SpeechRecognizer.isRecognitionAvailable(requireContext())) {
+                snackString("Your Phone Not Support Mic")
+            } else {
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.RECORD_AUDIO
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    checkPermission();
+                }
+
+                val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+                intent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                intent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE,
+                    Locale.getDefault()
+                )
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text")
+
+                startActivityForResult(intent, 1);
+
+            }
+
+
         }
 //        hideNavigation()
 
@@ -205,6 +248,17 @@ class SearchScreen : Fragment() {
 
     }
 
+
+    private fun checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                1
+            )
+        }
+    }
+
     private fun checkSearchType(headerAdaptor: SearchAdapter) {
         when (type) {
             SearchType.ANIME -> {
@@ -275,13 +329,44 @@ class SearchScreen : Fragment() {
         state = binding.searchRecyclerView.layoutManager?.onSaveInstanceState()
     }
 
+
     override fun onResume() {
         super.onResume()
         binding.searchRecyclerView.layoutManager?.onRestoreInstanceState(state)
+    }
+
+    override fun onActivityResult(
+        requestCode: Int, resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK && data != null) {
+                val result = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS
+                )
+
+                isMicClickedListener.invoke(result?.get(0)?.toString().toString())
+                snackString(result?.get(0)?.toString())
+            }
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1 && grantResults.size > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                snackString("Permission Granted")
+            }
+        }
+    }
 }

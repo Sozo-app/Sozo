@@ -15,7 +15,7 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.2775" />
-        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_close.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_close.xml" value="0.2264151024877837" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_correct.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_download.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable/ic_filter.xml" value="0.2775" />
@@ -56,6 +56,7 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/banner_item.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/borwse_screen.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/bottom_sheet_custom.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/bottom_sheet_search_filter.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/bottomsheet_media_list.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/character_item.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/detail_page.xml" value="0.2988679352838745" />
@@ -68,7 +69,7 @@
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_anime_watch.xml" value="0.2264151024877837" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_chip.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_episode_compat.xml" value="0.321875" />
-        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_history_search.xml" value="0.32083333333333336" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_history_search.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_recipient_message.xml" value="0.321875" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_search_header.xml" value="0.2988679352838745" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/layout/item_sender_message.xml" value="0.11354166666666667" />
