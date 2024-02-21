@@ -120,9 +120,7 @@ class SearchScreen : Fragment() {
         }
 
         binding.micSearch.setOnClickListener {
-            if (!SpeechRecognizer.isRecognitionAvailable(requireContext())) {
-                snackString("Your Phone Not Support Mic")
-            } else {
+
                 if (ContextCompat.checkSelfPermission(
                         requireActivity(),
                         Manifest.permission.RECORD_AUDIO
@@ -143,9 +141,6 @@ class SearchScreen : Fragment() {
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text")
 
                 startActivityForResult(intent, 1);
-
-            }
-
 
         }
 //        hideNavigation()
