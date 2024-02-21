@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.view.LayoutInflater
@@ -49,6 +50,7 @@ class SearchScreen : Fragment() {
 
     private lateinit var concatAdapter: ConcatAdapter
     lateinit var isMicClickedListener: (String) -> Unit
+    private lateinit var speechRecognizer: SpeechRecognizer
 
     lateinit var result: SearchResults
     lateinit var updateChips: (() -> Unit)
@@ -66,6 +68,7 @@ class SearchScreen : Fragment() {
     fun setIsMicClickedListener(isMicClickedListener: (String) -> Unit) {
         this.isMicClickedListener = isMicClickedListener
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -118,29 +121,64 @@ class SearchScreen : Fragment() {
                 }
             }
         }
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireActivity())
 
         binding.micSearch.setOnClickListener {
 
-                if (ContextCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.RECORD_AUDIO
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    checkPermission();
+            if (ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.RECORD_AUDIO
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                checkPermission();
+            }
+            // Initialize SpeechRecognizer
+            speechRecognizer.setRecognitionListener(object : RecognitionListener {
+                override fun onReadyForSpeech(params: Bundle?) {
+                    // Called when the speech recognition service is ready for user input
                 }
 
-                val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-                intent.putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-                )
-                intent.putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE,
-                    Locale.getDefault()
-                )
-                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text")
+                override fun onBeginningOfSpeech() {
+                    // Called when the user starts speaking
+                }
 
-                startActivityForResult(intent, 1);
+                override fun onRmsChanged(rmsdB: Float) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onBufferReceived(buffer: ByteArray?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onEndOfSpeech() {
+                    // Called when the user stops speaking
+                }
+
+                override fun onResults(results: Bundle?) {
+                    // Called when speech recognition results are available
+                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                    if (!matches.isNullOrEmpty()) {
+                        val recognizedText = matches[0]
+                        // Handle the recognized text as needed
+                        snackString(recognizedText)
+                    }
+                }
+
+                override fun onPartialResults(partialResults: Bundle?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onEvent(eventType: Int, params: Bundle?) {
+                    TODO("Not yet implemented")
+                }
+
+                // Implement other methods as needed
+
+                override fun onError(error: Int) {
+                    // Called when there is an error in speech recognition
+                }
+            })
+//            speechRecognizer.startListening()
 
         }
 //        hideNavigation()
@@ -252,6 +290,7 @@ class SearchScreen : Fragment() {
                 1
             )
         }
+
     }
 
     private fun checkSearchType(headerAdaptor: SearchAdapter) {
@@ -349,6 +388,7 @@ class SearchScreen : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        speechRecognizer.destroy()
     }
 
     @Deprecated("Deprecated in Java")
