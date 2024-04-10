@@ -2,6 +2,7 @@ package com.animestudios.animeapp.anilist.repo
 
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
+import com.animestudios.animeapp.anilist.response.SearchResultsCharacter
 import com.animestudios.animeapp.media.Media
 import kotlinx.coroutines.flow.Flow
 
@@ -10,9 +11,12 @@ interface AniListRepository {
     fun getFullDataById(media: Media): kotlinx.coroutines.flow.Flow<Media>
     fun getAnimeListByGenre(genre: MutableList<String>): Flow<Result<SearchResults>>
     fun getSearch(search: SearchResults): Flow<Result<SearchResults>>
+    fun getSearchCharacter(search: SearchResultsCharacter): Flow<Result<SearchResultsCharacter>>
+    fun recommendedAnimeList(): Flow<Result<MutableList<Media?>?>>
     fun recentlyUpdated(): Flow<Result<MutableList<Media>?>>
     fun forYouAnimeList(): Flow<Result<MutableList<Media>>>
     fun randomAnimeList(): Flow<Result<SearchResults>>
+
     suspend fun getMediaLists(
         anime: Boolean,
         userId: Int,

@@ -6,6 +6,7 @@
     <string name="home">Home</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="anime">Anime</string>
+    <string name="review_of_x_by_y">Review of %1$s by %2$s</string>
     <string name="list">My List</string>
     <string name="movies">Movie</string>
     <string name="browse_anime">Browse Anime</string>
@@ -188,6 +189,8 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="view_on_anilist">View on Anilist</string>
+    <string name="copy_link">Copy Link</string>
 
 
 </resources>

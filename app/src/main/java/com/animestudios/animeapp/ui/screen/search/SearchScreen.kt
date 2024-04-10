@@ -33,12 +33,13 @@ import com.animestudios.animeapp.tools.SearchType
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchAdapter
 import com.animestudios.animeapp.ui.screen.search.adapter.SearchItemAdapter
 import com.animestudios.animeapp.viewmodel.imp.SearchViewModelImp
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
-
+@AndroidEntryPoint
 class SearchScreen : Fragment() {
     private val scope = lifecycleScope
     var lastSearchedText = ""

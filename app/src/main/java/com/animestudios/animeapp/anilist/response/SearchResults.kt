@@ -1,8 +1,6 @@
 package com.animestudios.animeapp.anilist.response
 
-import com.animestudios.animeapp.R
-import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.currContext
+import com.animestudios.animeapp.media.Character
 import com.animestudios.animeapp.media.Media
 import java.io.Serializable
 
@@ -55,14 +53,14 @@ data class SearchResults(
 
     fun removeChip(chip: SearchChip) {
         when (chip.type) {
-            "SORT"           -> sort = null
-            "FORMAT"         -> format = null
-            "SEASON"         -> season = null
-            "SEASON_YEAR"    -> seasonYear = null
-            "GENRE"          -> genres?.remove(chip.text)
+            "SORT" -> sort = null
+            "FORMAT" -> format = null
+            "SEASON" -> season = null
+            "SEASON_YEAR" -> seasonYear = null
+            "GENRE" -> genres?.remove(chip.text)
             "EXCLUDED_GENRE" -> excludedGenres?.remove(chip.text)
-            "TAG"            -> tags?.remove(chip.text)
-            "EXCLUDED_TAG"   -> excludedTags?.remove(chip.text)
+            "TAG" -> tags?.remove(chip.text)
+            "EXCLUDED_TAG" -> excludedTags?.remove(chip.text)
         }
     }
 

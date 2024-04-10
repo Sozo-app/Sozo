@@ -74,4 +74,8 @@
         android:name="com.animestudios.animeapp.ui.screen.notification.NotificationScreen"
         android:label="notification_screen"
         tools:layout="@layout/notification_screen" />
+    <fragment
+        android:id="@+id/reviewScreen"
+        android:name="com.animestudios.animeapp.ui.screen.anime.ReviewScreen"
+        android:label="ReviewScreen" />
 </navigation>

@@ -63,7 +63,7 @@ class SearchAdapter(private val activity: SearchScreen) :
 
 
 
-        binding.searchBarText.hint = "Search" + activity.result.type.toFirstUpperCase()
+        binding.searchBarText.hint = "Search " + activity.result.type.toFirstUpperCase()
         val adult = activity.result.isAdult
         val listOnly = activity.result.onList
         reloadSearchHistory()
@@ -90,7 +90,9 @@ class SearchAdapter(private val activity: SearchScreen) :
         }
         val chipLayoutManager =
             LinearLayoutManager(binding.root.context, RecyclerView.HORIZONTAL, false)
-
+        if (binding2.searchBarText.text.toString().isNotEmpty()) {
+            binding2.searchBarText.setSelection(binding2.searchBarText.text.toString().length)
+        }
         binding.searchChipRecycler.layoutManager = chipLayoutManager
         binding.searchChipRecycler.scrollToPosition(1)
 
@@ -140,7 +142,6 @@ class SearchAdapter(private val activity: SearchScreen) :
                     if (binding.searchBarText.text.isNotEmpty()) {
                         searchTitle()
                         reloadSearchHistory()
-                        binding.searchBarText.clearFocus()
                         imm.hideSoftInputFromWindow(binding.searchBarText.windowToken, 0)
                     }
 
@@ -170,8 +171,10 @@ class SearchAdapter(private val activity: SearchScreen) :
             searchTitle()
         }
 
-        search = Runnable { searchTitle() }
-        requestFocus = Runnable { binding.searchBarText.requestFocus() }
+        search = Runnable {
+            searchTitle()
+        }
+        requestFocus = Runnable { }
 
     }
 
@@ -180,6 +183,7 @@ class SearchAdapter(private val activity: SearchScreen) :
             binding2.historyContainer.gone()
             binding2.historyTitleContainer.gone()
             binding2.genreContainer.visible()
+
         } else if (historyList.isEmpty()) {
             binding2.historyContainer.gone()
             binding2.historyTitleContainer.gone()
@@ -217,7 +221,7 @@ class SearchAdapter(private val activity: SearchScreen) :
                         parentView,
                         false
                     )
-                    if (count >= 7) return@onEach
+                    if (count >= 3) return@onEach
                     chipView.root.text = it
                     chipView.root.setOnClickListener {
                         binding.searchBarText.setText(chipView.root.text)
@@ -251,6 +255,7 @@ class SearchAdapter(private val activity: SearchScreen) :
     //Save Last History Query
 
     fun delayedSaveText(enteredText: String) {
+
         historyList = readData("historyListNewList") ?: arrayListOf()
         if (enteredText == binding2.searchBarText.text.toString() && enteredText.isNotEmpty()) {
             val history = binding2.searchBarText.text.toString()

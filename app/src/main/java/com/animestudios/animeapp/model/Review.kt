@@ -3,6 +3,7 @@ package com.animestudios.animeapp.model
 import android.os.Parcelable
 import com.animestudios.animeapp.type.MediaType
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 @Parcelize
 data class Review(
@@ -21,4 +22,4 @@ data class Review(
     val updatedAt: Int = 0,
     val user: User = User(),
     val aniListMedia: AniListMedia = AniListMedia()
-) : Parcelable
+) : Parcelable,Serializable

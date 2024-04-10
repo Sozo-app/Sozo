@@ -28,8 +28,8 @@
         <item name="colorSurface">@color/darkest_Black</item>
     </style>
     <style name="PopupTheme" parent="Theme.AppCompat.DayNight">
-        <item name="android:colorBackground">@color/background</item>
-        <item name="android:textColor">?themeContentColor</item>
+        <item name="android:colorBackground">?attr/colorOnSurface</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

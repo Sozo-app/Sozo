@@ -2,9 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
+    android:layout_height="55dp"
+    android:foreground="?selectableItemBackgroundBorderless"
+    android:background="?selectableItemBackgroundBorderless"
     android:layout_marginHorizontal="18dp"
-    android:layout_marginVertical="6dp"
+    android:layout_marginVertical="8dp"
     android:layout_marginBottom="4dp"
     app:cardBackgroundColor="?attr/colorOnBackground"
     app:cardCornerRadius="10dp"
@@ -16,8 +18,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/shapeableImageView"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginStart="2dp"
             android:src="@drawable/appearance"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,25 +34,27 @@
             android:layout_marginTop="2dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Appearance"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:enabled="true"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="4dp"
             android:text="Adjust the app to your liking"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             app:layout_constraintBottom_toBottomOf="parent"

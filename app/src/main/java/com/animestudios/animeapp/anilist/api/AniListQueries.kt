@@ -2,10 +2,7 @@ package com.animestudios.animeapp.anilist.api
 
 import android.app.Activity
 import com.animestudios.animeapp.UserQuery
-import com.animestudios.animeapp.anilist.response.Episode
-import com.animestudios.animeapp.anilist.response.Genre
-import com.animestudios.animeapp.anilist.response.Query
-import com.animestudios.animeapp.anilist.response.SearchResults
+import com.animestudios.animeapp.anilist.response.*
 import com.animestudios.animeapp.media.Media
 
 interface AniListQueries {
@@ -39,7 +36,16 @@ interface AniListQueries {
         hd: Boolean = false,
     ): SearchResults?
 
+    suspend fun searchCharacter(
+        type: String,
+        id: Int?=null,
+        page: Int? = null,
+        perPage: Int? = null,
+        search: String? = null,
+    ): SearchResultsCharacter?
 
+
+    suspend fun recommendedAnime(): MutableList<Media?>?
 
 
     suspend fun getMediaLists(

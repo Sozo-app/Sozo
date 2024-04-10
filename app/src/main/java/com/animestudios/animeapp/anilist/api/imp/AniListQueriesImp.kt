@@ -532,6 +532,134 @@ Page(page:$page,perPage:50) {
         return null
     }
 
+    override suspend fun searchCharacter(
+        type: String,
+        id: Int?,
+        page: Int?,
+        perPage: Int?,
+        search: String?
+    ): SearchResultsCharacter? {
+        val query = """
+            query (${"$"}page: Int = 1, ${"$"}id: Int ${"$"}search: String) {
+      Page(page: ${"$"}page, perPage: ${perPage ?: 50}) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    characters(id: ${"$"}id, search: ${"$"}search) {
+      id
+      name {
+        first
+        last
+        full
+        native
+        userPreferred
+      }
+      image {
+        large
+        medium
+      }
+      description
+      dateOfBirth {
+        year
+        month
+        day
+      }
+      
+      gender
+      bloodType
+      age
+} } } 
+        """.replace("\n", " ").replace("""  """, "")
+        val variables = """{
+            ${if (id != null) """"id":"$id"""" else ""}
+            ${if (search != null) ""","search":"$search"""" else ""}
+                                }
+                                
+            }""".replace("\n", " ").replace("""  """, "")
+        val response = executeQuery<Query.Page>(query, variables, true)?.data?.page
+        if (response?.characters != null) {
+            val responseArray = arrayListOf<Character>()
+            response.characters?.forEach { i ->
+                responseArray.add(i)
+            }
+            val pageInfo = response.pageInfo ?: return null
+
+            return SearchResultsCharacter(
+                perPage = perPage,
+                search = search,
+                results = responseArray,
+                page = pageInfo.currentPage.toString().toIntOrNull() ?: 0,
+                hasNextPage = pageInfo.hasNextPage == true,
+            )
+        } else snackString("Check Internet Your internet Bad ?")
+
+        return null
+    }
+
+    override suspend fun recommendedAnime(): MutableList<Media?>? {
+        val query = """query Recommendded { Page(page:1,perPage:40){
+                 recommendations(sort:RATING_DESC){
+      media{
+       id
+      idMal
+      isAdult
+      status
+      chapters
+      episodes
+      nextAiringEpisode {
+        episode
+      }
+      type
+      genres
+      meanScore
+      isFavourite
+      format
+      bannerImage
+      coverImage {
+        large
+        extraLarge
+      }
+      title {
+        english
+        romaji
+        userPreferred
+      }
+      mediaListEntry {
+        progress
+        private
+        score(format: POINT_100)
+        status
+      }
+    }
+              
+                }
+               }
+             }""".replace("\n", " ").replace("""  """, "")
+
+        val response = executeQuery<Query.Page>(query)?.data?.page
+        if (response?.recommendations != null) {
+            val responseArray = arrayListOf<Media?>()
+            response.recommendations?.forEach { i ->
+                val genresArr = arrayListOf<String>()
+                if (i.media?.genres != null) {
+                    i.media?.genres?.forEach { genre ->
+                        genresArr.add(genre)
+                    }
+                }
+                val media = Media(i.media!!)
+                media.genres = genresArr
+                media.cover = i.media?.coverImage?.large
+                media.relation =  null
+                responseArray.add(media)
+            }
+            return responseArray
+        } else snackString("Check Internet Your internet Bad ?")
+        return null
+    }
 
 
     override suspend fun getMediaLists(
@@ -543,7 +671,7 @@ Page(page:$page,perPage:50) {
 
         val anime = true
         val response =
-            executeQuery<Query.MediaListCollection>("""{ MediaListCollection(userId: $userId, type: ${if (anime) "ANIME" else "MANGA"}) { lists { name isCustomList entries { status progress private score(format:POINT_100) updatedAt media { id idMal isAdult type status chapters episodes nextAiringEpisode {episode} bannerImage meanScore isFavourite coverImage{large} startDate{year month day} title {english romaji userPreferred } } } } user { id mediaListOptions { rowOrder animeList { sectionOrder } mangaList { sectionOrder } } } } }""")
+            executeQuery<Query.MediaListCollection>("""{ MediaListCollection(userId: $userId, type: ${if (anime) "ANIME" else "MANGA"}) { lists { name isCustomList entries { status progress private score (format:POINT_100) updatedAt media { id idMal isAdult type status chapters episodes nextAiringEpisode { episode } bannerImage meanScore isFavourite coverImage { large } startDate { year month day } title { english romaji userPreferred } } } } user { id mediaListOptions { rowOrder animeList { sectionOrder } mangaList { sectionOrder } } } } }""")
         val sorted = mutableMapOf<String, ArrayList<Media>>()
         val unsorted = mutableMapOf<String, ArrayList<Media>>()
         val all = arrayListOf<Media>()
@@ -604,7 +732,27 @@ Page(page:$page,perPage:50) {
 
         suspend fun getNextPage(page: Int): List<Media> {
             val response =
-                executeQuery<Query.User>("""{User(id:${Anilist.userid}){id favourites{${if (anime) "anime" else "manga"}(page:$page){pageInfo{hasNextPage}edges{favouriteOrder node{id idMal isAdult mediaListEntry{ progress private score(format:POINT_100) status } chapters isFavourite episodes nextAiringEpisode{episode}meanScore isFavourite startDate{year month day} title{english romaji userPreferred}type status(version:2)bannerImage coverImage{large}}}}}}}""")
+                executeQuery<Query.User>(
+                    """{
+            User(id:${Anilist.userid}){
+            id favourites {
+                ${if (anime) "anime" else "manga"}(
+                page:$page){
+                pageInfo { hasNextPage } edges {
+                    favouriteOrder node {
+                        id idMal isAdult mediaListEntry {
+                            progress private score(
+                                format:POINT_100
+                            ) status
+                        } chapters isFavourite episodes nextAiringEpisode { episode } meanScore isFavourite startDate { year month day } title { english romaji userPreferred } type status(
+                            version:2)bannerImage coverImage{ large }
+                    }
+                }
+            }
+            }
+        }
+        }"""
+                )
             val favourites = response?.data?.user?.favourites
             val apiMediaList = if (anime) favourites?.anime else favourites?.manga
             hasNextPage = apiMediaList?.pageInfo?.hasNextPage ?: false
@@ -627,7 +775,7 @@ Page(page:$page,perPage:50) {
         val response: Query.Viewer?
         measureTimeMillis {
             response =
-                executeQuery("""{Viewer{name options{displayAdultContent}avatar{medium}bannerImage id mediaListOptions{rowOrder animeList{sectionOrder customLists}mangaList{sectionOrder customLists}}statistics{anime{episodesWatched}manga{chaptersRead}}}}""")
+                executeQuery("""{ Viewer { name options { displayAdultContent } avatar { medium } bannerImage id mediaListOptions { rowOrder animeList { sectionOrder customLists } mangaList { sectionOrder customLists } } statistics { anime { episodesWatched } manga { chaptersRead } } } }""")
         }.also { println("time : $it") }
         val user = response?.data?.user ?: return false
         Anilist.userid = user.id

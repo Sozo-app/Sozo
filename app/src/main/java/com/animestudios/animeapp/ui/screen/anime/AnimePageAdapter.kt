@@ -180,7 +180,7 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 val uiSettings =
                     readData<UISettings>("ui_settings") ?: UISettings()
                 val reviewAdapter =
-                    ReviewAdapter(it.data!!, activity = fragmentAdapter.requireActivity())
+                    ReviewAdapter(it.data!!, activity = fragmentAdapter)
                 binding.reviewTxt.visible()
                 binding.reviewRecyclerview.adapter = reviewAdapter
                 if (uiSettings!!.layoutAnimations) {

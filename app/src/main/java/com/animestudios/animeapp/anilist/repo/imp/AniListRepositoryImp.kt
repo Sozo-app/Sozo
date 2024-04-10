@@ -5,6 +5,7 @@ import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
 import com.animestudios.animeapp.anilist.repo.AniListRepository
 import com.animestudios.animeapp.anilist.response.Query
 import com.animestudios.animeapp.anilist.response.SearchResults
+import com.animestudios.animeapp.anilist.response.SearchResultsCharacter
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.randomSelectFromList
 import kotlinx.coroutines.Dispatchers
@@ -89,6 +90,20 @@ class AniListRepositoryImp() : AniListRepository {
             r.season
         )
         if (response != null) {
+            emit(Result.success(response))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override fun getSearchCharacter(search: SearchResultsCharacter)=flow<Result<SearchResultsCharacter>> {
+        val response =api.searchCharacter("ANIME", page = search.page, perPage = search.perPage, search = search.search)
+        if (response!=null) {
+            emit(Result.success(response))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override fun recommendedAnimeList()=flow<Result<MutableList<Media?>?>> {
+        val response = api.recommendedAnime()
+        if (response!=null) {
             emit(Result.success(response))
         }
     }.flowOn(Dispatchers.IO)

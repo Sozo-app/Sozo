@@ -9,6 +9,11 @@ import com.animestudios.animeapp.model.ProfileCategoryModel
 class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileVh>() {
     private val list = ArrayList<ProfileCategoryModel>()
 
+    lateinit var itemClickListener: (Int)->Unit
+
+    fun setItemClickListenerGetPosition(listener: (Int)->Unit){
+        itemClickListener=listener
+    }
 
     inner class ProfileVh(val binding: ProfileCategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -17,6 +22,10 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileVh>() {
                 binding.shapeableImageView.setImageResource(data.image)
                 binding.textView5.text = data.title
                 binding.description.text = data.description
+            }
+            binding.root.setOnClickListener {
+                itemClickListener
+                    .invoke(absoluteAdapterPosition)
             }
         }
     }

@@ -47,6 +47,7 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
             container,
             false
         )
+        screenWidth = resources.displayMetrics.widthPixels.toFloat()
         return _binding?.root
     }
 
@@ -60,13 +61,21 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
         binding.apply {
             adapter.submitList(loadProfileCategory())
             profileRv.adapter = adapter
+            adapter.setItemClickListenerGetPosition {
+                when(it){
+                    0->{
+                        findNavController().navigate(R.id.themeScreen, null, animationTransaction().build())
+
+                    }
+                    else ->{
+
+                    }
+                }
+            }
             detailAppbar.addOnOffsetChangedListener(this@ProfileScreen)
             cardView4.slideUp(700, 1)
             circleImageView.slideStart(700, 1)
             profileName.slideStart(700, 1)
-            linearLayout5.setOnClickListener {
-                findNavController().navigate(R.id.themeScreen, null, animationTransaction().build())
-            }
 
         }
 
@@ -79,9 +88,18 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
                 Resource.Loading -> {
                     binding.progressBar.visible()
                     binding.nestedScrollView.gone()
+
+                    binding.profileName.gone()
+                    binding.profileBg2.gone()
+                    binding.circleImageView.gone()
+                    binding.cardView4.visible()
                 }
                 is Resource.Success -> {
 
+                    binding.profileName.visible()
+                    binding.profileBg2.visible()
+                    binding.circleImageView.visible()
+                    binding.cardView4.visible()
                     binding.progressBar.gone()
                     binding.nestedScrollView.visible()
                     val userResponse = it.data.user

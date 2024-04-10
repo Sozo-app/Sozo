@@ -1,7 +1,6 @@
 package com.animestudios.animeapp.ui.screen.browse.page.allanime
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

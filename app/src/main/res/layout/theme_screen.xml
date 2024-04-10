@@ -17,6 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarBrowse"
             android:layout_width="match_parent"
+            android:layout_marginTop="24dp"
             android:layout_height="wrap_content"
             android:background="?attr/colorOnBackground"
             android:clipToPadding="false"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
 
@@ -11,6 +12,7 @@
         android:id="@+id/detailAppbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="?attr/colorOnBackground"
         android:orientation="vertical"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -37,9 +39,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:indeterminate="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_bg"
                     android:layout_width="match_parent"
+                    tools:visibility="visible"
+
                     android:layout_height="250dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -47,10 +63,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
+                    android:id="@+id/profile_bg2"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
+                    android:visibility="invisible"
                     android:background="@drawable/linear_gradient_bg"
                     app:layout_constraintEnd_toEndOf="parent"
+                    tools:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,6 +78,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
+                    android:visibility="gone"
                     android:scaleType="centerCrop"
                     android:src="@drawable/kbot09"
                     app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
@@ -69,6 +89,8 @@
 
                     android:id="@+id/profile_name"
                     android:layout_width="wrap_content"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/inter_bold"
@@ -85,7 +107,9 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginVertical="6dp"
+                    android:visibility="invisible"
                     android:layout_marginTop="4dp"
+                    tools:visibility="visible"
                     app:cardBackgroundColor="?attr/colorSurfaceVariant"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="2dp"
@@ -216,19 +240,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-
-        android:indeterminate="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
+        tools:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
