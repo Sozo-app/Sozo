@@ -92,7 +92,7 @@ class MainScreen : Fragment() {
                             val item = bottomBar.menu.getItem(3)
                             item.iconTintList = null
                             item.iconTintMode = PorterDuff.Mode.DST
-                            Glide.with(requireView())
+                            Glide.with(this@MainScreen)
                                 .load(Anilist.avatar)
                                 .circleCrop()
                                 .into(object : CustomTarget<Drawable>() {
