@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ThemeManager(this).applyTheme()
+        ThemeManager(this).applyTheme() //This project made  by Single Activity
 
         val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         val receiver = BatteryReceiver()

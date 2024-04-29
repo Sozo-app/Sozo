@@ -19,7 +19,7 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="AppTheme.Amoled" parent="">
+    <style name="AppTheme.Amoled" parent="Theme.AnimeApp">
         <item name="android:colorBackground">@color/darkest_Black</item>
         <item name="colorOnBackground">@color/bg</item>
         <item name="themeContentColor">@color/detail_Bg</item>

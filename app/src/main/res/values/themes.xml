@@ -6,9 +6,7 @@
         <item name="colorPrimary">@color/basic_color</item>
         <item name="colorAccent">@color/basic_color_500</item>
         <item name="colorSurface">@color/nav_bg</item>
-        <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="themeContentColor">@color/detail_Bg</item>
-        <item name="colorPrimaryVariant">@color/bg_white</item>
         <item name="themePrimaryButton">@style/ButtonPrimary</item>
         <item name="colorOnBackground">@color/bg</item>
         <item name="colorControlNormal">@color/nav_bg</item>
@@ -24,7 +22,7 @@
         <item name="themeBigBoldFont">@style/FontBigBold</item>
         <!--        <item name="themePrimaryBorderButton">@style/ButtonPrimaryBorder</item>-->
         <!--        <item name="themeNegativeBorderButton">@style/ButtonNegativeBorder</item>-->
-        <item name="colorOnPrimary">@color/bg_white</item>
+<!--        <item name="colorOnPrimary">@color/bg_white</item>-->
         <item name="colorSecondary">@color/basic_color</item>
         <item name="colorSecondaryVariant">@color/violet_700</item>
         <item name="colorOnContainer">@color/bg_filter_dialog</item>

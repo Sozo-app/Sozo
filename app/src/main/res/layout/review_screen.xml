@@ -14,9 +14,9 @@
             android:id="@+id/readerCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            app:contentScrim="@android:color/transparent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:backgroundTint="@color/status"
+            app:contentScrim="@color/status"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:scrimAnimationDuration="200"
             app:toolbarId="@id/readerToolbar">
 
@@ -24,14 +24,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/readerBannerImage"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Corner.Top" />
 
                 <View
                     android:layout_width="match_parent"
@@ -45,16 +47,21 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/readerToolbar"
                 android:layout_width="match_parent"
-                app:titleTextColor="@color/white"
-
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
-                android:elevation="0dp"
-                android:minHeight="@dimen/toolbarBigHeight"
-                app:layout_collapseMode="pin"
 
+                app:titleMarginTop="8dp"
+                android:elevation="0dp"
+                android:minHeight="70dp"
+                app:layout_collapseMode="pin"
                 app:menu="@menu/menu_view_on_anilist"
-                app:popupTheme="@style/PopupTheme" />
+                app:navigationIconTint="@color/color_white"
+
+                app:popupTheme="@style/PopupTheme"
+
+
+                app:title="@string/app_name"
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -64,6 +71,7 @@
         android:id="@+id/readerScrollingLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -126,9 +134,9 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/readerUserName"
                     style="?themeRegularClickableBoldFont"
-                    android:textColor="@color/white  "
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/readerDate"
@@ -152,34 +160,34 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/readerScoreCard"
-                app:layout_constraintTop_toBottomOf="@id/readerText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginPageNormal"
                 app:cardBackgroundColor="?attr/colorAccent"
                 app:contentPadding="@dimen/marginNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/readerText">
 
                 <FrameLayout
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:visibility="invisible"
-                        android:text="100/100"
                         style="?themeTitleFont"
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="100/100"
+                        android:visibility="invisible" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/readerScore"
                         style="?themeTitleFont"
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
 
                 </FrameLayout>
 

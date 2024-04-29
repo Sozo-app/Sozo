@@ -13,6 +13,7 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions
 
 
+
 class ThemeManager(private val context: Activity) {
     fun applyTheme(fromImage: Bitmap? = null) {
         val useOLED = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
@@ -43,7 +44,7 @@ class ThemeManager(private val context: Activity) {
             if (!returnedEarly) return
         }
         val theme = context.getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-            .getString("theme", "RED")!!
+            .getString("theme", "RED")!!// Default RED
 
         val themeToApply = when (theme) {
             "BLUE" -> if (useOLED) R.style.Theme_AnimeApp_BlueOLED else R.style.Theme_AnimeApp_Blue
