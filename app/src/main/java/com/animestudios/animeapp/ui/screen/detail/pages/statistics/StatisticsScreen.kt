@@ -184,7 +184,7 @@ class StatisticsScreen : Fragment() {
         media: Media
     ) {
         val scoreDistributionBinding = ListStatsChartBarBinding.inflate(
-            LayoutInflater.from(App.context),
+            LayoutInflater.from(App.instance),
             parent,
             false
         )
