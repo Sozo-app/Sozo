@@ -10,6 +10,7 @@ interface AniListAsync {
     suspend fun getNotifications(page: Int): ApolloResponse<NotificationsQuery.Data>
     suspend fun getNotificationsUnreadCount(): ApolloResponse<UnreadNotificationCountQuery.Data>
     suspend fun getExtraLargeImage(id: Int): ApolloResponse<GetImageQuery.Data>
+    suspend fun getRelationsById(id:Int):ApolloResponse<GetRelationByIdQuery.Data>
     suspend fun toggleFavorite(animeId: Int): ApolloResponse<ToggleFavouriteMutation.Data>
     suspend fun getUserDataById(userId: Int): ApolloResponse<UserQuery.Data>
     suspend fun sendMessage(

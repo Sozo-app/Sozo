@@ -11,8 +11,10 @@ import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Episode
 import com.animestudios.animeapp.jikan.Jikan
 import com.animestudios.animeapp.kitsu.Kitsu
+import com.animestudios.animeapp.mapper.convert
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.media.Selected
+import com.animestudios.animeapp.model.RelationData
 import com.animestudios.animeapp.parsers.ShowResponse
 import com.animestudios.animeapp.parsers.VideoExtractor
 import com.animestudios.animeapp.readData
@@ -37,10 +39,27 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     val coverImageForPreview: LiveData<String>
         get() = _coverImageForPreview
 
+    private val _getRelations = MutableLiveData<Resource<ArrayList<RelationData>>>()
+
+    val getRelations: MutableLiveData<Resource<ArrayList<RelationData>>> get() = getRelations
+
     private val _getFullData = MutableLiveData<Resource<GetFullDataByIdQuery.Data>>()
     val getFullData: LiveData<Resource<GetFullDataByIdQuery.Data>>
         get() = _getFullData
 
+
+    fun loadRelationsById(id: Int) {
+        viewModelScope.launch {
+            _getRelations.value = Resource.Loading
+            val media =aniListClient.getRelationsById(id).data
+            if (media!=null)
+            {
+                _getRelations.value =Resource.Success(media.convert())
+            }else {
+                _getRelations.value =Resource.Error(Exception("Have Problem"))
+            }
+        }
+    }
 
     fun saveSelected(id: Int, data: Selected, activity: Activity? = null) {
         saveData("$id-select", data, activity)

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.animestudios.animeapp.GetFullDataByIdQuery
 import com.animestudios.animeapp.R
+import com.animestudios.animeapp.anilist.response.data
 import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.LayoutMediaStatusDistributionBinding
 import com.animestudios.animeapp.databinding.ListStatsChartBarBinding
@@ -30,8 +31,63 @@ import kotlin.math.round
 class StatisticsScreen : Fragment() {
     private var _binding: StatisticsScreenBinding? = null
     private val binding get() = _binding!!
+    private var isInitialized =false
     private val model by activityViewModels<DetailsViewModelImpl>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model.getMedia().observe(this) {
+            if (it != null) {
+                val media = it
+                binding.apply {
+                    val parent = binding.parentStatistics
+                    if (!isInitialized){
+                        isInitialized=true
+                        model.getFulDataById(it)
+                        model.getFullData.observe(this@StatisticsScreen) {
+                            when (it) {
+                                is Resource.Error -> {
+
+                                }
+                                Resource.Loading -> {
+                                }
+                                is Resource.Success -> {
+                                    val fullData = it.data
+
+                                    //Ranking
+                                    val rankingAdapter = RankingAdapter(
+                                        fullData.Media?.rankings as ArrayList<GetFullDataByIdQuery.Ranking>
+                                            ?: arrayListOf()
+                                    )
+                                    rankingRv.adapter = rankingAdapter
+
+                                    loadPieChart(
+                                        fullData,
+                                        binding = binding,
+                                        parent = parent,
+                                        media = media
+                                    )
+                                    loadChart(
+                                        fullData,
+                                        binding = binding,
+                                        parent = parent,
+                                        media = media
+                                    )
+
+                                }
+
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,53 +100,6 @@ class StatisticsScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        model.getMedia().observe(viewLifecycleOwner) {
-            if (it != null) {
-                val media = it
-                binding.apply {
-                    val parent = binding.parentStatistics
-                    model.getFulDataById(it)
-                    model.getFullData.observe(viewLifecycleOwner) {
-                        when (it) {
-                            is Resource.Error -> {
-
-                            }
-                            Resource.Loading -> {
-                            }
-                            is Resource.Success -> {
-                                val fullData = it.data
-
-                                //Ranking
-                                val rankingAdapter = RankingAdapter(
-                                    fullData.Media?.rankings as ArrayList<GetFullDataByIdQuery.Ranking>
-                                        ?: arrayListOf()
-                                )
-                                rankingRv.adapter = rankingAdapter
-
-                                loadPieChart(
-                                    fullData,
-                                    binding = binding,
-                                    parent = parent,
-                                    media = media
-                                )
-                                loadChart(
-                                    fullData,
-                                    binding = binding,
-                                    parent = parent,
-                                    media = media
-                                )
-
-                            }
-
-
-                        }
-
-                    }
-
-
-                }
-            }
-        }
     }
 
     private fun loadPieChart(

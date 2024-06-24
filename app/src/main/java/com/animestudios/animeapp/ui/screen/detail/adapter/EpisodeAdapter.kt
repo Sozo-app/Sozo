@@ -1,15 +1,19 @@
 package com.animestudios.animeapp.ui.screen.detail.adapter
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.anilist.response.Episode
 import com.animestudios.animeapp.databinding.ItemEpisodeCompatBinding
 import com.animestudios.animeapp.logger
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.setAnimation
+import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.ui.screen.detail.pages.episodes.EpisodeScreen
 import com.animestudios.animeapp.updateAnilistProgress
 import com.animestudios.animeapp.widget.handleProgress
@@ -21,6 +25,18 @@ class EpisodeAdapter(
     private val fragment: EpisodeScreen,
     var arr: List<Episode> = arrayListOf()
 ) : RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder>() {
+    fun onEpisodeClick(media: Media, i: String, manager: FragmentManager, launch: Boolean = true, prevEp: String? = null) {
+        Handler(Looper.getMainLooper()).post {
+            if (manager.findFragmentByTag("dialog") == null && !manager.isDestroyed) {
+                if (media.anime?.episodes?.get(i) != null) {
+                    media.anime.selectedEpisode = i
+                } else {
+                    snackString("Couldn't find episode : $i")
+                    return@post
+                }
+            }
+        }
+    }
 
     inner class EpisodeViewHolder(val binding: ItemEpisodeCompatBinding) :
         RecyclerView.ViewHolder(binding.root) {

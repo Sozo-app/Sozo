@@ -27,6 +27,7 @@
     <attr name="themeSmallNegativeFont" format="reference"/>
     <attr name="themeBigFont" format="reference"/>
     <attr name="themeBigBoldFont" format="reference"/>
+    <attr name="colorOnPrimary" format="reference"/>
     <attr name="themeContentColor" format="reference"/>
 
     <attr name="themePrimaryButton" format="reference"/>

@@ -36,6 +36,13 @@ class AniListClient @Inject constructor(
     fun getExtraLargeImage(id: Int) =
         apolloClient.query(GetImageQuery(Optional.present(id))).execute()
 
+    override suspend fun getRelationsById(id: Int): ApolloResponse<GetRelationByIdQuery.Data> =
+        apolloClient.query(
+            GetRelationByIdQuery(
+                Optional.present(id)
+            )
+        ).execute()
+
     override suspend
     fun toggleFavorite(animeId: Int) =
         apolloClient.mutation(ToggleFavouriteMutation(Optional.present(animeId))).execute()
