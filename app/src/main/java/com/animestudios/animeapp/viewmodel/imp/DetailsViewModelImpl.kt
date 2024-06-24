@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.animestudios.animeapp.GetFullDataByIdQuery
+import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.response.Episode
@@ -39,24 +40,30 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     val coverImageForPreview: LiveData<String>
         get() = _coverImageForPreview
 
-    private val _getRelations = MutableLiveData<Resource<ArrayList<RelationData>>>()
+     val getRelations = MutableLiveData<Resource<ArrayList<RelationData>>>()
 
-    val getRelations: MutableLiveData<Resource<ArrayList<RelationData>>> get() = getRelations
 
     private val _getFullData = MutableLiveData<Resource<GetFullDataByIdQuery.Data>>()
     val getFullData: LiveData<Resource<GetFullDataByIdQuery.Data>>
         get() = _getFullData
 
+    val getMediaData =MutableLiveData<Media>()
+
+    fun getMediaById(id:Int){
+        viewModelScope.launch {
+            getMediaData.postValue(Anilist.getMedia(id = id))
+        }
+    }
 
     fun loadRelationsById(id: Int) {
         viewModelScope.launch {
-            _getRelations.value = Resource.Loading
+            getRelations.value = Resource.Loading
             val media =aniListClient.getRelationsById(id).data
             if (media!=null)
             {
-                _getRelations.value =Resource.Success(media.convert())
+                getRelations.value =Resource.Success(media.convert())
             }else {
-                _getRelations.value =Resource.Error(Exception("Have Problem"))
+                getRelations.value =Resource.Error(Exception("Have Problem"))
             }
         }
     }
