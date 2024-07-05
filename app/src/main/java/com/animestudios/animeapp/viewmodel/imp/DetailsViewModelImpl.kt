@@ -1,6 +1,9 @@
 package com.animestudios.animeapp.viewmodel.imp
 
 import android.app.Activity
+import android.os.Handler
+import android.os.Looper
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,9 +23,11 @@ import com.animestudios.animeapp.parsers.ShowResponse
 import com.animestudios.animeapp.parsers.VideoExtractor
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
+import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.sourcers.WatchSources
 import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.tryWithSuspend
+import com.animestudios.animeapp.ui.screen.detail.dialog.SelectorDialogFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -52,6 +57,32 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     fun getMediaById(id:Int){
         viewModelScope.launch {
             getMediaData.postValue(Anilist.getMedia(id = id))
+        }
+    }
+    val epChanged = MutableLiveData(true)
+
+
+    fun setEpisode(ep: Episode?, who: String) {
+//        logger("set episode ${ep?.number} - $who", false)
+        episode.postValue(ep)
+        MainScope().launch(Dispatchers.Main) {
+            episode.value = null
+        }
+    }
+
+    fun onEpisodeClick(media: Media, i: String, manager: FragmentManager, launch: Boolean = true, prevEp: String? = null) {
+        Handler(Looper.getMainLooper()).post {
+            if (manager.findFragmentByTag("dialog") == null && !manager.isDestroyed) {
+                if (media.anime?.episodes?.get(i) != null) {
+                    media.anime.selectedEpisode = i
+                } else {
+                    snackString("Couldn't find episode : $i")
+                    return@post
+                }
+                media.selected = this.loadSelected(media)
+                val selector = SelectorDialogFragment.newInstance(media.selected!!.server, launch, prevEp)
+                selector.show(manager, "dialog")
+            }
         }
     }
 
@@ -216,6 +247,26 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
             _getFullData.value = Resource.Success(aniListClient.getFullDataById(media).data!!)
         }
 
+    }
+    suspend fun loadEpisodeSingleVideo(ep: Episode, selected: Selected, post: Boolean = true): Boolean {
+        if (ep.extractors.isNullOrEmpty()) {
+
+            val server = selected.server ?: return false
+            val link = ep.link ?: return false
+
+            ep.extractors = mutableListOf(watchSources?.get(selected.source)?.let {
+                if (!post && !it.allowsPreloading) null
+                else it.loadSingleVideoServer(server, link, ep.extra, post)
+            } ?: return false)
+            ep.allStreams = false
+        }
+        if (post) {
+            episode.postValue(ep)
+            MainScope().launch(Dispatchers.Main) {
+                episode.value = null
+            }
+        }
+        return true
     }
 
 

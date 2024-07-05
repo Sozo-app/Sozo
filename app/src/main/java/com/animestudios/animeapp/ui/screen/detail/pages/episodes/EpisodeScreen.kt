@@ -211,6 +211,8 @@ class EpisodeScreen : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) { model.forceLoadEpisode(media, selected.source) }
     }
 
+
+
     fun loadEpisodes(i: Int) {
         lifecycleScope.launch(Dispatchers.IO) { model.loadEpisodes(media, i) }
     }
@@ -234,7 +236,7 @@ class EpisodeScreen : Fragment() {
     fun onEpisodeClick(i: String) {
         model.continueMedia = false
         model.saveSelected(media.id, media.selected!!, requireActivity())
-//        model.onEpisodeClick(media, i, requireActivity().supportFragmentManager)
+        model.onEpisodeClick(media, i, requireActivity().supportFragmentManager)
     }
 
     @SuppressLint("NotifyDataSetChanged")

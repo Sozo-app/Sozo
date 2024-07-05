@@ -1,14 +1,18 @@
 package com.animestudios.animeapp.ui.screen.detail.adapter
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.countDown
 import com.animestudios.animeapp.databinding.ItemAnimeWatchBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.sourcers.WatchSources
 import com.animestudios.animeapp.ui.screen.detail.pages.episodes.EpisodeScreen
 import com.animestudios.animeapp.visible
@@ -22,6 +26,8 @@ class AnimeWatchAdapter(
 ) : RecyclerView.Adapter<AnimeWatchAdapter.ViewHolder>() {
 
     private var _binding: ItemAnimeWatchBinding? = null
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val bind = ItemAnimeWatchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -57,7 +63,7 @@ class AnimeWatchAdapter(
                 val anilistEp = (media.userProgress ?: 0).plus(1)
                 val appEp = readData<String>("${media.id}_current_ep")?.toIntOrNull() ?: 1
 
-                var continueEp = (if (anilistEp > appEp) anilistEp else appEp).toString()
+                val continueEp = (if (anilistEp > appEp) anilistEp else appEp).toString()
                 if (episodes.contains(continueEp)) {
 
                     if (media.anime.episodes!!.isNotEmpty())

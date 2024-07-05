@@ -25,21 +25,19 @@ class EpisodeAdapter(
     private val fragment: EpisodeScreen,
     var arr: List<Episode> = arrayListOf()
 ) : RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder>() {
-    fun onEpisodeClick(media: Media, i: String, manager: FragmentManager, launch: Boolean = true, prevEp: String? = null) {
-        Handler(Looper.getMainLooper()).post {
-            if (manager.findFragmentByTag("dialog") == null && !manager.isDestroyed) {
-                if (media.anime?.episodes?.get(i) != null) {
-                    media.anime.selectedEpisode = i
-                } else {
-                    snackString("Couldn't find episode : $i")
-                    return@post
-                }
-            }
-        }
-    }
+
+
+
 
     inner class EpisodeViewHolder(val binding: ItemEpisodeCompatBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                if (bindingAdapterPosition < arr.size && bindingAdapterPosition >= 0)
+                    fragment.onEpisodeClick(arr[bindingAdapterPosition].number)
+            }
+        }
 
         @SuppressLint("SetTextI18n")
         fun onBind(ep: Episode) {
