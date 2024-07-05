@@ -30,7 +30,7 @@
             android:id="@+id/searchBarText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_height="60dp"
             android:layout_margin="12dp"
             android:layout_weight="1"
             android:background="@drawable/search_bg"
@@ -54,6 +54,7 @@
             android:layout_weight="0.11"
             android:src="@drawable/ic_filter"
             app:backgroundTint="?attr/colorOnSurface"
+            app:rippleColor="#16100E0E"
             tools:ignore="ContentDescription,TextContrastCheck" />
 
 
@@ -62,11 +63,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-16dp"
+        android:layout_marginTop="-24dp"
         android:layout_marginBottom="-4dp"
         android:minHeight="16dp"
         android:orientation="horizontal" />
-
     <LinearLayout
         android:id="@+id/genreContainer"
         android:layout_width="match_parent"
@@ -106,10 +106,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="visible"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -117,7 +117,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="Recent Searches"
-            android:textSize="17sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/searchClear"
@@ -166,17 +166,15 @@
         android:layout_marginVertical="6dp"
         android:layout_marginStart="20dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:orientation="horizontal">
 
 
         <TextView
-            android:id="@+id/searchTitleResult"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/poppins"
-            android:text="Recommended"
+            android:text="Search Results"
             android:textSize="18sp" />
 
 
@@ -207,39 +205,9 @@
 
     <LinearLayout
         android:id="@+id/defaultPageContainer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="2dp"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/popularRecycler"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/search_item" />
-
-        <TextView
-            android:id="@+id/searchHorizontalRecommendedTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins"
-            android:text="Popular"
-            android:textSize="18sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recommendedRv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/search_item" />
+        android:orientation="vertical">
 
     </LinearLayout>
 

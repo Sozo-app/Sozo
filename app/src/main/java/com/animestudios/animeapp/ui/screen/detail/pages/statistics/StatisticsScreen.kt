@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -41,8 +42,7 @@ class StatisticsScreen : Fragment() {
                 val media = it
                 binding.apply {
                     val parent = binding.parentStatistics
-                    if (!isInitialized){
-                        isInitialized=true
+
                         model.getFulDataById(it)
                         model.getFullData.observe(this@StatisticsScreen) {
                             when (it) {
@@ -52,7 +52,8 @@ class StatisticsScreen : Fragment() {
                                 Resource.Loading -> {
                                 }
                                 is Resource.Success -> {
-                                    val fullData = it.data
+                                    if (!isInitialized){
+                                        val fullData = it.data
 
                                     //Ranking
                                     val rankingAdapter = RankingAdapter(
@@ -67,12 +68,13 @@ class StatisticsScreen : Fragment() {
                                         parent = parent,
                                         media = media
                                     )
-                                    loadChart(
-                                        fullData,
-                                        binding = binding,
-                                        parent = parent,
-                                        media = media
-                                    )
+//                                    loadChart(
+//                                        fullData,
+//                                        binding = binding,
+//                                        parent = parent,
+//                                        media = media
+//                                    )
+                                        isInitialized=true
 
                                 }
 

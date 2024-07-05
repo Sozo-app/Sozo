@@ -9,6 +9,7 @@
         android:id="@+id/statsLineChart"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginHorizontal="@dimen/marginPageNormal"
+
         app:layout_constraintDimensionRatio="1:1"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>

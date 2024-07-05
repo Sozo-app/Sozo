@@ -31,7 +31,13 @@ class ReviewAdapter(private val list: List<Review>, private val activity: Fragme
                 }
                 title.text = data.user.name
                 animeTxt.text = data.aniListMedia.title.userPreferred
-                bannerGradient.loadImage(data.aniListMedia.bannerImage)
+                if (data.aniListMedia.bannerImage!=""){
+
+                    bannerGradient.loadImage(data.aniListMedia.bannerImage)
+                }else{
+                    bannerGradient.loadImage("https://i.pinimg.com/736x/67/50/d8/6750d8a9e653bc738f52c814181938f1.jpg")
+
+                }
                 profilePhoto.loadImage(data.user.avatar.medium)
                 itemCompactImage.loadImage(data.aniListMedia.coverImage.medium)
                 description.text = data.summary

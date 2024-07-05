@@ -12,9 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.animestudios.animeapp.*
-import com.animestudios.animeapp.anilist.api.common.Anilist.username
 import com.animestudios.animeapp.databinding.ReviewScreenBinding
 import com.animestudios.animeapp.model.Review
 import com.animestudios.animeapp.tools.TimeUtil
@@ -87,16 +85,26 @@ class ReviewScreen : Fragment() {
                 }
                 true
             }
-            binding.readerBannerImage.loadImage(reviewData.aniListMedia.bannerImage)
-            binding.readerTitle.text= getString(R.string.review_of_x_by_y, reviewData.aniListMedia.title.english, reviewData.user.name)
-            binding.readerMediaType.text="Anime Review"
-            binding.readerSummary.text=reviewData.summary
+            if (reviewData.aniListMedia.bannerImage != "") {
+                binding.readerBannerImage.loadImage(reviewData.aniListMedia.bannerImage)
+            } else {
+                binding.readerBannerImage.loadImage("https://i.pinimg.com/736x/67/50/d8/6750d8a9e653bc738f52c814181938f1.jpg")
+            }
+            binding.readerTitle.text = getString(
+                R.string.review_of_x_by_y,
+                reviewData.aniListMedia.title.english,
+                reviewData.user.name
+            )
+            binding.readerMediaType.text = "Anime Review"
+            binding.readerSummary.text = reviewData.summary
             binding.readerUserAvatar.loadImage(reviewData.user.avatar.large)
             binding.readerDate.text = TimeUtil.displayInDateFormat(reviewData.createdAt)
             MarkdownUtil.applyMarkdown(requireContext(), binding.readerText, reviewData.body)
             binding.readerScore.text = "${reviewData.score}/100"
             val nearestTen = (round(reviewData.score / 10.0) * 10).toInt()
-            binding.readerScoreCard.setCardBackgroundColor(nearestTen.getScoreColor() ?: requireContext().getThemeCardColor())
+            binding.readerScoreCard.setCardBackgroundColor(
+                nearestTen.getScoreColor() ?: requireContext().getThemeCardColor()
+            )
 
 
 //
@@ -122,10 +130,12 @@ class ReviewScreen : Fragment() {
 //        }
         }
     }
-     fun setUpInsets() {
+
+    fun setUpInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.readerCollapsingToolbar, null)
         binding.readerScrollingLayout.applyBottomPaddingInsets()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         menuItemCopyLink = null

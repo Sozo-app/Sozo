@@ -45,6 +45,8 @@
         android:layout_marginHorizontal="22dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="60dp"
         app:layout_constraintEnd_toEndOf="@id/rankingRv"
         app:layout_constraintStart_toStartOf="@id/rankingRv"
         app:layout_constraintTop_toBottomOf="@id/rankingRv" />
