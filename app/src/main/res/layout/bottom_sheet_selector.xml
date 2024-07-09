@@ -53,7 +53,7 @@
             android:fontFamily="@font/poppins_bold"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            app:backgroundTint="?attr/colorSurface"
+            app:backgroundTint="?attr/colorControlNormal"
             android:padding="8dp"
 
             android:text="Cancel"

@@ -790,5 +790,142 @@ Page(page:$page,perPage:50) {
         return true
     }
 
+    suspend fun getCharacterDetails(character: com.animestudios.animeapp.media.Character): com.animestudios.animeapp.media.Character {
+        val query = """ {
+  Character(id: ${character.id}) {
+    id
+    age
+    gender
+    description
+    dateOfBirth {
+      year
+      month
+      day
+    }
+    media(page: 0,sort:[POPULARITY_DESC,SCORE_DESC]) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      edges {
+        id
+        characterRole
+        node {
+          id
+          idMal
+          isAdult
+          status
+          chapters
+          episodes
+          nextAiringEpisode { episode }
+          type
+          meanScore
+          isFavourite
+          bannerImage
+          countryOfOrigin
+          coverImage { large }
+          title {
+              english
+              romaji
+              userPreferred
+          }
+          mediaListEntry {
+              progress
+              private
+              score(format: POINT_100)
+              status
+          }
+        }
+      }
+    }
+  }
+}""".replace("\n", " ").replace("""  """, "")
+        executeQuery<Query.Character>(query, force = true)?.data?.character?.apply {
+            character.age = age
+            character.gender = gender
+            character.description = description
+            character.dateOfBirth = dateOfBirth
+            character.roles = arrayListOf()
+            media?.edges?.forEach { i ->
+                val m = Media(i)
+                m.relation = i.characterRole.toString()
+                character.roles?.add(m)
+            }
+        }
+        return character
+    }
 
+    suspend fun getStudioDetails(studio: Studio): Studio {
+        fun query(page: Int = 0) = """ {
+  Studio(id: ${studio.id}) {
+    id
+    media(page: $page,sort:START_DATE_DESC) {
+      pageInfo{
+        hasNextPage
+      }
+      edges {
+        id
+        node {
+          id
+          idMal
+          isAdult
+          status
+          chapters
+          episodes
+          nextAiringEpisode { episode }
+          type
+          meanScore
+          startDate{ year }
+          isFavourite
+          bannerImage
+          countryOfOrigin
+          coverImage { large }
+          title {
+              english
+              romaji
+              userPreferred
+          }
+          mediaListEntry {
+              progress
+              private
+              score(format: POINT_100)
+              status
+          }
+        }
+      }
+    }
+  }
+}""".replace("\n", " ").replace("""  """, "")
+
+        var hasNextPage = true
+        val yearMedia = mutableMapOf<String, ArrayList<Media>>()
+        var page = 0
+        while (hasNextPage) {
+            page++
+            hasNextPage = executeQuery<Query.Studio>(query(page), force = true)?.data?.studio?.media?.let {
+                it.edges?.forEach { i ->
+                    i.node?.apply {
+                        val status = status.toString()
+                        val year = startDate?.year?.toString() ?: "TBA"
+                        val title = if (status != "CANCELLED") year else status
+                        if (!yearMedia.containsKey(title))
+                            yearMedia[title] = arrayListOf()
+                        yearMedia[title]?.add(Media(this))
+                    }
+                }
+                it.pageInfo?.hasNextPage == true
+            } ?: false
+        }
+
+        if (yearMedia.contains("CANCELLED")) {
+            val a = yearMedia["CANCELLED"]!!
+            yearMedia.remove("CANCELLED")
+            yearMedia["CANCELLED"] = a
+        }
+        studio.yearMedia = yearMedia
+        return studio
+    }
 }

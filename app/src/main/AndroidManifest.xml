@@ -12,7 +12,7 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,18 +24,21 @@
         android:maxSdkVersion="29"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <queries>
         <intent>
-            <action
-                android:name="android.speech.RecognitionService" />
+            <action android:name="android.speech.RecognitionService" />
         </intent>
     </queries>
 
 
-    <uses-feature android:name="android.software.leanback"
+    <uses-feature
+        android:name="android.software.leanback"
         android:required="false" />
-    <uses-feature android:name="android.hardware.touchscreen"
+    <uses-feature
+        android:name="android.hardware.touchscreen"
         android:required="false" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -89,6 +92,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".ui.screen.detail.pages.cast.detail.CastDetailScreen" />
 
         <activity
             android:name=".ui.activity.Login"

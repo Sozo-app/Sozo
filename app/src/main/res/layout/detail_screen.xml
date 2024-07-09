@@ -113,11 +113,11 @@
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/coverImage"
-                            android:transitionName="coverImage"
-
                             android:layout_width="match_parent"
+
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop" />
+                            android:scaleType="centerCrop"
+                            android:transitionName="coverImage" />
                     </androidx.cardview.widget.CardView>
 
                 </RelativeLayout>
@@ -250,13 +250,14 @@
                             app:tint="@color/white">
 
                             <ImageView
-
+                                android:id="@+id/likeIc"
                                 android:layout_width="match_parent"
                                 android:layout_height="55dp"
                                 android:layout_gravity="center"
                                 android:adjustViewBounds="true"
                                 android:padding="15dp"
-                                android:src="@drawable/ic_download" />
+                                android:src="@drawable/ic_round_favorite_border_24"
+                                app:tint="@color/white" />
                         </com.google.android.material.card.MaterialCardView>
 
                     </LinearLayout>
@@ -288,8 +289,9 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="30dp"
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <FrameLayout
 

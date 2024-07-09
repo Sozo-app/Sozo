@@ -22,8 +22,6 @@ import com.animestudios.animeapp.tools.*
 import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
-import com.github.amlcurran.showcaseview.ShowcaseView
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -120,6 +118,29 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                 }
             }
         )
+        adapterBannerAdapter.setViewInfoListener {
+            val intent = Intent(
+                fragmentAdapter.requireActivity(), DetailActivity::class.java
+            )
+            intent.putExtra("media", it)
+            intent.putExtra("currentPage", "info")
+            fragmentAdapter.requireActivity().startActivity(intent)
+        }
+        adapterBannerAdapter.setItemClickListener {
+            val intent = Intent(
+                fragmentAdapter.requireActivity(), DetailActivity::class.java
+            )
+            intent.putExtra("media", it)
+            fragmentAdapter.requireActivity().startActivity(intent)
+        }
+        adapterBannerAdapter.setPlayItemListener {
+            val intent = Intent(
+                fragmentAdapter.requireActivity(), DetailActivity::class.java
+            )
+            intent.putExtra("media", it)
+            intent.putExtra("currentPage", "first")
+            fragmentAdapter.requireActivity().startActivity(intent)
+        }
 
         binding.viewPager2.setPageTransformer(MediaPageTransformer())
         binding.viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER

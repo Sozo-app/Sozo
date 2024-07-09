@@ -43,7 +43,7 @@ import java.lang.Math.abs
  * @constructor Create an Empty
  **/
 @AndroidEntryPoint
-class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
+class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
     private var _binding: DetailScreenBinding? = null
     lateinit var media: Media
     private val binding get() = _binding!!
@@ -84,7 +84,7 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
      **/
     private fun initFabClick(): PopImageButton? {
         val favButton = if (Anilist.userid != null) {
-            if (media.isFav) binding.mediaFav.setImageDrawable(
+            if (media.isFav) binding.likeIc.setImageDrawable(
                 AppCompatResources.getDrawable(
                     this,
                     R.drawable.ic_round_favorite_24
@@ -92,7 +92,7 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
             )
             PopImageButton(
                 scope,
-                binding.mediaFav,
+                binding.likeIc,
                 R.drawable.ic_round_favorite_24,
                 R.drawable.ic_heart,
                 R.color.nav_tab,
@@ -104,7 +104,7 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
                 Refresh.all()
             }
         } else {
-            binding.mediaFav.visibility = View.GONE
+            binding.likeIc.visibility = View.GONE
             null
         }
         return favButton
@@ -133,12 +133,13 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
                     binding.itemCompactTotal.text = "1"
                 }
 
-                if (it.genres.isNotEmpty()){
-                    binding.mainData.text = "${it.anime!!.seasonYear ?: "??"} · ${it.genres.get(0)}  ${
-                        if (it.genres.size != 1) "/" + it.genres.get(1) else ""
-                    } · ${it.format}"
+                if (it.genres.isNotEmpty()) {
+                    binding.mainData.text =
+                        "${it.anime!!.seasonYear ?: "??"} · ${it.genres.get(0)}  ${
+                            if (it.genres.size != 1) "/" + it.genres.get(1) else ""
+                        } · ${it.format}"
 
-                }else{
+                } else {
                     binding.mainData.text = "${it.anime!!.seasonYear ?: "??"} · ${it.format}"
 
                 }
@@ -155,21 +156,37 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
                     if (it.isFav != initFabClick()?.clicked) initFabClick()?.clicked()
                 }
 
+                val currentPage = intent.getStringExtra("currentPage")
 
+                if (currentPage != null) {
+                    when (currentPage) {
+                        "info" -> {
+                            binding.mediaAppBar.setExpanded(false)  // Bu satır ile AppBarLayout'u collapsed durumuna getirirsiniz
+                        }
+                        "play" -> {
+
+                        }
+                        else -> {
+
+                        }
+                    }
+                }
 
                 binding.mediaAppBar.visible()
                 binding.fabBack.visible()
                 binding.viewPager.visible()
                 binding.animeDetailProgress.gone()
-                binding.mediaInfoDescription.slideUp(700,1)
-                binding.fabBack.slideUp(700,1)
-                binding.playMedia.slideUp(700,1)
-                binding.animeCover.slideUp(700,1)
-                binding.floatingActionButton.slideUp(700,1)
-                binding.mediaStatus.slideStart(700,1)
-                binding.title.slideStart(700,1)
-                binding.mainData.slideStart(700,1)
-                binding.linearLayout3.slideStart(700,1)
+                binding.mediaInfoDescription.slideUp(700, 1)
+           binding.fabBack.slideUp(700, 1)
+                binding.playMedia.slideUp(700, 1)
+                binding.animeCover.slideUp(700, 1)
+                binding.floatingActionButton.slideUp(700, 1)
+                binding.mediaStatus.slideStart(700, 1)
+                binding.title.slideStart(700, 1)
+                binding.mainData.slideStart(700, 1)
+                binding.linearLayout3.slideStart(700, 1)
+
+
 
                 binding.mediaNotify.setOnClickListener {
                     val i = Intent(Intent.ACTION_SEND)
@@ -221,7 +238,11 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
 
         binding.mediaStatus.text = media.status ?: ""
         binding.coverImage.setOnClickListener {
-            ImageUtil.showFullScreenImage(binding.root.context, media.extraLarge.toString(), binding.coverImage)
+            ImageUtil.showFullScreenImage(
+                binding.root.context,
+                media.extraLarge.toString(),
+                binding.coverImage
+            )
         }
     }
 
@@ -308,7 +329,7 @@ class   DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
             ObjectAnimator.ofFloat(binding.mediaCollapseContainer, "translationX", 0f)
                 .setDuration(duration).start()
             binding.mediaCollapseContainer.alphaAnim()
-            binding.mediaAccessContainer.slideStart(700,1)
+            binding.mediaAccessContainer.slideStart(700, 1)
             binding.fabBack.visible()
             binding.mediaTitleToolbar.gone()
             binding.mediaAccessContainer.visible()

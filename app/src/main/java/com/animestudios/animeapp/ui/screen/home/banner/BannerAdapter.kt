@@ -30,12 +30,31 @@ class BannerAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val uiSettings = readData<UISettings>("ui_settings") ?: UISettings()
 
+    lateinit var clickListener: ((Media) -> Unit)
+
+    fun setItemClickListener(listener: ((Media) -> Unit)) {
+        clickListener = listener
+    }
+
+    lateinit var playListener: ((Media) -> Unit)
+
+    fun setPlayItemListener(listener: ((Media) -> Unit)) {
+        playListener = listener
+    }
+
+    lateinit var itemInfoListener: ((Media) -> Unit)
+
+    fun setViewInfoListener(listener: ((Media) -> Unit)) {
+        itemInfoListener = listener
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     inner class MediaPageSmallViewHolder(val binding: BannerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            itemView.setOnTouchListener { _, _ -> true }
+
+//            itemView.setOnTouchListener { _, _ -> true }
         }
     }
 
@@ -53,6 +72,9 @@ class BannerAdapter(
 
         val b = (holder as MediaPageSmallViewHolder).binding
         val media = mediaList?.get(position)
+        b.root.setOnClickListener {
+                clickListener.invoke(media!!)
+        }
         if (media != null) {
             if (uiSettings.layoutAnimations)
                 b.itemCompactBanner.setTransitionGenerator(
@@ -76,6 +98,15 @@ class BannerAdapter(
             b.addToListBtn.setOnClickListener {
                 longClicked(position)
             }
+
+            b.infoBtn.setOnClickListener {
+                itemInfoListener.invoke(media)
+            }
+
+            b.playButtonForBanner.setOnClickListener {
+                playListener.invoke(media)
+            }
+
             var genresL = ""
             media.genres.apply {
                 var count = 0

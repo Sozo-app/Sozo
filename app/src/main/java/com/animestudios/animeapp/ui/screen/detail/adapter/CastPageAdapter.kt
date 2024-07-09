@@ -1,13 +1,20 @@
 package com.animestudios.animeapp.ui.screen.detail.adapter
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.databinding.CastPageItemBinding
 import com.animestudios.animeapp.gone
 import com.animestudios.animeapp.media.Character
 import com.animestudios.animeapp.ui.screen.detail.pages.cast.CastScreen
 import com.animestudios.animeapp.visible
+import java.io.Serializable
 
 class CastPageAdapter(
     private val fragment: CastScreen,
@@ -15,8 +22,16 @@ class CastPageAdapter(
     private val supportList: ArrayList<Character>
 ) : RecyclerView.Adapter<CastPageAdapter.CastVh>() {
     inner class CastVh(val binding: CastPageItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+
+        }
         fun onBind() {
+
             binding.apply {
+                binding.root.setOnClickListener {
+
+                }
                 if (
                     absoluteAdapterPosition == 0
                 ) {
