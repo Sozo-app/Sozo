@@ -30,12 +30,6 @@ class App : MultiDexApplication(), Configuration.Provider {
         super.onCreate()
         Anilist.getSavedToken(this)
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
-//        val sharedPreferences = getSharedPreferences("Sozo", Context.MODE_PRIVATE)
-//        val useMaterialYou = sharedPreferences.getBoolean("use_material_you", true)
-//        if (useMaterialYou) {
-//            DynamicColors.applyToActivitiesIfAvailable(this)
-//            //TODO: HarmonizedColors
-//        }
         initializeNetwork(this)
         if (Anilist.token != null) {
             setupNotificationWorker()

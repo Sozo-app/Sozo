@@ -201,7 +201,7 @@ fun loadProfileCategory(): ArrayList<ProfileCategoryModel> {
     list.add(
         ProfileCategoryModel(
             "Player",
-            "Player appearance , playback controls , Subtitles",
+            "Player appearance , playback...",
             R.drawable.ic_player
         )
     )
