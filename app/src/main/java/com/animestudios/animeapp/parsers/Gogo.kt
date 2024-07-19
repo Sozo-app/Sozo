@@ -48,26 +48,32 @@ class Gogo : AnimeParser() {
     ): List<VideoServer> {
         val list = mutableListOf<VideoServer>()
         getJsoup(episodeLink).select("div.anime_muti_link > ul > li").forEach {
-
             val name = it.select("a").text().replace("Choose this server", "")
             val url = httpsIfy(it.select("a").attr("data-video"))
             val embed = FileUrl(url, mapOf("referer" to hostUrl))
-            list.add(VideoServer(name, embed))
+            val domain = Uri.parse(embed.url).host!!
+            if ("awish" in domain) {
+                list.add(VideoServer(name, embed))
+            }
+
         }
         return list
     }
 
     override suspend fun getVideoExtractor(server: VideoServer): VideoExtractor? {
         val domain = Uri.parse(server.embed.url).host ?: return null
-        if ("dood" in domain) {
+        println(server.extraData.toString())
+
+        if ("awish" in domain) {
             println(server.embed.url)
+            println(server.extraData.toString())
         }
         val extractor: VideoExtractor? = when {
             "gogo" in domain -> GogoCDN(server)
             "goload" in domain -> GogoCDN(server)
             "playgo" in domain -> GogoCDN(server)
             "anihdplay" in domain -> GogoCDN(server)
-            "awish" in domain -> GogoCDN(server)
+            "awish" in domain -> GogoMpUploadExtractor(server)
             "sb" in domain -> StreamSB(server)
             "sss" in domain -> StreamSB(server)
             "fplayer" in domain -> FPlayer(server)
@@ -77,14 +83,19 @@ class Gogo : AnimeParser() {
         return extractor
     }
 
-//    class GogoMpUploadExtractor(override val server: VideoServer) : VideoExtractor() {
-//
-//        override suspend fun extract(): VideoContainer {
-//
-//            return VideoCont
-//        }
-//
-//    }
+    class GogoMpUploadExtractor(override val server: VideoServer) : VideoExtractor() {
+
+        override suspend fun extract(): VideoContainer {
+            val list = mutableListOf<Video>()
+            val url = server.embed.url
+            val host = server.embed.headers["referer"]
+
+
+
+            return VideoContainer(videos, subtitles)
+        }
+
+    }
 
     override suspend fun search(query: String): List<ShowResponse> {
         val encoded = encode(query + if (selectDub) " (Dub)" else "")
