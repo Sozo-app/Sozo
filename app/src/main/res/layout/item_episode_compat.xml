@@ -8,7 +8,7 @@
     android:layout_margin="6dp"
     android:backgroundTintMode="src_atop"
     android:longClickable="true"
-    app:cardBackgroundColor="?attr/colorOnSurface"
+    app:cardBackgroundColor="?attr/colorSurface"
     app:cardCornerRadius="16dp">
 
     <View
@@ -35,7 +35,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:cardBackgroundColor="?attr/colorSurface"
+                app:cardBackgroundColor="?attr/colorOnSurface"
                 app:cardCornerRadius="16dp">
 
                 <ProgressBar
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="-10dp"
                     android:layout_marginTop="-18dp"
-                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardBackgroundColor="?attr/colorOnSurface"
                     app:cardCornerRadius="16dp">
 
                     <TextView

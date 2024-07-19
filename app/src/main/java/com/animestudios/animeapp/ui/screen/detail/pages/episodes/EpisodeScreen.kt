@@ -120,7 +120,7 @@ class EpisodeScreen : Fragment() {
                 binding.mediaInfoProgressBar.visibility = progress
 
                 if (!loaded) {
-                    model.watchSources = if (!media.isAdult) HAnimeSources else AnimeSources
+                    model.watchSources = if (media.isAdult) HAnimeSources else AnimeSources
 
                     headerAdapter = AnimeWatchAdapter(it, this, model.watchSources!!)
                     episodeAdapter = EpisodeAdapter(media, this)

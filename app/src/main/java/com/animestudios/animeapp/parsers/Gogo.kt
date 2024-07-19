@@ -86,13 +86,23 @@ class Gogo : AnimeParser() {
     class GogoMpUploadExtractor(override val server: VideoServer) : VideoExtractor() {
 
         override suspend fun extract(): VideoContainer {
+            val scrapVideos = mutableListOf<Video>()
+
             val list = mutableListOf<Video>()
             val url = server.embed.url
             val host = server.embed.headers["referer"]
+            val document = getJsoup(url, server.extraData)
+            val script = document.select("script")
+                .firstOrNull { it.data().contains("jwplayer(\"vplayer\").setup") }?.data() ?: ""
+
+            val fileRegex = Regex("""file:"(https://[^"]+)""")
+
+            val fileUrl = fileRegex.find(script)?.groups?.get(1)?.value
+
+            scrapVideos.add(Video(null, VideoType.M3U8, fileUrl.toString()))
 
 
-
-            return VideoContainer(videos, subtitles)
+            return VideoContainer(scrapVideos)
         }
 
     }
