@@ -1,9 +1,14 @@
 package com.animestudios.animeapp
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.text.Html
+import android.util.AttributeSet
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -88,4 +93,37 @@ fun ContentLoadingProgressBar.setAnimatedProgress(progress: Int) {
 fun TextView.setMarkdownText(string: String) {
     text = Markwon.create(this.context)
         .toMarkdown(string)
+}
+
+
+
+
+@SuppressLint("ClickableViewAccessibility")
+class SpinnerNoSwipe : androidx.appcompat.widget.AppCompatSpinner {
+    private var mGestureDetector: GestureDetector? = null
+
+    constructor(context: Context) : super(context) {
+        setup()
+    }
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        setup()
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        setup()
+    }
+
+    private fun setup() {
+        mGestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onSingleTapUp(e: MotionEvent): Boolean {
+                return performClick()
+            }
+        })
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        mGestureDetector!!.onTouchEvent(event)
+        return true
+    }
 }

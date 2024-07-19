@@ -93,7 +93,15 @@
         </receiver>
 
         <activity android:name=".ui.screen.detail.pages.cast.detail.CastDetailScreen" />
-
+        <activity
+            android:name=".ui.view.ExoplayerView"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|navigation"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="@string/video"
+            android:launchMode="singleTask"
+            android:supportsPictureInPicture="true"
+            tools:targetApi="n" />
         <activity
             android:name=".ui.activity.Login"
             android:configChanges="orientation|screenSize|layoutDirection"

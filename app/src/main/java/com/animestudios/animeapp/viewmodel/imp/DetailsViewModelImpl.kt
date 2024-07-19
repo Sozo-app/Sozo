@@ -19,6 +19,7 @@ import com.animestudios.animeapp.mapper.convert
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.media.Selected
 import com.animestudios.animeapp.model.RelationData
+import com.animestudios.animeapp.others.AniSkip
 import com.animestudios.animeapp.parsers.ShowResponse
 import com.animestudios.animeapp.parsers.VideoExtractor
 import com.animestudios.animeapp.readData
@@ -248,6 +249,19 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
         }
 
     }
+
+    val timeStamps = MutableLiveData<List<AniSkip.Stamp>?>()
+    private val timeStampsMap: MutableMap<Int, List<AniSkip.Stamp>?> = mutableMapOf()
+    suspend fun loadTimeStamps(malId: Int?, episodeNum: Int?, duration: Long, useProxyForTimeStamps: Boolean) {
+        malId ?: return
+        episodeNum ?: return
+        if (timeStampsMap.containsKey(episodeNum))
+            return timeStamps.postValue(timeStampsMap[episodeNum])
+        val result = AniSkip.getResult(malId, episodeNum, duration, useProxyForTimeStamps)
+        timeStampsMap[episodeNum] = result
+        timeStamps.postValue(result)
+    }
+
     suspend fun loadEpisodeSingleVideo(ep: Episode, selected: Selected, post: Boolean = true): Boolean {
         if (ep.extractors.isNullOrEmpty()) {
 

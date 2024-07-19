@@ -10,10 +10,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.*
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.*
@@ -21,15 +24,13 @@ import android.view.animation.*
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import android.webkit.WebView
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.Scroller
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.math.MathUtils
 import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -67,11 +68,10 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.max
-import kotlin.math.min
-import kotlin.math.roundToInt
+import kotlin.math.*
 
 
 fun Fragment.applyColorByAttr(@AttrRes attrColor: Int): Int {
@@ -1167,3 +1167,59 @@ fun clearCookies(context: Context?) {
 }
 
 
+
+fun getCurrentBrightnessValue(context: Context): Float {
+    fun getMax(): Int {
+        val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+
+        val fields: Array<Field> = powerManager.javaClass.declaredFields
+        for (field in fields) {
+            if (field.name.equals("BRIGHTNESS_ON")) {
+                field.isAccessible = true
+                return try {
+                    field.get(powerManager)?.toString()?.toInt() ?: 255
+                } catch (e: IllegalAccessException) {
+                    255
+                }
+            }
+        }
+        return 255
+    }
+
+    fun getCur(): Float {
+        return Settings.System.getInt(context.contentResolver, Settings.System.SCREEN_BRIGHTNESS, 127).toFloat()
+    }
+
+    return brightnessConverter(getCur() / getMax(), true)
+}
+
+fun brightnessConverter(it: Float, fromLog: Boolean) =
+    MathUtils.clamp(
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+            if (fromLog) log2((it * 256f)) * 12.5f / 100f else 2f.pow(it * 100f / 12.5f) / 256f
+        else it, 0.001f, 1f
+    )
+
+
+fun checkCountry(context: Context): Boolean {
+    val telMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+    return when (telMgr.simState) {
+        TelephonyManager.SIM_STATE_ABSENT -> {
+            val tz = TimeZone.getDefault().id
+            tz.equals("Asia/Kolkata", ignoreCase = true)
+        }
+        TelephonyManager.SIM_STATE_READY  -> {
+            val countryCodeValue = telMgr.networkCountryIso
+            countryCodeValue.equals("in", ignoreCase = true)
+        }
+        else                              -> false
+    }
+}
+open class NoPaddingArrayAdapter<T>(context: Context, layoutId: Int, items: List<T>) : ArrayAdapter<T>(context, layoutId, items) {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view = super.getView(position, convertView, parent)
+        view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)
+        (view as TextView).setTextColor(Color.WHITE)
+        return view
+    }
+}

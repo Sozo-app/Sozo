@@ -1,9 +1,6 @@
 package com.animestudios.animeapp.parsers
 
 import android.net.Uri
-import com.animestudios.animeapp.parsers.extractors.FPlayer
-import com.animestudios.animeapp.parsers.extractors.GogoCDN
-import com.animestudios.animeapp.parsers.extractors.StreamSB
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.tools.client
 import com.animestudios.animeapp.tools.getJsoup
@@ -26,6 +23,7 @@ class Gogo : AnimeParser() {
             pageBody.select("ul#episode_page > li:last-child > a").attr("ep_end").toString()
         val animeId = pageBody.select("input#movie_id").attr("value").toString()
 
+        println("ANME ID :${animeId}")
         val epList = client
             .get("https://ajax.gogocdn.net/ajax/load-list-episode?ep_start=0&ep_end=$lastEpisode&id=$animeId").document
             .select("ul > li > a").reversed()
@@ -69,15 +67,7 @@ class Gogo : AnimeParser() {
             println(server.extraData.toString())
         }
         val extractor: VideoExtractor? = when {
-            "gogo" in domain -> GogoCDN(server)
-            "goload" in domain -> GogoCDN(server)
-            "playgo" in domain -> GogoCDN(server)
-            "anihdplay" in domain -> GogoCDN(server)
             "awish" in domain -> GogoMpUploadExtractor(server)
-            "sb" in domain -> StreamSB(server)
-            "sss" in domain -> StreamSB(server)
-            "fplayer" in domain -> FPlayer(server)
-            "fembed" in domain -> FPlayer(server)
             else -> null
         }
         return extractor
@@ -101,10 +91,8 @@ class Gogo : AnimeParser() {
 
             scrapVideos.add(Video(null, VideoType.M3U8, fileUrl.toString()))
 
-
             return VideoContainer(scrapVideos)
         }
-
     }
 
     override suspend fun search(query: String): List<ShowResponse> {

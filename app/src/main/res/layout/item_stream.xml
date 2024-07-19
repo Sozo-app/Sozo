@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:clipToPadding="false"
-    android:orientation="vertical"
-    tools:ignore="MissingDefaultResource">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/streamName"
@@ -24,7 +23,6 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        app:cardBackgroundColor="?attr/colorOnSurface"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp">
 

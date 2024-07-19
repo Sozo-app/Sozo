@@ -23,6 +23,7 @@ import com.animestudios.animeapp.databinding.ItemUrlBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.parsers.VideoExtractor
 import com.animestudios.animeapp.parsers.VideoType
+import com.animestudios.animeapp.ui.view.ExoplayerView
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.CoroutineScope
@@ -162,12 +163,12 @@ class SelectorDialogFragment : BottomSheetDialogFragment() {
         dismiss()
         if (launch!!) {
             stopAddingToList()
-//            val intent = Intent(activity, ExoplayerView::class.java)
-//            ExoplayerView.media = media
-//            ExoplayerView.initialized = true
-//            startActivity(intent)
+            val intent = Intent(activity, ExoplayerView::class.java)
+            ExoplayerView.media = media
+            ExoplayerView.initialized = true
+            startActivity(intent)
         } else {
-//            model.setEpisode(media.anime!!.episodes!![media.anime.selectedEpisode!!]!!, "startExo no launch")
+            model.setEpisode(media.anime!!.episodes!![media.anime.selectedEpisode!!]!!, "startExo no launch")
         }
     }
 

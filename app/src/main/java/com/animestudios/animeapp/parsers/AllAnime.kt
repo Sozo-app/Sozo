@@ -3,15 +3,11 @@ package com.animestudios.animeapp.parsers
 import android.net.Uri
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.getSize
-import com.animestudios.animeapp.parsers.extractors.FPlayer
-import com.animestudios.animeapp.parsers.extractors.GogoCDN
-import com.animestudios.animeapp.parsers.extractors.StreamSB
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.tools.asyncMapNotNull
 import com.animestudios.animeapp.tools.client
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.text.DecimalFormat
 
 
@@ -104,9 +100,9 @@ class AllAnime : AnimeParser() {
         val domain = serverUrl.host ?: return null
         val path = serverUrl.path ?: return null
         val extractor: VideoExtractor? = when {
-            "apivtwo" in path   -> AllAnimeExtractor(server)
-            "taku" in domain    -> GogoCDN(server)
-            "sb" in domain      -> StreamSB(server)
+//            "apivtwo" in path   -> AllAnimeExtractor(server)
+//            "taku" in domain    -> GogoCDN(server)
+//            "sb" in domain      -> StreamSB(server)
             else                -> null
         }
         return extractor
