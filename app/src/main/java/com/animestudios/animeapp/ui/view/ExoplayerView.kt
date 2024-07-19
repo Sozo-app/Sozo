@@ -319,7 +319,7 @@ class ExoplayerView : AppCompatActivity(), Player.Listener {
 
         playerView = findViewById(R.id.player_view)
         exoQuality = playerView.findViewById(R.id.exo_quality)
-        exoPlay = playerView.findViewById(androidx.media3.ui.R.id.exo_play)
+        exoPlay = playerView.findViewById(R.id.exo_play)
         exoSource = playerView.findViewById(R.id.exo_source)
         exoSettings = playerView.findViewById(R.id.exo_settings)
         exoSubtitle = playerView.findViewById(R.id.exo_sub)

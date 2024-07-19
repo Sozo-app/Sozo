@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable-nodpi/ic_round_play_arrow_24.xml" value="0.2775" />
+        <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable-v24/anim_play_to_pause.xml" value="0.2515" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable-v24/control_background_40dp.xml" value="0.2515" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable-v24/ic_round_auto_awesome_24.xml" value="0.2775" />
         <entry key="..\:/AndroidStudioProjects/AnimeApp/app/src/main/res/drawable-v24/spinner_icon.xml" value="0.1235" />

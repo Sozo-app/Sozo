@@ -194,7 +194,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/skip"
-                android:textColor="?attr/colorSecondary"
+                android:textColor="?attr/colorAccent"
                 android:textSize="14sp" />
 
             <TextView
@@ -205,7 +205,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:singleLine="true"
                 android:text="@string/animations"
-                android:textColor="?attr/colorSecondary"
+                android:textColor="?attr/colorAccent"
                 android:textSize="14sp" />
 
             <ImageView
@@ -213,7 +213,7 @@
                 android:layout_height="24dp"
                 android:layout_margin="4dp"
                 app:srcCompat="@drawable/ic_round_fast_forward_24"
-                app:tint="?attr/colorSecondary"
+                app:tint="?attr/colorAccent"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -248,7 +248,7 @@
                 android:valueTo="10"
                 app:labelBehavior="gone"
                 app:thumbElevation="0dp"
-                app:trackColorInactive="?attr/colorAccent"
+                app:trackColorInactive="?attr/colorOutline"
                 app:trackHeight="24dp" />
 
             <ImageView
@@ -290,7 +290,7 @@
                 android:valueTo="10"
                 app:labelBehavior="gone"
                 app:thumbElevation="0dp"
-                app:trackColorInactive="?attr/colorAccent"
+                app:trackColorInactive="?attr/colorOutline"
                 app:trackHeight="24dp" />
 
             <ImageView

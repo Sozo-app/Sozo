@@ -285,7 +285,7 @@
                     app:cardElevation="0dp">
 
                     <ImageButton
-                        android:id="@id/exo_play"
+                        android:id="@+id/exo_play"
                         style="@style/ExoMediaButton.Play"
                         android:layout_width="72dp"
                         android:layout_height="72dp"
