@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
-class AnimePahe : AnimeParser() {
+class       AnimePahe : AnimeParser() {
 
     override val hostUrl = "https://animepahe.ru"
     override val name = "AnimePahe"

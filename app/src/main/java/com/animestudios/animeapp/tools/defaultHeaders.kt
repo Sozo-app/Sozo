@@ -8,8 +8,9 @@ import com.animestudios.animeapp.toast
 import dev.brahmkshatriya.nicehttp.Requests
 import dev.brahmkshatriya.nicehttp.ResponseParser
 import dev.brahmkshatriya.nicehttp.addGenericDns
-import kotlinx.coroutines.*
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.decodeFromString
@@ -21,13 +22,13 @@ import java.io.File
 import java.io.PrintWriter
 import java.io.Serializable
 import java.io.StringWriter
-import java.util.concurrent.*
+import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 
 val defaultHeaders = mapOf(
     "User-Agent" to
-            "Mozilla/5.0 (Linux; Android %s; %s) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36"
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0"
                 .format(Build.VERSION.RELEASE, Build.MODEL)
 )
 lateinit var cache: Cache
@@ -55,7 +56,7 @@ fun initializeNetwork(context: Context) {
     client = Requests(
         okHttpClient,
         defaultHeaders,
-        defaultCacheTime = 6,
+        defaultCacheTime = 10,
         defaultCacheTimeUnit = TimeUnit.HOURS,
         responseParser = Mapper
     )
@@ -111,7 +112,11 @@ fun logError(e: Throwable, post: Boolean = true, snackbar: Boolean = true) {
 }
 
 
-suspend fun <T> tryWithSuspend(post: Boolean = false, snackbar: Boolean = true, call: suspend () -> T): T? {
+suspend fun <T> tryWithSuspend(
+    post: Boolean = false,
+    snackbar: Boolean = true,
+    call: suspend () -> T
+): T? {
     return try {
         call.invoke()
     } catch (e: Throwable) {
