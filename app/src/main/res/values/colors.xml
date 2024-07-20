@@ -52,6 +52,7 @@
     <color name="banner_bg">#232323</color>
     <color name="dark_700">#202020</color>
     <color name="basic_color">#FF2828</color>
+    <color name="dark_basic">#40FF007F</color>
     <color name="basic_color_400">#EF6B6B</color>
     <color name="basic_color_500">#E63956</color>
     <color name="buttonColor">#FF4D4D</color>

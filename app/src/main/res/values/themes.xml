@@ -24,7 +24,8 @@
         <!--        <item name="themeNegativeBorderButton">@style/ButtonNegativeBorder</item>-->
 <!--        <item name="colorOnPrimary">@color/bg_white</item>-->
         <item name="colorSecondary">@color/basic_color</item>
-        <item name="colorSecondaryVariant">@color/violet_700</item>
+        <item name="colorPrimaryDark">@color/dark_basic</item>
+        <item name="colorSecondaryVariant">@color/colorAccent</item>
         <item name="colorOnContainer">@color/bg_filter_dialog</item>
         <item name="colorSecondaryContainer">@color/basic_color</item>
         <item name="colorOnSurface">@color/detail_Bg</item>

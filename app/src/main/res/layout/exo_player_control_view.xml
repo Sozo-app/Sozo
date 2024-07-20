@@ -285,7 +285,7 @@
                     app:cardElevation="0dp">
 
                     <ImageButton
-                        android:id="@+id/exo_play"
+                        android:id="@id/exo_play"
                         style="@style/ExoMediaButton.Play"
                         android:layout_width="72dp"
                         android:layout_height="72dp"
@@ -377,7 +377,7 @@
                             android:background="@drawable/spinner_icon"
                             android:backgroundTint="#fff"
                             android:backgroundTintMode="src_atop"
-                            android:entries="@array/sort_by"
+                            android:entries="@array/tips"
                             android:popupBackground="@drawable/round_corner"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -525,6 +525,7 @@
 
             <view
                 android:id="@id/exo_progress"
+
                 class="com.animestudios.animeapp.ui.view.ExoplayerView$ExtendedTimeBar"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"

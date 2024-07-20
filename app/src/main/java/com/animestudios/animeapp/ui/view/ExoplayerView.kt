@@ -76,6 +76,7 @@ import com.animestudios.animeapp.tools.defaultHeaders
 import com.animestudios.animeapp.tools.logError
 import com.animestudios.animeapp.tools.printIt
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
+import com.animestudios.animeapp.widget.ThemeManager
 import com.bumptech.glide.Glide
 import com.google.android.material.slider.Slider
 import dagger.hilt.android.AndroidEntryPoint
@@ -305,6 +306,7 @@ class ExoplayerView : AppCompatActivity(), Player.Listener {
         super.onCreate(savedInstanceState)
         binding = ActivityExoplayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        ThemeManager(this).applyTheme() //This project made  by Single Activity
 
         //Initialize
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -319,7 +321,7 @@ class ExoplayerView : AppCompatActivity(), Player.Listener {
 
         playerView = findViewById(R.id.player_view)
         exoQuality = playerView.findViewById(R.id.exo_quality)
-        exoPlay = playerView.findViewById(R.id.exo_play)
+        exoPlay = playerView.findViewById(androidx.media3.ui.R.id.exo_play)
         exoSource = playerView.findViewById(R.id.exo_source)
         exoSettings = playerView.findViewById(R.id.exo_settings)
         exoSubtitle = playerView.findViewById(R.id.exo_sub)
