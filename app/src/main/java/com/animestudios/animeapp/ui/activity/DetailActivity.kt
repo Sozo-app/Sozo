@@ -26,6 +26,7 @@ import com.animestudios.animeapp.tools.ImageUtil
 import com.animestudios.animeapp.tools.slideStart
 import com.animestudios.animeapp.tools.slideUp
 import com.animestudios.animeapp.ui.screen.detail.adapter.TabAdapter
+import com.animestudios.animeapp.ui.screen.detail.dialog.SourceSearchDialogFragment
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator
 import com.google.android.material.appbar.AppBarLayout
@@ -187,6 +188,10 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 binding.linearLayout3.slideStart(700, 1)
 
 
+                binding.wrongTitle.setOnClickListener {
+                    SourceSearchDialogFragment().show(this.supportFragmentManager, null)
+
+                }
 
                 binding.mediaNotify.setOnClickListener {
                     val i = Intent(Intent.ACTION_SEND)

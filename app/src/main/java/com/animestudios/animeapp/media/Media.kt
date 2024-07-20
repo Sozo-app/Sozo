@@ -112,4 +112,6 @@ data class Media(
     }
 
     fun mainName() = nameMAL ?: name ?: nameRomaji
+    fun mangaName() = if (countryOfOrigin != "JP") mainName() else nameRomaji
+
 }

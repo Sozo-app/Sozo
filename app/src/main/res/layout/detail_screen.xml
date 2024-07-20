@@ -385,6 +385,7 @@
                         android:id="@+id/mediaNotify"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
                         android:background="?selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_share" />
@@ -393,6 +394,7 @@
                         android:id="@+id/wrongTitle"
                         android:layout_width="0dp"
                         android:layout_height="25dp"
+                        android:layout_marginHorizontal="40dp"
                         android:layout_weight="1"
                         android:background="?selectableItemBackgroundBorderless"
                         android:src="@drawable/cross" />
@@ -401,6 +403,7 @@
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="20dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_weight="1"
                         android:background="?selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_network" />
