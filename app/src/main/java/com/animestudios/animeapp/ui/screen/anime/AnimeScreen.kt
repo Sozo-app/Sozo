@@ -1,26 +1,30 @@
 package com.animestudios.animeapp.ui.screen.anime
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.animestudios.animeapp.Refresh
+import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.AnimeScreenBinding
-import com.animestudios.animeapp.gone
-import com.animestudios.animeapp.loaded
 import com.animestudios.animeapp.media.Media
-import com.animestudios.animeapp.statusBarHeight
+import com.animestudios.animeapp.others.CustomBottomDialog
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 import com.animestudios.animeapp.viewmodel.imp.AniListViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
+import io.noties.markwon.Markwon
+import io.noties.markwon.SoftBreakAddsNewLinePlugin
 import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.min
@@ -70,7 +74,35 @@ class AnimeScreen : Fragment() {
         binding.apply {
             initRv(height)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (readData<Boolean>("allow_opening_links", binding.root.context) != true) {
+                CustomBottomDialog.newInstance().apply {
+                    title = "Allow Sozo to automatically open Anilist  Links?"
+                    val md = "Open settings & click +Add Links & select Anilist & Mal urls"
+                    addView(TextView(binding.root.context).apply {
+                        val markWon =
+                            Markwon.builder(binding.root.context)
+                                .usePlugin(SoftBreakAddsNewLinePlugin.create()).build()
+                        markWon.setMarkdown(this, md)
+                    })
 
+                    setNegativeButton("No") {
+                        saveData("allow_opening_links", true, binding.root.context)
+                        dismiss()
+                    }
+
+                    setPositiveButton("Yes") {
+                        saveData("allow_opening_links", true, binding.root.context)
+                        tryWith(true) {
+                            startActivity(
+                                Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS)
+                                    .setData(Uri.parse("package:com.animestudios.animeapp"))
+                            )
+                        }
+                    }
+                }.show(parentFragmentManager, "dialog")
+            }
+        }
         val animePageAdapter = AnimePageAdapter(this@AnimeScreen)
         val adapter = ConcatAdapter(animePageAdapter)
         binding.animePageRecyclerView.adapter = adapter
