@@ -1,0 +1,17 @@
+plugins {
+//  id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+repositories {
+
+}
+
+dependencies {
+    implementation project(':library')
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1"
+}
