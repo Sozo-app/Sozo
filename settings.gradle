@@ -20,3 +20,6 @@ dependencyResolutionManagement {
 rootProject.name = "AnimeApp"
 include ':app'
 include ':benchmark'
+include ':nicehttp'
+include ':library'
+include ':cli'

@@ -22,6 +22,8 @@ android {
         applicationId "com.animestudios.animeapp"
         minSdk 24
         targetSdk 33
+        renderscriptTargetApi 30
+        renderscriptSupportModeEnabled true
 
         versionCode 1
         versionName "1.0"
@@ -114,7 +116,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.3")
 
 
-    /**//
+    /**/
+    /
      * CircleImageView
      */
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -142,11 +145,10 @@ dependencies {
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
     implementation 'com.alexvasilkov:gesture-views:2.8.3'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.github.brahmkshatriya:NiceHttp:1.1.0'
     implementation 'com.github.SabriGhazali:Shadout-Android:1.0.2'
     implementation 'androidx.browser:browser:1.5.0'
-    implementation 'com.irozon.sneaker:sneaker:2.0.0'
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.5.0'
     implementation "com.github.skydoves:powermenu:2.2.4"
     implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.27'
@@ -207,7 +209,7 @@ dependencies {
 
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
     implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
+    implementation project(':library')
 
 }

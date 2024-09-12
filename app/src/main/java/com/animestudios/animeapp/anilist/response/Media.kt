@@ -2,7 +2,6 @@
 
 package com.animestudios.animeapp.anilist.response
 
-import ani.saikou.anilist.api.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

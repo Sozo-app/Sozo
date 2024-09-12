@@ -5,9 +5,9 @@ import android.os.Build
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.toast
-import dev.brahmkshatriya.nicehttp.Requests
-import dev.brahmkshatriya.nicehttp.ResponseParser
-import dev.brahmkshatriya.nicehttp.addGenericDns
+import com.sozo.nicehttp.Requests
+import com.sozo.nicehttp.ResponseParser
+import com.sozo.nicehttp.addGenericDns
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking

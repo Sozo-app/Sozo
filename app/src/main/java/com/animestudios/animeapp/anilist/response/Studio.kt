@@ -1,6 +1,5 @@
-package ani.saikou.anilist.api
+package com.animestudios.animeapp.anilist.response
 
-import com.animestudios.animeapp.anilist.response.MediaConnection
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

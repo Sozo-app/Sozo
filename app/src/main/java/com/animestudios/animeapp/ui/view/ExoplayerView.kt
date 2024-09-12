@@ -79,8 +79,8 @@ import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import com.animestudios.animeapp.widget.ThemeManager
 import com.bumptech.glide.Glide
 import com.google.android.material.slider.Slider
+import com.sozo.nicehttp.ignoreAllSSLErrors
 import dagger.hilt.android.AndroidEntryPoint
-import dev.brahmkshatriya.nicehttp.ignoreAllSSLErrors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

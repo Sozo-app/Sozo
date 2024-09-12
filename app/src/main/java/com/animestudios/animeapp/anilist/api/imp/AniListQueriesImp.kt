@@ -27,6 +27,7 @@ class AniListQueriesImp constructor() : AniListQueries {
             val anilist = async {
                 var response = executeQuery<Query.Media>(query, force = true, show = true)
                 if (response != null) {
+                    println("RESPONSEEE :$response")
                     fun parse() {
                         val fetchedMedia = response?.data?.media ?: return
                         println(response?.data?.media?.coverImage?.extraLarge)
@@ -218,6 +219,8 @@ class AniListQueriesImp constructor() : AniListQueries {
                 force = true,
                 useToken = false
             )?.data?.genreCollection?.apply {
+                println("RESPONSEEE :$this")
+                println("!!!!!!!!!!!!!!!!!!!!! TUSHDII !!!!!!!!!!!")
                 genres = arrayListOf()
                 forEach {
                     genres?.add(it)
@@ -230,6 +233,7 @@ class AniListQueriesImp constructor() : AniListQueries {
                 """{ MediaTagCollection { name isAdult } }""",
                 force = true
             )?.data?.mediaTagCollection?.apply {
+                println("RESPONSEEE :$this")
                 val adult = mutableListOf<String>()
                 val good = mutableListOf<String>()
                 forEach { node ->

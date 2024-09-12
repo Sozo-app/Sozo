@@ -12,7 +12,7 @@ import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.tools.defaultHeaders
 import com.animestudios.animeapp.tools.tryWithSuspend
-import dev.brahmkshatriya.nicehttp.Requests
+import com.sozo.nicehttp.Requests
 import okhttp3.OkHttpClient
 import java.io.File
 import java.util.*
@@ -22,6 +22,7 @@ object Anilist {
     val BASE_URL = "https://graphql.anilist.co/"
     val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .followRedirects(true)
         .followSslRedirects(true)
@@ -84,8 +85,9 @@ object Anilist {
 
                     when (selectedType) {
                         1 -> {
-                            selected=1
+                            selected = 1
                             println("1 TOKEN")
+                            println(token)
                             headers["Authorization"] = "Bearer $token"
 
                         }
@@ -121,7 +123,7 @@ object Anilist {
                 1 -> {
                     if ("anilistToken" in context.fileList()) {
                         token = File(context.filesDir, "anilistToken").readText()
-                        saveData("selectedAccount",1)
+                        saveData("selectedAccount", 1)
                         return true
                     }
 
@@ -130,14 +132,14 @@ object Anilist {
 
                     if ("anilistToken2" in context.fileList()) {
                         token2 = File(context.filesDir, "anilistToken2").readText()
-                        saveData("selectedAccount",2)
+                        saveData("selectedAccount", 2)
                         return true
                     }
                 }
                 3 -> {
                     if ("anilistToken3" in context.fileList()) {
                         token3 = File(context.filesDir, "anilistToken3").readText()
-                        saveData("selectedAccount",3)
+                        saveData("selectedAccount", 3)
                         return true
                     }
                 }
@@ -175,7 +177,7 @@ object Anilist {
     }
 
     fun loginIntent(context: Context) {
-            val clientID = 14066
+        val clientID = 14066
 
         try {
 

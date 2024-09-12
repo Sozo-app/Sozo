@@ -67,7 +67,7 @@
             @Serializable
             data class Data(
                 @SerialName("Studio")
-                val studio: ani.saikou.anilist.api.Studio?
+                val studio: com.animestudios.animeapp.anilist.response.Studio?
             )
         }
 

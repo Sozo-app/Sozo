@@ -1,7 +1,5 @@
-package ani.saikou.anilist.api
+package com.animestudios.animeapp.anilist.response
 
-import com.animestudios.animeapp.anilist.response.Media
-import com.animestudios.animeapp.anilist.response.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 @Serializable

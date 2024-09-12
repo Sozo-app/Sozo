@@ -1,7 +1,5 @@
 package com.animestudios.animeapp.anilist.response
 
-import ani.saikou.anilist.api.StaffConnection
-import ani.saikou.anilist.api.StudioConnection
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
