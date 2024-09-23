@@ -74,6 +74,8 @@ class AllAnime : AnimeParser() {
                 val serverName = source.sourceName
                 val jsonUrl = if (!source.sourceUrl.startsWith("http")) {
                     val url = source.sourceUrl.decodeHash()
+                    println("DOMAIN L::: :::   : :::: " + serverName)
+                    println("DOMAIN L::: :::   : :::: " + url)
                     if (!url.startsWith("http"))
                         FileUrl("$referer${url.replace("clock", "clock.json")}")
                     else FileUrl(url, mapOf("referer" to referer))
@@ -99,10 +101,11 @@ class AllAnime : AnimeParser() {
         val serverUrl = Uri.parse(server.embed.url)
         val domain = serverUrl.host ?: return null
         val path = serverUrl.path ?: return null
+        println("DOMAIN L::: :::   : :::: " + domain)
+        println("DOMAIN L::: :::   : :::: " + path)
         val extractor: VideoExtractor? = when {
-//            "apivtwo" in path   -> AllAnimeExtractor(server)
-//            "taku" in domain    -> GogoCDN(server)
-//            "sb" in domain      -> StreamSB(server)
+            "apivtwo" in path   -> AllAnimeExtractor(server)
+
             else                -> null
         }
         return extractor
