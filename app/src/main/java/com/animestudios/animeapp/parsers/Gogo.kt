@@ -4,6 +4,7 @@ import android.net.Uri
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.tools.client
 import com.animestudios.animeapp.tools.getJsoup
+import com.animestudios.animeapp.utils.JsUnpacker
 
 class Gogo : AnimeParser() {
     override val name = "Gogo"
@@ -46,10 +47,13 @@ class Gogo : AnimeParser() {
     ): List<VideoServer> {
         val list = mutableListOf<VideoServer>()
         getJsoup(episodeLink).select("div.anime_muti_link > ul > li").forEach {
+
             val name = it.select("a").text().replace("Choose this server", "")
             val url = httpsIfy(it.select("a").attr("data-video"))
             val embed = FileUrl(url, mapOf("referer" to hostUrl))
             val domain = Uri.parse(embed.url).host!!
+            println("DOMAIN L::: :::   : :::: " + domain)
+            println("DOMAIN L::: :::   : :::: " + url)
             if ("awish" in domain) {
                 list.add(VideoServer(name, embed))
             }
@@ -82,14 +86,23 @@ class Gogo : AnimeParser() {
             val url = server.embed.url
             val host = server.embed.headers["referer"]
             val document = getJsoup(url, server.extraData)
-            val script = document.select("script")
-                .firstOrNull { it.data().contains("jwplayer(\"vplayer\").setup") }?.data() ?: ""
+            // Find the eval function in the script
+            val scriptElements = document.select("script")
+            println(scriptElements)
+            var evalContent: String? = null
+            for (script in scriptElements) {
+                val scriptData = script.data()
+                if (scriptData.contains("eval(function(p,a,c,k,e,d){")) {
+                    evalContent = scriptData
+                    println(evalContent)
 
-            val fileRegex = Regex("""file:"(https://[^"]+)""")
+                    break
+                }
+            }
 
-            val fileUrl = fileRegex.find(script)?.groups?.get(1)?.value
+            val urlM3u8 =extractFileUrl(getAndUnpack(evalContent.toString()))?:""
 
-            scrapVideos.add(Video(null, VideoType.M3U8, fileUrl.toString()))
+            scrapVideos.add(Video(null, VideoType.M3U8, urlM3u8))
 
             return VideoContainer(scrapVideos)
         }
@@ -107,4 +120,22 @@ class Gogo : AnimeParser() {
             }
         return list
     }
+
+
+}
+
+private val packedRegex = Regex("""eval\(function\(p,a,c,k,e,.*\)\)""")
+fun getPacked(string: String): String? {
+    return packedRegex.find(string)?.value
+}
+
+fun getAndUnpack(string: String): String {
+    val packedText = getPacked(string)
+    return JsUnpacker(packedText).unpack() ?: string
+}
+
+fun extractFileUrl(input: String): String? {
+    val regex = Regex("""file:"(https://[^\s"]+)"""")
+    val matchResult = regex.find(input)
+    return matchResult?.groups?.get(1)?.value
 }

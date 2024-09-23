@@ -16,7 +16,7 @@ data class PlayerSettings(
     var outline: Int = 0,
     var subBackground: Int = 0,
     var subWindow: Int = 0,
-    var font: Int = 0,
+        var font: Int = 0,
     var fontSize: Int = 20,
     var locale: Int = 2,
 
