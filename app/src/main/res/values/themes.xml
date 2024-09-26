@@ -23,7 +23,7 @@
         <!--        <item name="themePrimaryBorderButton">@style/ButtonPrimaryBorder</item>-->
         <!--        <item name="themeNegativeBorderButton">@style/ButtonNegativeBorder</item>-->
 <!--        <item name="colorOnPrimary">@color/bg_white</item>-->
-        <item name="colorSecondary">@color/basic_color</item>
+        <item name="colorSecondary">@color/basic_color_400</item>
         <item name="colorPrimaryDark">@color/dark_basic</item>
         <item name="colorSecondaryVariant">@color/colorAccent</item>
         <item name="colorOnContainer">@color/bg_filter_dialog</item>
@@ -115,6 +115,11 @@
         <item name="android:actionBarStyle">@style/Widget.Theme.AnimeApp.ActionBar.Fullscreen</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="Theme.AnimeApp.TextBold" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">19sp</item>
     </style>
 
     <style name="ThemeOverlay.AnimeApp.FullscreenContainer" parent="">
