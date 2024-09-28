@@ -7,17 +7,29 @@ import com.animestudios.animeapp.databinding.SourceItemBinding
 import com.animestudios.animeapp.gone
 import com.animestudios.animeapp.model.Source
 import com.animestudios.animeapp.readData
+import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.visible
 
 class SourcePageAdapter : RecyclerView.Adapter<SourcePageAdapter.SourcePageVh>() {
 
     private val list = ArrayList<Source>()
+    private lateinit var isNotify: () -> Unit
+
+    private var selectedSource: String? = null
+
+    init {
+        // Initial source o'qiladi
+        selectedSource = readData("selectedSource") ?: "GOGO"
+    }
+
+    fun setNotifyListener(listener: () -> Unit) {
+        isNotify = listener
+    }
 
     inner class SourcePageVh(var itemBinding: SourceItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun onBind(data: Source) {
             itemBinding.apply {
-                val selectedSource = readData("selectedSource") ?: "awish.pro"
                 if (data.link == selectedSource) {
                     isSelectedSource.visible()
                 } else {
@@ -25,7 +37,11 @@ class SourcePageAdapter : RecyclerView.Adapter<SourcePageAdapter.SourcePageVh>()
                 }
                 sourceTitle.text = data.title
             }
-
+            itemBinding.root.setOnClickListener {
+                selectedSource = data.link
+                saveData("selectedSource", data.link)
+                isNotify.invoke()
+            }
         }
     }
 

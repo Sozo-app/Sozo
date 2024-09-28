@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.databinding.SourcePageBinding
 import com.animestudios.animeapp.others.SourceList
 import com.animestudios.animeapp.ui.screen.profile.adapter.SourceHeaderAdapter
@@ -13,6 +14,8 @@ class SourcePage : Fragment() {
 
     private var _binding: SourcePageBinding? = null
     private val binding get() = _binding!!
+
+
     //
 
     private val adapter by lazy { SourceHeaderAdapter() }
@@ -29,6 +32,9 @@ class SourcePage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.sourceHeaderRv.adapter = adapter
+        binding.sourceToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         adapter.submitList(SourceList.sourceList)
     }
 

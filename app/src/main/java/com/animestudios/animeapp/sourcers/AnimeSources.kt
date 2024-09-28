@@ -1,12 +1,20 @@
 package com.animestudios.animeapp.sourcers
 
-import com.animestudios.animeapp.parsers.*
+import com.animestudios.animeapp.parsers.AnimePahe
+import com.animestudios.animeapp.parsers.BaseParser
+import com.animestudios.animeapp.parsers.Gogo
+import com.animestudios.animeapp.parsers.HentaiMama
+import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.tools.Lazier
 import com.animestudios.animeapp.tools.lazyList
 
 object AnimeSources : WatchSources() {
     override val list: List<Lazier<BaseParser>> = lazyList(
-        "Gogo" to ::Gogo,
+        when (readData("selectedSource") ?: "GOGO") {
+            "GOGO" -> "Gogo" to ::Gogo
+            "pahe" -> "Animepahe" to ::AnimePahe
+            else -> "Gogo" to ::Gogo
+        }
     )
 }
 

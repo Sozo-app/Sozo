@@ -4,5 +4,6 @@ enum class SourceType{
     ENGLISH,
     GERMAN,
     INDIA,
+    NATIVE,
     OTHER
 }

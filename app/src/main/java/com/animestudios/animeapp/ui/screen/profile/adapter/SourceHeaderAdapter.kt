@@ -18,8 +18,11 @@ class SourceHeaderAdapter() : RecyclerView.Adapter<SourceHeaderAdapter.SourceHea
                 textView6.text = data.sourceType.toString()
                 sourcePageAdapter.submitList(data.list)
                 sourceRv.adapter =sourcePageAdapter
-
+                sourcePageAdapter.setNotifyListener {
+                    notifyDataSetChanged()
+                }
             }
+
         }
 
     }

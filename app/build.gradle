@@ -215,5 +215,6 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
     implementation project(':library')
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
 
 }
