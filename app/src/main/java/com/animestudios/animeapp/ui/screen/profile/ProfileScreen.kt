@@ -68,8 +68,10 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
 
                     }
                     else ->{
+                        findNavController().navigate(R.id.sourcePage, null, animationTransaction().build())
 
                     }
+                    //
                 }
             }
             detailAppbar.addOnOffsetChangedListener(this@ProfileScreen)

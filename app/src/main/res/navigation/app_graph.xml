@@ -7,6 +7,11 @@
 
 
     <fragment
+        android:id="@+id/sourcePage"
+        android:name="com.animestudios.animeapp.ui.screen.profile.page.source.SourcePage"
+        tools:layout="@layout/source_page" />
+
+    <fragment
         android:id="@+id/animeScreen"
         android:name="com.animestudios.animeapp.ui.screen.anime.AnimeScreen"
         android:label="animeScreen"
@@ -46,7 +51,7 @@
         android:id="@+id/splashScreen"
         android:name="com.animestudios.animeapp.ui.screen.splash.SplashScreen"
         android:label="SplashScreen"
-        tools:layout="@layout/splash_screen" >
+        tools:layout="@layout/splash_screen">
         <action
             android:id="@+id/action_splashScreen_to_loginScreen"
             app:destination="@id/loginScreen" />

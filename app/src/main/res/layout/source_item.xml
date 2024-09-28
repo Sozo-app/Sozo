@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:layout_marginVertical="10dp"
     android:layout_marginStart="20dp"
     android:layout_marginEnd="30dp">
 
     <TextView
+        android:id="@+id/sourceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|start"
         android:fontFamily="@font/poppins_bold"
         android:text="GogoAnime"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/isSelectedSource"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="end|center"

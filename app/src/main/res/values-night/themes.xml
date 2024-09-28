@@ -191,7 +191,7 @@
         <item name="windowActionBar">false</item>
         <item name="colorErrorContainer">@color/md_theme_dark_6_errorContainer</item>
         <item name="colorPrimary">@color/basic_color</item>
-        <item name="colorAccent">@color/md_theme_dark_6_secondary</item>
+        <item name="colorAccent">@color/basic_color_500</item>
         <item name="colorSurface">@color/nav_bg</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorOnError">@color/md_theme_dark_6_onError</item>
