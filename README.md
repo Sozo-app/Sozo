@@ -1,7 +1,7 @@
 
 <br/>
 <div align="center">
-<a href="https://github.com/ShaanCoding/ReadME-Generator">
+<a href="https://sozo.framer.website/">
 <img src="https://github.com/user-attachments/assets/00077506-4e7f-4f51-bc51-3d6326fc27a1" alt="Logo" width="80" height="80">
 </a>
 <h3 align="center">SOZO</h3>
