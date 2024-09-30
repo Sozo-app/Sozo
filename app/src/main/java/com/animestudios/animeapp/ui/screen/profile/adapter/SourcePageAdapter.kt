@@ -13,7 +13,7 @@ import com.animestudios.animeapp.visible
 class SourcePageAdapter : RecyclerView.Adapter<SourcePageAdapter.SourcePageVh>() {
 
     private val list = ArrayList<Source>()
-    private lateinit var isNotify: () -> Unit
+    private lateinit var isNotify: (String) -> Unit
 
     private var selectedSource: String? = null
 
@@ -22,7 +22,7 @@ class SourcePageAdapter : RecyclerView.Adapter<SourcePageAdapter.SourcePageVh>()
         selectedSource = readData("selectedSource") ?: "GOGO"
     }
 
-    fun setNotifyListener(listener: () -> Unit) {
+    fun setNotifyListener(listener: (String) -> Unit) {
         isNotify = listener
     }
 
@@ -39,8 +39,7 @@ class SourcePageAdapter : RecyclerView.Adapter<SourcePageAdapter.SourcePageVh>()
             }
             itemBinding.root.setOnClickListener {
                 selectedSource = data.link
-                saveData("selectedSource", data.link)
-                isNotify.invoke()
+                isNotify.invoke(data.link)
             }
         }
     }

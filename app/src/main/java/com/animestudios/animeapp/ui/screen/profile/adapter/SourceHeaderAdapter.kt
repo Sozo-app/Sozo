@@ -5,21 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.databinding.SourcePageHeaderItemBinding
 import com.animestudios.animeapp.model.SourceDt
+import com.animestudios.animeapp.saveData
 
 class SourceHeaderAdapter() : RecyclerView.Adapter<SourceHeaderAdapter.SourceHeaderVh>() {
     var list = ArrayList<SourceDt>()
+    lateinit var itemClickListenerFr: (String) -> Unit
+    fun setItemClickListener(listener: (String) -> Unit) {
+        itemClickListenerFr = listener
+    }
 
     inner class SourceHeaderVh(var itemBinding: SourcePageHeaderItemBinding) : RecyclerView.
     ViewHolder(itemBinding.root) {
 
         fun onBind(data: SourceDt) {
             itemBinding.apply {
-                val sourcePageAdapter= SourcePageAdapter()
+                val sourcePageAdapter = SourcePageAdapter()
                 textView6.text = data.sourceType.toString()
                 sourcePageAdapter.submitList(data.list)
-                sourceRv.adapter =sourcePageAdapter
+                sourceRv.adapter = sourcePageAdapter
                 sourcePageAdapter.setNotifyListener {
-                    notifyDataSetChanged()
+                    itemClickListenerFr.invoke(it)
                 }
             }
 

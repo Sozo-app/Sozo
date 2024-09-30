@@ -1,5 +1,6 @@
 package com.animestudios.animeapp.ui.screen.profile.page.source
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.databinding.SourcePageBinding
 import com.animestudios.animeapp.others.SourceList
+import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.ui.screen.profile.adapter.SourceHeaderAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class SourcePage : Fragment() {
 
@@ -36,7 +39,31 @@ class SourcePage : Fragment() {
             findNavController().popBackStack()
         }
         adapter.submitList(SourceList.sourceList)
+        adapter.setItemClickListener {
+            saveData("selectedSource", it)
+            adapter.notifyDataSetChanged()
+            restartApp()
+
+        }
     }
 
+    fun restartApp() {
+        Snackbar.make(
+            binding.root,
+            "Restart App ?", Snackbar.LENGTH_SHORT
+        ).apply {
+            val mainIntent =
+                Intent.makeRestartActivityTask(
+                    context.packageManager.getLaunchIntentForPackage(
+                        context.packageName
+                    )!!.component
+                )
+            setAction("Do it!") {
+                context.startActivity(mainIntent)
+                Runtime.getRuntime().exit(0)
+            }
+            show()
+        }
+    }
 
 }
