@@ -78,13 +78,9 @@ class AniWorld : AnimeParser() {
     ): List<VideoServer> {
         val serverList = ArrayList<VideoServer>()
         println("For Test: $episodeLink")
-
         val doc = getJsoup("$hostUrl$episodeLink")
 
-
-        println("DATA DOC :${doc}")
         val episodeLinks = doc.select("li[data-link-target]")
-        println("EPISODE LINKS DATA ${episodeLinks}")
         println("Total episode links found: ${episodeLinks.size}")
 
         // Check if episodeLinks is not empty
