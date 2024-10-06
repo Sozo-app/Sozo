@@ -3,6 +3,7 @@ package com.animestudios.animeapp.parsers
 import android.os.Build
 import android.text.Html
 import com.animestudios.animeapp.model.aniworld.AniWorldSearchResponseItem
+import com.animestudios.animeapp.parsers.extractor.AniWorldExtractor
 import com.animestudios.animeapp.tools.getJsoup
 import com.animestudios.animeapp.tools.okHttpClient
 import com.google.gson.Gson
@@ -30,42 +31,36 @@ class AniWorld : AnimeParser() {
         val doc: Document = getJsoup("${hostUrl}$animeLink", extra)
 
         val staffelLinks: Elements = doc.select("a[href*='staffel']")
-        val staffelUrls = staffelLinks.map { it.attr("href") }.filter { it.isNotEmpty() }
+        if (staffelLinks.isNotEmpty()) {
+            val href = staffelLinks[0].attr("href")
+            println("Href Sezon :${href}")
 
-        if (staffelUrls.isEmpty()) {
-            println("Hech qanday staffel link topilmadi.")
-        } else {
-            for (href in staffelUrls) {
-                println("Href Sezon :${href}")
+            val staffelDoc: Document = getJsoup("${hostUrl}${href}")
 
-                val staffelDoc: Document = getJsoup("${hostUrl}${href}")
+            val episodesForDoc = staffelDoc.select("tr[data-episode-id]")
+            var count = 0
+            for (episodeRow: Element in episodesForDoc) {
+                count++
+                val episodeLinkElement =
+                    episodeRow.select("td.season1EpisodeID a[itemprop=url]").first()
+                val episodeTitleElement = episodeRow.select("td.seasonEpisodeTitle a").first()
+                val episodeLink: String = episodeLinkElement.attr("href")
+                val episodeTitle: String = episodeTitleElement.text()
 
-                val episodes: Elements = staffelDoc.select("ul:nth-of-type(2) li a")
-                var count = 0
-                for (episode: Element in episodes) {
-                    println("EPISODE DATT" + episode)
-                    val episodeTitle: String = episode.text()
-                    if (isValidNumber(episodeTitle)) {
-                        count++
-                        val episodeLink: String = episode.absUrl("href")
-                        println("EPISODE LINK ${episodeLink}")
-                        println("EPISODE DATA :${episodeTitle}")
-                        episodeList.add(Episode(count.toString(), episodeLink, episodeTitle))
-                    }
-                }
 
-                val episodesForDoc = staffelDoc.select("tr[data-episode-id]")
-                println("EPISODE FOR DOC" + episodesForDoc)
-                for (i in 0 until episodesForDoc.size) {
-                    if (i < episodeList.size) {
-                        val description = episodesForDoc[i].select("span").text()
-                        println("DESCRIPTION:::" + description)
-                        episodeList[i] = episodeList[i].copy(description = description)
-                    } else {
-                        println("Warning: episodeList does not have an entry for index $i")
-                    }
+                episodeList.add(Episode(count.toString(), episodeLink, episodeTitle))
+            }
+
+            for (i in 0 until episodesForDoc.size) {
+                if (i < episodeList.size) {
+                    val description = episodesForDoc[i].select("span").text()
+                    episodeList[i] = episodeList[i].copy(description = description)
+                } else {
+                    println("Warning: episodeList does not have an entry for index $i")
                 }
             }
+        } else {
+            println("Hech qanday staffel link topilmadi.")
         }
 
         if (episodeList.isEmpty()) {
@@ -81,11 +76,43 @@ class AniWorld : AnimeParser() {
         episodeLink: String,
         extra: Map<String, String>?
     ): List<VideoServer> {
-        TODO("Not yet implemented")
+        val serverList = ArrayList<VideoServer>()
+        println("For Test: $episodeLink")
+
+        val doc = getJsoup("$hostUrl$episodeLink")
+
+
+        println("DATA DOC :${doc}")
+        val episodeLinks = doc.select("li[data-link-target]")
+        println("EPISODE LINKS DATA ${episodeLinks}")
+        println("Total episode links found: ${episodeLinks.size}")
+
+        // Check if episodeLinks is not empty
+        if (episodeLinks.isNotEmpty()) {
+            var count = 0
+            for (link: Element in episodeLinks) {
+                val redirectLink: String = link.attr("data-link-target") // Redirect link
+                val fullLink = "$hostUrl$redirectLink" // Full URL
+                val hostName: String = link.select("h4").text() // Hoster name
+                count++
+                // Print debug information
+                println("FullLink: $fullLink")
+                println("HosterName: $hostName")
+
+                if (count < 5) {
+                    serverList.add(VideoServer(hostName, fullLink))
+                }
+            }
+        } else {
+            println("Error: No episode links found in inSiteWebStream.")
+        }
+        return serverList
+
     }
+
     //Infinity loop fixed ithink
     override suspend fun getVideoExtractor(server: VideoServer): VideoExtractor? {
-        TODO("Not yet implemented")
+        return AniWorldExtractor(server)
     }
 
     override suspend fun search(query: String): List<ShowResponse> {
