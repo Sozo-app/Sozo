@@ -33,6 +33,13 @@ Sozo is an Android AniList-only client that allows you to Efficiently Stream Ani
 
 SOZO ABout wait....
 
+### Official Discord Server
+ 
+<p align="center">
+ <a href="https://discord.gg/n22URhYvMR">
+  <img src="https://invidget.switchblade.xyz/n22URhYvMR">
+ </a>
+</p>
 
 
 ## Contributing
