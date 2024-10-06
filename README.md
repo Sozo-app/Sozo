@@ -1,54 +1,64 @@
-
-<br/>
-<div align="center">
-<a href="https://sozo.framer.website/">
-<img src="https://github.com/user-attachments/assets/00077506-4e7f-4f51-bc51-3d6326fc27a1" alt="Logo" width="80" height="80">
-</a>
-<h3 align="center">SOZO</h3>
 <p align="center">
-Sozo is an Android AniList-only client that allows you to Efficiently Stream Anime.
+<a href="https://sozo.framer.website/">
+   <img src="https://github.com/user-attachments/assets/bb1dd6b2-e41f-4fb5-b3db-a550bb6e5608" alt="Sozo banner" width="30%">
+</a>
+</p>
 
-<br/>
-<br/>
+<p align="center">
+   <h1 align="center"><strong>Sozo</strong> 🌟</h1>
+</p>
 
 <p align="center">
    <img src="https://img.shields.io/badge/platforms-android-blueviolet?style=for-the-badge"/>
-   <a href="https://t.me/+88-BMhB6wxNmMzJi"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"></a>
-   <a href="https://anilist.co/home"><img src="https://img.shields.io/badge/AniList-02A9FF?style=for-the-badge&logo=AniList&logoColor=white"></a>
-   <a href="https://discord.gg/n22URhYvMR"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
+   <a href="https://github.com/Sozo-app/Sozo/releases">
+      <img src="https://img.shields.io/github/downloads/Sozo-app/Sozo/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge">
+   </a>
+      <a href="https://discord.gg/n22URhYvMR"><img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white"></a>
+   <a href="https://telegram.me/sozoapp">
+      <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white">
+   </a>
 </p>
 
-<br/>
-<br/>
-<a href="https://sozo.framer.website/">SOZO Official Website | </a>
-<a href="https://github.com/Sozo-app/Sozo">View Demo | </a>  
-<a href="https://github.com/Sozo-app/Sozo">Report Bug | </a>
-<a href="https://github.com/Sozo-app/Sozo">Request Feature</a>
+<p align="center">
+   <a href="https://www.buymeacoffee.com/chihaku">
+      <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=chihaku&button_colour=FFDD00&font_colour=030201&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" />
+   </a>
 </p>
-</div>
 
-## About The Project
+---
 
-![Sozo Screenshot](https://github.com/user-attachments/assets/e9ec70f4-2ec4-4946-bd26-900510864f29)
+### 🚀 **STAR THIS REPOSITORY TO SUPPORT THE DEVELOPER AND ENCOURAGE THE DEVELOPMENT OF THE APPLICATION!**
 
-SOZO ABout wait....
+Sozo is an [Anilist](https://anilist.co/) only client that allows you to stream and download Anime & Manga with ease and elegance.
+
+---
+Join our awesome community to discuss new features, report bugs, or simply hang out at our Discord server:
+
+<p align="center">
+   <a href="https://discord.gg/n22URhYvMR">
+      <img src="https://invidget.switchblade.xyz/n22URhYvMR" alt="Discord Server">
+   </a>
+</p>
 
 
 
-## Contributing
+### 📖 **About The Project**
 
-All contributions are welcome, from code to documentation to graphics to design suggestions to bug reports. Please use GitHub to its fullest; contribute Pull Requests, contribute tutorials or other content - whatever you have to offer, we can use!
+<p><strong>Sozo</strong> is crafted with a perfect blend of simplicity and state-of-the-art elegance. It is designed as an <a href="https://anilist.co/">Anilist</a> only client, offering users the ability to stream and download their favorite Anime & Manga.</p>
+<p>The name <i>Sozo</i> (meaning "creation" or "imagination" in Japanese) represents innovation and artistry in the anime world. While we think this is the best open-source anime app for Android, we encourage you to try it out yourself and decide!</p>
 
-You can come hang out with our awesome community, request new features, and report any bugs or issues at our Discord server too.
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/e9ec70f4-2ec4-4946-bd26-900510864f29" alt="Sozo Screenshot">
+</p>
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+---
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-## License
+### 🤝 **Want to Contribute?**
 
-Distributed under the MIT License. See [MIT License](https://opensource.org/licenses/MIT) for more information.
+All contributions are welcome—from code to documentation, to graphics, to design suggestions, or even bug reports. Please make full use of GitHub; whether it’s through Pull Requests, tutorials, or other content, any contribution helps!
+
+---
+
+### 📜 **License**
+
+Distributed under the MIT License. See the [MIT License](https://opensource.org/licenses/MIT) for more details.
