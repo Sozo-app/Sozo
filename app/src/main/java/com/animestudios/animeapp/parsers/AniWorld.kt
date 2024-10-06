@@ -29,31 +29,49 @@ class AniWorld : AnimeParser() {
         val episodeList = ArrayList<Episode>()
         val doc: Document = getJsoup("${hostUrl}$animeLink", extra)
 
-// Barcha staffel linklarini olish
         val staffelLinks: Elements = doc.select("a[href*='staffel']")
         val staffelUrls = staffelLinks.map { it.attr("href") }.filter { it.isNotEmpty() }
 
-        for (href in staffelUrls) {
-            println("Href Sezon :${href}")
+        if (staffelUrls.isEmpty()) {
+            println("Hech qanday staffel link topilmadi.")
+        } else {
+            for (href in staffelUrls) {
+                println("Href Sezon :${href}")
 
-            // Har bir staffel uchun alohida so'rov yuborish
-            val staffelDoc: Document = getJsoup("${hostUrl}${href}")
+                val staffelDoc: Document = getJsoup("${hostUrl}${href}")
 
-            // Epizodlarni olish
-            val episodes: Elements = staffelDoc.select("ul:nth-of-type(2) li a")
-            var count = 0
-            for (episode: Element in episodes) {
-                println("EPISODE DATT" + episode)
-                val episodeTitle: String = episode.text() // Episod nomi
-                if (isValidNumber(episodeTitle)) {
-                    count++
-                    val episodeLink: String = episode.absUrl("href")
-                    println("EPISODE LINK ${episodeLink}")
-                    println("EPISODE DATA :${episodeTitle}")
-                    episodeList.add(Episode(count.toString(), episodeLink, episodeTitle))
+                val episodes: Elements = staffelDoc.select("ul:nth-of-type(2) li a")
+                var count = 0
+                for (episode: Element in episodes) {
+                    println("EPISODE DATT" + episode)
+                    val episodeTitle: String = episode.text()
+                    if (isValidNumber(episodeTitle)) {
+                        count++
+                        val episodeLink: String = episode.absUrl("href")
+                        println("EPISODE LINK ${episodeLink}")
+                        println("EPISODE DATA :${episodeTitle}")
+                        episodeList.add(Episode(count.toString(), episodeLink, episodeTitle))
+                    }
+                }
+
+                val episodesForDoc = staffelDoc.select("tr[data-episode-id]")
+                println("EPISODE FOR DOC" + episodesForDoc)
+                for (i in 0 until episodesForDoc.size) {
+                    if (i < episodeList.size) {
+                        val description = episodesForDoc[i].select("span").text()
+                        println("DESCRIPTION:::" + description)
+                        episodeList[i] = episodeList[i].copy(description = description)
+                    } else {
+                        println("Warning: episodeList does not have an entry for index $i")
+                    }
                 }
             }
+        }
 
+        if (episodeList.isEmpty()) {
+            println("Epizodlar ro'yxati bo'sh.")
+        } else {
+            println("Topilgan epizodlar soni: ${episodeList.size}")
         }
 
         return episodeList
@@ -65,7 +83,7 @@ class AniWorld : AnimeParser() {
     ): List<VideoServer> {
         TODO("Not yet implemented")
     }
-
+    //Infinity loop fixed ithink
     override suspend fun getVideoExtractor(server: VideoServer): VideoExtractor? {
         TODO("Not yet implemented")
     }
