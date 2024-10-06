@@ -44,8 +44,8 @@ class AniWorld : AnimeParser() {
                 val episodeLinkElement =
                     episodeRow.select("td.season1EpisodeID a[itemprop=url]").first()
                 val episodeTitleElement = episodeRow.select("td.seasonEpisodeTitle a").first()
-                val episodeLink: String = episodeLinkElement.attr("href")
-                val episodeTitle: String = episodeTitleElement.text()
+                val episodeLink: String = episodeLinkElement!!.attr("href")
+                val episodeTitle: String = episodeTitleElement!!.text()
 
 
                 episodeList.add(Episode(count.toString(), episodeLink, episodeTitle))

@@ -94,6 +94,11 @@ class SearchScreen : Fragment() {
                 "ANIME",
                 isAdult = false,
                 onList = false,
+                genres = requireActivity().intent.getStringExtra("genre")
+                    ?.let { mutableListOf(it) },
+                tags = requireActivity().intent.getStringExtra("tag")?.let { mutableListOf(it) },
+                sort = requireActivity().intent.getStringExtra("sortBy"),
+
                 results = mutableListOf(),
                 hasNextPage = false
             )
@@ -125,62 +130,7 @@ class SearchScreen : Fragment() {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireActivity())
 
         binding.micSearch.setOnClickListener {
-
-            if (ContextCompat.checkSelfPermission(
-                    requireActivity(),
-                    Manifest.permission.RECORD_AUDIO
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                checkPermission();
-            }
-            // Initialize SpeechRecognizer
-            speechRecognizer.setRecognitionListener(object : RecognitionListener {
-                override fun onReadyForSpeech(params: Bundle?) {
-                    // Called when the speech recognition service is ready for user input
-                }
-
-                override fun onBeginningOfSpeech() {
-                    // Called when the user starts speaking
-                }
-
-                override fun onRmsChanged(rmsdB: Float) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onBufferReceived(buffer: ByteArray?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onEndOfSpeech() {
-                    // Called when the user stops speaking
-                }
-
-                override fun onResults(results: Bundle?) {
-                    // Called when speech recognition results are available
-                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                    if (!matches.isNullOrEmpty()) {
-                        val recognizedText = matches[0]
-                        // Handle the recognized text as needed
-                        snackString(recognizedText)
-                    }
-                }
-
-                override fun onPartialResults(partialResults: Bundle?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onEvent(eventType: Int, params: Bundle?) {
-                    TODO("Not yet implemented")
-                }
-
-                // Implement other methods as needed
-
-                override fun onError(error: Int) {
-                    // Called when there is an error in speech recognition
-                }
-            })
-//            speechRecognizer.startListening()
-
+            setUpVoiceMicSearch()
         }
 //        hideNavigation()
 
@@ -311,6 +261,65 @@ class SearchScreen : Fragment() {
         mediaAdaptor.notifyDataSetChanged()
     }
 
+
+    private fun setUpVoiceMicSearch() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            checkPermission();
+        }
+        // Initialize SpeechRecognizer
+        speechRecognizer.setRecognitionListener(object : RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {
+                // Called when the speech recognition service is ready for user input
+            }
+
+            override fun onBeginningOfSpeech() {
+                // Called when the user starts speaking
+            }
+
+            override fun onRmsChanged(rmsdB: Float) {
+            }
+
+            override fun onBufferReceived(buffer: ByteArray?) {
+            }
+
+            override fun onEndOfSpeech() {
+                // Called when the user stops speaking
+            }
+
+            override fun onResults(results: Bundle?) {
+                // Called when speech recognition results are available
+                val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                if (!matches.isNullOrEmpty()) {
+                    val recognizedText = matches[0]
+                    // Handle the recognized text as needed
+                    model.searchResults.search=recognizedText
+                    progressAdapter.notifyDataSetChanged()
+                    search()
+                    snackString(recognizedText)
+                }
+            }
+
+            override fun onPartialResults(partialResults: Bundle?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onEvent(eventType: Int, params: Bundle?) {
+                TODO("Not yet implemented")
+            }
+
+            // Implement other methods as needed
+
+            override fun onError(error: Int) {
+                // Called when there is an error in speech recognition
+            }
+        })
+        speechRecognizer.startListening(requireActivity().intent)
+    }
+
     private fun initProgress(headerAdaptor: SearchAdapter) {
         val notSet = model.notSet
         progressAdapter = ProgressAdapter(searched = model.searched)
@@ -324,6 +333,7 @@ class SearchScreen : Fragment() {
                     }
                 } else
                     headerAdaptor.requestFocus?.run()
+                if (requireActivity().intent.getBooleanExtra("search", false)) search()
 
             }
         }

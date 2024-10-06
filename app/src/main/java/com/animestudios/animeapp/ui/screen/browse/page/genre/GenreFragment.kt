@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.animestudios.animeapp.R
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.FragmentGenreBinding
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.settings.UISettings
+import com.animestudios.animeapp.tools.animationTransaction
 import com.animestudios.animeapp.ui.screen.browse.page.genre.adapter.GenreAdapter
 import com.animestudios.animeapp.viewmodel.imp.GenresViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +49,16 @@ class GenreFragment : Fragment() {
             val screenWidth = resources.displayMetrics.run { widthPixels / density }
             val adapter = GenreAdapter(true)
 
+            adapter.setItemListener {
+                val bundle = Bundle()
+                bundle.putString("type", "ANIME")
+                bundle.putString("genre", it)
+                bundle.putString("sortBy", "Trending")
+                bundle.putBoolean("search", true)
+                findNavController().navigate(
+                    R.id.searchScreen, bundle, animationTransaction().build()
+                )
+            }
             model.doneListener = {
                 MainScope().launch {
                     binding.mediaInfoGenresProgressBar.visibility = View.GONE
