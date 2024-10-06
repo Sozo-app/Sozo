@@ -14,7 +14,7 @@ class AnimePahe : AnimeParser() {
     override val saveName = "anime_pahe_hu"
     override val hostUrl = "https://animepahe.ru/"
     override val malSyncBackupName = "animepahe"
-    override val isDubAvailableSeparately = true
+    override val isDubAvailableSeparately = false
 
     override suspend fun loadEpisodes(
         animeLink: String,
