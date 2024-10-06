@@ -32,6 +32,15 @@
 Sozo is an [Anilist](https://anilist.co/) only client that allows you to stream and download Anime & Manga with ease and elegance.
 
 ---
+Join our awesome community to discuss new features, report bugs, or simply hang out at our Discord server:
+
+<p align="center">
+   <a href="https://discord.gg/n22URhYvMR">
+      <img src="https://invidget.switchblade.xyz/n22URhYvMR" alt="Discord Server">
+   </a>
+</p>
+
+
 
 ### 📖 **About The Project**
 
@@ -47,14 +56,6 @@ Sozo is an [Anilist](https://anilist.co/) only client that allows you to stream 
 ### 🤝 **Want to Contribute?**
 
 All contributions are welcome—from code to documentation, to graphics, to design suggestions, or even bug reports. Please make full use of GitHub; whether it’s through Pull Requests, tutorials, or other content, any contribution helps!
-
-Join our awesome community to discuss new features, report bugs, or simply hang out at our Discord server:
-
-<p align="center">
-   <a href="https://discord.gg/n22URhYvMR">
-      <img src="https://invidget.switchblade.xyz/n22URhYvMR" alt="Discord Server">
-   </a>
-</p>
 
 ---
 
