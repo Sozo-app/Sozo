@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://sozo.framer.website/">
-   <img src="https://github.com/user-attachments/assets/ac019f7e-477e-40e8-9848-be738a2f19cb" alt="Sozo banner" width="40%" style="border-radius: 0; ">
+   <img src="https://github.com/user-attachments/assets/bb1dd6b2-e41f-4fb5-b3db-a550bb6e5608" alt="Sozo banner" width="30%">
 </a>
 </p>
 
