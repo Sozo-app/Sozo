@@ -38,6 +38,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+//Wassup Guys )) Soon I will start this project Damn my time :()
 
 class ListScreen : Fragment() {
     private var _binding: ListScreenBinding? = null
