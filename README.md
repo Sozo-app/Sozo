@@ -51,6 +51,11 @@ Join our awesome community to discuss new features, report bugs, or simply hang 
    <img src="https://github.com/user-attachments/assets/e9ec70f4-2ec4-4946-bd26-900510864f29" alt="Sozo Screenshot">
 </p>
 
+### 📖 **Screens**
+
+![image](https://github.com/user-attachments/assets/7bb806cc-b1bc-467b-bf76-c2664b90a8d6)
+
+
 ---
 
 ### 🤝 **Want to Contribute?**
