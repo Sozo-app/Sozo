@@ -51,6 +51,54 @@ Join our awesome community to discuss new features, report bugs, or simply hang 
    <img src="https://github.com/user-attachments/assets/e9ec70f4-2ec4-4946-bd26-900510864f29" alt="Sozo Screenshot">
 </p>
 
+### 📖 **Screens**
+
+![image](https://github.com/user-attachments/assets/7bb806cc-b1bc-467b-bf76-c2664b90a8d6)
+
+## 😮 **About in Table**
+  <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Attribute</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td>Programming Language</td>
+            <td>Kotlin</td>
+        </tr>
+        <tr>
+            <td>Main Framework</td>
+            <td>Jsoup && ExoPlayer</td>
+        </tr>
+        <tr>
+            <td>API Integration</td>
+            <td>Anilist API for anime data</td>
+        </tr>
+     <tr>
+        <td>Used Sources</td>
+        <td>Gogo,AllAnime,Zoro,Kaido..</td>
+     </tr>
+        <tr>
+            <td>UI Components</td>
+            <td>Custom Views, Navigation, Material Design,Material3</td>
+        </tr>
+        <tr>
+            <td>Libraries</td>
+            <td>Glide for image loading, Retrofit for network calls</td>
+        </tr>
+        <tr>
+            <td>Media Download</td>
+            <td>Media storage and download manager</td>
+        </tr>
+        <tr>
+            <td>License</td>
+            <td>MIT License</td>
+        </tr>
+        <tr>
+            <td>Sozo Site</td>
+            <td><a href="https://sozo.framer.website">Sozo IF you web Developer please contact us ) </a></td>
+        </tr>
+    </table>
+
 ---
 
 ### 🤝 **Want to Contribute?**
