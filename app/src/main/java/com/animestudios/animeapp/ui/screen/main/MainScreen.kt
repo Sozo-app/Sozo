@@ -5,6 +5,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
@@ -61,6 +64,7 @@ class MainScreen : Fragment() {
                                 navbar.getMenu().getItem(0).setChecked(true);
                                 navbar.animate().translationZ(12f).setDuration(200).start()
                                 mainViewPager.setCurrentItem(0, false)
+
                             }
                             R.id.brows -> {
                                 navbar.getMenu().getItem(1).setChecked(true);
@@ -76,7 +80,9 @@ class MainScreen : Fragment() {
                                 navbar.animate().translationZ(12f).setDuration(200).start()
                                 navbar.getMenu().getItem(3).setChecked(true);
                                 mainViewPager.setCurrentItem(3, false)
-
+                                navbar.findViewById<View>(R.id.account).setOnDoubleClickListener {
+                                    switchAccount()
+                                }
                             }
                         }
                         true
@@ -168,6 +174,9 @@ class MainScreen : Fragment() {
                 AccountBottomSheetDialog(this).show(parentFragmentManager, "dialog")
                 true
             }
+
+            
+
             menuView.getChildAt(0).setOnLongClickListener {
                 println("Home  Bosildi")
                 findNavController().navigate(R.id.messageScreen)
@@ -177,8 +186,58 @@ class MainScreen : Fragment() {
         }
     }
 
+    fun switchAccount() {
+        val selectedAccount = readData<Int>("selectedAccount") ?: 1 // Default to Account 1
+        val selectedAccountCount = readData<Int>("countAccount") ?: 1
+
+        when (selectedAccount) {
+            1 -> {
+                // Switch to Account 2 if exists
+                if (selectedAccountCount >= 2) {
+                    saveData("selectedAccount", 2)
+                    // Update UI or reload account 2 data
+                    snackString("Account Switched")
+                    findNavController().navigate(
+                        R.id.splashScreen,
+                        null,
+                        NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+                    )
+                }
+                 }
+            2 -> {
+                // Switch to Account 1
+                saveData("selectedAccount", 1)
+                snackString("Account Switched")
+                // Update UI or reload account 1 data
+                findNavController().navigate(
+                    R.id.splashScreen,
+                    null,
+                    NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+                )
+            }
+        }
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+    fun View.setOnDoubleClickListener(
+        doubleClickInterval: Long = 300L,
+        onDoubleClick: () -> Unit
+    ) {
+        var lastClickTime = 0L
+        var lastViewId = -1 // Track the last clicked view ID
+
+        this.setOnClickListener {
+            val currentTime = SystemClock.elapsedRealtime()
+            if (currentTime - lastClickTime < doubleClickInterval && it.id == lastViewId) {
+                onDoubleClick() // Trigger the double-click action
+            }
+            lastClickTime = currentTime
+            lastViewId = it.id // Update the last clicked view ID
+        }
+    }
+
 }

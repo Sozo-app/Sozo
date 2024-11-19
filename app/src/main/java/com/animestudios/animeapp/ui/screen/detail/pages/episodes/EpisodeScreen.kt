@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.response.Episode
 import com.animestudios.animeapp.databinding.EpisodeScreenBinding
 import com.animestudios.animeapp.dp
@@ -57,7 +58,6 @@ class EpisodeScreen : Fragment() {
     private val model by activityViewModels<DetailsViewModelImpl>()
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,7 +72,6 @@ class EpisodeScreen : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.animeSourceRecycler.updatePadding(bottom = binding.animeSourceRecycler.paddingBottom + navBarHeight)
         screenWidth = resources.displayMetrics.widthPixels.dp
-
         var maxGridSize = (screenWidth / 100f).roundToInt()
         maxGridSize = max(4, maxGridSize - (maxGridSize % 2))
         uiSettings = readData("ui_settings", toast = false) ?: UISettings().apply {
@@ -112,7 +111,8 @@ class EpisodeScreen : Fragment() {
                 media = it
                 media.selected = model.loadSelected(media)
 
-
+                Anilist.animePlayId = it.id
+                Anilist.titlePlay = media.nameRomaji
                 style = media.selected!!.recyclerStyle
                 reverse = media.selected!!.recyclerReversed
 
@@ -210,7 +210,6 @@ class EpisodeScreen : Fragment() {
         media.selected = selected
         lifecycleScope.launch(Dispatchers.IO) { model.forceLoadEpisode(media, selected.source) }
     }
-
 
 
     fun loadEpisodes(i: Int) {

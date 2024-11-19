@@ -33,6 +33,10 @@ object Anilist {
         defaultCacheTime = 6,
         defaultCacheTimeUnit = TimeUnit.HOURS,
     )
+    var notFoundImg =
+        "https://img.freepik.com/premium-vector/productive-woman-anime-error-404-page-found_150972-549.jpg"
+    var animePlayId = 21 //Def =21
+    var titlePlay = "One-Piece" //Def =One-Piece
     var genres: ArrayList<String>? = null
     var tags: Map<Boolean, List<String>>? = null
     var selected = 0

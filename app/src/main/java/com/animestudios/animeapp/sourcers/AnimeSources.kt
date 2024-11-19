@@ -11,6 +11,7 @@ object AnimeSources : WatchSources() {
             "GOGO" -> "Gogo" to ::Gogo
             "pahe" -> "Animepahe" to ::AnimePahe
             "gerani"-> "Aniworld" to ::AniWorld
+            "anirulz"-> "AniRulz" to ::Anirulz
             else -> "Gogo" to ::Gogo
         }
     )

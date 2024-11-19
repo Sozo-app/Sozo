@@ -46,20 +46,21 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     val coverImageForPreview: LiveData<String>
         get() = _coverImageForPreview
 
-     val getRelations = MutableLiveData<Resource<ArrayList<RelationData>>>()
+    val getRelations = MutableLiveData<Resource<ArrayList<RelationData>>>()
 
 
     private val _getFullData = MutableLiveData<Resource<GetFullDataByIdQuery.Data>>()
     val getFullData: LiveData<Resource<GetFullDataByIdQuery.Data>>
         get() = _getFullData
 
-    val getMediaData =MutableLiveData<Media>()
+    val getMediaData = MutableLiveData<Media>()
 
-    fun getMediaById(id:Int){
+    fun getMediaById(id: Int) {
         viewModelScope.launch {
             getMediaData.postValue(Anilist.getMedia(id = id))
         }
     }
+
     val epChanged = MutableLiveData(true)
 
 
@@ -71,7 +72,13 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
         }
     }
 
-    fun onEpisodeClick(media: Media, i: String, manager: FragmentManager, launch: Boolean = true, prevEp: String? = null) {
+    fun onEpisodeClick(
+        media: Media,
+        i: String,
+        manager: FragmentManager,
+        launch: Boolean = true,
+        prevEp: String? = null
+    ) {
         Handler(Looper.getMainLooper()).post {
             if (manager.findFragmentByTag("dialog") == null && !manager.isDestroyed) {
                 if (media.anime?.episodes?.get(i) != null) {
@@ -81,7 +88,8 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
                     return@post
                 }
                 media.selected = this.loadSelected(media)
-                val selector = SelectorDialogFragment.newInstance(media.selected!!.server, launch, prevEp)
+                val selector =
+                    SelectorDialogFragment.newInstance(media.selected!!.server, launch, prevEp)
                 selector.show(manager, "dialog")
             }
         }
@@ -90,12 +98,11 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     fun loadRelationsById(id: Int) {
         viewModelScope.launch {
             getRelations.value = Resource.Loading
-            val media =aniListClient.getRelationsById(id).data
-            if (media!=null)
-            {
-                getRelations.value =Resource.Success(media.convert())
-            }else {
-                getRelations.value =Resource.Error(Exception("Have Problem"))
+            val media = aniListClient.getRelationsById(id).data
+            if (media != null) {
+                getRelations.value = Resource.Success(media.convert())
+            } else {
+                getRelations.value = Resource.Error(Exception("Have Problem"))
             }
         }
     }
@@ -134,6 +141,7 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
                     println(color)
                     println(extraLarge)
                     val newMedia = it.copy(
+                        nameRomaji = data.data!!.Media!!.title!!.romaji ?: "",
                         nativeName = data.data!!.Media!!.title!!.native ?: "",
                         englishName = data.data!!.Media!!.title?.english ?: "",
                         extraLarge = extraLarge,
@@ -252,7 +260,12 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
 
     val timeStamps = MutableLiveData<List<AniSkip.Stamp>?>()
     private val timeStampsMap: MutableMap<Int, List<AniSkip.Stamp>?> = mutableMapOf()
-    suspend fun loadTimeStamps(malId: Int?, episodeNum: Int?, duration: Long, useProxyForTimeStamps: Boolean) {
+    suspend fun loadTimeStamps(
+        malId: Int?,
+        episodeNum: Int?,
+        duration: Long,
+        useProxyForTimeStamps: Boolean
+    ) {
         malId ?: return
         episodeNum ?: return
         if (timeStampsMap.containsKey(episodeNum))
@@ -262,7 +275,11 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
         timeStamps.postValue(result)
     }
 
-    suspend fun loadEpisodeSingleVideo(ep: Episode, selected: Selected, post: Boolean = true): Boolean {
+    suspend fun loadEpisodeSingleVideo(
+        ep: Episode,
+        selected: Selected,
+        post: Boolean = true
+    ): Boolean {
         if (ep.extractors.isNullOrEmpty()) {
 
             val server = selected.server ?: return false
