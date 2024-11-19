@@ -9,7 +9,7 @@ import com.animestudios.animeapp.utils.JsUnpacker
 class Gogo : AnimeParser() {
     override val name = "Gogo"
     override val saveName = "gogo_anime_hu"
-    override val hostUrl = "https://anitaku.pe"
+    override val hostUrl = "https://anitaku.pe" // Fuck PDP :)
     override val malSyncBackupName = "Gogoanime"
     override val isDubAvailableSeparately = true
 

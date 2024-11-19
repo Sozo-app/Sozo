@@ -16,9 +16,9 @@ import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import java.io.IOException
 
-class AniWorld : AnimeParser() {
+class AniWorldHind : AnimeParser() {
     override val name = "AniWorld"
-    override val saveName = "aniworld_ger"
+    override val saveName = "aniworld_hind"
     override val hostUrl = "https://aniworld.to"
     override val malSyncBackupName = "aniworld"
     override val isDubAvailableSeparately = true
@@ -31,10 +31,8 @@ class AniWorld : AnimeParser() {
         val doc: Document = getJsoup("${hostUrl}$animeLink", extra)
 
         val staffelLinks: Elements = doc.select("a[href*='staffel']")
-        println("Staffel List :${staffelLinks.size}")
-
         if (staffelLinks.isNotEmpty()) {
-            val href = staffelLinks[1].attr("href")
+            val href = staffelLinks[0].attr("href")
             println("Href Sezon :${href}")
 
             val staffelDoc: Document = getJsoup("${hostUrl}${href}")
@@ -44,7 +42,7 @@ class AniWorld : AnimeParser() {
             for (episodeRow: Element in episodesForDoc) {
                 count++
                 val episodeLinkElement =
-                    episodeRow.select("td.season2EpisodeID a[itemprop=url]").first()
+                    episodeRow.select("td.season1EpisodeID a[itemprop=url]").first()
                 val episodeTitleElement = episodeRow.select("td.seasonEpisodeTitle a").first()
                 val episodeLink: String = episodeLinkElement!!.attr("href")
                 val episodeTitle: String = episodeTitleElement!!.text()

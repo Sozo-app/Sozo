@@ -1,8 +1,6 @@
 package com.animestudios.animeapp.parsers
 
 import com.animestudios.animeapp.anilist.api.common.Anilist
-import com.animestudios.animeapp.tools.client
-import com.animestudios.animeapp.tools.getJson
 import com.animestudios.animeapp.tools.getJsoup
 
 class Anirulz : AnimeParser() {
@@ -27,6 +25,7 @@ class Anirulz : AnimeParser() {
         episodeLink: String,
         extra: Map<String, String>?
     ): List<VideoServer> {
+        print("EPISODE LINK :"+episodeLink)
         return emptyList()
     }
 
@@ -37,15 +36,14 @@ class Anirulz : AnimeParser() {
     override suspend fun search(query: String): List<ShowResponse> {
         print("WATCH ID:" + Anilist.animePlayId)
         print("WATCH ANIME TITLE" + Anilist.titlePlay)
-        val listNew = arrayListOf<ShowResponse>(
+
+        return arrayListOf(
             ShowResponse(
                 Anilist.titlePlay,
                 "$hostUrl/${replaceStr(Anilist.titlePlay)}-${Anilist.animePlayId}",
                 coverUrl = Anilist.notFoundImg
             )
         )
-
-        return listNew
     }
 
     private fun replaceStr(string: String): String {

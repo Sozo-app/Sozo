@@ -1,21 +1,20 @@
 package com.animestudios.animeapp.ui.screen.detail.adapter
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.animestudios.animeapp.countDown
 import com.animestudios.animeapp.databinding.ItemAnimeWatchBinding
+import com.animestudios.animeapp.databinding.ItemChipBinding
 import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.px
 import com.animestudios.animeapp.readData
-import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.sourcers.WatchSources
 import com.animestudios.animeapp.ui.screen.detail.pages.episodes.EpisodeScreen
 import com.animestudios.animeapp.visible
+import com.google.android.material.chip.Chip
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,6 @@ class AnimeWatchAdapter(
 ) : RecyclerView.Adapter<AnimeWatchAdapter.ViewHolder>() {
 
     private var _binding: ItemAnimeWatchBinding? = null
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -75,6 +73,57 @@ class AnimeWatchAdapter(
                 }
             }
         }
+    }
+
+    //Chips
+    @SuppressLint("SetTextI18n")
+    fun updateChips(limit: Int, names: Array<String>, arr: Array<Int>, selected: Int = 0) {
+        val binding = _binding
+        if (binding != null) {
+            val screenWidth = fragment.screenWidth.px
+            var select: Chip? = null
+            for (position in arr.indices) {
+                val last = if (position + 1 == arr.size) names.size else (limit * (position + 1))
+                val chip =
+                    ItemChipBinding.inflate(
+                        LayoutInflater.from(fragment.context),
+                        binding.animeSourceChipGroup,
+                        false
+                    ).root
+                chip.isCheckable = true
+                fun selected() {
+                    chip.isChecked = true
+                    binding.animeWatchChipScroll.smoothScrollTo(
+                        (chip.left - screenWidth / 2) + (chip.width / 2),
+                        0
+                    )
+                }
+                chip.text = "${names[limit * (position)]} - ${names[last - 1]}"
+
+                chip.setOnClickListener {
+                    selected()
+                    fragment.onChipClicked(position, limit * (position), last - 1)
+                }
+                binding.animeSourceChipGroup.addView(chip)
+                if (selected == position) {
+                    selected()
+                    select = chip
+                }
+            }
+            if (select != null)
+                binding.animeWatchChipScroll.apply {
+                    post {
+                        scrollTo(
+                            (select.left - screenWidth / 2) + (select.width / 2),
+                            0
+                        )
+                    }
+                }
+        }
+    }
+
+    fun clearChips() {
+        _binding?.animeSourceChipGroup?.removeAllViews()
     }
 
     override fun getItemCount(): Int = 1

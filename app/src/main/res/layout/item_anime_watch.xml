@@ -82,7 +82,7 @@
         android:paddingStart="28dp"
         android:paddingEnd="28dp"
         android:scrollbars="none"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/animeSourceChipGroup"
