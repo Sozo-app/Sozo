@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Sozo App</string>
     <string name="you_have_unread_notifications">You have unread notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -15,6 +15,11 @@
     <string name="browse_manga">Browse Manga</string>
     <string name="info">Info</string>
     <string name="watch">Watch</string>
+    <string name="preview_seekbar_key" translatable="false">preview_seekbar_key</string>
+    <string name="preview_seekbar">Seekbar preview</string>
+    <string name="preview_seekbar_desc">Enable preview thumbnail on seekbar</string>
+    <string name="app_layout_key" translatable="false">app_layout_key</string>
+
     <string name="read">Read</string>
     <string name="filter_format">"Format : %1$s"</string>
     <string name="filter_sort">"Sort : %1$s"</string>
