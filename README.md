@@ -106,6 +106,10 @@ Join our awesome community to discuss new features, report bugs, or simply hang 
 All contributions are welcome—from code to documentation, to graphics, to design suggestions, or even bug reports. Please make full use of GitHub; whether it’s through Pull Requests, tutorials, or other content, any contribution helps!
 
 ---
+ <summary>Star History</summary>
+  <a href="https://github.com/Sozo-app/Sozo/stargazers">
+      <img alt="Star History Chart" src="https://starchart.cc/Sozo-app/Sozo.svg?variant=adaptive" width="450" height="300" />
+  </a>
 
 ### 📜 **License**
 
