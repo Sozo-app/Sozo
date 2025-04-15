@@ -3,6 +3,7 @@ buildscript {
         classpath "com.android.tools:r8:8.1.56"
         classpath 'com.google.guava:guava:30.1.1-jre'  // <-- THIS IS REQUIRED UNTIL R8 3.2.4-dev
         classpath "org.jetbrains.kotlin:kotlin-serialization:1.7.10"
+        classpath 'com.google.gms:google-services:4.3.13'
     }
 }
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
