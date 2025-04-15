@@ -274,28 +274,25 @@
                         android:gravity="start"
                         android:maxLines="3"
                         android:overScrollMode="never"
-                        android:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
+                        tools:text="Chainsaw Man follows the story of Denji, an impoverished young man who makes a contract that fuses his body wi...Read more"
                         android:visibility="visible"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/materialButton2" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="vertical">
 
             <FrameLayout
-
                 android:id="@+id/mediaTitleContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -304,6 +301,7 @@
                 android:background="@color/detail_Bg"
                 android:gravity="center"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 tools:ignore="UselessParent">
 
@@ -311,7 +309,7 @@
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/mediaTitleToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
                     android:gravity="center|start"
                     android:paddingTop="4dp"
@@ -319,25 +317,9 @@
                     app:buttonGravity="center_vertical"
                     app:contentInsetLeft="0dp"
                     app:contentInsetRight="0dp"
-                    app:contentInsetStart="0dp">
+                    app:contentInsetStart="0dp"
+                    app:navigationIcon="@drawable/ic_back">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="start|center"
-                        android:layout_marginStart="8dp"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:translationZ="7dp"
-                        app:cardBackgroundColor="@color/nav_bg"
-                        app:cardCornerRadius="34dp"
-                        app:cardElevation="4dp">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_round_arrow_back_ios_new_24" />
-                    </androidx.cardview.widget.CardView>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/mediaTitle"
@@ -368,11 +350,12 @@
             <LinearLayout
                 android:id="@+id/mediaAccessContainer"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:background="@drawable/help_menu_bg"
+                android:orientation="vertical"
+                android:padding="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -381,34 +364,72 @@
                     android:gravity="bottom"
                     android:orientation="horizontal">
 
-
-                    <ImageView
+                    <LinearLayout
                         android:id="@+id/mediaNotify"
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_weight="1"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_share" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <ImageView
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="?selectableItemBackground"
+                            android:src="@drawable/ic_share" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="Share" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/wrongTitle"
                         android:layout_width="0dp"
-                        android:layout_height="25dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="40dp"
                         android:layout_weight="1"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:src="@drawable/cross" />
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:background="?selectableItemBackground"
+                            android:src="@drawable/cross" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="Title" />
+                    </LinearLayout>
 
 
-                    <ImageView
+                    <LinearLayout
+                        android:id="@+id/sourceChange"
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_weight="1"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_network" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:background="?selectableItemBackground"
+                            android:src="@drawable/ic_network" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="Source" />
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -422,34 +443,36 @@
 
             </LinearLayout>
 
-        </FrameLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/detail_Bg"
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/detail_Bg"
+                android:clipToPadding="false"
+                android:requiresFadingEdge="vertical"
+                android:visibility="visible"
+                app:tabBackground="@null"
+                app:tabGravity="center"
+                app:tabIndicatorAnimationMode="elastic"
 
-            android:clipToPadding="false"
-            android:requiresFadingEdge="vertical"
-            android:visibility="visible"
-            app:tabBackground="@null"
-            app:tabGravity="center"
-            app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorColor="#D81E1E"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="2dp"
+                app:tabInlineLabel="true"
+                app:tabMaxWidth="0dp"
+                app:tabMode="auto"
+                app:tabPaddingBottom="4dp"
+                app:tabPaddingEnd="8dp"
+                app:tabRippleColor="@null"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextAppearance="@style/textAppearance"
+                app:tabTextColor="#878787" />
 
-            app:tabIndicatorColor="#D81E1E"
-            app:tabIndicatorFullWidth="true"
-            app:tabIndicatorGravity="bottom"
-            app:tabIndicatorHeight="2dp"
-            app:tabInlineLabel="true"
-            app:tabMaxWidth="0dp"
-            app:tabMode="auto"
-            app:tabPaddingBottom="4dp"
-            app:tabPaddingEnd="8dp"
-            app:tabRippleColor="@null"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextAppearance="@style/textAppearance"
-            app:tabTextColor="#878787" />
+        </LinearLayout>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

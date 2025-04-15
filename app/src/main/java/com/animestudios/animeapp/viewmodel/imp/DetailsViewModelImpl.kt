@@ -3,6 +3,7 @@ package com.animestudios.animeapp.viewmodel.imp
 import android.app.Activity
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,8 @@ import com.animestudios.animeapp.mapper.convert
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.media.Selected
 import com.animestudios.animeapp.model.RelationData
+import com.animestudios.animeapp.model.shikimori.Anime
+import com.animestudios.animeapp.model.shikimori.Screenshot
 import com.animestudios.animeapp.others.AniSkip
 import com.animestudios.animeapp.parsers.ShowResponse
 import com.animestudios.animeapp.parsers.VideoExtractor
@@ -27,6 +30,7 @@ import com.animestudios.animeapp.saveData
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.sourcers.WatchSources
 import com.animestudios.animeapp.tools.Resource
+import com.animestudios.animeapp.tools.client
 import com.animestudios.animeapp.tools.tryWithSuspend
 import com.animestudios.animeapp.ui.screen.detail.dialog.SelectorDialogFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,6 +51,9 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
         get() = _coverImageForPreview
 
     val getRelations = MutableLiveData<Resource<ArrayList<RelationData>>>()
+    private val _screenshotPreview = MutableLiveData<List<Screenshot>>()
+    val screenshotPreview: LiveData<List<Screenshot>>
+        get() = _screenshotPreview
 
 
     private val _getFullData = MutableLiveData<Resource<GetFullDataByIdQuery.Data>>()
@@ -104,6 +111,19 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
             } else {
                 getRelations.value = Resource.Error(Exception("Have Problem"))
             }
+        }
+    }
+
+    fun getScreenshots(id: Int) {
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            Log.d("GGG", "observerData ")
+
+            val request =
+                client.get("https://shikimori.one/api/animes/${id}").parsed<Anime>()
+                request.screenshots.let {
+                    _screenshotPreview.postValue(it)
+                }
         }
     }
 

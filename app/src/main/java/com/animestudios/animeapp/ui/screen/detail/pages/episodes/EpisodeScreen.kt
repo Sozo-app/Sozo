@@ -3,6 +3,7 @@ package com.animestudios.animeapp.ui.screen.detail.pages.episodes
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import com.animestudios.animeapp.sourcers.HAnimeSources
 import com.animestudios.animeapp.tools.FileUrl
 import com.animestudios.animeapp.ui.screen.detail.adapter.AnimeWatchAdapter
 import com.animestudios.animeapp.ui.screen.detail.adapter.EpisodeAdapter
+import com.animestudios.animeapp.ui.screen.detail.adapter.ScreenshotsAdapter
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -118,7 +120,10 @@ class EpisodeScreen : Fragment() {
 
                 progress = View.GONE
                 binding.mediaInfoProgressBar.visibility = progress
-
+                model.getScreenshots(id = it.id)
+                model.screenshotPreview.observe(viewLifecycleOwner) { screenshots ->
+                    headerAdapter.updateScreenshotView(screenshots)
+                }
                 if (!loaded) {
                     model.watchSources = if (media.isAdult) HAnimeSources else AnimeSources
 

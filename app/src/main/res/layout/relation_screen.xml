@@ -18,6 +18,7 @@
         android:id="@+id/relationRv"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:paddingBottom="44dp"
         android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="10dp"

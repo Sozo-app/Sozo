@@ -56,11 +56,25 @@ class ListScreen : Fragment() {
         return _binding!!.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
 
-        model.lists.observe(this) {
+    @SuppressLint("ResourceAsColor", "FragmentLiveDataObserve")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Refresh.activity[1]!!.postValue(true)
+        val live = Refresh.activity.getOrPut(
+            1
+        ) { MutableLiveData(false) }
+        live.observe(viewLifecycleOwner) {
+            if (it) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    model.loadLists(
+                        true, Anilist.userid!!
+                    )
+                }
+            }
+        }
+        model.lists.observe(viewLifecycleOwner) {
             binding.listProgressBar.visibility = View.GONE
             binding.sort.visible()
             binding.listRefresh.visible()
@@ -87,25 +101,6 @@ class ListScreen : Fragment() {
             update(values.toList().getOrNull(selectedPositionF)!!)
         }
 
-    }
-
-
-    @SuppressLint("ResourceAsColor", "FragmentLiveDataObserve")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Refresh.activity[1]!!.postValue(true)
-        val live = Refresh.activity.getOrPut(
-            1
-        ) { MutableLiveData(false) }
-        live.observe(this) {
-            if (it) {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    model.loadLists(
-                        true, Anilist.userid!!
-                    )
-                }
-            }
-        }
     }
 
 

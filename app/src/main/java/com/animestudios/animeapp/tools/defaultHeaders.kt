@@ -2,6 +2,7 @@ package com.animestudios.animeapp.tools
 
 import android.content.Context
 import android.os.Build
+import com.animestudios.animeapp.anilist.api.intercepter.HeaderInterceptor
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.toast
@@ -18,6 +19,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import java.io.File
 import java.io.PrintWriter
 import java.io.Serializable
@@ -43,6 +45,11 @@ fun initializeNetwork(context: Context) {
         5 * 1024L * 1024L // 5 MiB
     )
     okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(
+            HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        )
         .followRedirects(true)
         .followSslRedirects(true)
         .apply {

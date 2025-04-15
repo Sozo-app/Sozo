@@ -30,11 +30,6 @@ object SourceList {
         )
 
     var sourceList = arrayListOf(
-        SourceDt(SourceType.ENGLISH, engSources),
-        SourceDt(
-            SourceType.INDIA,
-            indiaSources
-        ),
         SourceDt(
             SourceType.GERMAN,
             germanSources
@@ -43,6 +38,6 @@ object SourceList {
             SourceType.NATIVE,
             nativeSources
         ),
-        SourceDt(SourceType.OTHER, otherSources)
-    )
+
+        )
 }

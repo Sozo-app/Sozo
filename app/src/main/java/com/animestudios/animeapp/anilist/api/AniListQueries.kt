@@ -7,7 +7,7 @@ import com.animestudios.animeapp.media.Media
 
 interface AniListQueries {
     suspend fun getMediaFullData(media: Media): Media
-    suspend fun getMediaFullDataById(anId: Int): Media
+    suspend fun getMediaFullDataById(anId: Int): Media?
     suspend fun getGenre(): Query.GenreCollection?
     suspend fun getGenresAndTags(activity: Activity): Boolean
     suspend fun recentlyUpdated(

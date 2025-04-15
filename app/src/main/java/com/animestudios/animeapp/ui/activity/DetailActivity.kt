@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -25,6 +26,7 @@ import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.ImageUtil
 import com.animestudios.animeapp.tools.slideStart
 import com.animestudios.animeapp.tools.slideUp
+import com.animestudios.animeapp.ui.screen.detail.adapter.ScreenshotsAdapter
 import com.animestudios.animeapp.ui.screen.detail.adapter.TabAdapter
 import com.animestudios.animeapp.ui.screen.detail.dialog.SourceSearchDialogFragment
 import com.animestudios.animeapp.viewmodel.imp.DetailsViewModelImpl
@@ -67,6 +69,7 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         media = intent.getSerializableExtra("media") as Media ?: return
         initUiLayoutParams()
         setTab()
+        setUpClicks()
         observerData()
         binding.mediaAppBar.addOnOffsetChangedListener(this)
         val live = Refresh.activity.getOrPut(this.hashCode()) { MutableLiveData(true) }
@@ -77,6 +80,15 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                     live.postValue(false)
                 }
             }
+        }
+    }
+
+    private fun setUpClicks() {
+        binding.fabBack.setOnClickListener {
+            finish()
+        }
+        binding.mediaTitleToolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 
@@ -164,9 +176,11 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                         "info" -> {
                             binding.mediaAppBar.setExpanded(false)  // Bu satır ile AppBarLayout'u collapsed durumuna getirirsiniz
                         }
+
                         "play" -> {
 
                         }
+
                         else -> {
 
                         }
@@ -178,7 +192,7 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 binding.viewPager.visible()
                 binding.animeDetailProgress.gone()
                 binding.mediaInfoDescription.slideUp(700, 1)
-           binding.fabBack.slideUp(700, 1)
+                binding.fabBack.slideUp(700, 1)
                 binding.playMedia.slideUp(700, 1)
                 binding.animeCover.slideUp(700, 1)
                 binding.floatingActionButton.slideUp(700, 1)
@@ -214,7 +228,6 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
      * @see updateLayoutParams
      * **/
     private fun initUiLayoutParams() {
-
         binding.itemCompactBannerNoKen.updateLayoutParams { height += statusBarHeight }
         binding.imageView.updateLayoutParams { height += statusBarHeight }
         binding.shapeableImageView2.updateLayoutParams { height += statusBarHeight }
@@ -319,8 +332,10 @@ class DetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                 .setDuration(duration).start()
             ObjectAnimator.ofFloat(binding.mediaCollapseContainer, "translationX", screenWidth)
                 .setDuration(duration).start()
+            binding.mediaTitleContainer.visible()
             binding.mediaTitleToolbar.visible()
             binding.fabBack.gone()
+
             binding.mediaAccessContainer.gone()
         }
         if (percentage <= percent && isCollapsed) {

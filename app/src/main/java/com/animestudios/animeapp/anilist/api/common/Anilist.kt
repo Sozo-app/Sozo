@@ -90,13 +90,10 @@ object Anilist {
                     when (selectedType) {
                         1 -> {
                             selected = 1
-                            println("1 TOKEN")
-                            println(token)
                             headers["Authorization"] = "Bearer $token"
 
                         }
                         2 -> {
-                            println("2 TOKEN")
                             headers["Authorization"] = "Bearer $token2"
 
                         }

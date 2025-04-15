@@ -146,16 +146,16 @@ class AnimeScreen : Fragment() {
                     }
                 }
                 animePageAdapter.setItemAnimeClickListener {
-                    lifecycleScope.launch {
-                        val data = model.loadFullDataByMedia(it)
-                        data.let {
-                            val intent = Intent(
-                                requireActivity(), DetailActivity::class.java
-                            )
-                            intent.putExtra("media", it)
-                            requireActivity().startActivity(intent)
-                        }
-                    }
+//                    lifecycleScope.launch {
+//                        val data = model.loadFullDataByMedia(it)
+//                        data.let {
+//                            val intent = Intent(
+//                                requireActivity(), DetailActivity::class.java
+//                            )
+//                            intent.putExtra("media", it)
+//                            requireActivity().startActivity(intent)
+//                        }
+//                    }
                 }
                 animePageAdapter.setSelectedChipListener {
                     model.loadReview(it)

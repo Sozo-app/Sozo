@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2025 Azamov . - All Rights Reserved
+  ~
+  ~ Unauthorized copying or redistribution of this file in source and binary forms via any medium
+  ~ is strictly prohibited.
+  ~
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle" >
+            <corners android:radius="12dp"/>
+            <solid android:color="?attr/colorSurface"/>
+        </shape>
+    </item>
+    <item android:top="0.4dp">
+        <shape android:shape="rectangle" >
+            <corners android:radius="12dp"/>
+            <solid android:color="?attr/colorOnSurface" />
+        </shape>
+    </item>
+</layer-list>

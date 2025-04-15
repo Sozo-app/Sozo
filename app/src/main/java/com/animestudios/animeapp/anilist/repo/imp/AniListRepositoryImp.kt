@@ -47,8 +47,9 @@ class AniListRepositoryImp() : AniListRepository {
     }
 
     override fun getFullDataById(id: Int) = flow<Media> {
-        val response = api.getMediaFullDataById(id)
-        emit(response)
+        api.getMediaFullDataById(id)?.let {
+            emit(it)
+        }
     }
 
     override fun getFullDataById(media: Media): Flow<Media> = flow<Media> {

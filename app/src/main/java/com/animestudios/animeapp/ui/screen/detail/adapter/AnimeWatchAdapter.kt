@@ -9,6 +9,7 @@ import com.animestudios.animeapp.countDown
 import com.animestudios.animeapp.databinding.ItemAnimeWatchBinding
 import com.animestudios.animeapp.databinding.ItemChipBinding
 import com.animestudios.animeapp.media.Media
+import com.animestudios.animeapp.model.shikimori.Screenshot
 import com.animestudios.animeapp.px
 import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.sourcers.WatchSources
@@ -49,6 +50,9 @@ class AnimeWatchAdapter(
 
 
         handleEpisodes()
+    }
+
+    fun updateScreenshotView(arrayList: List<Screenshot>) {
     }
 
     @SuppressLint("SetTextI18n")

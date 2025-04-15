@@ -214,6 +214,7 @@
     <string name="video">Video</string>
     <string name="skip">Skip</string>
     <string name="skip_time">Skip time</string>
+    <string name="screenshots">Screenshots</string>
 
 
 </resources>

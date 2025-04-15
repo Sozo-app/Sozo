@@ -197,7 +197,7 @@ class AniListQueriesImp constructor() : AniListQueries {
         return media
     }
 
-    override suspend fun getMediaFullDataById(anId: Int): Media {
+    override suspend fun getMediaFullDataById(anId: Int): Media? {
         lateinit var media: Media
         val query = """{
   Media(id:${anId}) {
@@ -220,32 +220,24 @@ class AniListQueriesImp constructor() : AniListQueries {
     siteUrl
   }
 }"""
-        runBlocking {
-            val anilist = async {
-                var response = executeQuery<Query.Media>(query, force = true, show = true)
-                if (response != null) {
-                    if (response.data?.media != null) {
-                        media = Media(response.data?.media!!)
-                    } else {
-                        snackString("Adult Stuff? ( ͡° ͜ʖ ͡°)")
-                        response = executeQuery(query, force = true, useToken = false)
-                        if (response?.data?.media != null) {
-                            media = Media(response.data?.media!!)
-                        } else snackString("What did you even open?")
-                    }
-                } else {
-                    snackString("Error getting Data from Anilist.")
-                }
 
+        var response = executeQuery<Query.Media>(query, force = true, show = true)
+        if (response != null) {
+            if (response.data?.media != null) {
+                media = Media(response.data?.media!!)
+                return media
+            } else {
+                snackString("Adult Stuff? ( ͡° ͜ʖ ͡°)")
+                response = executeQuery(query, force = true, useToken = false)
+                if (response?.data?.media != null) {
+                    media = Media(response.data?.media!!)
+                    return media
+                } else snackString("What did you even open?")
             }
-            val mal = async {
-                if (media.idMAL != null) {
-                    MalScraper.loadMedia(media)
-                }
-            }
-            awaitAll(anilist, mal)
+        } else {
+            snackString("Error getting Data from Anilist.")
         }
-        return media
+        return null
     }
 
     override suspend fun getGenre(): Query.GenreCollection? {

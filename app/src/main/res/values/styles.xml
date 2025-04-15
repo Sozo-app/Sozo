@@ -32,4 +32,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="LayoutHeader">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:alpha">0.9</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>
