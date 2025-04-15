@@ -72,12 +72,15 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
 
                     }
 
-                    else -> {
+                    1 -> {
                         findNavController().navigate(
                             R.id.sourcePage,
                             null,
                             animationTransaction().build()
                         )
+
+                    }
+                    else -> {
 
                     }
                     //
@@ -99,10 +102,6 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
                 Resource.Loading -> {
                     binding.nestedScrollView.gone()
 
-                    binding.profileName.gone()
-                    binding.profileBg2.gone()
-                    binding.circleImageView.gone()
-                    binding.cardView4.visible()
                 }
 
                 is Resource.Success -> {
