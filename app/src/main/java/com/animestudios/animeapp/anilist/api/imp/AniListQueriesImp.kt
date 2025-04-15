@@ -27,7 +27,6 @@ class AniListQueriesImp constructor() : AniListQueries {
             val anilist = async {
                 var response = executeQuery<Query.Media>(query, force = true, show = true)
                 if (response != null) {
-                    println("RESPONSEEE :$response")
                     fun parse() {
                         val fetchedMedia = response?.data?.media ?: return
                         println(response?.data?.media?.coverImage?.extraLarge)
@@ -46,8 +45,9 @@ class AniListQueriesImp constructor() : AniListQueries {
                         }
 
                         media.trailer = fetchedMedia.trailer?.let { i ->
-                            if (i.site != null && i.site.toString() == "youtube")
-                                "https://www.youtube.com/embed/${i.id.toString().trim('"')}"
+                            if (i.site != null && i.site.toString() == "youtube") "https://www.youtube.com/embed/${
+                                i.id.toString().trim('"')
+                            }"
                             else null
                         }
 
@@ -63,8 +63,7 @@ class AniListQueriesImp constructor() : AniListQueries {
                         fetchedMedia.tags?.apply {
                             media.tags = arrayListOf()
                             this.forEach { i ->
-                                if (i.isMediaSpoiler == false)
-                                    media.tags.add("${i.name} : ${i.rank.toString()}%")
+                                if (i.isMediaSpoiler == false) media.tags.add("${i.name} : ${i.rank.toString()}%")
                             }
                         }
 
@@ -155,8 +154,7 @@ class AniListQueriesImp constructor() : AniListQueries {
                                 if (isNotEmpty()) {
                                     val firstStudio = get(0)
                                     media.anime.mainStudio = Studio(
-                                        firstStudio.id.toString(),
-                                        firstStudio.name ?: "N/A"
+                                        firstStudio.id.toString(), firstStudio.name ?: "N/A"
                                     )
                                 }
                             }
@@ -169,6 +167,7 @@ class AniListQueriesImp constructor() : AniListQueries {
                                     "youtube" -> media.anime.youtube = i.url
                                     "crunchyroll" -> media.crunchySlug =
                                         i.url?.split("/")?.getOrNull(3)
+
                                     "vrv" -> media.vrvId = i.url?.split("/")?.getOrNull(4)
                                 }
                             }
@@ -198,26 +197,71 @@ class AniListQueriesImp constructor() : AniListQueries {
         return media
     }
 
+    override suspend fun getMediaFullDataById(anId: Int): Media {
+        lateinit var media: Media
+        val query = """{
+  Media(id:${anId}) {
+    id
+    idMAL
+    title {
+      romaji
+      english
+      native
+      userPreferred
+    }
+    isFavourite
+    idMal
+    format
+    status
+    coverImage {
+      large
+    }
+    bannerImage
+    siteUrl
+  }
+}"""
+        runBlocking {
+            val anilist = async {
+                var response = executeQuery<Query.Media>(query, force = true, show = true)
+                if (response != null) {
+                    if (response.data?.media != null) {
+                        media = Media(response.data?.media!!)
+                    } else {
+                        snackString("Adult Stuff? ( ͡° ͜ʖ ͡°)")
+                        response = executeQuery(query, force = true, useToken = false)
+                        if (response?.data?.media != null) {
+                            media = Media(response.data?.media!!)
+                        } else snackString("What did you even open?")
+                    }
+                } else {
+                    snackString("Error getting Data from Anilist.")
+                }
+
+            }
+            val mal = async {
+                if (media.idMAL != null) {
+                    MalScraper.loadMedia(media)
+                }
+            }
+            awaitAll(anilist, mal)
+        }
+        return media
+    }
+
     override suspend fun getGenre(): Query.GenreCollection? {
         return executeQuery(
-            """{GenreCollection}""",
-            force = true,
-            useToken = false
+            """{GenreCollection}""", force = true, useToken = false
         )
 
     }
 
     override suspend fun getGenresAndTags(activity: Activity): Boolean {
-        var genres: ArrayList<String>? =
-            readData("genres_list", activity)
-        var tags: Map<Boolean, List<String>>? =
-            readData("tags_map", activity)
+        var genres: ArrayList<String>? = readData("genres_list", activity)
+        var tags: Map<Boolean, List<String>>? = readData("tags_map", activity)
 
         if (genres == null) {
             executeQuery<Query.GenreCollection>(
-                """{GenreCollection}""",
-                force = true,
-                useToken = false
+                """{GenreCollection}""", force = true, useToken = false
             )?.data?.genreCollection?.apply {
                 println("RESPONSEEE :$this")
                 println("!!!!!!!!!!!!!!!!!!!!! TUSHDII !!!!!!!!!!!")
@@ -230,8 +274,7 @@ class AniListQueriesImp constructor() : AniListQueries {
         }
         if (tags == null) {
             executeQuery<Query.MediaTagCollection>(
-                """{ MediaTagCollection { name isAdult } }""",
-                force = true
+                """{ MediaTagCollection { name isAdult } }""", force = true
             )?.data?.mediaTagCollection?.apply {
                 println("RESPONSEEE :$this")
                 val adult = mutableListOf<String>()
@@ -241,8 +284,7 @@ class AniListQueriesImp constructor() : AniListQueries {
                     else good.add(node.name)
                 }
                 tags = mapOf(
-                    true to adult,
-                    false to good
+                    true to adult, false to good
                 )
                 saveData("tags_map", tags)
             }
@@ -258,9 +300,7 @@ class AniListQueriesImp constructor() : AniListQueries {
     }
 
     override suspend fun recentlyUpdated(
-        smaller: Boolean,
-        greater: Long,
-        lesser: Long
+        smaller: Boolean, greater: Long, lesser: Long
     ): MutableList<Media>? {
         suspend fun execute(page: Int = 1): Page? {
             val query = """{
@@ -314,11 +354,10 @@ Page(page:$page,perPage:50) {
             val listOnly = readData("recently_list_only") ?: false
             return response.mapNotNull { i ->
                 i.media?.let {
-                    if (!idArr.contains(it.id))
-                        if (!listOnly && (it.countryOfOrigin == "JP" && (if (!Anilist.adult) it.isAdult == false else true)) || (listOnly && it.mediaListEntry != null)) {
-                            idArr.add(it.id)
-                            Media(it)
-                        } else null
+                    if (!idArr.contains(it.id)) if (!listOnly && (it.countryOfOrigin == "JP" && (if (!Anilist.adult) it.isAdult == false else true)) || (listOnly && it.mediaListEntry != null)) {
+                        idArr.add(it.id)
+                        Media(it)
+                    } else null
                     else null
                 }
             }.toMutableList()
@@ -346,8 +385,7 @@ Page(page:$page,perPage:50) {
     }
 
     override suspend fun getGenres(
-        genres: ArrayList<String>,
-        listener: ((Pair<String, String>) -> Unit)
+        genres: ArrayList<String>, listener: ((Pair<String, String>) -> Unit)
     ) {
         genres.forEach {
             getGenreThumbnail(it).apply {
@@ -367,10 +405,7 @@ Page(page:$page,perPage:50) {
                 executeQuery<Query.Page>(genreQuery, force = true)?.data?.page?.media?.forEach {
                     if (genres.checkId(it.id) && it.bannerImage != null) {
                         genres[genre] = Genre(
-                            genre,
-                            it.id,
-                            it.bannerImage!!,
-                            System.currentTimeMillis()
+                            genre, it.id, it.bannerImage!!, System.currentTimeMillis()
                         )
                         println("Is Thumbali:" + genres[genre]?.thumbnail)
                         println("Is Title:" + genres[genre]?.name)
@@ -463,32 +498,28 @@ Page(page:$page,perPage:50) {
             ${if (format != null) ""","format":"${format.replace(" ", "_")}"""" else ""}
             ${if (genres?.isNotEmpty() == true) ""","genres":[${genres.joinToString { "\"$it\"" }}]""" else ""}
             ${
-            if (excludedGenres?.isNotEmpty() == true)
-                ""","excludedGenres":[${
-                    excludedGenres.joinToString {
-                        "\"${
-                            it.replace(
-                                "Not ",
-                                ""
-                            )
-                        }\""
-                    }
-                }]"""
+            if (excludedGenres?.isNotEmpty() == true) ""","excludedGenres":[${
+                excludedGenres.joinToString {
+                    "\"${
+                        it.replace(
+                            "Not ", ""
+                        )
+                    }\""
+                }
+            }]"""
             else ""
         }
             ${if (tags?.isNotEmpty() == true) ""","tags":[${tags.joinToString { "\"$it\"" }}]""" else ""}
             ${
-            if (excludedTags?.isNotEmpty() == true)
-                ""","excludedTags":[${
-                    excludedTags.joinToString {
-                        "\"${
-                            it.replace(
-                                "Not ",
-                                ""
-                            )
-                        }\""
-                    }
-                }]"""
+            if (excludedTags?.isNotEmpty() == true) ""","excludedTags":[${
+                excludedTags.joinToString {
+                    "\"${
+                        it.replace(
+                            "Not ", ""
+                        )
+                    }\""
+                }
+            }]"""
             else ""
         }
             }""".replace("\n", " ").replace("""  """, "")
@@ -537,11 +568,7 @@ Page(page:$page,perPage:50) {
     }
 
     override suspend fun searchCharacter(
-        type: String,
-        id: Int?,
-        page: Int?,
-        perPage: Int?,
-        search: String?
+        type: String, id: Int?, page: Int?, perPage: Int?, search: String?
     ): SearchResultsCharacter? {
         val query = """
             query (${"$"}page: Int = 1, ${"$"}id: Int ${"$"}search: String) {
@@ -657,7 +684,7 @@ Page(page:$page,perPage:50) {
                 val media = Media(i.media!!)
                 media.genres = genresArr
                 media.cover = i.media?.coverImage?.large
-                media.relation =  null
+                media.relation = null
                 responseArray.add(media)
             }
             return responseArray
@@ -667,9 +694,7 @@ Page(page:$page,perPage:50) {
 
 
     override suspend fun getMediaLists(
-        animes: Boolean,
-        userId: Int,
-        sortOrder: String?
+        animes: Boolean, userId: Int, sortOrder: String?
     ): MutableMap<String, ArrayList<Media>> {
         Log.e("TAG", "getMediaLists: ${userid}")
 
@@ -713,12 +738,9 @@ Page(page:$page,perPage:50) {
         for (i in sorted.keys) {
             when (sort) {
                 "score" -> sorted[i]?.sortWith { b, a ->
-                    compareValuesBy(
-                        a,
-                        b,
-                        { it.userScore },
-                        { it.meanScore })
+                    compareValuesBy(a, b, { it.userScore }, { it.meanScore })
                 }
+
                 "title" -> sorted[i]?.sortWith(compareBy { it.userPreferredName })
                 "updatedAt" -> sorted[i]?.sortWith(compareByDescending { it.userUpdatedAt })
                 "release" -> sorted[i]?.sortWith(compareByDescending { it.startDate })
@@ -735,9 +757,8 @@ Page(page:$page,perPage:50) {
         var page = 0
 
         suspend fun getNextPage(page: Int): List<Media> {
-            val response =
-                executeQuery<Query.User>(
-                    """{
+            val response = executeQuery<Query.User>(
+                """{
             User(id:${Anilist.userid}){
             id favourites {
                 ${if (anime) "anime" else "manga"}(
@@ -756,7 +777,7 @@ Page(page:$page,perPage:50) {
             }
         }
         }"""
-                )
+            )
             val favourites = response?.data?.user?.favourites
             val apiMediaList = if (anime) favourites?.anime else favourites?.manga
             hasNextPage = apiMediaList?.pageInfo?.hasNextPage ?: false
@@ -909,19 +930,19 @@ Page(page:$page,perPage:50) {
         var page = 0
         while (hasNextPage) {
             page++
-            hasNextPage = executeQuery<Query.Studio>(query(page), force = true)?.data?.studio?.media?.let {
-                it.edges?.forEach { i ->
-                    i.node?.apply {
-                        val status = status.toString()
-                        val year = startDate?.year?.toString() ?: "TBA"
-                        val title = if (status != "CANCELLED") year else status
-                        if (!yearMedia.containsKey(title))
-                            yearMedia[title] = arrayListOf()
-                        yearMedia[title]?.add(Media(this))
+            hasNextPage =
+                executeQuery<Query.Studio>(query(page), force = true)?.data?.studio?.media?.let {
+                    it.edges?.forEach { i ->
+                        i.node?.apply {
+                            val status = status.toString()
+                            val year = startDate?.year?.toString() ?: "TBA"
+                            val title = if (status != "CANCELLED") year else status
+                            if (!yearMedia.containsKey(title)) yearMedia[title] = arrayListOf()
+                            yearMedia[title]?.add(Media(this))
+                        }
                     }
-                }
-                it.pageInfo?.hasNextPage == true
-            } ?: false
+                    it.pageInfo?.hasNextPage == true
+                } ?: false
         }
 
         if (yearMedia.contains("CANCELLED")) {

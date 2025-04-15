@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/photoCard" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView5"
+            android:id="@+id/item_anime"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
@@ -121,8 +121,8 @@
             android:fontFamily="@font/poppins_bold"
             android:text="One Pioece"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/cardView5"
-            app:layout_constraintStart_toEndOf="@+id/cardView5"
-            app:layout_constraintTop_toTopOf="@+id/cardView5" />
+            app:layout_constraintBottom_toBottomOf="@+id/item_anime"
+            app:layout_constraintStart_toEndOf="@+id/item_anime"
+            app:layout_constraintTop_toTopOf="@+id/item_anime" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

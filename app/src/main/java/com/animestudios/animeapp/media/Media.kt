@@ -1,6 +1,7 @@
 package com.animestudios.animeapp.media
 
 import com.animestudios.animeapp.anilist.response.*
+import com.animestudios.animeapp.model.AniListMedia
 import java.io.Serializable
 import com.animestudios.animeapp.anilist.response.Media as ApiMedia
 
@@ -107,9 +108,11 @@ data class Media(
         this.userUpdatedAt = mediaList.updatedAt?.toLong()
     }
 
+
     constructor(mediaEdge: MediaEdge) : this(mediaEdge.node!!) {
         this.relation = mediaEdge.relationType?.toString()
     }
+
 
     fun mainName() = nameMAL ?: name ?: nameRomaji
     fun mangaName() = if (countryOfOrigin != "JP") mainName() else nameRomaji

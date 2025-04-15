@@ -38,14 +38,43 @@ class MainScreen : Fragment() {
     private val binding get() = _binding!!
     private val model by viewModels<MainViewModelImp>()
     private var uiSettings = UISettings()
-    private val load = false
 
     @SuppressLint("ResourceAsColor", "NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model.getUnreadNotificationsCount()
+
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = com.animestudios.animeapp.databinding.MainScreenBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        return _binding?.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val navbar = binding.navbar
+        val mainViewPager = binding.viewPager
+        binding.mainProgressBar.visible()
+        bottomBar = navbar
+        mainViewPager.gone()
+        navbar.gone()
+        mainViewPager.isUserInputEnabled = false
+        uiSettings = readData("ui_settings") ?: uiSettings
+        model.getGenres(requireActivity())
         model.genres.observe(
-            this
+            viewLifecycleOwner
         ) {
             if (it != null) {
                 if (it) {
@@ -66,23 +95,24 @@ class MainScreen : Fragment() {
                                 mainViewPager.setCurrentItem(0, false)
 
                             }
+
                             R.id.brows -> {
                                 navbar.getMenu().getItem(1).setChecked(true);
                                 navbar.animate().translationZ(12f).setDuration(200).start()
                                 mainViewPager.setCurrentItem(1, false)
                             }
+
                             R.id.list -> {
                                 navbar.getMenu().getItem(2).setChecked(true);
                                 navbar.animate().translationZ(12f).setDuration(200).start()
                                 mainViewPager.setCurrentItem(2, false)
                             }
+
                             R.id.account -> {
                                 navbar.animate().translationZ(12f).setDuration(200).start()
                                 navbar.getMenu().getItem(3).setChecked(true);
                                 mainViewPager.setCurrentItem(3, false)
-                                navbar.findViewById<View>(R.id.account).setOnDoubleClickListener {
-                                    switchAccount()
-                                }
+
                             }
                         }
                         true
@@ -126,36 +156,6 @@ class MainScreen : Fragment() {
                 }
             }
         }
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = com.animestudios.animeapp.databinding.MainScreenBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-        return _binding?.root
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val navbar = binding.navbar
-        val mainViewPager = binding.viewPager
-        binding.mainProgressBar.visible()
-        bottomBar = navbar
-        mainViewPager.gone()
-        navbar.gone()
-        mainViewPager.isUserInputEnabled = false
-        uiSettings = readData("ui_settings") ?: uiSettings
-        model.getGenres(requireActivity())
-
     }
 
     override fun onPause() {
@@ -175,7 +175,7 @@ class MainScreen : Fragment() {
                 true
             }
 
-            
+
 
             menuView.getChildAt(0).setOnLongClickListener {
                 println("Home  Bosildi")
@@ -186,58 +186,13 @@ class MainScreen : Fragment() {
         }
     }
 
-    fun switchAccount() {
-        val selectedAccount = readData<Int>("selectedAccount") ?: 1 // Default to Account 1
-        val selectedAccountCount = readData<Int>("countAccount") ?: 1
 
-        when (selectedAccount) {
-            1 -> {
-                // Switch to Account 2 if exists
-                if (selectedAccountCount >= 2) {
-                    saveData("selectedAccount", 2)
-                    // Update UI or reload account 2 data
-                    snackString("Account Switched")
-                    findNavController().navigate(
-                        R.id.splashScreen,
-                        null,
-                        NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
-                    )
-                }
-                 }
-            2 -> {
-                // Switch to Account 1
-                saveData("selectedAccount", 1)
-                snackString("Account Switched")
-                // Update UI or reload account 1 data
-                findNavController().navigate(
-                    R.id.splashScreen,
-                    null,
-                    NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
-                )
-            }
-        }
-    }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    fun View.setOnDoubleClickListener(
-        doubleClickInterval: Long = 300L,
-        onDoubleClick: () -> Unit
-    ) {
-        var lastClickTime = 0L
-        var lastViewId = -1 // Track the last clicked view ID
 
-        this.setOnClickListener {
-            val currentTime = SystemClock.elapsedRealtime()
-            if (currentTime - lastClickTime < doubleClickInterval && it.id == lastViewId) {
-                onDoubleClick() // Trigger the double-click action
-            }
-            lastClickTime = currentTime
-            lastViewId = it.id // Update the last clicked view ID
-        }
-    }
 
 }

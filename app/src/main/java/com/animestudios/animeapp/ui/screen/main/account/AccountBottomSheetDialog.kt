@@ -148,10 +148,8 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
             saveData("selectedAccount", 1)
             model.getGenresAndTags(requireActivity())
             dismiss()
-            activity.findNavController().navigate(
-                R.id.splashScreen,
-                null,
-                NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+            startMainActivity(
+                requireActivity()
             )
         }
         binding.accountContainer2.setOnClickListener {
@@ -162,11 +160,9 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
             saveData("selectedAccount", 2)
             model.getGenresAndTags(requireActivity())
             dismiss()
-            activity.findNavController().navigate(
-                R.id.splashScreen,
-                null,
-                NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
-            )
+          startMainActivity(
+              requireActivity()
+          )
         }
         binding.accountContainer3.setOnClickListener {
             binding.selected2.gone()
@@ -176,10 +172,8 @@ class AccountBottomSheetDialog(private val activity: MainScreen) :
             saveData("selectedAccount", 3)
             model.getGenresAndTags(requireActivity())
             dismiss()
-            activity.findNavController().navigate(
-                R.id.mainScreen,
-                null,
-                NavOptions.Builder().setPopUpTo(R.id.mainScreen, true).build()
+            startMainActivity(
+                requireActivity()
             )
         }
     }

@@ -36,6 +36,11 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
             fragmentAdapter.requireActivity()
         )
     }
+
+    private lateinit var itemAnimeClickListener: (Int) -> Unit
+    fun setItemAnimeClickListener(listener: (Int) -> Unit) {
+        itemAnimeClickListener = listener
+    }
     private lateinit var selectedChipListener: (ReviewSort) -> Unit
 
     fun setSelectedChipListener(listener: (ReviewSort) -> Unit) {
@@ -202,6 +207,9 @@ class AnimePageAdapter(private val fragmentAdapter: Fragment) :
                     readData<UISettings>("ui_settings") ?: UISettings()
                 val reviewAdapter =
                     ReviewAdapter(it.data!!, activity = fragmentAdapter)
+                reviewAdapter.setItemAnimeClickListener {
+                    itemAnimeClickListener.invoke(it)
+                }
                 binding.reviewTxt.visible()
                 binding.reviewRecyclerview.adapter = reviewAdapter
                 if (uiSettings!!.layoutAnimations) {

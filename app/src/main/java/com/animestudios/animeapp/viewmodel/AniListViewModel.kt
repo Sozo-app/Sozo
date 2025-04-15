@@ -19,7 +19,7 @@ interface AniListViewModel {
     val getReview: MutableLiveData<Resource<List<Review>>>
     fun getHomeAnimeListByGenre(genre: MutableList<String>)
     fun loadHome()
-    fun loadFullDataByMedia(media: Media)
+   suspend fun loadFullDataByMedia(media: Int):Media
     fun loadAnimeSection(i: Int)
     fun loadReview(reviewSort: ReviewSort)
 

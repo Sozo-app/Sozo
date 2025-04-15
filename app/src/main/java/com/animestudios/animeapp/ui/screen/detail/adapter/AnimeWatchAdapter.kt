@@ -131,7 +131,6 @@ class AnimeWatchAdapter(
     inner class ViewHolder(val binding: ItemAnimeWatchBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            //Timer
             countDown(media, binding.animeSourceContainer)
         }
     }

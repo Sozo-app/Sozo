@@ -1,7 +1,9 @@
 package com.animestudios.animeapp.viewmodel.imp
 
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.animestudios.animeapp.anilist.repo.imp.AniListRepositoryImp
 import com.animestudios.animeapp.anilist.repo.imp.ReviewRepositoryImpl
@@ -14,6 +16,8 @@ import com.animestudios.animeapp.type.ReviewSort
 import com.animestudios.animeapp.viewmodel.AniListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.zip
@@ -134,8 +138,10 @@ class AniListViewModelImp @Inject constructor(private val repositoryImpl: Review
         }
     }
 
-    override fun loadFullDataByMedia(media: Media) {
-
+    override suspend fun loadFullDataByMedia(media: Int):Media {
+        return repository.getFullDataById(media).first()
     }
+
+
 
 }

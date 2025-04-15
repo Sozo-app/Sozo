@@ -20,6 +20,7 @@ import com.animestudios.animeapp.*
 import com.animestudios.animeapp.databinding.AnimeScreenBinding
 import com.animestudios.animeapp.media.Media
 import com.animestudios.animeapp.others.CustomBottomDialog
+import com.animestudios.animeapp.ui.activity.DetailActivity
 import com.animestudios.animeapp.ui.screen.home.banner.BannerAdapter
 import com.animestudios.animeapp.viewmodel.imp.AniListViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
@@ -144,7 +145,18 @@ class AnimeScreen : Fragment() {
                         animePageAdapter.updateReview(it)
                     }
                 }
-
+                animePageAdapter.setItemAnimeClickListener {
+                    lifecycleScope.launch {
+                        val data = model.loadFullDataByMedia(it)
+                        data.let {
+                            val intent = Intent(
+                                requireActivity(), DetailActivity::class.java
+                            )
+                            intent.putExtra("media", it)
+                            requireActivity().startActivity(intent)
+                        }
+                    }
+                }
                 animePageAdapter.setSelectedChipListener {
                     model.loadReview(it)
                 }

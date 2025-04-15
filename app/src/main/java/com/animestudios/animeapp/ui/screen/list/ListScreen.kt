@@ -93,19 +93,19 @@ class ListScreen : Fragment() {
     @SuppressLint("ResourceAsColor", "FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            Refresh.activity[1]!!.postValue(true)
-            val live = Refresh.activity.getOrPut(
-                1
-            ) { MutableLiveData(false) }
-            live.observe(this) {
-                if (it) {
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        model.loadLists(
-                            true, Anilist.userid!!
-                        )
-                    }
+        Refresh.activity[1]!!.postValue(true)
+        val live = Refresh.activity.getOrPut(
+            1
+        ) { MutableLiveData(false) }
+        live.observe(this) {
+            if (it) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    model.loadLists(
+                        true, Anilist.userid!!
+                    )
                 }
             }
+        }
     }
 
 

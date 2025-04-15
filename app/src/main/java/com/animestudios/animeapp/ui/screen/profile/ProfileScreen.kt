@@ -62,13 +62,22 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
             adapter.submitList(loadProfileCategory())
             profileRv.adapter = adapter
             adapter.setItemClickListenerGetPosition {
-                when(it){
-                    0->{
-                        findNavController().navigate(R.id.themeScreen, null, animationTransaction().build())
+                when (it) {
+                    0 -> {
+                        findNavController().navigate(
+                            R.id.themeScreen,
+                            null,
+                            animationTransaction().build()
+                        )
 
                     }
-                    else ->{
-                        findNavController().navigate(R.id.sourcePage, null, animationTransaction().build())
+
+                    else -> {
+                        findNavController().navigate(
+                            R.id.sourcePage,
+                            null,
+                            animationTransaction().build()
+                        )
 
                     }
                     //
@@ -84,11 +93,10 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
         model.userData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Error -> {
-                    binding.progressBar.gone()
                     binding.nestedScrollView.visible()
                 }
+
                 Resource.Loading -> {
-                    binding.progressBar.visible()
                     binding.nestedScrollView.gone()
 
                     binding.profileName.gone()
@@ -96,13 +104,13 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
                     binding.circleImageView.gone()
                     binding.cardView4.visible()
                 }
+
                 is Resource.Success -> {
 
                     binding.profileName.visible()
                     binding.profileBg2.visible()
                     binding.circleImageView.visible()
                     binding.cardView4.visible()
-                    binding.progressBar.gone()
                     binding.nestedScrollView.visible()
                     val userResponse = it.data.user
                     lifecycleScope.launch {

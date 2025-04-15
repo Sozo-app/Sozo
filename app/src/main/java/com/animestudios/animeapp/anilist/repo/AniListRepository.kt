@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface AniListRepository {
     fun getGenre(): kotlinx.coroutines.flow.Flow<Result<Query.GenreCollection>>
     fun getFullDataById(media: Media): kotlinx.coroutines.flow.Flow<Media>
+    fun getFullDataById(id:Int): kotlinx.coroutines.flow.Flow<Media>
     fun getAnimeListByGenre(genre: MutableList<String>): Flow<Result<SearchResults>>
     fun getSearch(search: SearchResults): Flow<Result<SearchResults>>
     fun getSearchCharacter(search: SearchResultsCharacter): Flow<Result<SearchResultsCharacter>>

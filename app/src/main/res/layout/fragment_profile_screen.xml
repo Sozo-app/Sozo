@@ -39,24 +39,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-
-                    android:indeterminate="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_bg"
                     android:layout_width="match_parent"
                     tools:visibility="visible"
-
-                    android:layout_height="250dp"
+                    app:srcCompat="@drawable/img"
+                    android:layout_height="290dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -65,8 +54,8 @@
                 <View
                     android:id="@+id/profile_bg2"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:visibility="invisible"
+                    android:layout_height="290dp"
+                    android:visibility="visible"
                     android:background="@drawable/linear_gradient_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:visibility="visible"
@@ -77,8 +66,8 @@
                     android:id="@+id/circleImageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="4dp"
-                    android:visibility="gone"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/app_logo"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
                     app:layout_constraintEnd_toEndOf="@+id/profile_bg"
@@ -88,10 +77,10 @@
 
                     android:id="@+id/profile_name"
                     android:layout_width="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     tools:visibility="visible"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="User"
                     android:textColor="@color/white"

@@ -15,8 +15,10 @@ import com.animestudios.animeapp.settings.UISettings
 
 class ReviewAdapter(private val list: List<Review>, private val activity: Fragment) :
     RecyclerView.Adapter<ReviewAdapter.ReviewVh>() {
-
-
+        private lateinit var  itemAnimeClickListener :(Int) ->Unit
+    fun setItemAnimeClickListener(listener:(Int) ->Unit) {
+        itemAnimeClickListener = listener
+    }
     inner class ReviewVh(val binding: ReviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Review) {
             val uiSettings =
@@ -37,6 +39,9 @@ class ReviewAdapter(private val list: List<Review>, private val activity: Fragme
                 }else{
                     bannerGradient.loadImage("https://i.pinimg.com/736x/67/50/d8/6750d8a9e653bc738f52c814181938f1.jpg")
 
+                }
+                itemAnime.setOnClickListener {
+                    itemAnimeClickListener.invoke(data.aniListMedia.idAniList)
                 }
                 profilePhoto.loadImage(data.user.avatar.medium)
                 itemCompactImage.loadImage(data.aniListMedia.coverImage.medium)

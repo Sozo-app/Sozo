@@ -46,6 +46,11 @@ class AniListRepositoryImp() : AniListRepository {
         return api.loadProfile()
     }
 
+    override fun getFullDataById(id: Int) = flow<Media> {
+        val response = api.getMediaFullDataById(id)
+        emit(response)
+    }
+
     override fun getFullDataById(media: Media): Flow<Media> = flow<Media> {
         val response = api.getMediaFullData(media)
         emit(response)
@@ -94,16 +99,22 @@ class AniListRepositoryImp() : AniListRepository {
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun getSearchCharacter(search: SearchResultsCharacter)=flow<Result<SearchResultsCharacter>> {
-        val response =api.searchCharacter("ANIME", page = search.page, perPage = search.perPage, search = search.search)
-        if (response!=null) {
-            emit(Result.success(response))
-        }
-    }.flowOn(Dispatchers.IO)
+    override fun getSearchCharacter(search: SearchResultsCharacter) =
+        flow<Result<SearchResultsCharacter>> {
+            val response = api.searchCharacter(
+                "ANIME",
+                page = search.page,
+                perPage = search.perPage,
+                search = search.search
+            )
+            if (response != null) {
+                emit(Result.success(response))
+            }
+        }.flowOn(Dispatchers.IO)
 
-    override fun recommendedAnimeList()=flow<Result<MutableList<Media?>?>> {
+    override fun recommendedAnimeList() = flow<Result<MutableList<Media?>?>> {
         val response = api.recommendedAnime()
-        if (response!=null) {
+        if (response != null) {
             emit(Result.success(response))
         }
     }.flowOn(Dispatchers.IO)
