@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.BatteryManager
 import android.view.LayoutInflater
@@ -44,41 +45,71 @@ class BatteryReceiver : BroadcastReceiver() {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables", "NewApi")
+    @SuppressLint("RestrictedApi")
     private fun showNotification(context: Context, level: Int) {
         if (level <= 32 && !isNotificationShown) {
             isNotificationShown = true
-////            val customSnackbarView =
-////                LayoutInflater.from(context).inflate(R.layout.snack_bar, null, false)
-////            val actionTextView: TextView = customSnackbarView.findViewById(R.id.snackbar_action)
-////            actionTextView.setOnClickListener {
-////                isActionClicked = true  // Disable functionality after action click
-////            }
-////            val rootView =
-////                (context as? Activity)?.window?.decorView?.findViewById<View>(android.R.id.content)
-////                    ?: return
-////            rootView.post {
-////                val bitmap =
-////                    Bitmap.createBitmap(rootView.width, rootView.height, Bitmap.Config.ARGB_8888)
-////                rootView.draw(Canvas(bitmap))
-////                val blurredBitmap = RenderScriptBlur.blur(context, bitmap, 25f)
-////                customSnackbarView.background = BitmapDrawable(context.resources, blurredBitmap)
-////                val snackbar = Snackbar.make(rootView, "", Snackbar.LENGTH_LONG)
-////                val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-////                snackbarLayout.setPadding(0, 0, 0, 0) // Remove default padding
-////                snackbarLayout.addView(customSnackbarView, 0)
-////                val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
-////                val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-////
-////                // Apply animations
-////                customSnackbarView.startAnimation(fadeIn)
-////                customSnackbarView.startAnimation(slideUp)
-////                snackbar.show()
-//            }
+            val customSnackbarView = LayoutInflater.from(context)
+                .inflate(R.layout.snack_bar, null, false)
+            val actionTextView: TextView = customSnackbarView.findViewById(R.id.snackbar_action)
+            actionTextView.setOnClickListener {
+                isActionClicked = true  // Disable functionality after action click
+                val uiSettings = readData<UISettings>("ui_settings") ?: UISettings()
+                saveData("ui_settings", uiSettings.copy(layoutAnimations = true))
+                isNotificationShown = false
+            }
+            val rootView = (context as? Activity)
+                ?.window?.decorView?.findViewById<View>(android.R.id.content)
+                ?: return
+
+            rootView.post {
+                // Create the snackbar first so that it measures its dimensions
+                val snackbar = Snackbar.make(rootView, "", Snackbar.LENGTH_LONG)
+                val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+                snackbarLayout.setPadding(0, 0, 0, 0)
+                // Use a transparent background for the snackbar container
+                snackbarLayout.setBackgroundColor(Color.TRANSPARENT)
+
+                // Add your custom view
+                snackbarLayout.addView(customSnackbarView, 0)
+
+                // Measure the snackbar to get its height (if not already measured)
+                snackbarLayout.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+                val snackbarHeight = snackbarLayout.measuredHeight
+
+                // Determine the y-coordinate where the snackbar appears (usually bottom)
+                // For example, assuming the snackbar is at the bottom:
+                val yPos = rootView.height - snackbarHeight
+
+                // Capture only the area behind the snackbar:
+                val bitmap = Bitmap.createBitmap(
+                    rootView.width,
+                    snackbarHeight,
+                    Bitmap.Config.ARGB_8888
+                )
+                val canvas = Canvas(bitmap)
+                // Translate the canvas so that you capture the area at the bottom of the screen
+                canvas.translate(0f, -yPos.toFloat())
+                rootView.draw(canvas)
+
+                // Blur only the snackbar area
+                val blurredBitmap = RenderScriptBlur.blur(context, bitmap, 25f)
+                // Apply the blurred bitmap as the background of the custom snackbar view:
+                customSnackbarView.background = BitmapDrawable(context.resources, blurredBitmap)
+
+                // Start animations
+                val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+                val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
+                customSnackbarView.startAnimation(fadeIn)
+                customSnackbarView.startAnimation(slideUp)
+                snackbar.setDuration(4000)
+                snackbar.show()
+            }
         } else if (level > 32) {
             isNotificationShown = false
         }
     }
+
 
 
 }

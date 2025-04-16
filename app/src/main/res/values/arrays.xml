@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="progress_colors">
+        <item>#FF5722</item>  <!-- Deep Orange -->
+        <item>#FFC107</item>  <!-- Amber -->
+        <item>#4CAF50</item>  <!-- Green -->
+        <item>#03A9F4</item>  <!-- Light Blue -->
+    </array>
+</resources>

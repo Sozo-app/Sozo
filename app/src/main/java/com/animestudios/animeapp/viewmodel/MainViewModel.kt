@@ -10,4 +10,6 @@ interface MainViewModel {
     fun getGenresAndTags(activity: Activity)
     fun getUnreadNotificationsCount()
     fun getGenres(activity: Activity)
+
+
 }

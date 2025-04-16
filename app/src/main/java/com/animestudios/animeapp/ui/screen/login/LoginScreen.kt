@@ -20,6 +20,7 @@ import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.databinding.LoginScreenBinding
 import com.animestudios.animeapp.tools.logError
 import com.animestudios.animeapp.viewmodel.imp.MainViewModelImp
+import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,7 +49,6 @@ class LoginScreen : Fragment() {
             val clientID = 14066
             val data = arguments?.getInt("selected", 1)
             println(data)
-
             if (!isCustomTabsAvailable(requireContext())) {
                 if (data != null) {
                     binding.webLogin.settings.javaScriptEnabled = true
@@ -207,7 +207,8 @@ class LoginScreen : Fragment() {
                     binding.webLogin.loadUrl("https://anilist.co/api/v2/oauth/authorize?client_id=$clientID&response_type=token")
                     binding.webLogin.visible()
                 }
-            } else {
+            }
+            else {
                 if (data != null) {
                     binding.webLogin.settings.javaScriptEnabled = true
                     binding.webLogin.clearCache(true)
@@ -320,7 +321,6 @@ class LoginScreen : Fragment() {
                     Anilist.loginIntent(requireContext())
                 }
             }
-
         }
     }
 

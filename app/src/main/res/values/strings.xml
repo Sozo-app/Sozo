@@ -157,6 +157,8 @@
     <string name="filler">Sort &amp; Filter</string>
     <string name="grid">Grid</string>
     <string name="apply">Apply</string>
+    <string name="update_now">Update Now</string>
+    <string name="understand">I Understand</string>
     <string name="cancel">Cancel</string>
 
     <string name="anilist_settings">Anilist Settings</string>
@@ -168,6 +170,11 @@
     <string name="downloadInSd">Download in SD card</string>
     <string name="noSdFound">No SD card was Found.</string>
     <string name="reader_settings">Reader Settings</string>
+    <string name="update_sheet">Update Available</string>
+    <string name="warning_update">Read this before updating</string>
+    <string name="warning_update_desc">
+        You can install the new app using the APK file in the Downloads folder. Before installation, please remove the existing version !
+    </string>
     <string name="default_source">Default Source</string>
     <string name="show_yt">Show Youtube Link</string>
     <string name="default_ep_view">Default Episode Layout</string>
@@ -215,6 +222,7 @@
     <string name="skip">Skip</string>
     <string name="skip_time">Skip time</string>
     <string name="screenshots">Screenshots</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
 
 
 </resources>

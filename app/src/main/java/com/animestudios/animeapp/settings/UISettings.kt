@@ -17,5 +17,5 @@ data class UISettings(
     //Animations
     var bannerAnimations: Boolean = true,
     var layoutAnimations: Boolean = true,
-    var animationSpeed: Float = 1f
+    var animationSpeed: Float = 1.1f
 ) : Serializable
