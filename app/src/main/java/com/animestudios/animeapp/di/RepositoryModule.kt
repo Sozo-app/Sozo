@@ -1,8 +1,10 @@
 package com.animestudios.animeapp.di
 
+import com.animestudios.animeapp.anilist.repo.MessageRepository
 import com.animestudios.animeapp.anilist.repo.NotificationRepository
 import com.animestudios.animeapp.anilist.repo.ProfileRepository
 import com.animestudios.animeapp.anilist.repo.ReviewRepository
+import com.animestudios.animeapp.anilist.repo.imp.MessageRepositoryImpl
 import com.animestudios.animeapp.anilist.repo.imp.NotificationRepositoryImp
 import com.animestudios.animeapp.anilist.repo.imp.ProfileRepositoryImpl
 import com.animestudios.animeapp.anilist.repo.imp.ReviewRepositoryImpl
@@ -25,6 +27,9 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindReviewRepository(repository: ReviewRepositoryImpl): ReviewRepository
+
+    @Binds
+    abstract fun bindMessageRepository(repository: MessageRepositoryImpl): MessageRepository
 
 
 }

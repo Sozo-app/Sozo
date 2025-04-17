@@ -41,7 +41,6 @@ class RelationScreen : Fragment() {
         model.getMedia().observe(viewLifecycleOwner) {
             val media = it
             model.loadRelationsById(media.id)
-
             model.getRelations.observe(viewLifecycleOwner) {
 
                 when (it) {
@@ -75,7 +74,6 @@ class RelationScreen : Fragment() {
                     }
                 }
             }
-
         }
     }
 }

@@ -20,6 +20,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.animestudios.animeapp.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
+import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.databinding.MainScreenBinding
 import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.ui.screen.main.account.AccountBottomSheetDialog
@@ -128,7 +129,7 @@ class MainScreen : Fragment() {
                             val item = bottomBar.menu.getItem(3)
                             item.iconTintList = null
                             item.iconTintMode = PorterDuff.Mode.DST
-                            Glide.with(this@MainScreen)
+                            Glide.with(App.currentContext()!!)
                                 .load(Anilist.avatar)
                                 .circleCrop()
                                 .into(object : CustomTarget<Drawable>() {

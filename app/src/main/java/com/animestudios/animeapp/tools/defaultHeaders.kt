@@ -18,12 +18,15 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import okhttp3.Cache
+import okhttp3.CookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.File
 import java.io.PrintWriter
 import java.io.Serializable
 import java.io.StringWriter
+import java.net.CookieManager
+import java.net.CookiePolicy
 import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
@@ -44,7 +47,10 @@ fun initializeNetwork(context: Context) {
         File(context.cacheDir, "http_cache"),
         5 * 1024L * 1024L // 5 MiB
     )
+    val cookieManager: CookieManager = CookieManager()
+    cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
     okHttpClient = OkHttpClient.Builder()
+
         .addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -60,6 +66,8 @@ fun initializeNetwork(context: Context) {
             }
         }
         .build()
+//    okHttpClient.cookieJar = CookieJar { _, _ -> cookieManager }
+//    okHttpClient.cookieJar =CookieJar.(cookieManager)
     client = Requests(
         okHttpClient,
         defaultHeaders,

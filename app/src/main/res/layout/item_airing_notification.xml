@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:background="@drawable/tab_item_unselected"
+    android:padding="10dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgCover"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
         android:layout_width="56dp"
+        app:srcCompat="@drawable/banner_img"
         android:layout_height="56dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +22,10 @@
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
+        android:maxLines="1"
+        android:lines="1"
+        android:maxLength="16"
+        android:ellipsize="end"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@android:color/white"
@@ -34,6 +40,7 @@
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:lines="1"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:textColor="@android:color/darker_gray"

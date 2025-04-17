@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -17,6 +18,9 @@ import android.net.Uri
 import android.os.*
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.*
@@ -27,6 +31,7 @@ import android.webkit.WebView
 import android.widget.*
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -35,6 +40,7 @@ import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
@@ -338,6 +344,7 @@ fun isOnline(context: Context): Boolean {
                             cap.hasTransport(NetworkCapabilities.TRANSPORT_VPN) ||
                             cap.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
                             cap.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE) -> true
+
                     else -> false
                 }
             } else false
@@ -415,6 +422,84 @@ fun loadFilterTab(
     return list
 }
 
+/**
+ * Extracts a “vibrant” color from this Bitmap (or falls back to [defaultColor]).
+ */
+fun Bitmap.getVibrantColor(defaultColor: Int): Int {
+    val palette = Palette.from(this).generate()
+    return palette.vibrantSwatch?.rgb
+        ?: palette.dominantSwatch?.rgb
+        ?: defaultColor
+}
+
+/**
+ * Asynchronously extracts a color from this ImageView’s drawable (if it’s a BitmapDrawable),
+ * then sets “[name][suffix]” on the TextView, coloring only the [name] portion.
+ *
+ * @param name the user name to highlight
+ * @param suffix the rest of the message (default “ followed you”)
+ * @param defaultHighlightRes a @ColorRes fallback in case Palette fails
+ */
+fun TextView.setColoredNameFromImage(
+    name: String,
+    suffix: String = "",
+    imageView: ImageView,
+    @ColorRes defaultHighlightRes: Int
+) {
+    // grab the Bitmap from the ImageView’s drawable
+    val bd = imageView.drawable
+    val bmp = (bd as? android.graphics.drawable.BitmapDrawable)?.bitmap
+    if (bmp == null) {
+        // no bitmap? just use default color span
+        setColoredName(name, suffix, defaultHighlightRes)
+        return
+    }
+
+    // generate Palette asynchronously
+    Palette.from(bmp).generate { palette ->
+        val defaultColor = ContextCompat.getColor(context, defaultHighlightRes)
+        val color = palette?.vibrantSwatch?.rgb
+            ?: palette?.dominantSwatch?.rgb
+            ?: defaultColor
+
+        // build and apply spannable
+        val full = "$name$suffix"
+        val span = SpannableString(full)
+        span.setSpan(
+            ForegroundColorSpan(color),
+            0,
+            name.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        text = span
+    }
+}
+
+ fun Fragment.getThemeColor(@AttrRes attr: Int): Int {
+    val tv = TypedValue()
+    requireContext().theme.resolveAttribute(attr, tv, true)
+    return tv.data
+}
+
+/**
+ * Synchronous fallback: uses a fixed @ColorRes for the name span.
+ */
+fun TextView.setColoredName(
+    name: String,
+    suffix: String = " followed you",
+    @ColorRes nameColorRes: Int
+) {
+    val full = "$name$suffix"
+    val span = SpannableString(full)
+    val color = ContextCompat.getColor(context, nameColorRes)
+    span.setSpan(
+        ForegroundColorSpan(color),
+        0,
+        name.length,
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    text = span
+}
 
 class ZoomOutPageTransformer(private val uiSettings: UISettings) :
     ViewPager2.PageTransformer {
@@ -1167,7 +1252,6 @@ fun clearCookies(context: Context?) {
 }
 
 
-
 fun getCurrentBrightnessValue(context: Context): Float {
     fun getMax(): Int {
         val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -1187,7 +1271,11 @@ fun getCurrentBrightnessValue(context: Context): Float {
     }
 
     fun getCur(): Float {
-        return Settings.System.getInt(context.contentResolver, Settings.System.SCREEN_BRIGHTNESS, 127).toFloat()
+        return Settings.System.getInt(
+            context.contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS,
+            127
+        ).toFloat()
     }
 
     return brightnessConverter(getCur() / getMax(), true)
@@ -1208,14 +1296,18 @@ fun checkCountry(context: Context): Boolean {
             val tz = TimeZone.getDefault().id
             tz.equals("Asia/Kolkata", ignoreCase = true)
         }
-        TelephonyManager.SIM_STATE_READY  -> {
+
+        TelephonyManager.SIM_STATE_READY -> {
             val countryCodeValue = telMgr.networkCountryIso
             countryCodeValue.equals("in", ignoreCase = true)
         }
-        else                              -> false
+
+        else -> false
     }
 }
-open class NoPaddingArrayAdapter<T>(context: Context, layoutId: Int, items: List<T>) : ArrayAdapter<T>(context, layoutId, items) {
+
+open class NoPaddingArrayAdapter<T>(context: Context, layoutId: Int, items: List<T>) :
+    ArrayAdapter<T>(context, layoutId, items) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getView(position, convertView, parent)
         view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)

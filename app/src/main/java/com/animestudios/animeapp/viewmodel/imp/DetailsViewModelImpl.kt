@@ -91,6 +91,7 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
                 if (media.anime?.episodes?.get(i) != null) {
                     media.anime.selectedEpisode = i
                 } else {
+
                     snackString("Couldn't find episode : $i")
                     return@post
                 }
@@ -103,6 +104,7 @@ class DetailsViewModelImpl @Inject constructor(private val aniListClient: AniLis
     }
 
     fun loadRelationsById(id: Int) {
+
         viewModelScope.launch {
             getRelations.value = Resource.Loading
             val media = aniListClient.getRelationsById(id).data

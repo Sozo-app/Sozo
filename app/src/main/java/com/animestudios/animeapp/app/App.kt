@@ -11,10 +11,15 @@ import androidx.multidex.MultiDexApplication
 import androidx.work.*
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.tools.initializeNetwork
+import com.animestudios.animeapp.utils.PresenceManager
 import com.animestudios.animeapp.widget.ThemeManager
 import com.animestudios.animeapp.worker.NotificationWorker
 import com.animestudios.animeapp.worker.NotificationWorkerFactory
 import com.google.android.material.color.DynamicColors
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.HiltAndroidApp
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -25,6 +30,11 @@ class App : MultiDexApplication(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: NotificationWorkerFactory
 
+
+    override fun getWorkManagerConfiguration(): Configuration =
+        Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 
     override fun onCreate() {
         super.onCreate()
@@ -120,9 +130,4 @@ class App : MultiDexApplication(), Configuration.Provider {
             return instance?.mFTActivityLifecycleCallbacks?.currentActivity
         }
     }
-
-    override fun getWorkManagerConfiguration() = Configuration.Builder()
-        .setWorkerFactory(workerFactory)
-        .setMinimumLoggingLevel(Log.DEBUG)
-        .build()
 }

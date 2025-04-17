@@ -1,14 +1,18 @@
 package com.animestudios.animeapp.di
 
+import android.content.Context
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.api.intercepter.HeaderInterceptor
 import com.animestudios.animeapp.anilist.apollo.client.AniListClient
+import com.animestudios.animeapp.readData
 import com.animestudios.animeapp.tools.Apollo
+import com.animestudios.animeapp.tools.TokenInterceptor
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,12 +27,14 @@ object NetworkModule {
     @Singleton
     @Apollo
     fun provideOkHttpClient(
+        @ApplicationContext context: Context
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             }
         )
+
         .addInterceptor(HeaderInterceptor())
         .addInterceptor(
             HttpLoggingInterceptor().apply {

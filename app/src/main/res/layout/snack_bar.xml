@@ -32,11 +32,12 @@
             android:textSize="16sp" />
 
         <TextView
+            android:background="?selectableItemBackground"
             android:id="@+id/snackbar_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Disable"
-            android:textColor="#00aaff"
+            android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>

@@ -15,7 +15,9 @@ import com.animestudios.animeapp.di.FirebaseService
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.utils.AppUpdate
 import com.animestudios.animeapp.utils.AppUtils
+import com.animestudios.animeapp.utils.PresenceManager
 import com.animestudios.animeapp.viewmodel.MainViewModel
+import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +30,7 @@ import javax.inject.Inject
 class MainViewModelImp @Inject constructor(
     private var notificationRepository: NotificationRepositoryImp,
     private val firebaseService: FirebaseService,
-
+    private val firebaseDb:FirebaseDatabase
     ) :
     ViewModel(), MainViewModel {
     private val queriesImp = AniListQueriesImp()
@@ -118,11 +120,13 @@ class MainViewModelImp @Inject constructor(
     suspend fun loadProfile(success: (() -> Unit)) {
         viewModelScope.launch {
             if (queriesImp.loadProfile()) {
+                Anilist.userid?.let { PresenceManager(firebaseDb).start(myUserId = it) }
                 success.invoke()
             } else
                 snackString("Error loading AniList User Data")
         }
     }
+
 
 
     override fun getGenres(activity: Activity) {

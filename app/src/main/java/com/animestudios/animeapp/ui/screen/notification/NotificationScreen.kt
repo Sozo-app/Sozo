@@ -33,6 +33,7 @@ class NotificationScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.notificationPager.isUserInputEnabled = false
         binding.notificationPager.adapter = NotificationTabAdapter(tabList(), requireActivity())
         TabLayoutMediator(binding.notificationTab, binding.notificationPager) { _, _ ->
         }.attach()
@@ -117,10 +118,14 @@ class NotificationScreen : Fragment() {
     fun tabList(): ArrayList<String> {
         return arrayListOf(
             "All",
+            "Following",
             "Airing",
-            "Forum",
-            "Follows",
-            "Media",
+            "Likes",
+            "Messages",
+            "Mentions",
+            "Replies",
+            "Thread Mentions",
+            "Thread Replies"
         )
     }
 
@@ -135,6 +140,9 @@ class NotificationScreen : Fragment() {
             Pair(R.drawable.ic_forum, true),
             Pair(R.drawable.ic_follow, true),
             Pair(R.drawable.ic_pic, true),
+            Pair(R.drawable.ic_round_favorite_border_24, true),
+            Pair(R.drawable.ic_player, true),
+            Pair(R.drawable.ic_airing, true),
 
             )
     }

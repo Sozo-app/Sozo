@@ -77,6 +77,7 @@ data class AiringNotification(
     override val id: Int,
     override val type: String,
     override val createdAt: Long,
+
     override val context: String?, // AiringNotification’da konteksti bo‘lmasa, null yuborish mumkin
     val episode: Int,
     val contexts: List<String?>,
@@ -101,6 +102,7 @@ data class ActivityMessageNotification(
     override val createdAt: Long,
     override val context: String?,
     val userId: Int,
+    val message: String,
     val user: AniUser
 ) : AniNotification(id, type, createdAt, context)
 

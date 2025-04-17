@@ -1,5 +1,6 @@
 package com.animestudios.animeapp.anilist.api.intercepter
 
+import android.util.Log
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.readData
 import okhttp3.Interceptor
@@ -24,6 +25,7 @@ class HeaderInterceptor @Inject constructor(
         when (selectedAccountType) {
             1 -> {
                 val token = Anilist.token ?: return chain.proceed(originalRequest)
+                Log.d("GGG", "intercept:selected 1 ")
                 /* Adding the header to the request. */
                 val newRequest = originalRequest.newBuilder()
                     .addHeader("Authorization", "Bearer $token")
@@ -35,7 +37,7 @@ class HeaderInterceptor @Inject constructor(
             }
             2 -> {
                 val token = Anilist.token2 ?: return chain.proceed(originalRequest)
-                /* Adding the header to the request. */
+                Log.d("GGG", "intercept:selected 2 ")
                 val newRequest = originalRequest.newBuilder()
                     .addHeader("Authorization", "Bearer $token")
                     .addHeader("Accept", "application/json")
@@ -45,6 +47,7 @@ class HeaderInterceptor @Inject constructor(
                 return response
             }
             else -> {
+                Log.d("GGG", "intercept:selected 3 ")
                 val token = Anilist.token3 ?: return chain.proceed(originalRequest)
                 /* Adding the header to the request. */
                 val newRequest = originalRequest.newBuilder()

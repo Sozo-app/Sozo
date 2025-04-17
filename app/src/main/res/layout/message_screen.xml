@@ -1,66 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:paddingTop="30dp"
+    android:paddingBottom="50dp">
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/messageRv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/messageInputLayout"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_sender_message"
-        tools:visibility="visible" />
 
-    <LinearLayout
-        android:id="@+id/messageInputLayout"
+    <!-- AppBar with avatar, title & subtitle -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-        <EditText
-            android:id="@+id/messageInput"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            app:navigationIcon="@drawable/ic_back"
+            app:titleTextAppearance="@style/TitleAppearance">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearance="@style/roundedImageView"
+                    app:srcCompat="@drawable/banner_img" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/fromChatName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/inter_bold"
+                            android:maxLength="10"
+                            android:text="Azamov"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/verifedBadge"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearance="@style/roundedImageView"
+                            app:srcCompat="@drawable/ic_admin"
+                            app:tint="@color/basic_color" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/lastSeenToolbarTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Last seen 2 hours ago"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messageRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/messageInputLayout"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <LinearLayout
+            android:id="@+id/messageInputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Type a message"
-            android:inputType="textMultiLine"
-            android:maxLines="4"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-        <ImageButton
-            android:id="@+id/sendMessageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            <EditText
+                android:id="@+id/messageInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Type a message" />
 
-            android:layout_marginStart="10dp"
-            android:background="@drawable/send_button_background"
-            android:padding="10dp"
-            android:src="@drawable/ic_send" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/loading_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_above="@+id/messageInputLayout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:gravity="center"
-        android:text="Loading messages"
-        android:visibility="gone" />
-
-</RelativeLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/sendMessageButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="4dp"
+                app:srcCompat="@drawable/ic_send" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

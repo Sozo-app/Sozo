@@ -3,6 +3,8 @@ package com.animestudios.animeapp.ui.screen.notification.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.animestudios.animeapp.R
 import com.animestudios.animeapp.anilist.response.ActivityLikeNotification
 import com.animestudios.animeapp.anilist.response.ActivityMentionNotification
 import com.animestudios.animeapp.anilist.response.ActivityMessageNotification
@@ -17,6 +19,13 @@ import com.animestudios.animeapp.databinding.ItemActivityMentionNotificationBind
 import com.animestudios.animeapp.databinding.ItemActivityMessageNotificationBinding
 import com.animestudios.animeapp.databinding.ItemAiringNotificationBinding
 import com.animestudios.animeapp.databinding.ItemFollowingNotificationBinding
+import com.animestudios.animeapp.loadImage
+import com.animestudios.animeapp.setColoredName
+import com.animestudios.animeapp.setColoredNameFromImage
+import com.apollographql.apollo3.api.not
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class NotificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -37,6 +46,11 @@ class NotificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifications.clear()
         notifications.addAll(newItems)
         notifyDataSetChanged()
+    }
+
+    fun setItemsForPaging(newItems: List<AniNotification>) {
+        notifications.addAll(newItems)
+        notifyItemInserted(notifications.size - newItems.size)
     }
 
     override fun getItemCount(): Int = notifications.size
@@ -85,7 +99,8 @@ class NotificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             VIEW_TYPE_REPLY -> {
-                val binding = ItemActivityMentionNotificationBinding.inflate(inflater, parent, false)
+                val binding =
+                    ItemActivityMentionNotificationBinding.inflate(inflater, parent, false)
                 ActivityReplyViewHolder(binding)
             }
 
@@ -119,37 +134,45 @@ class NotificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    // 1) Following
     inner class FollowingViewHolder(
         private val binding: ItemFollowingNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: FollowingNotification) {
+            binding.imgCover.loadImage(notification.user.avatar.medium)
             binding.tvNotificationTitle.text = "${notification.user.name} followed you"
+            binding.tvNotificationTitle.setColoredName(
+                notification.user.name,
+                nameColorRes = R.color.md_theme_dark_7_primary
+            )
         }
     }
 
-    // 2) Airing
     inner class AiringViewHolder(
         private val binding: ItemAiringNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: AiringNotification) {
-            binding.tvTime.text = notification.createdAt.toString()
+            binding.tvTime.text = notification.createdAt.toDateTime()
             binding.tvTitle.text = notification.media.title
+            binding.imgCover.loadImage(notification.media.coverImage)
             binding.tvSubtitle.text =
                 "Episode ${notification.episode} of ${notification.media.title} just aired"
-
         }
     }
 
-    // 3) ActivityLike
+    fun Long.toDateTime(): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = Date(this)
+        return sdf.format(date)
+    }
+
     inner class ActivityLikeViewHolder(
         private val binding: ItemActivityLikeNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: ActivityLikeNotification) {
-            // Masalan: kim like bosganini ko‘rsatamiz
+            binding.imgUserAvatar.loadImage(notification.user.avatar.large)
             binding.tvLikeInfo.text = "${notification.user.name} liked your activity"
         }
     }
@@ -160,53 +183,51 @@ class NotificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: ActivityMessageNotification) {
-            // Masalan: kim message yozganini va context matnini ko‘rsatamiz
+            binding.imgUserAvatar.loadImage(notification.user.avatar.large)
             binding.tvMessageInfo.text =
-                "${notification.user.name} sent you a message\n${notification.context}"
+                "${notification.user.name} sent you a message"
         }
     }
 
-    // 5) ActivityMention
     inner class ActivityMentionViewHolder(
         private val binding: ItemActivityMentionNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: ActivityMentionNotification) {
-            // Masalan: kim mention qilgani va qayerda mention qilingani
+            binding.imgUserAvatar.loadImage(notification.user.avatar.large)
             binding.tvMentionInfo.text =
                 "${notification.user.name} mentioned you: ${notification.context}"
         }
     }
 
-    // 6) ActivityReply
     inner class ActivityReplyViewHolder(
         private val binding: ItemActivityMentionNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: ActivityReplyNotification) {
-            // Masalan: kim reply qilgani
+            binding.imgUserAvatar.loadImage(notification.user.avatar.large)
             binding.tvMentionInfo.text =
                 "${notification.user.name} replied to you: ${notification.context}"
         }
     }
 
-    // 7) ThreadCommentMention
     inner class ThreadCommentMentionViewHolder(
         private val binding: ItemActivityMentionNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: ThreadCommentMentionNotification) {
+            binding.imgUserAvatar.loadImage(notification.user.avatar.large)
             binding.tvMentionInfo.text =
                 "${notification.user.name} mentioned you in a thread\n${notification.context}"
         }
     }
 
-    // 8) ThreadCommentReply
     inner class ThreadCommentReplyViewHolder(
         private val binding: ItemActivityMentionNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notification: ThreadCommentReplyNotification) {
+            binding.imgUserAvatar.loadImage(notification.user.avatar.large)
             binding.tvMentionInfo.text =
                 "${notification.user.name} replied in a thread\n${notification.context}"
         }

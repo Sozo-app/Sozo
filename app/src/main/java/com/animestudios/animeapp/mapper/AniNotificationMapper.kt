@@ -62,32 +62,33 @@ object AniNotificationMapper {
 
     fun mapActivityLikeNotification(
         data: NotificationsQuery.OnActivityLikeNotification
-    ): AniNotification {
-        val activity = data.activity.let { activityData ->
-            when (activityData!!.__typename) {
+    ): AniNotification? {
+        val activity = data.activity?.let { activityData ->
+            when (activityData.__typename) {
                 "ListActivity" -> activityData.onListActivity?.let {
                     AniActivity.ListActivity(
-                        id = it.id,
+                        id = it.id ?: return null, // Use safe calls to avoid NPE
                         type = it.type.toString(),
-                        createdAt = it.createdAt!!.toLong(),
+                        createdAt = it.createdAt?.toLong()
+                            ?: return null, // Safe call for `createdAt`
                         status = it.status,
                         progress = it.progress,
-                        media = mapHomeMedia(it.media!!)
+                        media = mapHomeMedia(it.media ?: return null) // Handle null media
                     )
                 }
 
                 "MessageActivity" -> activityData.onMessageActivity?.let {
                     AniActivity.MessageActivity(
-                        id = it.id,
+                        id = it.id ?: return null,
                         type = it.type.toString(),
-                        createdAt = it.createdAt.toLong(),
+                        createdAt = it.createdAt?.toLong() ?: return null,
                         message = it.message,
                         recipient = AniUser(
-                            id = it.recipient!!.id,
-                            name = it.recipient.name,
+                            id = it.recipient?.id ?: return null,
+                            name = it.recipient?.name ?: return null,
                             avatar = AniAvatar(
-                                large = it.recipient.avatar!!.large,
-                                medium = it.recipient.avatar.medium
+                                large = it.recipient?.avatar?.large ?: return null,
+                                medium = it.recipient?.avatar?.medium ?: return null
                             )
                         )
                     )
@@ -95,29 +96,29 @@ object AniNotificationMapper {
 
                 "TextActivity" -> activityData.onTextActivity?.let {
                     AniActivity.TextActivity(
-                        id = it.id,
+                        id = it.id ?: return null,
                         type = it.type.toString(),
-                        createdAt = it.createdAt.toLong(),
+                        createdAt = it.createdAt?.toLong() ?: return null,
                         text = it.text
                     )
                 }
 
                 else -> null
             }
-        } ?: throw IllegalArgumentException("Activity mapping error")
+        } ?: return null // If `activity` data is null, return null
 
         return ActivityLikeNotification(
-            id = data.id,
+            id = data.id ?: return null,
             type = data.type.toString(),
-            createdAt = data.createdAt!!.toLong(),
+            createdAt = data.createdAt?.toLong() ?: return null,
             context = data.context,
             userId = data.userId,
             user = AniUser(
-                id = data.user!!.id,
-                name = data.user.name,
+                id = data.user?.id ?: return null,
+                name = data.user?.name ?: return null,
                 avatar = AniAvatar(
-                    large = data.user.avatar!!.large,
-                    medium = data.user.avatar.medium
+                    large = data.user?.avatar?.large ?: return null,
+                    medium = data.user?.avatar?.medium ?: return null
                 )
             ),
             activity = activity
@@ -126,19 +127,20 @@ object AniNotificationMapper {
 
     fun mapActivityMessageNotification(
         data: NotificationsQuery.OnActivityMessageNotification
-    ): AniNotification {
+    ): AniNotification? {
         return ActivityMessageNotification(
-            id = data.id,
+            id = data.id ?: return null,
             type = data.type.toString(),
-            createdAt = data.createdAt!!.toLong(),
+            createdAt = data.createdAt?.toLong() ?: return null,
             context = data.context,
             userId = data.userId,
+            message = data.message?.message ?: "",
             user = AniUser(
-                id = data.user!!.id,
-                name = data.user.name,
+                id = data.user?.id ?: return null,
+                name = data.user?.name ?: return null,
                 avatar = AniAvatar(
-                    large = data.user.avatar!!.large,
-                    medium = data.user.avatar.medium
+                    large = data.user?.avatar?.large ?: return null,
+                    medium = data.user?.avatar?.medium ?: return null
                 )
             )
         )

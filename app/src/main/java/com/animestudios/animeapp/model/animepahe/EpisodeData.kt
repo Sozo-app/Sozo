@@ -3,7 +3,6 @@ package com.animestudios.animeapp.model.animepahe
 import kotlinx.serialization.Serializable
 
 @Serializable
-
 data class EpisodeData(
     val current_page: Int?,
     @Serializable

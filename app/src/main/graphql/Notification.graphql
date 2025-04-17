@@ -1,5 +1,12 @@
 query Notifications($page: Int) {
     page: Page(page: $page, perPage: 20) {
+        pageInfo {
+            currentPage
+            hasNextPage
+            lastPage
+            total
+
+        }
         notifications(resetNotificationCount: false) {
             ... on FollowingNotification {
                 context
@@ -75,6 +82,10 @@ query Notifications($page: Int) {
             ... on ActivityMessageNotification {
                 context
                 createdAt
+                message {
+                    message
+
+                }
                 id
                 type
                 user {

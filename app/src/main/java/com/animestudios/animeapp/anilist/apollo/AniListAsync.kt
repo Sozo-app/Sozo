@@ -7,7 +7,7 @@ import com.animestudios.animeapp.type.ReviewSort
 import com.apollographql.apollo3.api.ApolloResponse
 
 interface AniListAsync {
-    suspend fun getNotifications(page: Int): ApolloResponse<NotificationsQuery.Data>
+    suspend fun getNotifications(page: Int): ApolloResponse<NotificationsQuery.Data>?
     suspend fun getNotificationsUnreadCount(): ApolloResponse<UnreadNotificationCountQuery.Data>
     suspend fun getExtraLargeImage(id: Int): ApolloResponse<GetImageQuery.Data>
     suspend fun getRelationsById(id:Int):ApolloResponse<GetRelationByIdQuery.Data>

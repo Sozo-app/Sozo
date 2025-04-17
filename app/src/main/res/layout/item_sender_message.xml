@@ -1,64 +1,41 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardBackgroundColor="@color/nav_bg"
-    app:cardCornerRadius="10dp">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/bg_bubble_sent"
+    android:padding="4dp">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_marginHorizontal="8dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Sender avatar -->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatarImageView"
-                image="@{message.messenger.avatarMedium}"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_vertical"
-                tools:src="@tools:sample/avatars" />
+    <ImageView
+        android:id="@+id/readReceiptView"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_margin="4dp"
+        android:src="@drawable/ic_unread"
+        app:layout_constraintBottom_toBottomOf="@id/messageTextView"
+        app:layout_constraintEnd_toEndOf="@id/messageTextView" />
 
-            <TextView
-                android:id="@+id/usernameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:text="@{message.messenger.name}"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:text="klejvi" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/messageTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="16sp"
-            tools:text="Sample message ckemi klejvi" />
-
-        <TextView
-            android:id="@+id/messageTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="4dp"
-            android:text="@{message.convertUnixTimeToFormattedTime}"
-            android:textSize="12sp"
-            tools:text="12:00 AM" />
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/messageTextView"
+        app:layout_constraintTop_toBottomOf="@id/messageTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

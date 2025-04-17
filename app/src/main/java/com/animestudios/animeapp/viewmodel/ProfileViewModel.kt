@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface ProfileViewModel {
     val userData:MutableLiveData<Resource<UserQuery.Data>>
     fun loadUserById(userId:Int)
+
 }

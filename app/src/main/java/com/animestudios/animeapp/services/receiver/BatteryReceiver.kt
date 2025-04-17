@@ -49,59 +49,48 @@ class BatteryReceiver : BroadcastReceiver() {
     private fun showNotification(context: Context, level: Int) {
         if (level <= 32 && !isNotificationShown) {
             isNotificationShown = true
-            val customSnackbarView = LayoutInflater.from(context)
+            val customSnackBarView = LayoutInflater.from(context)
                 .inflate(R.layout.snack_bar, null, false)
-            val actionTextView: TextView = customSnackbarView.findViewById(R.id.snackbar_action)
+            val actionTextView: TextView = customSnackBarView.findViewById(R.id.snackbar_action)
             actionTextView.setOnClickListener {
-                isActionClicked = true  // Disable functionality after action click
+                isActionClicked = true
                 val uiSettings = readData<UISettings>("ui_settings") ?: UISettings()
                 saveData("ui_settings", uiSettings.copy(layoutAnimations = true))
                 isNotificationShown = false
+
             }
             val rootView = (context as? Activity)
                 ?.window?.decorView?.findViewById<View>(android.R.id.content)
                 ?: return
 
             rootView.post {
-                // Create the snackbar first so that it measures its dimensions
                 val snackbar = Snackbar.make(rootView, "", Snackbar.LENGTH_LONG)
                 val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
                 snackbarLayout.setPadding(0, 0, 0, 0)
-                // Use a transparent background for the snackbar container
                 snackbarLayout.setBackgroundColor(Color.TRANSPARENT)
 
-                // Add your custom view
-                snackbarLayout.addView(customSnackbarView, 0)
+                snackbarLayout.addView(customSnackBarView, 0)
 
-                // Measure the snackbar to get its height (if not already measured)
                 snackbarLayout.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
                 val snackbarHeight = snackbarLayout.measuredHeight
 
-                // Determine the y-coordinate where the snackbar appears (usually bottom)
-                // For example, assuming the snackbar is at the bottom:
                 val yPos = rootView.height - snackbarHeight
-
-                // Capture only the area behind the snackbar:
                 val bitmap = Bitmap.createBitmap(
                     rootView.width,
                     snackbarHeight,
                     Bitmap.Config.ARGB_8888
                 )
                 val canvas = Canvas(bitmap)
-                // Translate the canvas so that you capture the area at the bottom of the screen
                 canvas.translate(0f, -yPos.toFloat())
                 rootView.draw(canvas)
 
-                // Blur only the snackbar area
                 val blurredBitmap = RenderScriptBlur.blur(context, bitmap, 25f)
-                // Apply the blurred bitmap as the background of the custom snackbar view:
-                customSnackbarView.background = BitmapDrawable(context.resources, blurredBitmap)
+                customSnackBarView.background = BitmapDrawable(context.resources, blurredBitmap)
 
-                // Start animations
                 val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
                 val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-                customSnackbarView.startAnimation(fadeIn)
-                customSnackbarView.startAnimation(slideUp)
+                customSnackBarView.startAnimation(fadeIn)
+                customSnackBarView.startAnimation(slideUp)
                 snackbar.setDuration(4000)
                 snackbar.show()
             }

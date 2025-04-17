@@ -161,7 +161,7 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask">

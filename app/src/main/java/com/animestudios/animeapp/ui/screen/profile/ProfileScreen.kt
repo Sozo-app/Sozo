@@ -1,6 +1,10 @@
 package com.animestudios.animeapp.ui.screen.profile
 
+import android.animation.AnimatorSet
+import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
@@ -8,6 +12,8 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.math.MathUtils
@@ -21,13 +27,17 @@ import com.animestudios.animeapp.settings.UISettings
 import com.animestudios.animeapp.tools.Resource
 import com.animestudios.animeapp.tools.animationTransaction
 import com.animestudios.animeapp.tools.slideStart
+import com.animestudios.animeapp.tools.slideTop
 import com.animestudios.animeapp.tools.slideUp
 import com.animestudios.animeapp.ui.screen.profile.adapter.ProfileAdapter
 import com.animestudios.animeapp.viewmodel.imp.ProfileViewModelImpl
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
@@ -80,6 +90,7 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
                         )
 
                     }
+
                     else -> {
 
                     }
@@ -92,7 +103,9 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
             profileName.slideStart(700, 1)
 
         }
-
+        model.error.onEach {
+            snackString(it)
+        }.launchIn(lifecycleScope)
         model.userData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Error -> {
@@ -123,57 +136,127 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
         }
 
 
-        model.loadUserById(Anilist.userid!!.toInt())
+        model.loadProfile(Anilist.userid!!.toInt())
 
     }
 
     private var isCollapsed = false
-    private var isCollapsedForAppbar = false
-    private val percent = 70
+
     private var screenWidth = 0f
     private var mMaxScrollSize = 0
 
-    @SuppressLint("ResourceType")
-    override fun onOffsetChanged(appBar: AppBarLayout, i: Int) {
+    private val collapseThreshold = 70             // percent
+    private val uiSpeed get() = uiSettings.animationSpeed
+    private val baseDuration get() = (800 * uiSpeed).toLong()
+    override fun onOffsetChanged(appBar: AppBarLayout, offset: Int) {
         if (mMaxScrollSize == 0) mMaxScrollSize = appBar.totalScrollRange
-        val percentage = Math.abs(i) * 100 / mMaxScrollSize
-        val cap = MathUtils.clamp((percent - percentage) / percent.toFloat(), 0f, 1f)
-        val duration = (300 * uiSettings.animationSpeed).toLong()
 
-        binding.circleImageView.scaleX = 1f * cap
-        binding.circleImageView.scaleY = 1f * cap
+        binding.profileBg2.translationY = offset / 2f
+        binding.profileBg.translationY = offset / 2f
 
-        binding.circleImageView.visibility =
-            if (binding.circleImageView.scaleX == 0f) View.GONE else View.VISIBLE
-        binding.circleImageView.visibility =
-            if (binding.circleImageView.scaleX == 0f) View.GONE else View.VISIBLE
+        val percentage = abs(offset) * 100 / mMaxScrollSize
+        val scale = clamp((collapseThreshold - percentage) / collapseThreshold.toFloat(), 0f, 1f)
+        binding.circleImageView.apply {
+            scaleX = scale
+            scaleY = scale
+            visibility = if (scale == 0f) View.GONE else View.VISIBLE
+        }
 
-
-        if (percentage >= percent && !isCollapsed) {
+        if (percentage >= collapseThreshold && !isCollapsed) {
             isCollapsed = true
-            val typedValue = TypedValue()
-            val theme: Resources.Theme = requireContext().theme
-            theme.resolveAttribute(
-                com.google.android.material.R.attr.colorOnBackground,
-                typedValue,
-                true
-            )
-            @ColorInt val selectedcolor: Int = typedValue.data
-            requireActivity().window.statusBarColor = selectedcolor
-            ObjectAnimator.ofFloat(binding.detailAppbar, "translationX", 0f)
-                .setDuration(duration).start()
-
+            animateCollapse()
         }
-        if (percentage <= percent && isCollapsed) {
+        if (percentage < collapseThreshold && isCollapsed) {
             isCollapsed = false
-            requireActivity().window.statusBarColor =
-                ContextCompat.getColor(requireActivity(), R.color.status)
-            binding.cardView4.slideUp(700, 1)
-            binding.circleImageView.slideUp(700, 1)
-            binding.profileName.slideUp(700, 1)
-
+            animateExpand()
         }
-
     }
 
+    private fun animateCollapse() {
+
+        val fromColor = getThemeColor(com.google.android.material.R.attr.colorOnBackground)
+        val toColor = getThemeColor(com.google.android.material.R.attr.colorOnBackground)
+        ValueAnimator.ofObject(ArgbEvaluator(), fromColor, toColor).apply {
+            duration = baseDuration
+            addUpdateListener { animator ->
+                requireActivity().window.statusBarColor = animator.animatedValue as Int
+            }
+        }.start()
+
+        val avatarAnim = ObjectAnimator.ofPropertyValuesHolder(
+            binding.circleImageView,
+            PropertyValuesHolder.ofFloat(View.SCALE_X, 0f),
+            PropertyValuesHolder.ofFloat(View.SCALE_Y, 0f)
+        )
+
+        val cardAnim = ObjectAnimator.ofPropertyValuesHolder(
+            binding.cardView4,
+            PropertyValuesHolder.ofFloat(View.SCALE_X, 0.9f),
+            PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.9f),
+            PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, -20f),
+            PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0f)
+        )
+
+        val nameFade = ObjectAnimator.ofFloat(binding.profileName, View.ALPHA, 1f, 0f)
+
+        AnimatorSet().apply {
+            playTogether(avatarAnim, cardAnim, nameFade)
+            duration = baseDuration
+            interpolator = DecelerateInterpolator()
+        }.start()
+    }
+
+    private fun animateExpand() {
+        val fromColor = requireActivity().window.statusBarColor
+        val toColor = getThemeColor(com.google.android.material.R.attr.colorOnBackground)
+        ValueAnimator.ofObject(ArgbEvaluator(), fromColor, toColor).apply {
+            duration = baseDuration
+            addUpdateListener { animator ->
+                requireActivity().window.statusBarColor = animator.animatedValue as Int
+            }
+        }.start()
+
+        val avatarAnim = ObjectAnimator.ofPropertyValuesHolder(
+            binding.circleImageView,
+            PropertyValuesHolder.ofFloat(View.SCALE_X, 1f),
+            PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f)
+        ).apply {
+            interpolator = OvershootInterpolator(1.3f)
+        }
+
+        val cardAnim = ObjectAnimator.ofPropertyValuesHolder(
+            binding.cardView4,
+            PropertyValuesHolder.ofFloat(View.SCALE_X, 1f),
+            PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f),
+            PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f),
+            PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 1f)
+        ).apply {
+            interpolator = OvershootInterpolator(1.3f)
+        }
+
+        AnimatorSet().apply {
+            playTogether(avatarAnim, cardAnim)
+            duration = baseDuration
+        }.start()
+
+        binding.profileName.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setInterpolator(OvershootInterpolator())
+            .setDuration(baseDuration)
+            .start()
+    }
+
+    override fun onDestroyView() {
+        binding.detailAppbar.removeOnOffsetChangedListener(this)
+        _binding = null
+        super.onDestroyView()
+    }
+
+    private fun clamp(value: Float, min: Float, max: Float) =
+        when {
+            value < min -> min
+            value > max -> max
+            else -> value
+        }
 }

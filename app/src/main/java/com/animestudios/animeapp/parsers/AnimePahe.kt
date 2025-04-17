@@ -7,10 +7,11 @@ import com.animestudios.animeapp.parsers.extractor.AnimePaheExtractor
 import com.animestudios.animeapp.tools.client
 import com.animestudios.animeapp.tools.getJsoup
 import kotlinx.coroutines.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import org.jsoup.select.Elements
+import java.net.CookieManager
+import java.net.CookiePolicy
 import java.util.regex.Pattern
+
 
 class AnimePahe : AnimeParser() {
     override val name = "AnimePahe"
@@ -31,13 +32,17 @@ class AnimePahe : AnimeParser() {
             val response = withContext(Dispatchers.IO) {
                 client.get(
                     "https://animepahe.ru/api?m=release&id=$animeLink&sort=episode_asc&page=$currentPage",
-                    headers = mapOf(
-                        "dnt" to "1",
-                        "Cookie" to "your_cookie_string_here", // Kerakli cookie ni qo'llang
-                        "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+                    mapOf(
+                        "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36",
+                        "Accept" to "application/json",
+                        "cookie" to "__ddgid_=3CIIbMpZkAvDfTLO; __ddgmark_=01xWaCnkllOz8sRz; __ddg2_=oWnFR38NY6RYWtId; __ddg1_=sevVENmRLVKULNFteGnZ; ann-fakesite=0; __ddg9_=195.158.9.110; __ddg8_=paGVVpRmwg7Xsv1P; __ddg10_=1744825088; XSRF-TOKEN=eyJpdiI6ImNjUGd5WjFzOENPbW1xODA1K0dsK2c9PSIsInZhbHVlIjoiclcvREowb3NrNjlTK0QzNkhIOEhBWmYzUDdlZllXYVdJTDBBMHZFdlRocjN1ZXJ4MmRWVm9leXdxTFhFVHlTZkEvM0EwLzJybFJvdnA1T0RVaFZzcGMwK2VHOGV3eTRrdnRDMVZuazYxTkdPdXRDTlM4MHh2Q3ZLNmdzUWJpQUYiLCJtYWMiOiJiMGU4OTUwM2QxMmFmNTNhODQ5ZmIxMDAxZDQxZjZiZDU5ZGE0NjFiYTMwMzk2NWIxOTY1NWIwMjhjZmNmNGM3IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IkQ2Q2xuSzF3YXlKOHE1K0xDQzZ2NWc9PSIsInZhbHVlIjoiWmJUaEhTOTlmQlkxQmQ3OWQ5Q3paUTU2L093MUs1RGttYmFLMURXb2Q3dW02RUhReFhBeVVpc1lKSWdVUmRwZjVYbm04RUxzeVQvSExleDM3M092SU1tSlFLVjhQR20vamZ6SldhN05LS29nUURBN1dCSWQzVTNXOW9nZ1MvbXYiLCJtYWMiOiIxZjc5ZDM5NGIxNzdhNDFlY2I4OTc1ZjhkMjM1NjVlMmI3ZmQ4MjhmOGE4MzdmNmNmYjc0ZmY2NTQ2ZGEyN2UwIiwidGFnIjoiIn0%3D"
                     )
                 ).parsed<EpisodeData>()
             }
+            Log.d(
+                "GGG",
+                "loadEpisodes:https://animepahe.ru/api?m=release&id=$animeLink&sort=episode_asc&page=$currentPage "
+            )
 
             lastPage = response.last_page ?: currentPage
 
@@ -89,41 +94,31 @@ class AnimePahe : AnimeParser() {
         return AnimePaheExtractor(server)
     }
 
+
     override suspend fun search(query: String): List<ShowResponse> {
-//        https://animepahe.ru/api?m=search&q=one%20piece
-        val firstSpaceIndex = query.indexOf(" ")
-        val formattedQuery = if (firstSpaceIndex != -1) {
-            query.substring(0, firstSpaceIndex).replace(" ", "%")
-        } else {
-            query
-        }
-
         val list = mutableListOf<ShowResponse>()
-//        println("${hostUrl}api?m=search&q=$formattedQuery")
-        client.get(
-            "${hostUrl}api?m=search&q=$query", mapOf(
-                "dnt" to "1",
-                "Cookie" to "\n" +
-                        "__ddg1_=Yhqnq62nxbM5uT9LNXBU; SERVERID=janna; latest=5633; ann-fakesite=0; res=720; aud=jpn; av1=0; dom3ic8zudi28v8lr6fgphwffqoz0j6c=33161aa3-e5ac-4f93-b315-e3165fddb0bf%3A3%3A1; sb_page_8966b6c0380845137e2f0bc664baf7be=3; sb_count_8966b6c0380845137e2f0bc664baf7be=3; sb_onpage_8966b6c0380845137e2f0bc664baf7be=1; XSRF-TOKEN=eyJpdiI6InV2RGVHeUhMNkxFelAzOG16TnRXa2c9PSIsInZhbHVlIjoiWkQyWTJaODErMnNVREhRdnZ5L0pycG1Sd2hWZkRhcjB6alN6MDZwb3ppOEpTNFpscWljYmRkVHI0RDNDN0ZxYkZIZE5jSTF2SWpjckZSaHhYWkVRZmdHMGgreE1LMlNLZXpPUnREQ3hjQ0NiZ1RZNUEwQ1hXNkxjaEdKdVc3YnAiLCJtYWMiOiJhMDRkOWU3ZjkzZWNjZmMxYTUxNTI0YWIwOTE2NTcxYTUyYWI3NTM4YTgyMzJhYmYyZDc3YjA2NWVlMjBmMDNhIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlVtQnJPL3habzNObUJmWVpkTEZTTEE9PSIsInZhbHVlIjoiR2ZMditvM0ZvYnVLajArWnVYZllFcEpOUGVXYk95bWRkdXdGcUVMZE9mT0ZvYmpPSEpoMDdNeC9MWjlxMnluVHd4djZ1TGcyOHJxbEdxd013K09wemJiZlcrZHhUZUN5YkJma3pkZXN4ZVZyU0RQY0pvSnc1WHpHTHlDUWpvTE0iLCJtYWMiOiIzZGVjYTM3N2ZiYzc3ODAyOWMyNjAwODU4NWU4YTY0NTgwNjVhNTVjZGM0NjZjM2QxOTM5MzJlZTcwNTEyYzM3IiwidGFnIjoiIn0%3D; __ddgid_=QTDZaHo3uDoGqGuR; __ddgmark_=a9WzMcAyP2KIzfHF; __ddg2_=nslKhTTMfCM10kKQ",
-                "Referer" to "https://animepahe.ru//api?m=search&q=$formattedQuery",
-                "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+           val requestSearch = client.get(
+            "$hostUrl/api?m=search&q=${query}", mapOf(
+                "Content-Type" to "application/json",
+                "Accept" to "application/json",
+                "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
+                "Cookie" to "__ddgid_=3CIIbMpZkAvDfTLO; __ddgmark_=01xWaCnkllOz8sRz; __ddg2_=oWnFR38NY6RYWtId; __ddg1_=sevVENmRLVKULNFteGnZ; ann-fakesite=0; __ddg9_=195.158.9.110; __ddg8_=paGVVpRmwg7Xsv1P; __ddg10_=1744825088; XSRF-TOKEN=eyJpdiI6ImNjUGd5WjFzOENPbW1xODA1K0dsK2c9PSIsInZhbHVlIjoiclcvREowb3NrNjlTK0QzNkhIOEhBWmYzUDdlZllXYVdJTDBBMHZFdlRocjN1ZXJ4MmRWVm9leXdxTFhFVHlTZkEvM0EwLzJybFJvdnA1T0RVaFZzcGMwK2VHOGV3eTRrdnRDMVZuazYxTkdPdXRDTlM4MHh2Q3ZLNmdzUWJpQUYiLCJtYWMiOiJiMGU4OTUwM2QxMmFmNTNhODQ5ZmIxMDAxZDQxZjZiZDU5ZGE0NjFiYTMwMzk2NWIxOTY1NWIwMjhjZmNmNGM3IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IkQ2Q2xuSzF3YXlKOHE1K0xDQzZ2NWc9PSIsInZhbHVlIjoiWmJUaEhTOTlmQlkxQmQ3OWQ5Q3paUTU2L093MUs1RGttYmFLMURXb2Q3dW02RUhReFhBeVVpc1lKSWdVUmRwZjVYbm04RUxzeVQvSExleDM3M092SU1tSlFLVjhQR20vamZ6SldhN05LS29nUURBN1dCSWQzVTNXOW9nZ1MvbXYiLCJtYWMiOiIxZjc5ZDM5NGIxNzdhNDFlY2I4OTc1ZjhkMjM1NjVlMmI3ZmQ4MjhmOGE4MzdmNmNmYjc0ZmY2NTQ2ZGEyN2UwIiwidGFnIjoiIn0%3D"
             )
-        )
-            .parsed<AnimePaheData>()
-            .apply {
+        ).parsed<AnimePaheData>()
+        Log.d("GGG", "search:$hostUrl/api?m=search&q=${encode(query)} ")
+        requestSearch.apply {
+            data?.let {
+                it.onEach {
+                    val link = it.session
+                    val title = it.title.toString()
+                    val cover = it.poster
 
-                data?.let {
-                    it.onEach {
-                        val link = it.session
-                        val title = it.title.toString()
-                        val cover = it.poster
-
-                        list.add(ShowResponse(title, link ?: "", cover ?: ""))
-                    }
+                    list.add(ShowResponse(title, link ?: "", cover ?: ""))
                 }
             }
-        return list
+        }
 
+        return list
     }
 
     fun extractValue(scriptContent: String, key: String): String {
