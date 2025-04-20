@@ -51,8 +51,8 @@ abstract class BaseParser {
         if (response != null) {
             saveShowResponse(mediaObj.id, response, true)
         } else {
-            setUserText("Searching : ${mediaObj.userPreferredName}")
-            response = search(mediaObj.mainName()).let { if (it.isNotEmpty()) it[0] else null }
+            setUserText("Searching : ${mediaObj.englishName}")
+            response = search(mediaObj.englishName!!).let { if (it.isNotEmpty()) it[0] else null }
 
             if (response == null) {
                 setUserText("Searching : ${mediaObj.nameRomaji}")

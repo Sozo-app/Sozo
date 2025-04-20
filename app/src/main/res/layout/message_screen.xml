@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     android:paddingTop="30dp"
     android:paddingBottom="50dp">
 
@@ -88,7 +90,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="16dp"
@@ -97,6 +99,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messageRv"
             android:layout_width="match_parent"
+            android:paddingBottom="60dp"
             android:layout_height="match_parent"
             android:layout_above="@id/messageInputLayout"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -106,6 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/explore"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -124,5 +129,5 @@
                 android:layout_marginHorizontal="4dp"
                 app:srcCompat="@drawable/ic_send" />
         </LinearLayout>
-    </RelativeLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </FrameLayout>
+</LinearLayout>

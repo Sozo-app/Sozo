@@ -20,6 +20,7 @@ object SourceList {
 
     var nativeSources = arrayListOf(
         Source("ANIMEPAHE", "pahe"),//https://animepahe.ru
+        Source("ANIWATCH", "aniwatch"),//https://aniwatchtv.to/
     )
     var germanSources = arrayListOf(
         Source("ANIWORLD", "gerani"),//https://aniworld.to

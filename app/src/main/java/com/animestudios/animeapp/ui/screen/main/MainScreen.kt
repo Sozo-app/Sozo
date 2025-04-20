@@ -119,40 +119,43 @@ class MainScreen : Fragment() {
                         true
                     }
                     lifecycleScope.launch {
-                        model.loadProfile() {
-                            if ((readData("selectedAccount") ?: 1) == 1) {
-                                println("Tuushdi")
-                                saveData("userImage", Anilist.avatar)
-                                saveData("userId", Anilist.userid)
-                                saveData("userName", Anilist.username)
-                            }
-                            val item = bottomBar.menu.getItem(3)
-                            item.iconTintList = null
-                            item.iconTintMode = PorterDuff.Mode.DST
-                            Glide.with(App.currentContext()!!)
-                                .load(Anilist.avatar)
-                                .circleCrop()
-                                .into(object : CustomTarget<Drawable>() {
-                                    override fun onResourceReady(
-                                        resource: Drawable,
-                                        transition: Transition<in Drawable>?
-                                    ) {
-                                        println(resource.current)
-                                        item.setIcon(resource)
-                                    }
+                        if (Anilist.userid == null) {
+                            model.loadProfile() {
+                                if ((readData("selectedAccount") ?: 1) == 1) {
+                                    println("Tuushdi")
+                                    saveData("userImage", Anilist.avatar)
+                                    saveData("userId", Anilist.userid)
+                                    saveData("userName", Anilist.username)
 
-                                    override fun onLoadCleared(placeholder: Drawable?) {
-                                        item.setIcon(placeholder)
-                                    }
-                                })
-                            binding.mainProgressBar.gone()
-                            mainViewPager.visible()
-                            overrideOnMenuItemLongClickListener(navbar)
-                            for (item in navbar.children) {
-                                TooltipCompat.setTooltipText(item, null)
+                                }
+                                val item = bottomBar.menu.getItem(3)
+                                item.iconTintList = null
+                                item.iconTintMode = PorterDuff.Mode.DST
+                                Glide.with(App.currentContext()!!)
+                                    .load(Anilist.avatar)
+                                    .circleCrop()
+                                    .into(object : CustomTarget<Drawable>() {
+                                        override fun onResourceReady(
+                                            resource: Drawable,
+                                            transition: Transition<in Drawable>?
+                                        ) {
+                                            println(resource.current)
+                                            item.setIcon(resource)
+                                        }
+
+                                        override fun onLoadCleared(placeholder: Drawable?) {
+                                            item.setIcon(placeholder)
+                                        }
+                                    })
+                                binding.mainProgressBar.gone()
+                                mainViewPager.visible()
+                                overrideOnMenuItemLongClickListener(navbar)
+                                for (item in navbar.children) {
+                                    TooltipCompat.setTooltipText(item, null)
+                                }
                             }
+
                         }
-
                     }
                 }
             }
@@ -180,14 +183,23 @@ class MainScreen : Fragment() {
 
             menuView.getChildAt(0).setOnLongClickListener {
                 println("Home  Bosildi")
-                findNavController().navigate(R.id.messageScreen)
+                if (Anilist.userid != null) {
+                    when (Anilist.userid) {
+                        6136028 -> {
+                            findNavController().navigate(R.id.chatListScreen)
+                        }
+
+                        else -> {
+                            findNavController().navigate(R.id.messageScreen)
+
+                        }
+                    }
+                }
                 true
             }
 
         }
     }
-
-
 
 
     override fun onDestroyView() {

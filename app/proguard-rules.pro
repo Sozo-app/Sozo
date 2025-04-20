@@ -20,3 +20,17 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep class com.animestudios.animeapp.media.Media
+-keep class org.json.** {
+    *;
+}
+-keep class com.google.firebase.** {
+    *;
+}
+
+-keep class com.animestudios.animeapp.model.UserProfile {
+    *;
+}
+
+-keep class com.animestudios.animeapp.**  {
+    *;
+}

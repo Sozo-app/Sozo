@@ -1,5 +1,6 @@
 package com.animestudios.animeapp.di
 
+import com.animestudios.animeapp.anilist.repo.imp.ChatListRepository
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
@@ -18,4 +19,8 @@ object FirebaseModule {
             FirebaseDatabase.getInstance("https://sozo-app-a36e6-default-rtdb.asia-southeast1.firebasedatabase.app")
         return database
     }
+    @Provides
+    fun provideChatListRepository(db: FirebaseDatabase): ChatListRepository =
+        ChatListRepository(db)
+
 }

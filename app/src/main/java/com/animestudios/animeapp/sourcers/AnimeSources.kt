@@ -7,14 +7,15 @@ import com.animestudios.animeapp.tools.lazyList
 
 object AnimeSources : WatchSources() {
     override val list: List<Lazier<BaseParser>> = lazyList(
-        when (readData("selectedSource") ?: "GOGO") {
+        when (readData("selectedSource") ?: "aniwatch") {
             "GOGO" -> "Gogo" to ::Gogo
             "pahe" -> "Animepahe" to ::AnimePahe
+            "aniwatch" -> "AniWatch" to ::AniWatch
             "gerani"-> "Aniworld" to ::AniWorld
             "anirulz"-> "AniRulz" to ::Anirulz
             "aniworld"-> "AniWorld" to ::Anirulz
             "hianime"-> "HiAnime" to ::HiAnime
-            else -> "Gogo" to ::Gogo
+            else -> "pahe" to ::AnimePahe
         }
     )
 }

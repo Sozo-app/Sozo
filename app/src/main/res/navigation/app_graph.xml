@@ -83,4 +83,8 @@
         android:id="@+id/reviewScreen"
         android:name="com.animestudios.animeapp.ui.screen.anime.ReviewScreen"
         android:label="ReviewScreen" />
+    <fragment
+        android:id="@+id/chatListScreen"
+        android:name="com.animestudios.animeapp.ui.screen.message.ChatListScreen"
+        android:label="ChatListScreen" />
 </navigation>

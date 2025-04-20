@@ -29,7 +29,9 @@ class MessageScreen : Fragment(R.layout.message_screen) {
     private val b get() = _b!!
 
     private val meId = Anilist.userid!!
-    private val otherId = if (meId == 6136028) 6292651 else 6136028
+    private val otherId  by lazy {
+        if (Anilist.userid ==6136028) requireArguments().getInt("otherId") else 6136028
+    }
 
     private lateinit var adapter: MessageAdapter
 
@@ -74,10 +76,8 @@ class MessageScreen : Fragment(R.layout.message_screen) {
             }
         }
 
-        // 3) Messages → list
         viewLifecycleOwner.lifecycleScope.launch {
             vm.chatMessages.collectLatest { list ->
-//                snackString(list[0].isRead.toString())
                 adapter.submitList(list)
                 if (list.isNotEmpty())
                     b.messageRv.scrollToPosition(list.lastIndex)
@@ -101,8 +101,14 @@ class MessageScreen : Fragment(R.layout.message_screen) {
         _b = null
     }
 
-    private fun Long.toTimeString(): String {
-        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return sdf.format(Date(this))
+    fun Long.toTimeString(): String {
+        val nowCal = Calendar.getInstance()
+        val msgCal = Calendar.getInstance().apply { timeInMillis = this@toTimeString }
+        return if (nowCal.get(Calendar.YEAR) == msgCal.get(Calendar.YEAR)
+            && nowCal.get(Calendar.DAY_OF_YEAR) == msgCal.get(Calendar.DAY_OF_YEAR)) {
+            SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(this))
+        } else {
+            SimpleDateFormat("dd MMM HH:mm", Locale.getDefault()).format(Date(this))
+        }
     }
 }

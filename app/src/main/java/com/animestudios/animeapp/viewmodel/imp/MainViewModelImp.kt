@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import com.animestudios.animeapp.anilist.api.common.Anilist
 import com.animestudios.animeapp.anilist.api.imp.AniListQueriesImp
 import com.animestudios.animeapp.anilist.repo.imp.NotificationRepositoryImp
+import com.animestudios.animeapp.anilist.repo.imp.ProfileRepositoryImpl
 import com.animestudios.animeapp.app.App
 import com.animestudios.animeapp.di.FirebaseService
+import com.animestudios.animeapp.model.UserProfile
 import com.animestudios.animeapp.snackString
 import com.animestudios.animeapp.utils.AppUpdate
 import com.animestudios.animeapp.utils.AppUtils
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -30,8 +33,9 @@ import javax.inject.Inject
 class MainViewModelImp @Inject constructor(
     private var notificationRepository: NotificationRepositoryImp,
     private val firebaseService: FirebaseService,
-    private val firebaseDb:FirebaseDatabase
-    ) :
+    private val firebaseDb: FirebaseDatabase,
+    val repositoryImpl: ProfileRepositoryImpl
+) :
     ViewModel(), MainViewModel {
     private val queriesImp = AniListQueriesImp()
     override val genres: MutableLiveData<Boolean?> = MutableLiveData(null)
@@ -65,7 +69,8 @@ class MainViewModelImp @Inject constructor(
         }
     }
 
-     fun getAppUpdateInfo() {
+    fun getAppUpdateInfo() {
+
         firebaseService.getAppUpdateInfo().observeForever { appUpdate ->
             appUpdate?.let {
                 getAppUpdateInfo.postValue(appUpdate!!)
@@ -120,13 +125,36 @@ class MainViewModelImp @Inject constructor(
     suspend fun loadProfile(success: (() -> Unit)) {
         viewModelScope.launch {
             if (queriesImp.loadProfile()) {
+                repositoryImpl.loadUserById(Anilist.userid!!).collect { result ->
+                    result.fold(
+                        onSuccess = { data ->
+                            data.user?.let { gqlUser ->
+                                val profile = UserProfile(
+                                    id = gqlUser.id,
+                                    name = gqlUser.name,
+                                    avatarUrl = gqlUser.avatar?.large,
+                                    bannerUrl = gqlUser.bannerImage
+                                )
+
+//                                userData.postValue(Resource.Success(data))
+                                repositoryImpl.ensureUserInRealtimeDb(profile)
+                                    .catch { e -> }
+                                    .onEach {
+
+                                    }.launchIn(viewModelScope)
+                            } ?: run {
+                            }
+                        },
+                        onFailure = { throwable ->
+                        }
+                    )
+                }
                 Anilist.userid?.let { PresenceManager(firebaseDb).start(myUserId = it) }
                 success.invoke()
             } else
                 snackString("Error loading AniList User Data")
         }
     }
-
 
 
     override fun getGenres(activity: Activity) {

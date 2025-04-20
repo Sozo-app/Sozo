@@ -69,38 +69,7 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            adapter.submitList(loadProfileCategory())
-            profileRv.adapter = adapter
-            adapter.setItemClickListenerGetPosition {
-                when (it) {
-                    0 -> {
-                        findNavController().navigate(
-                            R.id.themeScreen,
-                            null,
-                            animationTransaction().build()
-                        )
 
-                    }
-
-                    1 -> {
-                        findNavController().navigate(
-                            R.id.sourcePage,
-                            null,
-                            animationTransaction().build()
-                        )
-
-                    }
-
-                    else -> {
-
-                    }
-                    //
-                }
-            }
-            detailAppbar.addOnOffsetChangedListener(this@ProfileScreen)
-            cardView4.slideUp(700, 1)
-            circleImageView.slideStart(700, 1)
-            profileName.slideStart(700, 1)
 
         }
         model.error.onEach {
@@ -124,6 +93,56 @@ class ProfileScreen : Fragment(), AppBarLayout.OnOffsetChangedListener {
                     binding.circleImageView.visible()
                     binding.cardView4.visible()
                     binding.nestedScrollView.visible()
+                    adapter.submitList(loadProfileCategory())
+                    binding.profileRv.adapter = adapter
+                    binding.detailAppbar.addOnOffsetChangedListener(this@ProfileScreen)
+                    binding.cardView4.slideUp(700, 1)
+                    binding.circleImageView.slideStart(700, 1)
+                    binding.profileName.slideStart(700, 1)
+                    adapter.setItemClickListenerGetPosition {
+
+                        when (it) {
+                            0 -> {
+                                if (Anilist.userid == 6136028) {
+                                    findNavController().navigate(
+                                        R.id.chatListScreen,
+                                        null,
+                                        animationTransaction().build()
+                                    )
+                                } else {
+                                    findNavController().navigate(
+                                        R.id.messageScreen,
+                                        null,
+                                        animationTransaction().build()
+                                    )
+                                }
+                            }
+
+                            1 -> {
+                                findNavController().navigate(
+                                    R.id.themeScreen,
+                                    null,
+                                    animationTransaction().build()
+                                )
+
+                            }
+
+                            2 -> {
+                                findNavController().navigate(
+                                    R.id.sourcePage,
+                                    null,
+                                    animationTransaction().build()
+                                )
+
+                            }
+
+                            else -> {
+
+                            }
+                            //
+                        }
+                    }
+
                     val userResponse = it.data.user
                     lifecycleScope.launch {
                         binding.profileName.text = userResponse!!.name

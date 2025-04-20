@@ -192,6 +192,13 @@ fun loadProfileCategory(): ArrayList<ProfileCategoryModel> {
     val list = ArrayList<ProfileCategoryModel>()
     list.add(
         ProfileCategoryModel(
+            "Test Messenger",
+            "Try now with developer, send message to developer",
+            R.drawable.ic_forum
+        )
+    )
+    list.add(
+        ProfileCategoryModel(
             "Appearance",
             "Adjust the app to your liking",
             R.drawable.appearance

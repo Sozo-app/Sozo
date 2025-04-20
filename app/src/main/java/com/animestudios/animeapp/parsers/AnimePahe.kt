@@ -16,7 +16,7 @@ import java.util.regex.Pattern
 class AnimePahe : AnimeParser() {
     override val name = "AnimePahe"
     override val saveName = "anime_pahe_hu"
-    override val hostUrl = "https://animepahe.ru/"
+    override val hostUrl = "https://animepahe.ru"
     override val malSyncBackupName = "animepahe"
     override val isDubAvailableSeparately = false
 
@@ -94,11 +94,14 @@ class AnimePahe : AnimeParser() {
         return AnimePaheExtractor(server)
     }
 
+    private fun String.firstWord(): String {
+        return this.replace("%20", " ")
+    }
 
     override suspend fun search(query: String): List<ShowResponse> {
         val list = mutableListOf<ShowResponse>()
-           val requestSearch = client.get(
-            "$hostUrl/api?m=search&q=${query}", mapOf(
+        val requestSearch = client.get(
+            "$hostUrl/api?m=search&q=${query.firstWord()}", mapOf(
                 "Content-Type" to "application/json",
                 "Accept" to "application/json",
                 "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
