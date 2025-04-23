@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "767586905505",
+    "project_id": "sozo-app-a36e6",
+    "storage_bucket": "sozo-app-a36e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767586905505:android:53cf32f51ea5ec475fafe0",
+        "android_client_info": {
+          "package_name": "com.animestudios.animeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEOHebJaGTtawrlDtaASQbL_ksSp4xK3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
