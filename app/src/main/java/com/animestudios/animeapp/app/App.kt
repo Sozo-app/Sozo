@@ -15,6 +15,8 @@ import com.animestudios.animeapp.utils.PresenceManager
 import com.animestudios.animeapp.widget.ThemeManager
 import com.animestudios.animeapp.worker.NotificationWorker
 import com.animestudios.animeapp.worker.NotificationWorkerFactory
+import com.bugsnag.android.Bugsnag
+import com.bugsnag.android.performance.BugsnagPerformance
 import com.google.android.material.color.DynamicColors
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -44,6 +46,8 @@ class App : MultiDexApplication(), Configuration.Provider {
         if (Anilist.token != null) {
             setupNotificationWorker()
         }
+        Bugsnag.start(this)
+        BugsnagPerformance.start(this)
     }
 
     @SuppressLint("SuspiciousIndentation")

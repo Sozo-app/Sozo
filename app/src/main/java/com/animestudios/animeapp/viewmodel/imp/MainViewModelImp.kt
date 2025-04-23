@@ -159,7 +159,7 @@ class MainViewModelImp @Inject constructor(
 
     override fun getGenres(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO) {
-            genres.postValue(
+            (
                 queriesImp.getGenresAndTags(
                     activity
                 )

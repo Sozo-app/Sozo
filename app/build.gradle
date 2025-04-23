@@ -231,4 +231,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
 
+    //Sozo
+    implementation "com.bugsnag:bugsnag-android:6.+"
+    implementation "com.bugsnag:bugsnag-android-performance:1.+"
+
 }

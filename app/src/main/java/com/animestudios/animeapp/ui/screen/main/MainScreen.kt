@@ -61,105 +61,117 @@ class MainScreen : Fragment() {
         return _binding?.root
     }
 
+    @SuppressLint("FragmentLiveDataObserve")
     @RequiresApi(Build.VERSION_CODES.O)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navbar = binding.navbar
         val mainViewPager = binding.viewPager
-        binding.mainProgressBar.visible()
         bottomBar = navbar
-        mainViewPager.gone()
         navbar.gone()
         mainViewPager.isUserInputEnabled = false
         uiSettings = readData("ui_settings") ?: uiSettings
         model.getGenres(requireActivity())
-        model.genres.observe(
-            viewLifecycleOwner
-        ) {
-            if (it != null) {
-                if (it) {
+        binding.navbar.visibility = View.VISIBLE
+        binding.viewPager.isUserInputEnabled = false
+        binding.viewPager.setPageTransformer(ZoomOutPageTransformer(uiSettings))
+        binding.viewPager.adapter = BottomNavigationAdapter(requireActivity())
+        lifecycleScope.launch {
+            if (Anilist.userid == null) {
+                model.loadProfile() {
+                    if ((readData("selectedAccount") ?: 1) == 1) {
+                        println("Tuushdi")
+                        saveData("userImage", Anilist.avatar)
+                        saveData("userId", Anilist.userid)
+                        saveData("userName", Anilist.username)
 
-                    val mainViewPager = binding.viewPager
-                    val navbar = binding.navbar
-                    binding.navbar.visibility = View.VISIBLE
-                    binding.viewPager.isUserInputEnabled = false
-                    binding.viewPager.setPageTransformer(ZoomOutPageTransformer(uiSettings))
-                    binding.viewPager.adapter = BottomNavigationAdapter(requireActivity())
-                    navbar.visible()
-                    navbar.setOnItemSelectedListener {
-                        when (it.itemId) {
-                            R.id.home -> {
-
-                                navbar.getMenu().getItem(0).setChecked(true);
-                                navbar.animate().translationZ(12f).setDuration(200).start()
-                                mainViewPager.setCurrentItem(0, false)
-
-                            }
-
-                            R.id.brows -> {
-                                navbar.getMenu().getItem(1).setChecked(true);
-                                navbar.animate().translationZ(12f).setDuration(200).start()
-                                mainViewPager.setCurrentItem(1, false)
-                            }
-
-                            R.id.list -> {
-                                navbar.getMenu().getItem(2).setChecked(true);
-                                navbar.animate().translationZ(12f).setDuration(200).start()
-                                mainViewPager.setCurrentItem(2, false)
-                            }
-
-                            R.id.account -> {
-                                navbar.animate().translationZ(12f).setDuration(200).start()
-                                navbar.getMenu().getItem(3).setChecked(true);
-                                mainViewPager.setCurrentItem(3, false)
-
-                            }
-                        }
-                        true
                     }
-                    lifecycleScope.launch {
-                        if (Anilist.userid == null) {
-                            model.loadProfile() {
-                                if ((readData("selectedAccount") ?: 1) == 1) {
-                                    println("Tuushdi")
-                                    saveData("userImage", Anilist.avatar)
-                                    saveData("userId", Anilist.userid)
-                                    saveData("userName", Anilist.username)
-
-                                }
-                                val item = bottomBar.menu.getItem(3)
-                                item.iconTintList = null
-                                item.iconTintMode = PorterDuff.Mode.DST
-                                Glide.with(App.currentContext()!!)
-                                    .load(Anilist.avatar)
-                                    .circleCrop()
-                                    .into(object : CustomTarget<Drawable>() {
-                                        override fun onResourceReady(
-                                            resource: Drawable,
-                                            transition: Transition<in Drawable>?
-                                        ) {
-                                            println(resource.current)
-                                            item.setIcon(resource)
-                                        }
-
-                                        override fun onLoadCleared(placeholder: Drawable?) {
-                                            item.setIcon(placeholder)
-                                        }
-                                    })
-                                binding.mainProgressBar.gone()
-                                mainViewPager.visible()
-                                overrideOnMenuItemLongClickListener(navbar)
-                                for (item in navbar.children) {
-                                    TooltipCompat.setTooltipText(item, null)
-                                }
+                    val item = bottomBar.menu.getItem(3)
+                    item.iconTintList = null
+                    item.iconTintMode = PorterDuff.Mode.DST
+                    Glide.with(App.currentContext()!!)
+                        .load(Anilist.avatar)
+                        .circleCrop()
+                        .into(object : CustomTarget<Drawable>() {
+                            override fun onResourceReady(
+                                resource: Drawable,
+                                transition: Transition<in Drawable>?
+                            ) {
+                                println(resource.current)
+                                item.setIcon(resource)
                             }
 
-                        }
+                            override fun onLoadCleared(placeholder: Drawable?) {
+                                item.setIcon(placeholder)
+                            }
+                        })
+                    binding.mainProgressBar.gone()
+                    mainViewPager.visible()
+                    overrideOnMenuItemLongClickListener(navbar)
+                    for (item in navbar.children) {
+                        TooltipCompat.setTooltipText(item, null)
                     }
+                }
+            }else {
+                val item = bottomBar.menu.getItem(3)
+                item.iconTintList = null
+                item.iconTintMode = PorterDuff.Mode.DST
+                Glide.with(App.currentContext()!!)
+                    .load(Anilist.avatar)
+                    .circleCrop()
+                    .into(object : CustomTarget<Drawable>() {
+                        override fun onResourceReady(
+                            resource: Drawable,
+                            transition: Transition<in Drawable>?
+                        ) {
+                            println(resource.current)
+                            item.setIcon(resource)
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                            item.setIcon(placeholder)
+                        }
+                    })
+                binding.mainProgressBar.gone()
+                mainViewPager.visible()
+                overrideOnMenuItemLongClickListener(navbar)
+                for (item in navbar.children) {
+                    TooltipCompat.setTooltipText(item, null)
                 }
             }
         }
+        navbar.visible()
+        navbar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.home -> {
+                    navbar.getMenu().getItem(0).setChecked(true);
+                    navbar.animate().translationZ(12f).setDuration(200).start()
+                    mainViewPager.setCurrentItem(0, false)
+                }
+
+                R.id.brows -> {
+                    navbar.getMenu().getItem(1).setChecked(true);
+                    navbar.animate().translationZ(12f).setDuration(200).start()
+                    mainViewPager.setCurrentItem(1, false)
+                }
+
+                R.id.list -> {
+                    navbar.getMenu().getItem(2).setChecked(true);
+                    navbar.animate().translationZ(12f).setDuration(200).start()
+                    mainViewPager.setCurrentItem(2, false)
+                }
+
+                R.id.account -> {
+                    navbar.animate().translationZ(12f).setDuration(200).start()
+                    navbar.getMenu().getItem(3).setChecked(true);
+                    mainViewPager.setCurrentItem(3, false)
+
+                }
+            }
+            true
+        }
+
     }
 
     override fun onPause() {
@@ -178,8 +190,6 @@ class MainScreen : Fragment() {
                 AccountBottomSheetDialog(this).show(parentFragmentManager, "dialog")
                 true
             }
-
-
 
             menuView.getChildAt(0).setOnLongClickListener {
                 println("Home  Bosildi")

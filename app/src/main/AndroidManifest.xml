@@ -175,6 +175,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.bugsnag.android.API_KEY"
+            android:value="715cbb660e9781cc7ae3655263cf67be"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
